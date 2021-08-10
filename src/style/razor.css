@@ -1,8 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
 :root {
-    --primary-color: black;
+    --primary-color: #5851d8;
     --default-font-size: 14px;
+    --card-background: #fff;
 }
 
 body {
     font-size: var(--default-font-size);
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/************ Card ****************/
+
+.card{
+    background-color: var(--card-background);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/************ Forms Componets ****************/
+
+input {
+    border: 1px solid #b5d6ff;
+    background: #fafbfd;
+    border-radius: 2px;
+}
+
+textarea {
+    border: 1px solid #b5d6ff;
+    background: #fafbfd;
+    border-radius: 2px;
+}
+
+input:focus, input:focus-visible{
+    border-color: transparent !important;
+    box-shadow: 0 0 0 0.2rem rgba(154,150,231, 0.25);
 }
