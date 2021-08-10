@@ -16,6 +16,10 @@
   --violet: #0f104b;
   --padding: 0.25rem;
   --margin: 0.25rem;
+  --default-font-family: "Poppins", sans-serif;
+  --default-box-shadow: 0px 0px 6px -2px grey;
+  --dark-grey: rgb(65, 62, 62);
+  --light-grey: rgb(198, 198, 198);
 }
 
 body {
@@ -399,4 +403,25 @@ input:focus,
 input:focus-visible {
   border-color: transparent !important;
   box-shadow: 0 0 0 0.2rem rgba(154, 150, 231, 0.25);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn {
+  border: 0.25rem;
+  font-size: 12px;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 500;
+}
+
+.list_item {
+  margin: 10px;
+  margin-right: 10%;
+  margin-left: 10%;
+  background: white;
+  padding: 20px;
 }
