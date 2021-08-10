@@ -1,0 +1,8 @@
+:root {
+    --primary-color: black;
+    --default-font-size: 14px;
+}
+
+body {
+    font-size: var(--default-font-size);
+}
