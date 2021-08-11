@@ -391,23 +391,29 @@ body {
 /************ Card ****************/
 
 .card {
-  background-color: var(--card-background);
+  background-color: white;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
+  border-radius: 0.25rem;
 }
 
 /************ Forms Componets ****************/
 
 label {
-  font-size: 18px;
-  color: gray;
+  font-size: 14px;
+  color: black;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 input {
   background: #fafbfd;
   border-radius: 2px;
   border: 1px solid #e3e3e3;
-  padding: 4px;
+  padding: 4px 10px;
   height: 30px;
   border-radius: 0.25rem;
 }
@@ -416,7 +422,7 @@ textarea {
   outline: none;
   border: 1px solid #e3e3e3;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 4px 10px;
   background: #fafbfd;
   border-radius: 0.25rem;
 }
