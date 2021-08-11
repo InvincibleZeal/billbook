@@ -18,49 +18,68 @@
     <div class="add-item">
       <div class="sidebar">
         <div class="sidebar-items">
-          <ul class="sidebar-items">
-            <a href="index.html">
-              <li class="p-5 py-3 ">
-                <i class="fa fa-user"></i>Customers
-              </li>
-            </a>
-            <a href="show-item.html">
-              <li class="p-5 py-3  sidebar-item-opened" ><i class="fa fa-star"></i>Items</li>
-            </a>
-            <a href="list-invoices.html">
-              <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
-            </a>
+          <ul>
+            <li class="p-5 py-3">
+              <i class="fa fa-user" style="margin-right: 10px; color: grey"></i>
+              Customers
+            </li>
+            <li class="p-5 py-3 current-tab-open">
+              <l class="fa fa-star" style="margin-right: 10px"></l>Items
+            </li>
+            <li class="p-5 py-3">
+              <i
+                class="fa fa-clipboard"
+                style="margin-right: 10px; color: grey"
+              ></i>
+              Invoices
+            </li>
           </ul>
         </div>
       </div>
       <div class="add-item-div p-5 bg-primary">
         <div class="items-header">
           <div class="title">Items</div>
-          <a href="add-new-item.html">
-            <button class="btn">
-              <i class="fa fa-plus"></i> &nbsp; Add Item
-            </button>
-          </a>
+          <button class="btn m-2 p-2 mt-1 btn-item-added">
+            &plus; Add Item
+          </button>
         </div>
 
         <div class="show-items-body mt-5">
           <div class="item-list-heading p-5">
-            <div class="item-name px-2">NAME</div>
-            <div class="item-description px-2">DESCRIPTION</div>
-            <div class="item-price px-2">PRICE</div>
-            <div class="item-added-on px-2">ADDED-ON</div>
+            <div class="item-name px-2">Name</div>
+            <div class="item-description px-2">Description</div>
+            <div class="item-price px-2">Price</div>
+            <div class="item-added-on px-2">Added-on</div>
           </div>
           <div class="item-list p-5 mt-5">
             <div class="item-name px-2">classical tabla</div>
             <div class="item-description px-2">
-              Description Description Description Description Description
+              DescriptionDescriptionDescriptionDescriptionDescription
             </div>
             <div class="item-price px-2">200</div>
             <div class="item-added-on px-2">Added-on</div>
           </div>
-   
+      ÷
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<!-- <table style="width: 100%" class="table">
+            <thead class="thead p-4">
+              <th>name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Added on</th>
+            </thead>
+
+            <tbody class="tbody_tr p-4">
+              <tr>
+                <td>Mark</td>
+                <td>Description about the item to be sold</td>
+                <td>12</td>
+                <td>23 Aug 2021</td>
+              </tr>
+            </tbody>
+          </table> -->
