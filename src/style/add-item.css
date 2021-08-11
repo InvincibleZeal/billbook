@@ -39,7 +39,7 @@ label {
   font-size: 18px;
   color: gray;
 }
-.form {
+form {
   background: white;
   padding: 39px;
   box-shadow: 0px 0px 6px -3px grey;
