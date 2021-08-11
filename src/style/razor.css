@@ -30,12 +30,12 @@ body {
   background-color: var(--background-color);
 }
 
-/* CSS Rules */
+/************ CSS Rules ****************/
 .rounded {
   border-radius: 0.25rem;
 }
 
-/* Colors */
+/************ Colors ****************/
 .primary {
   color: var(--primary-color);
 }
@@ -76,7 +76,7 @@ body {
   background-color: var(--danger-bg);
 }
 
-/* Paddings */
+/************ Paddings ****************/
 .p-1 {
   padding: calc(1 * var(--padding));
 }
@@ -227,7 +227,7 @@ body {
   padding-bottom: calc(5 * var(--padding));
 }
 
-/* Margins */
+/************ Margins ****************/
 
 .m-1 {
   margin: calc(1 * var(--padding));
@@ -379,6 +379,15 @@ body {
   margin-bottom: calc(5 * var(--padding));
 }
 
+/************ Project Helpers ****************/
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /************ Card ****************/
 
 .card {
@@ -390,28 +399,36 @@ body {
 /************ Forms Componets ****************/
 
 input {
-  border: 1px solid #b5d6ff;
   background: #fafbfd;
   border-radius: 2px;
+  border: 1px solid #e3e3e3;
+  padding: 4px;
+  border-radius: 0.25rem;
 }
 
 textarea {
-  border: 1px solid #b5d6ff;
+  outline: none;
+  border: 1px solid #e3e3e3;
+  padding: 4px;
+  border-radius: 4px;
   background: #fafbfd;
-  border-radius: 2px;
+  border-radius: 0.25rem;
 }
 
 input:focus,
 input:focus-visible {
-  border-color: transparent !important;
+  outline: none;
   box-shadow: 0 0 0 0.2rem rgba(154, 150, 231, 0.25);
 }
+
+/************ Typography ****************/
 
 .title {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: calc(6 * var(--padding));
 }
+
+/************ Buttons ****************/
 
 .btn {
   border: 0.25rem;
@@ -419,15 +436,11 @@ input:focus-visible {
   background: var(--primary-color);
   color: white;
   font-weight: 500;
+  border-radius: 0.25rem;
 }
 
-.list_item {
-  margin: 10px;
-  margin-right: 10%;
-  margin-left: 10%;
-  background: white;
-  padding: 20px;
-}
+/************ Table ****************/
+
 .table {
   display: flex;
   flex-direction: column;
@@ -443,6 +456,7 @@ input:focus-visible {
 
 .tbody {
 }
+
 .tbody_tr {
   display: flex;
   background-color: white;
@@ -452,11 +466,4 @@ input:focus-visible {
 .tbody_tr > div {
   flex-grow: 1;
   padding: calc(var(--padding) * 3);
-}
-
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
