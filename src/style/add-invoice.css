@@ -1,0 +1,80 @@
+.input_group label {
+    color: rgb(100, 100, 100);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 12px;
+}
+input,
+textarea {
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0.4rem 0.8rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table-bordered {
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid rgb(240, 240, 240);
+}
+.table-bordered tr {
+    padding: 1rem 0;
+}
+.table-bordered td {
+    text-align: center;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.table-bordered tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-bordered th {
+    padding: 0.5rem;
+    color: rgb(100, 100, 100);
+    font-weight: 400;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.table-bordered td:nth-child(1) {
+    text-align: left;
+}
+
+.table-bordered th:nth-child(1) {
+    text-align: left;
+}
+.table-bordered input {
+    width: 3rem;
+    padding-right: 0px;
+}
+
+.table-action {
+    width: 20px;
+}
+
+.invoice_additem {
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+.summary_items {
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+.summary_item {
+    display: flex;
+}
+
+.summary_item > div,
+.summary_total > div {
+    padding: 0.5rem;
+}
+
+.summary_item > div:first-child,
+.summary_total > div:first-child {
+    flex-grow: 1;
+    color: rgb(150, 150, 150);
+}

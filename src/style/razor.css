@@ -47,6 +47,10 @@ body {
     align-items: center;
 }
 
+.align-items-start {
+    align-items: flex-start;
+}
+
 /* CSS Rules */
 .rounded {
     border-radius: 0.25rem;

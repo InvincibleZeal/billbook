@@ -9,32 +9,123 @@
         <link rel="stylesheet" href="style/add-invoice.css" />
     </head>
     <body>
-        <div class="p-5">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="title">New Invoice</div>
-                <div class="btn">Save Invoice</div>
-            </div>
+        <div
+            class="d-flex justify-content-between align-items-center py-5 mx-5"
+        >
+            <div class="title">New Invoice</div>
+            <div class="btn">Save Invoice</div>
+        </div>
 
-            <div class="d-flex my-5 flex-grow">
-                <div class="invoice_billto card-bordered p-3">
-                    <h4 class="text-muted m-0 mb-3">Billto</h4>
-                    <div class="d-flex justify-content-between">
-                        <div class="pr-3">
-                            <div>Buck Miller</div>
-                            <div>81998492023</div>
-                            <div>buck@miller.com</div>
-                        </div>
-                        <div class="btn-link">Change</div>
+        <div class="d-flex py-5 flex-grow align-items-start">
+            <div class="invoice_billto card-bordered p-3 mx-5">
+                <h4 class="text-muted m-0 mb-3">Billto</h4>
+                <div class="d-flex justify-content-between">
+                    <div class="pr-3">
+                        <div>Buck Miller</div>
+                        <div>81998492023</div>
+                        <div>buck@miller.com</div>
+                    </div>
+                    <div class="btn-link">Change</div>
+                </div>
+            </div>
+            <div class="invoice_details mx-5">
+                <div class="d-flex flex-grow mb-5">
+                    <div class="input_group px-2">
+                        <label for="issue_date">Issued At</label>
+                        <input type="date" name="issue_date" />
+                    </div>
+                    <div class="input_group px-2">
+                        <label for="due_date">Due Date</label>
+                        <input type="date" name="due_date" />
                     </div>
                 </div>
-                <div class="invoice_metadata"></div>
+                <div class="d-flex flex-grow">
+                    <div class="input_group px-2">
+                        <label for="invoice_number">Invoice Number</label>
+                        <input type="date" name="invoice_number" />
+                    </div>
+                    <div class="input_group px-2">
+                        <label for="ref_nmumber">Reference Number</label>
+                        <input type="date" name="ref_nmumber" />
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="invoice_items"></div>
+        <div class="invoice_items py-5 mx-5">
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th class="table-action"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Model 5</td>
+                        <td>
+                            <input type="number" name="item_quantity" />
+                        </td>
+                        <td>₹350</td>
+                        <td>₹700</td>
+                        <td><a href="#" class="btn-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                        <td>Model 5</td>
+                        <td>
+                            <input type="number" name="item_quantity" />
+                        </td>
+                        <td>₹350</td>
+                        <td>₹700</td>
+                        <td class="table-action">
+                            <a href="#" class="btn-link">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div class="d-flex">
-                <div class="invoice_note"></div>
-                <div class="invoice_summary"></div>
+            <div
+                class="
+                    invoice_additem
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                "
+            >
+                <div class="btn-link p-3">Add an Item</div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-grow">
+            <div class="invoice_note mx-5">
+                <div class="input_group">
+                    <label for="notes">Notes</label>
+                    <textarea name="notes" id="invoice_notes" rows="5">
+                    </textarea>
+                </div>
+            </div>
+            <div class="summary mx-5">
+                <div class="card-bordered p-3">
+                    <div class="summary_items">
+                        <div class="summary_item">
+                            <div class="summary_name">Model 5</div>
+                            <div class="summary_quantity">x2</div>
+                            <div class="summary_ammount">₹700</div>
+                        </div>
+                        <div class="summary_item">
+                            <div class="summary_name">Model 3</div>
+                            <div class="summary_quantity">x1</div>
+                            <div class="summary_ammount">₹800</div>
+                        </div>
+                    </div>
+                    <div class="summary_total d-flex">
+                        <div class="text-muted">Total Amount:</div>
+                        <div class="primary">₹1500</div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
