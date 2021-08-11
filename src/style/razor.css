@@ -398,11 +398,17 @@ body {
 
 /************ Forms Componets ****************/
 
+label {
+  font-size: 18px;
+  color: gray;
+}
+
 input {
   background: #fafbfd;
   border-radius: 2px;
   border: 1px solid #e3e3e3;
   padding: 4px;
+  height: 30px;
   border-radius: 0.25rem;
 }
 
@@ -439,15 +445,21 @@ input:focus-visible {
   border-radius: 0.25rem;
 }
 
+.btn .outlined{
+
+}
+
 /************ Table ****************/
 
 .table {
   display: flex;
   flex-direction: column;
 }
+
 .thead {
   display: flex;
 }
+
 .thead > div {
   flex-grow: 1;
   text-transform: uppercase;
@@ -466,4 +478,53 @@ input:focus-visible {
 .tbody_tr > div {
   flex-grow: 1;
   padding: calc(var(--padding) * 3);
+}
+
+/************ Container ****************/
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  background-color: white;
+  height: 100vh;
+}
+
+/************ Sidebar Menu ****************/
+.sidebar{
+  background-color: white;
+}
+
+.sidebar ul{
+  padding: 0;
+  min-width: 240px;
+}
+
+.sidebar li{
+  padding-left: 10%;
+  list-style: none;
+  font-size: 18px;
+}
+
+.sidebar-items i{
+  margin-right: 10px;
+  color:grey;
+}
+
+.sidebar-item-opened{
+    background-color: var(--background-color);
+    border-left: 3px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.sidebar-item-opened i{
+  color: var(--primary-color);
+}
+
+/************ Page Content ****************/
+
+.page-content{
+  font-size: 24px;
+  background-color: var(--background-color);
+  flex: 1;
 }
