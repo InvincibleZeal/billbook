@@ -33,7 +33,6 @@
 
 .item-list {
     display: flex;
-    color: grey;
-    color: rgb(191, 189, 189);
+    color: var(--light-grey);
     background: var(--white);
 }

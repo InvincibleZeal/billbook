@@ -399,6 +399,15 @@ body {
     transform: translate(-50%, -50%);
 }
 
+/************ Project Helpers ****************/
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /************ Card ****************/
 
 .card {
@@ -477,6 +486,8 @@ input:focus-visible {
     cursor: pointer;
     text-decoration: none;
 }
+
+/************ Buttons ****************/
 
 .btn {
     border: 0.25rem;
