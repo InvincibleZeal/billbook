@@ -444,6 +444,7 @@ input:focus-visible {
   padding: 10px 20px;
   font-weight: 500;
   border-radius: 0.25rem;
+  cursor: pointer;
 }
 
 .btn-outlined {
@@ -477,7 +478,14 @@ input:focus-visible {
   padding-left: 10%;
   list-style: none;
   font-size: 16px;
+  cursor: pointer;
 }
+
+.sidebar a{
+  text-decoration: none;
+  color: black;
+}
+
 
 .sidebar-items i {
   margin-right: 10px;

@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Page Title -->
+    <title>BillBook</title>
+    <!-- Meta Information -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An invoice is a document sent to a buyer that specifies the amount and cost of products or services that have been provided by a seller."
+    />
+    <!-- Link Tags -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="./style/razor.css" />
     <link rel="stylesheet" href="./style/add-customer.css" />
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <link
+      rel="shortcut icon"
+      href="https://razorpay.com/favicon.png?v=2"
+      type="image/png"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <ul class="sidebar-items">
+          <a href="index.html">
+            <li class="p-5 py-3 sidebar-item-opened">
+              <i class="fa fa-user"></i>Customers
+            </li>
+          </a>
+          <a href="show-item.html">
+            <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
+          </a>
+          <a href="list-invoices.html">
+            <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+          </a>
+        </ul>
+      </div>
+      <div class="page-content p-5 bg-primary">
+        <div class="page-heading-wrapper mb-2">
+          <span class="title"> New Customer </span>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
