@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Billbook</title>
+        <link rel="stylesheet" href="style/razor.css" />
+        <link rel="stylesheet" href="style/add-invoice.css" />
+    </head>
+    <body>
+        <div class="p-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="title">New Invoice</div>
+                <div class="btn">Save Invoice</div>
+            </div>
+
+            <div class="d-flex my-5 flex-grow">
+                <div class="invoice_billto card-bordered p-3">
+                    <h4 class="text-muted m-0 mb-3">Billto</h4>
+                    <div class="d-flex justify-content-between">
+                        <div class="pr-3">
+                            <div>Buck Miller</div>
+                            <div>81998492023</div>
+                            <div>buck@miller.com</div>
+                        </div>
+                        <div class="btn-link">Change</div>
+                    </div>
+                </div>
+                <div class="invoice_metadata"></div>
+            </div>
+
+            <div class="invoice_items"></div>
+
+            <div class="d-flex">
+                <div class="invoice_note"></div>
+                <div class="invoice_summary"></div>
+            </div>
+        </div>
+    </body>
+</html>
