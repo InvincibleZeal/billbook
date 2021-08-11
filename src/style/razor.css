@@ -23,6 +23,7 @@
 }
 
 body {
+  margin: 0;
   font-size: var(--default-font-size);
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -406,8 +407,9 @@ input:focus-visible {
 }
 
 .title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
+  margin-bottom: calc(6 * var(--padding));
 }
 
 .btn {

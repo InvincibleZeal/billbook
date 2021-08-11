@@ -1,0 +1,22 @@
+.items-header {
+  display: flex;
+  justify-content: space-between;
+}
+.item-list-heading {
+  display: flex;
+  color: grey;
+  font-size: 14px;
+  font-weight: 600;
+}
+.item-name {
+  flex-grow: 1;
+}
+.item-description {
+  flex-grow: 4;
+}
+.item-price {
+  flex-grow: 1;
+}
+.item-added-on {
+  flex-grow: 1;
+}
