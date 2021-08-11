@@ -1,0 +1,52 @@
+li {
+  padding: 24px;
+  list-style: none;
+  padding-left: 10%;
+  align-items: center;
+  font-size: 18px;
+}
+ul {
+  padding: 0;
+  min-width: 240px;
+}
+
+.add-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+.add-item-div {
+  font-size: 24px;
+  background-color: #f8fbff;
+  flex: 1;
+}
+.add-new-item-body {
+  width: 100%;
+  align-items: center;
+  max-width: 786px;
+}
+
+.input-box {
+  width: 100%;
+  outline: none;
+  margin-top: 9px;
+  border: 1px solid #e3e3e3;
+  padding: 4px;
+  height: 30px;
+  border-radius: 4px;
+}
+label {
+  font-size: 18px;
+  color: gray;
+}
+form {
+  background: white;
+  padding: 39px;
+  box-shadow: 0px 0px 6px -3px grey;
+}
+
+.current-tab-open {
+  background-color: #f8fbff;
+  border-left: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}

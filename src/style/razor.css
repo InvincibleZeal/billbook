@@ -21,6 +21,7 @@
 }
 
 body {
+  margin: 0;
   font-size: var(--default-font-size);
 }
 
@@ -374,16 +375,18 @@ body {
 }
 
 .title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
+  margin-bottom: calc(6 * var(--padding));
 }
 
 .btn {
   border: 0.25rem;
-  font-size: 12px;
+  font-size: var(--default-font-size);
   background: var(--primary-color);
   color: white;
   font-weight: 500;
+  border-radius: 4px;
 }
 
 .list_item {
