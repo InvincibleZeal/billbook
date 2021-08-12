@@ -1,8 +1,18 @@
 # CSS Guide
 
-## More CSS Rules -
+### Font Sizes
 
-- `rounded` - Adds 4px border-radius to elements.
+-   `--default-font-size` - 1rem = 14px
+-   `--h7-font-size` - 0.85rem = 12px
+-   `--h6-font-size` - 1.14rem = 16px
+-   `--h5-font-size` - 1.285rem = 18px
+-   `--h4-font-size` - 1.429rem = 20px
+-   `--h3-font-size` - 1.71rem = 24px
+-   `--h2-font-size` - 2rem = 28px
+
+### More CSS Rules -
+
+-   `rounded` - Adds 4px border-radius to elements.
 
 ### Colors
 
@@ -18,14 +28,14 @@ Following backgrounds classes are available - `bg-primary`,`bg-success`, `bg-inf
 
 Following padding classes are available -
 
-- `p-*` - Adds padding to top, bottom, left, bottom
-  _Available classes_ - p-1, p-2, p-3, p-4, p-5
-- `px-*` - Adds padding to left and right
-- `py-*` - Adds padding to top and bottom
-- `pt-*` - Adds padding to top
-- `pb-*` - Adds padding to bottom
-- `pl-*` - Adds padding to left
-- `pr-*` - Adds padding to right
+-   `p-*` - Adds padding to top, bottom, left, bottom
+    _Available classes_ - p-1, p-2, p-3, p-4, p-5
+-   `px-*` - Adds padding to left and right
+-   `py-*` - Adds padding to top and bottom
+-   `pt-*` - Adds padding to top
+-   `pb-*` - Adds padding to bottom
+-   `pl-*` - Adds padding to left
+-   `pr-*` - Adds padding to right
 
 ### Margins
 
@@ -33,11 +43,11 @@ Following padding classes are available -
 
 Following margin classes are available -
 
-- `m-*` - Adds margin to top, bottom, left, bottom
-  _Available classes_ - m-1, m-2, m-3, m-4, m-5
-- `mx-*` - Adds margin to left and right
-- `my-*` - Adds margin to top and bottom
-- `mt-*` - Adds margin to top
-- `mb-*` - Adds margin to bottom
-- `ml-*` - Adds margin to left
-- `mr-*` - Adds margin to right
+-   `m-*` - Adds margin to top, bottom, left, bottom
+    _Available classes_ - m-1, m-2, m-3, m-4, m-5
+-   `mx-*` - Adds margin to left and right
+-   `my-*` - Adds margin to top and bottom
+-   `mt-*` - Adds margin to top
+-   `mb-*` - Adds margin to bottom
+-   `ml-*` - Adds margin to left
+-   `mr-*` - Adds margin to right
