@@ -3,14 +3,20 @@
   align-items: left;
   justify-content: space-between;
 }
-
+.item-list-heading {
+  display: flex;
+  color: grey;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: start;
+}
 .font-size-item {
   font-size: 14px;
 }
-/* .btn-item-added {
+.btn-item-added {
   height: 30px;
-} */
-/* 
+}
+
 .item-name {
   max-width: 100px;
   min-width: 50px;
@@ -27,12 +33,12 @@
 }
 .item-added-on {
   width: 10%;
-} */
+}
 
-/* .item-list {
+.item-list {
   display: flex;
   color: grey;
-  font-size: 12px;
+  font-size: 14px;
   color: rgb(168, 166, 166);
   background: white;
-} */
+}

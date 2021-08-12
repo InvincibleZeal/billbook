@@ -10,6 +10,9 @@ ul {
   min-width: 240px;
 }
 
+.input-box {
+  width: 95%;
+}
 .add-item {
   display: flex;
   flex-wrap: wrap;
