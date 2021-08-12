@@ -536,7 +536,7 @@ table {
 thead > tr > th {
   text-align: left;
   text-transform: uppercase;
-  padding: calc(var(--padding) * 1);
+  padding: var(--padding);
   font-size: 16px;
   letter-spacing: 0.75px;
   font-weight: 500;
