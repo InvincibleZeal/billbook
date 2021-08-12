@@ -1,0 +1,109 @@
+.input_group label {
+    color: var(--dark-grey);
+    display: block;
+    margin-bottom: calc(var(--padding) * 2);
+    font-size: 0.75rem;
+}
+.input_group {
+    position: relative;
+}
+
+.input_group input {
+    padding-left: 2.25rem;
+}
+
+.input_group i {
+    display: inline;
+    position: absolute;
+    left: 1.25rem;
+    top: 55%;
+    color: var(--grey);
+}
+
+.input_group input[type="date"]::-webkit-inner-spin-button,
+.input_group input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.input_group input::-webkit-outer-spin-button,
+.input_group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.input_group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.table-bordered {
+    background-color: white;
+    border-radius: 0.25rem;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+}
+.table-bordered tr {
+    padding: 1rem 0;
+}
+.table-bordered td {
+    text-align: center;
+    padding: calc(var(--padding) * 2) calc(var(--padding) * 3);
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.table-bordered tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-bordered th {
+    padding: calc(var(--padding) * 2);
+    color: var(--dark-grey);
+    font-weight: 400;
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.table-bordered th {
+    text-align: center;
+}
+
+.table-bordered td:nth-child(1) {
+    text-align: left;
+}
+
+.table-bordered th:nth-child(1) {
+    text-align: left;
+}
+.table-bordered input {
+    width: 3rem;
+    padding-right: 0px;
+}
+
+.table-action {
+    width: 1.25rem;
+}
+
+.invoice_additem {
+    border-bottom: 1px solid var(--light-grey);
+}
+.summary_items {
+    border-bottom: 1px solid var(--light-grey);
+}
+.summary_item {
+    display: flex;
+}
+
+.summary_item > div,
+.summary_total > div {
+    padding: calc(var(--padding) * 2);
+}
+
+.summary_item > div:first-child,
+.summary_total > div:first-child {
+    flex-grow: 1;
+    color: var(--grey);
+}
+
+.table-action {
+    font-size: 18px;
+}
