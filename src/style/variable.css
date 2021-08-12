@@ -1,0 +1,34 @@
+:root {
+    --default-font-size: 1rem; /* 1rem = 14px */
+    --h7-font-size: 0.85rem; /* 12px */
+    --h6-font-size: 1.14rem; /* 16px */
+    --h5-font-size: 1.285rem; /* 18px */
+    --h4-font-size: 1.429rem; /* 20px */
+    --h3-font-size: 1.71rem; /* 24px */
+    --h2-font-size: 2rem; /* 28px */
+    --primary-color: #5851d8;
+    --primary-bg: #5851d81a;
+    --info-color: #5dc4eb;
+    --info-bg: #5dc4eb1a;
+    --warning-color: #ffc95c;
+    --warning-bg: #ffc95c1a;
+    --danger-color: #fa7178;
+    --danger-bg: #fa71781a;
+    --success-color: #03c99b;
+    --success-bg: #03c99b1a;
+    --background-color: #f9fbff;
+    --form-items-border: #e3e3e3;
+    --card-background: #ffffff;
+    --violet: #0f104b;
+    --dark-grey: rgb(65, 62, 62);
+    --light-grey: rgb(198, 198, 198);
+    --default-box-shadow: 0px 0px 6px -2px grey;
+    --default-font-family: "Poppins", sans-serif;
+    --padding: 0.25rem;
+    --margin: 0.25rem;
+    --default-font-weight: 400;
+    --font-light: 300;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+}

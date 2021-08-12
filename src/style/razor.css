@@ -1,37 +1,7 @@
 /************ Imports ****************/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-
-/************ Colors ****************/
-:root {
-    --default-font-size: 1rem; /* 1rem = 14px */
-    --h7-font-size: 0.85rem; /* 12px */
-    --h6-font-size: 1.14rem; /* 16px */
-    --h5-font-size: 1.285rem; /* 18px */
-    --h4-font-size: 1.429rem; /* 20px */
-    --h3-font-size: 1.71rem; /* 24px */
-    --h2-font-size: 2rem; /* 28px */
-    --primary-color: #5851d8;
-    --primary-bg: #5851d81a;
-    --info-color: #5dc4eb;
-    --info-bg: #5dc4eb1a;
-    --warning-color: #ffc95c;
-    --warning-bg: #ffc95c1a;
-    --danger-color: #fa7178;
-    --danger-bg: #fa71781a;
-    --success-color: #03c99b;
-    --success-bg: #03c99b1a;
-    --background-color: #f9fbff;
-    --form-items-border: #e3e3e3;
-    --card-background: #ffffff;
-    --violet: #0f104b;
-    --padding: 0.25rem;
-    --margin: 0.25rem;
-    --default-font-family: "Poppins", sans-serif;
-    --default-box-shadow: 0px 0px 6px -2px grey;
-    --dark-grey: rgb(65, 62, 62);
-    --light-grey: rgb(198, 198, 198);
-}
+@import "variable.css";
 
 /************ Common CSS ****************/
 body {
@@ -448,7 +418,7 @@ input:focus-visible {
 
 .title {
     font-size: var(--h3-font-size);
-    font-weight: 600;
+    font-weight: var(--font-semi-bold);
 }
 
 /************ Buttons ****************/
@@ -459,7 +429,7 @@ input:focus-visible {
     background: var(--primary-color);
     color: white;
     padding: calc(var(--padding) * 3) calc(var(--padding) * 5);
-    font-weight: 500;
+    font-weight: var(--font-medium);
     border-radius: 0.25rem;
     cursor: pointer;
 }
@@ -545,7 +515,7 @@ thead > tr > th {
     padding: var(--padding);
     font-size: var(--h6-font-size);
     letter-spacing: 0.75px;
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 tbody > tr > td {

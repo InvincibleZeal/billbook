@@ -6,7 +6,7 @@
 .item-list-heading {
     display: flex;
     color: grey;
-    font-weight: 600;
+    font-weight: var(--font-semi-bold);
     justify-content: start;
 }
 .btn-item-added {

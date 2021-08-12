@@ -10,6 +10,14 @@
 -   `--h3-font-size` - 1.71rem = 24px
 -   `--h2-font-size` - 2rem = 28px
 
+### Font Weights
+
+-   `--default-font-weight` - 400
+-   `--font-light` - 300
+-   `--font-medium` - 500
+-   `--font-semi-bold` - 600
+-   `--font-bold` - 700
+
 ### More CSS Rules -
 
 -   `rounded` - Adds 4px border-radius to elements.
