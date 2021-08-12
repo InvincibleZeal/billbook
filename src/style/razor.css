@@ -2,32 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import "reset.css";
-
-/************ Colors ****************/
-:root {
-    --default-font-size: 14px;
-    --nav-items-font-size: 16px;
-    --primary-color: #5851d8;
-    --primary-bg: #5851d81a;
-    --info-color: #5dc4eb;
-    --info-bg: #5dc4eb1a;
-    --warning-color: #ffc95c;
-    --warning-bg: #ffc95c1a;
-    --danger-color: #fa7178;
-    --danger-bg: #fa71781a;
-    --success-color: #03c99b;
-    --success-bg: #03c99b1a;
-    --background-color: #f9fbff;
-    --card-background: #ffffff;
-    --violet: #0f104b;
-    --padding: 0.25rem;
-    --margin: 0.25rem;
-    --default-font-family: "Poppins", sans-serif;
-    --default-box-shadow: 0px 0px 6px -2px grey;
-    --grey: rgb(150, 150, 150);
-    --light-grey: rgb(240, 240, 240);
-    --dark-grey: rgb(100, 100, 100);
-}
+@import "variable.css";
 
 /************ Common CSS ****************/
 body {
@@ -433,16 +408,16 @@ body {
 }
 
 .card-bordered {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 0.5rem;
-    border: 1px solid rgb(240, 240, 240);
+    border: 1px solid var(--light-grey);
 }
 
 /************ Forms Componets ****************/
 
 label {
     font-size: var(--default-font-size);
-    color: black;
+    color: var(--black);
 }
 
 .form-group {
@@ -452,7 +427,7 @@ label {
 }
 
 input {
-    background: white;
+    background: var(--white);
     border: 1px solid var(--light-grey);
     padding: var(--padding) calc(var(--padding) * 2);
     height: 30px;
@@ -464,7 +439,7 @@ textarea {
     outline: none;
     border: 1px solid var(--light-grey);
     padding: var(--padding);
-    background: white;
+    background: var(--white);
     border-radius: 0.25rem;
 }
 
@@ -484,8 +459,8 @@ input:focus-visible {
 /************ Typography ****************/
 
 .title {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-semi-bold);
 }
 
 .text-muted {
@@ -507,12 +482,11 @@ input:focus-visible {
     border: 0.25rem;
     font-size: var(--default-font-size);
     background: var(--primary-color);
-    color: white;
+    color: var(--card-background);
     padding: calc(var(--padding) * 3) calc(var(--padding) * 5);
-    font-weight: 500;
+    font-weight: var(--font-medium);
     border-radius: 0.25rem;
     cursor: pointer;
-    text-decoration: none;
 }
 
 .btn-outlined {
@@ -527,14 +501,14 @@ input:focus-visible {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    background-color: white;
+    background-color: var(--white);
     height: 100vh;
 }
 
 /************ Sidebar Menu ****************/
 
 .sidebar {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .sidebar ul {
@@ -544,18 +518,18 @@ input:focus-visible {
 
 .sidebar li {
     list-style: none;
-    font-size: var(--nav-items-font-size);
+    font-size: var(--h6-font-size);
     cursor: pointer;
 }
 
 .sidebar a {
     text-decoration: none;
-    color: black;
+    color: var(--black);
 }
 
 .sidebar-items i {
     margin-right: 10px;
-    color: grey;
+    color: var(--grey);
 }
 
 .sidebar-item-opened {
@@ -603,12 +577,12 @@ input:focus-visible {
     text-align: left;
     text-transform: uppercase;
     padding: var(--padding);
-    font-size: var(--nav-items-font-size);
+    font-size: var(--h6-font-size);
     letter-spacing: 0.75px;
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 .table tbody > tr > td {
-    background-color: white;
+    background-color: var(--card-background);
     padding: calc(var(--padding) * 4);
 }

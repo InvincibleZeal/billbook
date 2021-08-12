@@ -1,41 +1,39 @@
 .items-header {
-  display: flex;
-  align-items: left;
-  justify-content: space-between;
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
 }
 .item-list-heading {
-  display: flex;
-  color: grey;
-  font-size: 14px;
-  font-weight: 600;
-  justify-content: start;
+    display: flex;
+    color: grey;
+    font-weight: var(--font-semi-bold);
+    justify-content: start;
 }
 .btn-item-added {
-  height: 30px;
+    height: 30px;
 }
 
 .item-name {
-  max-width: 100px;
-  min-width: 50px;
-  width: 10%;
+    max-width: 100px;
+    min-width: 50px;
+    width: 10%;
 }
 .item-description {
-  width: 50%;
-  max-width: 500px;
-  overflow: scroll;
+    width: 50%;
+    max-width: 500px;
+    overflow: scroll;
 }
 .item-price {
-  width: 20%;
-  max-width: 100px;
+    width: 20%;
+    max-width: 100px;
 }
 .item-added-on {
-  width: 10%;
+    width: 10%;
 }
 
 .item-list {
-  display: flex;
-  color: grey;
-  font-size: 14px;
-  color: rgb(191, 189, 189);
-  background: white;
+    display: flex;
+    color: grey;
+    color: rgb(191, 189, 189);
+    background: var(--white);
 }
