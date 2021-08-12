@@ -403,7 +403,7 @@ body {
 /************ Forms Componets ****************/
 
 label {
-  font-size: 14px;
+  font-size: var(--default-font-size);
   color: black;
 }
 
@@ -448,7 +448,7 @@ input:focus-visible {
 
 .btn {
   border: 0.25rem;
-  font-size: 14px;
+  font-size: var(--default-font-size);
   background: var(--primary-color);
   color: white;
   padding: 10px 20px;
