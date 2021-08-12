@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import "reset.css";
+@import "hamburger.css";
 
 /************ Colors ****************/
 :root {
@@ -539,7 +540,6 @@ input:focus-visible {
   flex-wrap: wrap;
   justify-content: start;
   background-color: white;
-  height: 100vh;
 }
 
 /************ Sidebar Menu ****************/
