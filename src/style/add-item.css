@@ -14,6 +14,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+  height: 100vh;
 }
 .add-item-div {
   font-size: 24px;
@@ -26,15 +27,6 @@ ul {
   max-width: 786px;
 }
 
-.input-box {
-  width: 100%;
-  outline: none;
-  margin-top: 9px;
-  border: 1px solid #e3e3e3;
-  padding: 4px;
-  height: 30px;
-  border-radius: 4px;
-}
 label {
   font-size: 18px;
   color: gray;

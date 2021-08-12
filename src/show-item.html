@@ -16,23 +16,21 @@
 
   <body>
     <div class="add-item">
-      <div class="sidebar">
-        <div class="sidebar-items">
-          <ul class="sidebar-items">
-            <a href="index.html">
-              <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
-            </a>
-            <a href="show-item.html">
-              <li class="p-5 py-3 sidebar-item-opened">
-                <i class="fa fa-star"></i>Items
-              </li>
-            </a>
-            <a href="list-invoices.html">
-              <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
-            </a>
-          </ul>
-        </div>
-      </div>
+      <nav class="sidebar">
+        <ul class="sidebar-items">
+          <a href="index.html">
+            <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
+          </a>
+          <a href="show-item.html">
+            <li class="p-5 py-3 sidebar-item-opened">
+              <i class="fa fa-star"></i>Items
+            </li>
+          </a>
+          <a href="list-invoice.html">
+            <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+          </a>
+        </ul>
+      </nav>
       <div class="add-item-div p-5 bg-primary">
         <div class="items-header">
           <div class="title">Items</div>
@@ -43,6 +41,30 @@
           </a>
         </div>
 
+        <table class="table p-3 font-size-item">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Added-On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Snow</td>
+              <td>Classical tabla and harmonium player</td>
+              <td>200</td>
+              <td>06 Aug 2020</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- 
         <div class="show-items-body mt-5">
           <div class="item-list-heading p-5 to-upper-case">
             <div class="item-name px-2">name</div>
@@ -58,8 +80,4 @@
             <div class="item-price px-2">200</div>
             <div class="item-added-on px-2">Added-on</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+        </div> -->
