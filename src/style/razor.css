@@ -439,7 +439,7 @@ input {
     background: var(--white);
     border: 1px solid var(--light-grey);
     padding: var(--padding) calc(var(--padding) * 2);
-    height: 30px;
+    height: 40px;
     border-radius: 0.25rem;
     box-sizing: border-box;
 }
@@ -579,6 +579,7 @@ input:focus-visible {
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
 }
+
 .table tbody tr td:last-child {
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -588,7 +589,7 @@ input:focus-visible {
     text-align: left;
     text-transform: uppercase;
     padding: var(--padding);
-    font-size: var(--h6-font-size);
+    font-size: var(--default-font-size);
     letter-spacing: 0.75px;
     font-weight: var(--font-medium);
 }
@@ -596,4 +597,5 @@ input:focus-visible {
 .table tbody > tr > td {
     background-color: var(--card-background);
     padding: calc(var(--padding) * 4);
+    color: var(--dark-grey);
 }
