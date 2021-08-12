@@ -10,13 +10,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style/razor.css" />
     <link rel="stylesheet" href="./style/add-item.css" />
+    <link rel="stylesheet" href="./style/hamburger.css" />
     <link rel="stylesheet" href="./style/show-item.css" />
     <title>Billbook/Items</title>
   </head>
 
   <body>
     <div class="add-item">
-      <nav class="sidebar">
+      <nav id="hamnav">
+        <label for="hamburger">&#9776;</label>
+        <input type="checkbox" id="hamburger" />
+
+        <div id="hamitems">
+          <ul class="sidebar-items">
+            <a href="index.html">
+              <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
+            </a>
+            <a href="show-item.html">
+              <li class="p-5 py-3 sidebar-item-opened">
+                <i class="fa fa-star"></i>Items
+              </li>
+            </a>
+            <a href="list-invoice.html">
+              <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+            </a>
+          </ul>
+        </div>
+      </nav>
+
+      <nav class="sidebar pt-3" id="hamitems">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
