@@ -42,47 +42,75 @@
                 </ul>
             </nav>
             <div class="page-content p-5 bg-primary">
-                <div class="page-heading-wrapper mb-5">
+                <div class="page-heading-wrapper mb-5 p-5">
                     <span class="title"> Invoices </span>
-                    <a href="add-customer.html">
+                    <a href="/add-invoice.html">
                         <button class="btn">
-                            <i class="fa fa-plus"></i> &nbsp; New Customer
+                            <i class="fa fa-plus"></i> &nbsp; New Invoice
                         </button>
                     </a>
                 </div>
-                <table class="table">
+                <table class="table px-5">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Created On</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Number</th>
+                            <th>Paid Status</th>
+                            <th>Amount</th>
+                            <th>Amount Due</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>17 Dec 2019</td>
                             <td>Anissa Beier</td>
-                            <td>+9120841156265</td>
-                            <td>void@razorpay.com</td>
-                            <td>06 Aug 2020</td>
+                            <td>INV-0019120841156265</td>
+                            <td>
+                                <span
+                                    class="bg-warning warning px-3 py-1 rounded"
+                                    >ISSUED</span
+                                >
+                            </td>
+                            <td>₹3300</td>
+                            <td>₹3300</td>
                         </tr>
                         <tr>
+                            <td>17 Dec 2019</td>
                             <td>Mellie Buckride</td>
-                            <td>8889922222</td>
-                            <td>hello@razorpay.com</td>
-                            <td>06 Aug 2020</td>
+                            <td>INV-002</td>
+                            <td>
+                                <span class="bg-info info px-3 py-1 rounded"
+                                    >PAID</span
+                                >
+                            </td>
+                            <td>₹3300</td>
+                            <td>₹3300</td>
                         </tr>
                         <tr>
+                            <td>17 Dec 2019</td>
                             <td>Ashlee Glover</td>
-                            <td>9898761525</td>
-                            <td>contact@razorpay.com</td>
-                            <td>06 Aug 2020</td>
+                            <td>INV-003</td>
+                            <td>
+                                <span
+                                    class="bg-warning warning px-3 py-1 rounded"
+                                    >ISSUED</span
+                                >
+                            </td>
+                            <td>₹3300</td>
+                            <td>₹3300</td>
                         </tr>
                         <tr>
+                            <td>17 Dec 2019</td>
                             <td>John Doe</td>
-                            <td>4819699668</td>
-                            <td>support@razorpay.com</td>
-                            <td>06 Aug 2020</td>
+                            <td>INV-004</td>
+                            <td>
+                                <span class="bg-danger danger px-3 py-1 rounded"
+                                    >FAILED</span
+                                >
+                            </td>
+                            <td>₹3300</td>
+                            <td>₹3300</td>
                         </tr>
                     </tbody>
                 </table>

@@ -583,6 +583,7 @@ input:focus-visible {
 .page-heading-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /************ Table ****************/
@@ -592,6 +593,15 @@ input:focus-visible {
     border-collapse: separate;
     border-spacing: 0 15px;
     overflow-x: auto;
+}
+
+.table tbody tr td:first-child {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.table tbody tr td:last-child {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .table thead > tr > th {
