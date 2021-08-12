@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 :root {
   --default-font-size: 14px;
@@ -30,12 +31,12 @@ body {
   background-color: var(--background-color);
 }
 
-/* CSS Rules */
+/************ CSS Rules ****************/
 .rounded {
   border-radius: 0.25rem;
 }
 
-/* Colors */
+/************ Colors ****************/
 .primary {
   color: var(--primary-color);
 }
@@ -76,7 +77,7 @@ body {
   background-color: var(--danger-bg);
 }
 
-/* Paddings */
+/************ Paddings ****************/
 .p-1 {
   padding: calc(1 * var(--padding));
 }
@@ -227,7 +228,7 @@ body {
   padding-bottom: calc(5 * var(--padding));
 }
 
-/* Margins */
+/************ Margins ****************/
 
 .m-1 {
   margin: calc(1 * var(--padding));
@@ -379,84 +380,171 @@ body {
   margin-bottom: calc(5 * var(--padding));
 }
 
-/************ Card ****************/
-
-.card {
-  background-color: var(--card-background);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-}
-
-/************ Forms Componets ****************/
-
-input {
-  border: 1px solid #b5d6ff;
-  background: #fafbfd;
-  border-radius: 2px;
-}
-
-textarea {
-  border: 1px solid #b5d6ff;
-  background: #fafbfd;
-  border-radius: 2px;
-}
-
-input:focus,
-input:focus-visible {
-  border-color: transparent !important;
-  box-shadow: 0 0 0 0.2rem rgba(154, 150, 231, 0.25);
-}
-
-.title {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: calc(6 * var(--padding));
-}
-
-.btn {
-  border: 0.25rem;
-  font-size: 12px;
-  background: var(--primary-color);
-  color: white;
-  font-weight: 500;
-}
-
-.list_item {
-  margin: 10px;
-  margin-right: 10%;
-  margin-left: 10%;
-  background: white;
-  padding: 20px;
-}
-.table {
-  display: flex;
-  flex-direction: column;
-}
-.thead {
-  display: flex;
-}
-.thead > div {
-  flex-grow: 1;
-  text-transform: uppercase;
-  padding: calc(var(--padding) * 3);
-}
-
-.tbody {
-}
-.tbody_tr {
-  display: flex;
-  background-color: white;
-  border-radius: 0.25rem;
-}
-
-.tbody_tr > div {
-  flex-grow: 1;
-  padding: calc(var(--padding) * 3);
-}
+/************ Project Helpers ****************/
 
 .center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/************ Card ****************/
+
+.card {
+  background-color: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+/************ Forms Componets ****************/
+
+label {
+  font-size: 14px;
+  color: black;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+input {
+  background: #fafbfd;
+  border-radius: 2px;
+  border: 1px solid #e3e3e3;
+  padding: 4px 10px;
+  height: 30px;
+  border-radius: 0.25rem;
+}
+
+textarea {
+  outline: none;
+  border: 1px solid #e3e3e3;
+  padding: 4px;
+  border-radius: 4px 10px;
+  background: #fafbfd;
+  border-radius: 0.25rem;
+}
+
+input:focus,
+input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(154, 150, 231, 0.25);
+}
+
+/************ Typography ****************/
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/************ Buttons ****************/
+
+.btn {
+  border: 0.25rem;
+  font-size: 14px;
+  background: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.btn-outlined {
+  background: var(--background-color);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+/************ Container ****************/
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  background-color: white;
+  height: 100vh;
+}
+
+/************ Sidebar Menu ****************/
+
+.sidebar {
+  background-color: white;
+}
+
+.sidebar ul {
+  padding: 0;
+  min-width: 240px;
+}
+
+.sidebar li {
+  padding-left: 10%;
+  list-style: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-items i {
+  margin-right: 10px;
+  color: grey;
+}
+
+.sidebar-item-opened {
+  background-color: var(--background-color);
+  border-left: 3px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.sidebar-item-opened i {
+  color: var(--primary-color);
+}
+
+/************ Page Content ****************/
+
+.page-content {
+  background-color: var(--background-color);
+  flex: 1;
+}
+
+.page-heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+/************ Table ****************/
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  overflow-x: auto;
+}
+
+thead > tr > th {
+  text-align: left;
+  text-transform: uppercase;
+  padding: calc(var(--padding) * 1);
+  font-size: 16px;
+  letter-spacing: 0.75px;
+  font-weight: 500;
+}
+
+tbody > tr > td {
+  background-color: white;
+  padding: calc(var(--padding) * 4);
+}
+
+/* ****** Text formating ***** */
+.upper-case {
+  text-transform: uppercase;
 }
