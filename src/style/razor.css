@@ -5,6 +5,7 @@
 /************ Colors ****************/
 :root {
   --default-font-size: 14px;
+  --nav-items-font-size: 16px;
   --primary-color: #5851d8;
   --primary-bg: #5851d81a;
   --info-color: #5dc4eb;
@@ -16,6 +17,8 @@
   --success-color: #03c99b;
   --success-bg: #03c99b1a;
   --background-color: #f9fbff;
+  --form-items-border: #e3e3e3;
+  --card-background: #ffffff;
   --violet: #0f104b;
   --padding: 0.25rem;
   --margin: 0.25rem;
@@ -395,7 +398,7 @@ body {
 /************ Card ****************/
 
 .card {
-  background-color: white;
+  background-color: var(--card-background);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
@@ -414,20 +417,19 @@ label {
 }
 
 input {
-  background: #fafbfd;
+  background: var(--background-color);
   border-radius: 2px;
-  border: 1px solid #e3e3e3;
-  padding: 4px 10px;
+  border: 1px solid var(--form-items-border);
+  padding: 0.25rem 0.5rem;
   height: 30px;
   border-radius: 0.25rem;
 }
 
 textarea {
   outline: none;
-  border: 1px solid #e3e3e3;
-  padding: 4px;
-  border-radius: 4px 10px;
-  background: #fafbfd;
+  border: 1px solid var(--form-items-border);
+  padding: var(--padding);
+  background: var(--background-color);
   border-radius: 0.25rem;
 }
 
@@ -451,7 +453,7 @@ input:focus-visible {
   font-size: var(--default-font-size);
   background: var(--primary-color);
   color: white;
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
   font-weight: 500;
   border-radius: 0.25rem;
   cursor: pointer;
@@ -485,9 +487,8 @@ input:focus-visible {
 }
 
 .sidebar li {
-  padding-left: 10%;
   list-style: none;
-  font-size: 16px;
+  font-size: var(--nav-items-font-size);
   cursor: pointer;
 }
 
@@ -537,7 +538,7 @@ thead > tr > th {
   text-align: left;
   text-transform: uppercase;
   padding: var(--padding);
-  font-size: 16px;
+  font-size: var(--nav-items-font-size);
   letter-spacing: 0.75px;
   font-weight: 500;
 }
