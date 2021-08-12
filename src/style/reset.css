@@ -131,3 +131,8 @@ table {
 a {
     text-decoration: none;
 }
+
+input,
+textarea {
+    font-family: inherit;
+}

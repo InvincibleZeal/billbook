@@ -18,7 +18,6 @@
     --success-color: #03c99b;
     --success-bg: #03c99b1a;
     --background-color: #f9fbff;
-    --form-items-border: #e3e3e3;
     --card-background: #ffffff;
     --violet: #0f104b;
     --padding: 0.25rem;
@@ -453,31 +452,27 @@ label {
 }
 
 input {
-    background: var(--background-color);
-    border: 1px solid var(--form-items-border);
+    background: white;
+    border: 1px solid var(--light-grey);
     padding: var(--padding) calc(var(--padding) * 2);
     height: 30px;
     border-radius: 0.25rem;
+    box-sizing: border-box;
 }
+
 textarea {
     outline: none;
-    border: 1px solid var(--form-items-border);
+    border: 1px solid var(--light-grey);
     padding: var(--padding);
-    background: var(--background-color);
+    background: white;
     border-radius: 0.25rem;
 }
 
-.input-sm,
-.textarea-bordered {
+.input-sm {
     height: 2.5rem;
-    border: 1px solid rgb(240, 240, 240);
-    padding: 0.5rem 1rem;
-    background-color: white;
-    border-radius: 0.25rem;
-    font-family: inherit;
+    padding: calc(var(--padding) * 2) calc(var(--padding) * 4);
     font-size: 12px;
     width: 100%;
-    box-sizing: border-box;
 }
 
 input:focus,
@@ -494,7 +489,7 @@ input:focus-visible {
 }
 
 .text-muted {
-    color: lightgrey;
+    color: var(--light-grey);
 }
 
 .flex-grow > * {

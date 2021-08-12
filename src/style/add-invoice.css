@@ -1,18 +1,18 @@
-.input_group label {
+.input-group label {
     color: var(--dark-grey);
     display: block;
     margin-bottom: calc(var(--padding) * 2);
     font-size: 0.75rem;
 }
-.input_group {
+.input-group {
     position: relative;
 }
 
-.input_group input {
-    padding-left: 2.25rem;
+.input-group input {
+    padding-left: calc(var(--padding) * 9);
 }
 
-.input_group i {
+.input-group i {
     display: inline;
     position: absolute;
     left: 1.25rem;
@@ -20,31 +20,31 @@
     color: var(--grey);
 }
 
-.input_group input[type="date"]::-webkit-inner-spin-button,
-.input_group input[type="date"]::-webkit-calendar-picker-indicator {
+.input-group input[type="date"]::-webkit-inner-spin-button,
+.input-group input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
 
-.input_group input::-webkit-outer-spin-button,
-.input_group input::-webkit-inner-spin-button {
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Firefox */
-.input_group input[type="number"] {
+.input-group input[type="number"] {
     -moz-appearance: textfield;
 }
 
 .table-bordered {
-    background-color: white;
+    background-color: var(--card-background);
     border-radius: 0.25rem;
     width: 100%;
     border: 1px solid var(--light-grey);
 }
 .table-bordered tr {
-    padding: 1rem 0;
+    padding: calc(var(--padding) * 4) 0;
 }
 .table-bordered td {
     text-align: center;
