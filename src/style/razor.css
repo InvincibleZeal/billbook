@@ -1,6 +1,7 @@
 /************ Imports ****************/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "reset.css";
 
 /************ Colors ****************/
 :root {
@@ -24,8 +25,9 @@
     --margin: 0.25rem;
     --default-font-family: "Poppins", sans-serif;
     --default-box-shadow: 0px 0px 6px -2px grey;
-    --dark-grey: rgb(65, 62, 62);
-    --light-grey: rgb(198, 198, 198);
+    --grey: rgb(150, 150, 150);
+    --light-grey: rgb(240, 240, 240);
+    --dark-grey: rgb(100, 100, 100);
 }
 
 /************ Common CSS ****************/
@@ -465,6 +467,19 @@ textarea {
     border-radius: 0.25rem;
 }
 
+.input-sm,
+.textarea-bordered {
+    height: 2.5rem;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 input:focus,
 input:focus-visible {
     outline: none;
@@ -484,8 +499,6 @@ input:focus-visible {
 
 .flex-grow > * {
     flex-grow: 1;
-    font-size: 22px;
-    font-weight: 600;
 }
 
 /************ Buttons ****************/
@@ -504,6 +517,7 @@ input:focus-visible {
     font-weight: 500;
     border-radius: 0.25rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-outlined {
@@ -572,8 +586,7 @@ input:focus-visible {
 }
 
 /************ Table ****************/
-
-table {
+.table {
     border-collapse: collapse;
     width: 100%;
     border-collapse: separate;
@@ -581,7 +594,7 @@ table {
     overflow-x: auto;
 }
 
-thead > tr > th {
+.table thead > tr > th {
     text-align: left;
     text-transform: uppercase;
     padding: var(--padding);
@@ -590,7 +603,7 @@ thead > tr > th {
     font-weight: 500;
 }
 
-tbody > tr > td {
+.table tbody > tr > td {
     background-color: white;
     padding: calc(var(--padding) * 4);
 }

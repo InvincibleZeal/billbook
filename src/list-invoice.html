@@ -1,46 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Page Title -->
+        <title>BillBook</title>
+        <!-- Meta Information -->
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style/razor.css" />
-        <link rel="stylesheet" href="style/list-invoice.css" />
-        <title>Billbook</title>
+        <meta
+            name="description"
+            content="An invoice is a document sent to a buyer that specifies the amount and cost of products or services that have been provided by a seller."
+        />
+        <!-- Link Tags -->
+        <link rel="stylesheet" href="./style/razor.css" />
+        <link rel="stylesheet" href="./style/add-customer.css" />
+        <link
+            rel="shortcut icon"
+            href="https://razorpay.com/favicon.png?v=2"
+            type="image/png"
+        />
     </head>
     <body>
-        <div class="p-5">
-            <div
-                class="
-                    px-3
-                    py-5
-                    d-flex
-                    justify-content-between
-                    align-items-center
-                "
-            >
-                <div class="title">Invoices</div>
-                <div class="btn">New Invoice</div>
-            </div>
-            <div class="table">
-                <div class="thead">
-                    <div>Header 1</div>
-                    <div>Header 2</div>
-                    <div>Header 3</div>
-                    <div>Header 4</div>
-                    <div>Header 5</div>
+        <div class="wrapper">
+            <nav class="sidebar">
+                <ul class="sidebar-items">
+                    <a href="index.html">
+                        <li class="p-5 py-3">
+                            <i class="fa fa-user"></i>Customers
+                        </li>
+                    </a>
+                    <a href="show-item.html">
+                        <li class="p-5 py-3">
+                            <i class="fa fa-star"></i>Items
+                        </li>
+                    </a>
+                    <a href="list-invoice.html">
+                        <li class="p-5 py-3 sidebar-item-opened">
+                            <i class="fa fa-clipboard"></i>Invoices
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+            <div class="page-content p-5 bg-primary">
+                <div class="page-heading-wrapper mb-5">
+                    <span class="title"> Invoices </span>
+                    <a href="add-customer.html">
+                        <button class="btn">
+                            <i class="fa fa-plus"></i> &nbsp; New Customer
+                        </button>
+                    </a>
                 </div>
-                <div class="tbody">
-                    <div class="tbody_tr">
-                        <div>Cell 1</div>
-                        <div>Cell 2</div>
-                        <div>
-                            <span class="bg-warning warning p-2">ISSUED</span>
-                        </div>
-                        <div>Cell 4</div>
-                        <div>Cell 5</div>
-                    </div>
-                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Created On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anissa Beier</td>
+                            <td>+9120841156265</td>
+                            <td>void@razorpay.com</td>
+                            <td>06 Aug 2020</td>
+                        </tr>
+                        <tr>
+                            <td>Mellie Buckride</td>
+                            <td>8889922222</td>
+                            <td>hello@razorpay.com</td>
+                            <td>06 Aug 2020</td>
+                        </tr>
+                        <tr>
+                            <td>Ashlee Glover</td>
+                            <td>9898761525</td>
+                            <td>contact@razorpay.com</td>
+                            <td>06 Aug 2020</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>4819699668</td>
+                            <td>support@razorpay.com</td>
+                            <td>06 Aug 2020</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
