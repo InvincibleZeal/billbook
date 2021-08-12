@@ -1,5 +1,6 @@
 .items-header {
   display: flex;
+  align-items: left;
   justify-content: space-between;
 }
 .item-list-heading {
@@ -7,16 +8,34 @@
   color: grey;
   font-size: 14px;
   font-weight: 600;
+  justify-content: start;
 }
+.btn-item-added {
+  height: 30px;
+}
+
 .item-name {
-  flex-grow: 1;
+  max-width: 100px;
+  min-width: 50px;
+  width: 10%;
 }
 .item-description {
-  flex-grow: 4;
+  width: 50%;
+  max-width: 500px;
+  overflow: scroll;
 }
 .item-price {
-  flex-grow: 1;
+  width: 20%;
+  max-width: 100px;
 }
 .item-added-on {
-  flex-grow: 1;
+  width: 10%;
+}
+
+.item-list {
+  display: flex;
+  color: grey;
+  font-size: 14px;
+  color: rgb(191, 189, 189);
+  background: white;
 }

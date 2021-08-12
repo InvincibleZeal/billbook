@@ -13,22 +13,76 @@
     />
     <!-- Link Tags -->
     <link rel="stylesheet" href="./style/razor.css" />
+    <link rel="stylesheet" href="./style/add-customer.css" />
     <link
       rel="shortcut icon"
       href="https://razorpay.com/favicon.png?v=2"
       type="image/png"
     />
   </head>
-
   <body>
-    LIST Customer
-    <div class="title">List Saved Customer</div>
-    <div class="onHover">Hover property shown</div>
-    <button class="commonButton">Add Customer</button>
-    <div class="showList">
-      <div class="listChildren">Item 1</div>
-      <div class="listChildren">Item 2</div>
-      <div class="listChildren">Item 3</div>
+    <div class="wrapper">
+      <nav class="sidebar">
+        <ul class="sidebar-items">
+          <a href="index.html">
+            <li class="p-5 py-3 sidebar-item-opened">
+              <i class="fa fa-user"></i>Customers
+            </li>
+          </a>
+          <a href="show-item.html">
+            <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
+          </a>
+          <a href="list-invoices.html">
+            <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+          </a>
+        </ul>
+      </nav>
+      <div class="page-content p-5 bg-primary">
+        <div class="page-heading-wrapper mb-5">
+          <span class="title"> Customers </span>
+          <a href="add-customer.html">
+            <button class="btn">
+              <i class="fa fa-plus"></i> &nbsp; New Customer
+            </button>
+          </a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Created On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anissa Beier</td>
+              <td>+9120841156265</td>
+              <td>void@razorpay.com</td>
+              <td>06 Aug 2020</td>
+            </tr>
+            <tr>
+              <td>Mellie Buckride</td>
+              <td>8889922222</td>
+              <td>hello@razorpay.com</td>
+              <td>06 Aug 2020</td>
+            </tr>
+            <tr>
+              <td>Ashlee Glover</td>
+              <td>9898761525</td>
+              <td>contact@razorpay.com</td>
+              <td>06 Aug 2020</td>
+            </tr>
+            <tr>
+              <td>John Doe</td>
+              <td>4819699668</td>
+              <td>support@razorpay.com</td>
+              <td>06 Aug 2020</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>
