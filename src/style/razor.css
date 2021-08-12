@@ -1,6 +1,7 @@
 /************ Imports ****************/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "reset.css";
 @import "variable.css";
 
 /************ Common CSS ****************/
@@ -10,6 +11,27 @@ body {
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     background-color: var(--background-color);
+}
+
+/************ Flex Rules ****************/
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-start {
+    align-items: flex-start;
 }
 
 /************ CSS Rules ****************/
@@ -59,6 +81,10 @@ body {
 }
 
 /************ Paddings ****************/
+.p-0 {
+    padding: 0px;
+}
+
 .p-1 {
     padding: calc(1 * var(--padding));
 }
@@ -210,6 +236,9 @@ body {
 }
 
 /************ Margins ****************/
+.m-0 {
+    margin: 0px;
+}
 
 .m-1 {
     margin: calc(1 * var(--padding));
@@ -378,11 +407,17 @@ body {
     border-radius: 0.25rem;
 }
 
+.card-bordered {
+    background-color: var(--white);
+    border-radius: 0.5rem;
+    border: 1px solid var(--light-grey);
+}
+
 /************ Forms Componets ****************/
 
 label {
     font-size: var(--default-font-size);
-    color: black;
+    color: var(--black);
 }
 
 .form-group {
@@ -392,20 +427,27 @@ label {
 }
 
 input {
-    background: var(--background-color);
-    border-radius: 2px;
-    border: 1px solid var(--form-items-border);
+    background: var(--white);
+    border: 1px solid var(--light-grey);
     padding: var(--padding) calc(var(--padding) * 2);
     height: 30px;
     border-radius: 0.25rem;
+    box-sizing: border-box;
 }
 
 textarea {
     outline: none;
-    border: 1px solid var(--form-items-border);
+    border: 1px solid var(--light-grey);
     padding: var(--padding);
-    background: var(--background-color);
+    background: var(--white);
     border-radius: 0.25rem;
+}
+
+.input-sm {
+    height: 2.5rem;
+    padding: calc(var(--padding) * 2) calc(var(--padding) * 4);
+    font-size: 12px;
+    width: 100%;
 }
 
 input:focus,
@@ -421,13 +463,26 @@ input:focus-visible {
     font-weight: var(--font-semi-bold);
 }
 
+.text-muted {
+    color: var(--light-grey);
+}
+
+.flex-grow > * {
+    flex-grow: 1;
+}
+
 /************ Buttons ****************/
+.btn-link {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: none;
+}
 
 .btn {
     border: 0.25rem;
     font-size: var(--default-font-size);
     background: var(--primary-color);
-    color: white;
+    color: var(--card-background);
     padding: calc(var(--padding) * 3) calc(var(--padding) * 5);
     font-weight: var(--font-medium);
     border-radius: 0.25rem;
@@ -446,14 +501,14 @@ input:focus-visible {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    background-color: white;
+    background-color: var(--white);
     height: 100vh;
 }
 
 /************ Sidebar Menu ****************/
 
 .sidebar {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .sidebar ul {
@@ -469,12 +524,12 @@ input:focus-visible {
 
 .sidebar a {
     text-decoration: none;
-    color: black;
+    color: var(--black);
 }
 
 .sidebar-items i {
     margin-right: 10px;
-    color: grey;
+    color: var(--grey);
 }
 
 .sidebar-item-opened {
@@ -497,11 +552,11 @@ input:focus-visible {
 .page-heading-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /************ Table ****************/
-
-table {
+.table {
     border-collapse: collapse;
     width: 100%;
     border-collapse: separate;
@@ -509,7 +564,16 @@ table {
     overflow-x: auto;
 }
 
-thead > tr > th {
+.table tbody tr td:first-child {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.table tbody tr td:last-child {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.table thead > tr > th {
     text-align: left;
     text-transform: uppercase;
     padding: var(--padding);
@@ -518,7 +582,7 @@ thead > tr > th {
     font-weight: var(--font-medium);
 }
 
-tbody > tr > td {
-    background-color: white;
+.table tbody > tr > td {
+    background-color: var(--card-background);
     padding: calc(var(--padding) * 4);
 }

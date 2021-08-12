@@ -35,5 +35,5 @@
     display: flex;
     color: grey;
     color: rgb(191, 189, 189);
-    background: white;
+    background: var(--white);
 }
