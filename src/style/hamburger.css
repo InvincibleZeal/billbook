@@ -58,10 +58,12 @@
   }
 
   #hamitems {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s;
   }
   #hamnav input:checked ~ #hamitems {
-    display: block;
     background-color: white;
+    max-height: 200px;
   }
 }
