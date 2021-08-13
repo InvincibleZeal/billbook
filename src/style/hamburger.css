@@ -1,19 +1,37 @@
 #hamnav {
   display: none;
 }
+.hamitems {
+  display: none;
+  transition: opacity 1s ease-out;
+  opacity: 0;
+}
 
 /* After 625px sidebar will not appear */
 @media only screen and (max-width: 625px) {
   .sidebar {
     display: none;
   }
-  #hamnav {
+  .hamitems.active {
+    opacity: 1;
     display: block;
   }
-  .add-item {
+  #hamnav {
+    display: block;
     height: auto;
+    position: inherit;
+    background: white;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: var(--default-box-shadow);
   }
-
+  .add-item {
+    max-height: 30px;
+  }
+  .sidebar-items {
+    transition: visibility 0s, opacity 0.5s linear;
+  }
   #hamitems a {
     flex-grow: 1;
     flex-basis: 0;
@@ -36,7 +54,6 @@
     display: inline-block;
     cursor: pointer;
     font-style: normal;
-
     padding: 10px;
   }
 
