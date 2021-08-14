@@ -18,12 +18,12 @@
   }
   #hamnav {
     display: block;
-    height: auto;
-    position: inherit;
+    left: 0;
+    top: 0;
+    position: fixed;
     background: white;
     width: 100%;
     padding: 10px;
-    margin: 10px;
     box-shadow: var(--default-box-shadow);
   }
   .add-item {
@@ -40,7 +40,9 @@
     font-size: 16px;
     color: black;
   }
-
+  .add-item-div {
+    margin-top: 50px;
+  }
   #hamnav label,
   #hamburger {
     display: none;
