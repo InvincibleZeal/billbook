@@ -22,6 +22,28 @@
   </head>
   <body>
     <div class="wrapper">
+      <div class="add-item">
+        <nav id="hamnav" class="sidebar">
+          <label for="hamburger">&#9776;</label>
+          <input type="checkbox" id="hamburger" />
+  
+          <div id="hamitems">
+            <ul class="sidebar-items">
+              <a href="index.html">
+                <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
+              </a>
+              <a href="list-item.html">
+                <li class="p-5 py-3 sidebar-item-opened">
+                  <i class="fa fa-star"></i>Items
+                </li>
+              </a>
+              <a href="list-invoice.html">
+                <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+              </a>
+            </ul>
+          </div>
+        </nav>
+
       <nav class="sidebar">
         <ul class="sidebar-items">
           <a href="index.html">
@@ -37,7 +59,8 @@
           </a>
         </ul>
       </nav>
-      <div class="page-content p-5 bg-primary">
+
+      <div class="margin-content-top page-content p-5 bg-primary">
         <div class="page-heading-wrapper p-5 mb-5">
           <span class="title"> Items </span>
           <a href="add-item.html">
@@ -48,11 +71,11 @@
         </div>
         <table class="table px-5">
           <colgroup>
-            <col span="1" style="width: 20%;">
-            <col span="1" style="width: 50%;">
-            <col span="1" style="width: 15%;">
-            <col span="1" style="width: 15%;">
-         </colgroup>
+            <col span="1" style="width: 20%" />
+            <col span="1" style="width: 50%" />
+            <col span="1" style="width: 15%" />
+            <col span="1" style="width: 15%" />
+          </colgroup>
           <thead>
             <tr>
               <th>Name</th>
