@@ -402,10 +402,10 @@ body {
 /************ Project Helpers ****************/
 
 .center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /************ Card ****************/
@@ -473,7 +473,7 @@ input:focus-visible {
 }
 
 .text-muted {
-    color: var(--light-grey);
+    color: var(--grey);
 }
 
 .flex-grow > * {
