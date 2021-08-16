@@ -23,7 +23,7 @@
     position: fixed;
     background: white;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     padding-left: 0;
     box-shadow: var(--default-box-shadow);
   }
@@ -43,7 +43,7 @@
   }
 
   .margin-content-top {
-    margin-top: 50px;
+    margin-top: 30px;
   }
   #hamnav label,
   #hamburger {
@@ -59,7 +59,7 @@
     display: inline-block;
     cursor: pointer;
     font-style: normal;
-    padding: 10px;
+    padding: 0 0 0px 10px;
   }
 
   #hamitems {
