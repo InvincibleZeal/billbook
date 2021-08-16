@@ -17,9 +17,9 @@ html {
 body {
   margin: 0;
   font-size: var(--default-font-size);
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   background-color: var(--background-color);
-  min-height: 100vh;
 }
 
 /************ Flex Rules ****************/
@@ -503,7 +503,7 @@ input:focus-visible {
   font-size: var(--default-font-size);
   background: var(--primary-color);
   color: var(--card-background);
-  padding: calc(var(--padding) * 3);
+  padding: calc(var(--padding) * 3) calc(var(--padding) * 5);
   font-weight: var(--font-medium);
   border-radius: 0.25rem;
   cursor: pointer;
@@ -519,7 +519,10 @@ input:focus-visible {
 
 .wrapper {
   display: flex;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  justify-content: start;
+  background-color: var(--white);
+  height: 100vh;
 }
 
 /************ Sidebar Menu ****************/
@@ -533,6 +536,7 @@ input:focus-visible {
 }
 
 .sidebar ul {
+  background-color: white;
   padding: 0;
 }
 
@@ -607,10 +611,10 @@ input:focus-visible {
 
 .table tbody > tr > td {
   background-color: var(--card-background);
-  padding:  calc(var(--padding) * 6) calc(var(--padding) * 3);
+  padding: calc(var(--padding) * 6) calc(var(--padding) * 3);
   color: var(--dark-grey);
   font-weight: 300;
-  line-height: calc(var(--padding) * 5)
+  line-height: calc(var(--padding) * 5);
 }
 
 .table tbody > tr > td:hover {

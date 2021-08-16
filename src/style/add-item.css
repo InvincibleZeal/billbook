@@ -1,0 +1,46 @@
+li {
+  padding: 24px;
+  list-style: none;
+  padding-left: 10%;
+  align-items: center;
+  font-size: 18px;
+}
+ul {
+  padding: 0;
+  min-width: 240px;
+}
+
+.input-box {
+  width: 95%;
+}
+.add-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  height: 100vh;
+}
+.add-item-div {
+  font-size: 24px;
+  background-color: #f8fbff;
+  flex: 1;
+}
+.add-new-item-body {
+  width: 100%;
+  align-items: center;
+  max-width: 786px;
+}
+
+label {
+  font-size: 18px;
+}
+.form {
+  background: white;
+  padding: 39px;
+  box-shadow: 0px 0px 6px -3px grey;
+}
+
+.current-tab-open {
+  background-color: #f8fbff;
+  border-left: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}

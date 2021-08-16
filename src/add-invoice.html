@@ -22,7 +22,27 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav class="sidebar">
+      <nav id="hamnav" class="sidebar add-item">
+        <label for="hamburger">&#9776;</label>
+        <input type="checkbox" id="hamburger" />
+
+        <div id="hamitems">
+          <ul class="sidebar-items">
+            <a href="index.html">
+              <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
+            </a>
+            <a href="list-item.html">
+              <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
+            </a>
+            <a href="list-invoice.html">
+              <li class="p-5 py-3 sidebar-item-opened">
+                <i class="fa fa-clipboard"></i>Invoices
+              </li>
+            </a>
+          </ul>
+        </div>
+      </nav>
+      <nav class="sidebar" id="hamitems">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
@@ -37,15 +57,26 @@
           </a>
         </ul>
       </nav>
-      <div class="page-content p-5 bg-primary">
-        <form action="">
-          <div class="page-heading-wrapper mb-5 p-5">
-            <span class="title"> Invoices </span>
-            <a href="/list-invoice.html">
-              <button class="btn" type="submit">
-                <i class="fa fa-save"></i> &nbsp; Save Invoice
-              </button>
-            </a>
+      <div class="margin-content-top page-content p-5 bg-primary">
+        <div class="page-heading-wrapper mb-5 p-5">
+          <span class="title"> Invoices </span>
+          <a href="list-invoice.html">
+            <button class="btn">
+              <i class="fa fa-save"></i> &nbsp; Save Invoice
+            </button>
+          </a>
+        </div>
+        <div class="d-flex py-5 flex-grow align-items-start">
+          <div class="invoice_billto card-bordered p-3 mx-5">
+            <h4 class="text-muted m-0 mb-3">Billto</h4>
+            <div class="d-flex justify-content-between">
+              <div class="pr-3">
+                <div>Buck Miller</div>
+                <div>81998492023</div>
+                <div>buck@miller.com</div>
+              </div>
+              <div class="btn-link">Change</div>
+            </div>
           </div>
           <div class="d-flex py-5 flex-grow align-items-start">
             <div class="card-bordered p-3 mx-5">
