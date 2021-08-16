@@ -22,27 +22,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav id="hamnav" class="sidebar add-item">
-        <label for="hamburger">&#9776;</label>
-        <input type="checkbox" id="hamburger" />
-
-        <div id="hamitems">
-          <ul class="sidebar-items">
-            <a href="index.html">
-              <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
-            </a>
-            <a href="list-item.html">
-              <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
-            </a>
-            <a href="list-invoice.html">
-              <li class="p-5 py-3 sidebar-item-opened">
-                <i class="fa fa-clipboard"></i>Invoices
-              </li>
-            </a>
-          </ul>
-        </div>
-      </nav>
-      <nav class="sidebar" id="hamitems">
+      <nav class="sidebar">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
@@ -57,20 +37,20 @@
           </a>
         </ul>
       </nav>
-      <div class="margin-content-top page-content p-5 bg-primary">
+      <div class="page-content p-5 bg-primary">
         <div class="page-heading-wrapper mb-5 p-5">
           <span class="title"> Invoices </span>
-          <a href="list-invoice.html">
+          <a href="/list-invoice.html">
             <button class="btn">
               <i class="fa fa-save"></i> &nbsp; Save Invoice
             </button>
           </a>
         </div>
         <div class="d-flex py-5 flex-grow align-items-start">
-          <div class="invoice_billto card-bordered p-3 mx-5">
-            <h4 class="text-muted m-0 mb-3">Billto</h4>
+          <div class="card-bordered p-3 mx-5">
+            <h4 class="billto text-muted m-0 mb-3">Bill to</h4>
             <div class="d-flex justify-content-between">
-              <div class="pr-3">
+              <div class="billing_details pr-3">
                 <div>Buck Miller</div>
                 <div>81998492023</div>
                 <div>buck@miller.com</div>
@@ -155,27 +135,23 @@
               justify-content-center
             "
           >
-            <a class="btn-link p-3" href="/add-item.html">
+            <a class="btn-link p-4" href="/add-item.html">
               <i class="fa fa-shopping-basket mr-2"> </i>
               Add an Item
             </a>
           </div>
         </div>
 
-        <div class="d-flex flex-grow">
+        <div class="d-flex flex-grow py-5">
           <div class="invoice_note mx-5">
             <div class="input-group">
               <label for="notes">Notes</label>
-              <textarea
-                class="input-sm invoice-notes"
-                name="notes"
-                rows="10"
-              ></textarea>
+              <textarea class="input-sm invoice-notes" name="notes"></textarea>
             </div>
           </div>
           <div class="summary mx-5">
             <div class="card-bordered p-3">
-              <div class="summary_items">
+              <div class="summary_items pb-4">
                 <div class="summary_item">
                   <div class="summary_name">Model 5</div>
                   <div class="summary_quantity">x2</div>
@@ -187,8 +163,8 @@
                   <div class="summary_ammount">₹800</div>
                 </div>
               </div>
-              <div class="summary_total d-flex">
-                <div class="text-muted">Total Amount:</div>
+              <div class="summary_total d-flex mt-2">
+                <div>Total Amount:</div>
                 <div class="primary">₹1500</div>
               </div>
             </div>

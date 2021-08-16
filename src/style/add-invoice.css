@@ -1,8 +1,15 @@
+.billto {
+    font-weight: var(--font-medium);
+}
+
+.billing_details > * {
+    padding: calc(var(--padding) * 1) 0px;
+}
 .input-group label {
     color: var(--dark-grey);
     display: block;
-    margin-bottom: calc(var(--padding) * 2);
-    font-size: var(--h7-font-size);
+    margin-bottom: calc(var(--padding) * 3);
+    font-weight: var(--font-medium);
 }
 .input-group {
     position: relative;
@@ -43,13 +50,15 @@
     width: 100%;
     border: 1px solid var(--light-grey);
 }
+
 .table-bordered tr {
     padding: calc(var(--padding) * 4) 0;
 }
 .table-bordered td {
     text-align: center;
-    padding: calc(var(--padding) * 2) calc(var(--padding) * 3);
+    padding: calc(var(--padding) * 2) calc(var(--padding) * 4);
     border-bottom: 1px solid var(--light-grey);
+    color: var(--dark-grey);
 }
 
 .table-bordered tbody tr:last-child td {
@@ -57,9 +66,10 @@
 }
 
 .table-bordered th {
-    padding: calc(var(--padding) * 2);
+    padding: calc(var(--padding) * 3) calc(var(--padding) * 4);
     color: var(--dark-grey);
     border-bottom: 1px solid var(--light-grey);
+    font-weight: var(--font-medium);
 }
 
 .table-bordered th {
@@ -90,6 +100,7 @@
 }
 .summary_item {
     display: flex;
+    color: var(--dark-grey);
 }
 
 .summary_item > div,
@@ -103,6 +114,17 @@
     color: var(--grey);
 }
 
-.table-action {
+.summary_name,
+.summary_total {
+    text-transform: uppercase;
+    color: var(--light-grey);
+    font-weight: var(--font-medium);
+}
+
+.summar .table-action {
     font-size: var(--h6-font-size);
+}
+
+.invoice-notes {
+    height: 6rem;
 }
