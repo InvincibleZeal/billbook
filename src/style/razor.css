@@ -403,10 +403,10 @@ body {
 /************ Project Helpers ****************/
 
 .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /************ Card ****************/
@@ -474,7 +474,7 @@ input:focus-visible {
 }
 
 .text-muted {
-    color: var(--grey);
+  color: var(--grey);
 }
 
 .flex-grow > * {
@@ -532,7 +532,7 @@ input:focus-visible {
   list-style: none;
   font-size: var(--h6-font-size);
   cursor: pointer;
-  padding: calc(var(--padding) * 5 );
+  padding: calc(var(--padding) * 5);
 }
 
 .sidebar a {
