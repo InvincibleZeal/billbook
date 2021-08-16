@@ -7,7 +7,7 @@
   opacity: 0;
 }
 
-/* After 625px sidebar will not appear */
+/* After 625px   sidebar will not appear */
 @media only screen and (max-width: 880px) {
   .sidebar {
     display: none;
