@@ -570,9 +570,8 @@ input:focus-visible {
 
 /************ Table ****************/
 .table {
-  border-collapse: collapse;
-  width: 100%;
   border-collapse: separate;
+  width: 100%;
   border-spacing: 0 15px;
   overflow-x: auto;
 }
@@ -590,14 +589,22 @@ input:focus-visible {
 .table thead > tr > th {
   text-align: left;
   text-transform: uppercase;
-  padding: var(--padding);
+  padding: 0 calc(var(--padding) * 3);
   font-size: var(--default-font-size);
   letter-spacing: 0.75px;
   font-weight: var(--font-medium);
+  height: calc(var(--padding) * 3);
 }
 
 .table tbody > tr > td {
   background-color: var(--card-background);
-  padding: calc(var(--padding) * 4);
+  padding:  calc(var(--padding) * 6) calc(var(--padding) * 3);
   color: var(--dark-grey);
+  font-weight: 300;
+  line-height: calc(var(--padding) * 3)
+}
+
+.table tbody > tr > td:hover {
+  transform: scale(1.02);
+  transition: transform ease 0.2s;
 }
