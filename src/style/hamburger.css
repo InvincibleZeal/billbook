@@ -8,7 +8,7 @@
 }
 
 /* After 625px sidebar will not appear */
-@media only screen and (max-width: 625px) {
+@media only screen and (max-width: 880px) {
   .sidebar {
     display: none;
   }
@@ -24,6 +24,7 @@
     background: white;
     width: 100%;
     padding: 10px;
+    padding-left: 0;
     box-shadow: var(--default-box-shadow);
   }
   .add-item {
