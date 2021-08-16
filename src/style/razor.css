@@ -536,7 +536,7 @@ input:focus-visible {
 }
 
 .sidebar ul {
-  background-color: white;
+  background: white;
   padding: 0;
 }
 
