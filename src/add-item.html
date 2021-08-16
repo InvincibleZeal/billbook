@@ -63,25 +63,38 @@
         </div>
         <div class="card px-5 mx-5" style="max-width: 400px">
           <div class="py-5">
-            <div class="form-group mx-5 my-3">
-              <label class="mb-3">Name</label>
-              <input type="text" />
-            </div>
-            <div class="form-group mx-5 my-3">
-              <label class="mb-3">Price</label>
-              <input type="text" />
-            </div>
-            <div class="form-group mx-5 my-3">
-              <label class="mb-3">Description</label>
-              <textarea rows="4"> </textarea>
-            </div>
-            <div class="form-group m-5" style="justify-content: center">
-              <a href="list-item.html">
-                <button class="btn">
-                  <i class="fa fa-save"></i> &nbsp; Save Item
-                </button>
-              </a>
-            </div>
+            <form action="">
+              <div class="form-group mx-5 my-3">
+                <label class="mb-3">Name</label>
+                <input type="text" name="name" required />
+              </div>
+              <div class="form-group mx-5 my-3">
+                <label class="mb-3">Price</label>
+                <input
+                  type="text"
+                  name="price"
+                  pattern="[0-9]"
+                  required
+                  oninvalid="this.setCustomValidity('Only numerical values allowed')"
+                  oninput="this.setCustomValidity('')"
+                />
+              </div>
+              <div class="form-group mx-5 my-3">
+                <label class="mb-3">Description</label>
+                <textarea
+                  rows="4"
+                  name="description"
+                  required="true"
+                ></textarea>
+              </div>
+              <div class="form-group m-5" style="justify-content: center">
+                <a href="list-item.html">
+                  <button class="btn" type="submit">
+                    <i class="fa fa-save"></i> &nbsp; Save Item
+                  </button>
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
