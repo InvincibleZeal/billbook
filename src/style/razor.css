@@ -6,12 +6,20 @@
 @import "hamburger.css";
 
 /************ Common CSS ****************/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-size: var(--default-font-size);
-  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   background-color: var(--background-color);
+  min-height: 100vh;
 }
 
 /************ Flex Rules ****************/
@@ -495,7 +503,7 @@ input:focus-visible {
   font-size: var(--default-font-size);
   background: var(--primary-color);
   color: var(--card-background);
-  padding: calc(var(--padding) * 3) calc(var(--padding) * 5);
+  padding: calc(var(--padding) * 3);
   font-weight: var(--font-medium);
   border-radius: 0.25rem;
   cursor: pointer;
@@ -511,21 +519,21 @@ input:focus-visible {
 
 .wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  background-color: var(--white);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /************ Sidebar Menu ****************/
 
 .sidebar {
   background-color: var(--white);
+  width: 250px;
+  min-width: 250px;
+  padding-top: 1.5rem;
+  box-shadow: 2px 0px 7px 0px rgb(0 0 0 / 10%);
 }
 
 .sidebar ul {
   padding: 0;
-  min-width: 240px;
 }
 
 .sidebar li {
@@ -559,20 +567,20 @@ input:focus-visible {
 
 .page-content {
   background-color: var(--background-color);
-  flex: 1;
+  width: 100%;
 }
 
 .page-heading-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 /************ Table ****************/
 .table {
-  border-collapse: collapse;
-  width: 100%;
   border-collapse: separate;
+  width: 100%;
   border-spacing: 0 15px;
   overflow-x: auto;
 }
@@ -590,14 +598,26 @@ input:focus-visible {
 .table thead > tr > th {
   text-align: left;
   text-transform: uppercase;
-  padding: var(--padding);
+  padding: 0 calc(var(--padding) * 3);
   font-size: var(--default-font-size);
   letter-spacing: 0.75px;
   font-weight: var(--font-medium);
+  height: calc(var(--padding) * 3);
 }
 
 .table tbody > tr > td {
   background-color: var(--card-background);
-  padding: calc(var(--padding) * 4);
+  padding:  calc(var(--padding) * 6) calc(var(--padding) * 3);
   color: var(--dark-grey);
+  font-weight: 300;
+  line-height: calc(var(--padding) * 5)
+}
+
+.table tbody > tr > td:hover {
+  transform: scale(1.02);
+  transition: transform ease 0.2s;
+}
+
+.scrollable {
+  overflow-x: auto;
 }
