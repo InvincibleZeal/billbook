@@ -22,7 +22,27 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav class="sidebar">
+      <nav id="hamnav" class="sidebar add-item">
+        <label for="hamburger">&#9776;</label>
+        <input type="checkbox" id="hamburger" />
+
+        <div id="hamitems">
+          <ul class="sidebar-items">
+            <a href="index.html">
+              <li class="p-5 py-3 sidebar-item-opened">
+                <i class="fa fa-user"></i>Customers
+              </li>
+            </a>
+            <a href="list-item.html">
+              <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
+            </a>
+            <a href="list-invoice.html">
+              <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
+            </a>
+          </ul>
+        </div>
+      </nav>
+      <nav class="sidebar" id="hamitems">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3 sidebar-item-opened">
@@ -37,12 +57,12 @@
           </a>
         </ul>
       </nav>
-      <div class="page-content p-5 bg-primary">
+      <div class="margin-content-top page-content p-5 bg-primary">
         <div class="page-heading-wrapper mb-5 p-5">
           <span class="title"> New Customer </span>
         </div>
         <div class="card p-5 mx-5">
-          <div class="row py-5" style="max-width: 800px;">
+          <div class="row py-5" style="max-width: 800px">
             <div class="form-group mx-5 my-3">
               <label class="mb-3">Name</label>
               <input type="text" />
