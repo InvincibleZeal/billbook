@@ -524,6 +524,7 @@ input:focus-visible {
 }
 
 .sidebar ul {
+  background: white;
   padding: 0;
   min-width: 240px;
 }
