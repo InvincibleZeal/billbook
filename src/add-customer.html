@@ -22,27 +22,8 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav id="hamnav" class="sidebar add-item">
-        <label for="hamburger">&#9776;</label>
-        <input type="checkbox" id="hamburger" />
-
-        <div id="hamitems">
-          <ul class="sidebar-items">
-            <a href="index.html">
-              <li class="p-5 py-3 sidebar-item-opened">
-                <i class="fa fa-user"></i>Customers
-              </li>
-            </a>
-            <a href="list-item.html">
-              <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
-            </a>
-            <a href="list-invoice.html">
-              <li class="p-5 py-3"><i class="fa fa-clipboard"></i>Invoices</li>
-            </a>
-          </ul>
-        </div>
-      </nav>
-      <nav class="sidebar" id="hamitems">
+       <!-- Side Bar -->
+      <nav class="sidebar">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3 sidebar-item-opened">
@@ -57,7 +38,23 @@
           </a>
         </ul>
       </nav>
-      <div class="margin-content-top page-content p-5 bg-primary">
+      <!-- Bottom Bar -->
+      <nav class="bottom-bar">
+        <ul>
+          <a href="index.html">
+            <li class="p-5 py-3 selected">
+              <i class="fa fa-user"></i>
+            </li>
+          </a>
+          <a href="list-item.html">
+            <li class="p-5 py-3"><i class="fa fa-star"></i></li>
+          </a>
+          <a href="list-invoice.html">
+            <li class="p-5 py-3"><i class="fa fa-clipboard"></i></li>
+          </a>
+        </ul>
+      </nav>
+      <div class="page-content p-5 bg-primary">
         <div class="page-heading-wrapper mb-5 p-5">
           <span class="title"> New Customer </span>
         </div>
