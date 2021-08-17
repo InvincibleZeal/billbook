@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Customers from "./pages/Customers";
-import Inventory from "./pages/Inventory";
-import Invoice from "./pages/Invoice";
+import Customers from "./Pages/Customers";
+import Inventory from "./Pages/Inventory";
+import Invoice from "./Pages/Invoice";
 
 function App() {
   return (
