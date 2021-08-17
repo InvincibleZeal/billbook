@@ -22,27 +22,8 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav id="hamnav" class="sidebar add-item">
-        <label for="hamburger">&#9776;</label>
-        <input type="checkbox" id="hamburger" />
-
-        <div id="hamitems">
-          <ul class="sidebar-items">
-            <a href="index.html">
-              <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
-            </a>
-            <a href="list-item.html">
-              <li class="p-5 py-3"><i class="fa fa-star"></i>Items</li>
-            </a>
-            <a href="list-invoice.html">
-              <li class="p-5 py-3 sidebar-item-opened">
-                <i class="fa fa-clipboard"></i>Invoices
-              </li>
-            </a>
-          </ul>
-        </div>
-      </nav>
-      <nav class="sidebar" id="hamitems">
+      <!--Side Bar-->
+      <nav class="sidebar">
         <ul class="sidebar-items">
           <a href="index.html">
             <li class="p-5 py-3"><i class="fa fa-user"></i>Customers</li>
@@ -57,7 +38,23 @@
           </a>
         </ul>
       </nav>
-      <div class="margin-content-top page-content p-5 bg-primary">
+      <!--Bottom Bar-->
+      <nav class="bottom-bar">
+        <ul>
+          <a href="index.html">
+            <li class="p-5 py-3">
+              <i class="fa fa-user"></i>
+            </li>
+          </a>
+          <a href="list-item.html">
+            <li class="p-5 py-3"><i class="fa fa-star"></i></li>
+          </a>
+          <a href="list-invoice.html">
+            <li class="p-5 py-3 selected"><i class="fa fa-clipboard"></i></li>
+          </a>
+        </ul>
+      </nav>
+      <div class="page-content p-5 bg-primary">
         <div class="page-heading-wrapper mb-5 p-5">
           <span class="title"> Invoices </span>
           <a href="add-invoice.html">
@@ -66,60 +63,62 @@
             </button>
           </a>
         </div>
-        <table class="table px-5">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Customer</th>
-              <th>Number</th>
-              <th>Paid Status</th>
-              <th>Amount</th>
-              <th>Amount Due</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>17 Dec 2019</td>
-              <td>Anissa Beier</td>
-              <td>INV-0019120841156265</td>
-              <td>
-                <span class="bg-warning warning px-3 py-1 rounded">ISSUED</span>
-              </td>
-              <td>₹3300</td>
-              <td>₹3300</td>
-            </tr>
-            <tr>
-              <td>17 Dec 2019</td>
-              <td>Mellie Buckride</td>
-              <td>INV-002</td>
-              <td>
-                <span class="bg-info info px-3 py-1 rounded">PAID</span>
-              </td>
-              <td>₹3300</td>
-              <td>₹3300</td>
-            </tr>
-            <tr>
-              <td>17 Dec 2019</td>
-              <td>Ashlee Glover</td>
-              <td>INV-003</td>
-              <td>
-                <span class="bg-warning warning px-3 py-1 rounded">ISSUED</span>
-              </td>
-              <td>₹3300</td>
-              <td>₹3300</td>
-            </tr>
-            <tr>
-              <td>17 Dec 2019</td>
-              <td>John Doe</td>
-              <td>INV-004</td>
-              <td>
-                <span class="bg-danger danger px-3 py-1 rounded">FAILED</span>
-              </td>
-              <td>₹3300</td>
-              <td>₹3300</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="scrollable">
+          <table class="table px-5">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Number</th>
+                <th>Paid Status</th>
+                <th>Amount</th>
+                <th>Amount Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>17 Dec 2019</td>
+                <td>Anissa Beier</td>
+                <td>INV-0019120841156265</td>
+                <td>
+                  <span class="bg-warning warning px-3 py-1 rounded">ISSUED</span>
+                </td>
+                <td>₹3300</td>
+                <td>₹3300</td>
+              </tr>
+              <tr>
+                <td>17 Dec 2019</td>
+                <td>Mellie Buckride</td>
+                <td>INV-002</td>
+                <td>
+                  <span class="bg-info info px-3 py-1 rounded">PAID</span>
+                </td>
+                <td>₹3300</td>
+                <td>₹3300</td>
+              </tr>
+              <tr>
+                <td>17 Dec 2019</td>
+                <td>Ashlee Glover</td>
+                <td>INV-003</td>
+                <td>
+                  <span class="bg-warning warning px-3 py-1 rounded">ISSUED</span>
+                </td>
+                <td>₹3300</td>
+                <td>₹3300</td>
+              </tr>
+              <tr>
+                <td>17 Dec 2019</td>
+                <td>John Doe</td>
+                <td>INV-004</td>
+                <td>
+                  <span class="bg-danger danger px-3 py-1 rounded">FAILED</span>
+                </td>
+                <td>₹3300</td>
+                <td>₹3300</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>
