@@ -410,10 +410,10 @@ body {
 /************ Project Helpers ****************/
 
 .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /************ Card ****************/
@@ -481,7 +481,7 @@ input:focus-visible {
 }
 
 .text-muted {
-    color: var(--grey);
+  color: var(--grey);
 }
 
 .flex-grow > * {
@@ -539,7 +539,7 @@ input:focus-visible {
   list-style: none;
   font-size: var(--h6-font-size);
   cursor: pointer;
-  padding: calc(var(--padding) * 5 );
+  padding: calc(var(--padding) * 5);
 }
 
 .sidebar a {
@@ -607,10 +607,10 @@ input:focus-visible {
 
 .table tbody > tr > td {
   background-color: var(--card-background);
-  padding:  calc(var(--padding) * 6) calc(var(--padding) * 3);
+  padding: calc(var(--padding) * 6) calc(var(--padding) * 3);
   color: var(--dark-grey);
   font-weight: 300;
-  line-height: calc(var(--padding) * 5)
+  line-height: calc(var(--padding) * 5);
 }
 
 .table tbody > tr > td:hover {
@@ -622,7 +622,7 @@ input:focus-visible {
   overflow-x: auto;
 }
 
-.bottom-bar{
+.bottom-bar {
   display: none;
 }
 
@@ -631,13 +631,12 @@ input:focus-visible {
     display: none;
   }
 
-  .bottom-bar{
+  .bottom-bar {
     display: initial;
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: var(--white);
-    
   }
 
   .bottom-bar ul {
@@ -645,24 +644,23 @@ input:focus-visible {
     display: flex;
   }
 
-  .bottom-bar a{
+  .bottom-bar a {
     flex-grow: 1;
   }
-  
+
   .bottom-bar li {
     list-style: none;
     font-size: var(--h6-font-size);
     cursor: pointer;
-    padding: calc(var(--padding) * 5 );
+    padding: calc(var(--padding) * 5);
     width: 100%;
     text-align: center;
     color: var(--dark-grey);
   }
 
-  .bottom-bar .selected{
+  .bottom-bar .selected {
     background-color: var(--background-color);
     border-bottom: 3px solid var(--primary-color);
     color: var(--primary-color);
   }
-
 }
