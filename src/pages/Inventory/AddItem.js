@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AddItem = () => {
-    return (
-        <div>
-            I am Add Item Page
-        </div>
-    )
-}
+    return <div>I am Add Item Page</div>;
+};
 
-export default AddItem
+export default AddItem;
