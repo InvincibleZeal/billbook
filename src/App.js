@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ListCustomers } from "./pages/customers";
-import { ListItems } from "./pages/inventory";
-import { ListInvoices } from "./pages/invoice";
+import { ListCustomers } from "./pages/Customers";
+import { ListItems } from "./pages/Inventory";
+import { ListInvoices } from "./pages/Invoice";
 
 function App() {
     return (
