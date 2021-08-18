@@ -1,9 +1,8 @@
 /************ Imports ****************/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-@import "reset.css";
-@import "variable.css";
-@import "hamburger.css";
+@import "./reset.css";
+@import "./variable.css";
 
 /************ Common CSS ****************/
 * {
@@ -568,6 +567,7 @@ input:focus-visible {
 .page-content {
   background-color: var(--background-color);
   width: 100%;
+  padding-bottom: 75px;
 }
 
 .page-heading-wrapper {
@@ -607,10 +607,10 @@ input:focus-visible {
 
 .table tbody > tr > td {
   background-color: var(--card-background);
-  padding:  calc(var(--padding) * 6) calc(var(--padding) * 3);
+  padding: calc(var(--padding) * 6) calc(var(--padding) * 3);
   color: var(--dark-grey);
   font-weight: 300;
-  line-height: calc(var(--padding) * 5)
+  line-height: calc(var(--padding) * 5);
 }
 
 .table tbody > tr > td:hover {
@@ -620,4 +620,47 @@ input:focus-visible {
 
 .scrollable {
   overflow-x: auto;
+}
+
+.bottom-bar {
+  display: none;
+}
+
+@media only screen and (max-width: 880px) {
+  .sidebar {
+    display: none;
+  }
+
+  .bottom-bar {
+    display: initial;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--white);
+  }
+
+  .bottom-bar ul {
+    padding: 0;
+    display: flex;
+  }
+
+  .bottom-bar a {
+    flex-grow: 1;
+  }
+
+  .bottom-bar li {
+    list-style: none;
+    font-size: var(--h6-font-size);
+    cursor: pointer;
+    padding: calc(var(--padding) * 5);
+    width: 100%;
+    text-align: center;
+    color: var(--dark-grey);
+  }
+
+  .bottom-bar .selected {
+    background-color: var(--background-color);
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--primary-color);
+  }
 }

@@ -1,5 +1,37 @@
-# <center>Billbook</center>
+# Billbook
 
-## Development
+[![Netlify Status](https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status)](https://app.netlify.com/sites/billbook-razorpay/deploys)
 
-For CSS Guide refer [this](./src/style/README.md)
+<p>This is an invoicing system. It works especially well for SMEs and likes to be called <em>BillBook!</em>.</p>
+
+### Check this out live at : https://billbook-razorpay.netlify.app/
+
+## Features
+
+### The Customers
+
+<p>In the Customers tab, you may view the list of your customers as well as go to the next page to add a new customer.</p>
+
+<img width="1440" alt="customer list" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A11%3A17.809Z">
+
+<img width="1416" alt="customer add" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A11%3A46.043Z">
+
+### The Inventory
+
+<p>Want somewhere to keep track of your inventory? Go to the Items tab to see the items in your inventory and add new ones.</p>
+
+<img width="1440" alt="items list" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A12%3A23.067Z">
+
+<img width="1439" alt="items add" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A12%3A47.606Z">
+
+### The Invoices
+
+<p>Finally, you can generate and keep track of your invoices via the Invoices tab.</p>
+
+<img width="1440" alt="invoice list" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A13%3A04.542Z">
+
+<img width="1438" alt="invoice add" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A13%3A31.351Z">
+
+## Other Features
+
+<p>This website is built using pure HTML and CSS and is compatible with other screen sizes down to a mobile screen.</p>
