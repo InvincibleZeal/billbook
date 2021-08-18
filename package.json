@@ -16,6 +16,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --passWithNoTests",
+        "stylelint": "stylelint '**/*.scss'; exit 0",
         "eject": "react-scripts eject",
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
@@ -54,7 +55,9 @@
         "eslint-plugin-react": "^7.24.0",
         "husky": "^7.0.0",
         "lint-staged": "^11.1.2",
-        "prettier": "^2.3.2"
+        "prettier": "^2.3.2",
+        "stylelint": "^13.13.1",
+        "stylelint-config-standard": "^22.0.0"
     },
     "config": {
         "commitizen": {
