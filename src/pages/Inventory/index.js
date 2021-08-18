@@ -1,7 +1,4 @@
-import React from "react";
+import AddItem from "./AddItem";
+import ListItems from "./ListItems";
 
-const Inventory = () => {
-    return <div>I am Inventory Page</div>;
-};
-
-export default Inventory;
+export { AddItem, ListItems };

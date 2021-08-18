@@ -1,7 +1,4 @@
-import React from "react";
+import AddCustomer from "./AddCustomer";
+import ListCustomers from "./ListCustomers";
 
-const Customers = () => {
-    return <div>I am customers page</div>;
-};
-
-export default Customers;
+export { AddCustomer, ListCustomers };
