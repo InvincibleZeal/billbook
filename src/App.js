@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Customers from "./Pages/Customers";
-import Inventory from "./Pages/Inventory";
-import Invoice from "./Pages/Invoice";
+import Customers from "./pages/Customers";
+import Inventory from "./pages/Inventory";
+import Invoice from "./pages/Invoice";
 
 function App() {
     return (
