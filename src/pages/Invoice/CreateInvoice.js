@@ -1,7 +1,7 @@
 import React from "react";
 
-const AddCustomer = () => {
+const CreateInvoice = () => {
     return <div>I am add customers page</div>;
 };
 
-export default AddCustomer;
+export default CreateInvoice;

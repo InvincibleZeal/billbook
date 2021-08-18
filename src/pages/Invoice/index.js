@@ -1,7 +1,4 @@
-import React from "react";
+import CreateInvoice from "./CreateInvoice";
+import ListInvoices from "./ListInvoices";
 
-const Invoice = () => {
-    return <div>I am Invoice Page</div>;
-};
-
-export default Invoice;
+export { CreateInvoice, ListInvoices };

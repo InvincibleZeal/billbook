@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Customers from "./pages/Customers";
-import Inventory from "./pages/Inventory";
-import Invoice from "./pages/Invoice";
+import { ListCustomers } from "./pages/customers";
+import { ListItems } from "./pages/inventory";
+import { ListInvoices } from "./pages/invoice";
 
 function App() {
     return (
         <Router>
             <Switch>
                 <Route path="/" exact>
-                    <Customers />
+                    <ListCustomers />
                 </Route>
                 <Route path="/inventory">
-                    <Inventory />
+                    <ListItems />
                 </Route>
                 <Route path="/invoice">
-                    <Invoice />
+                    <ListInvoices />
                 </Route>
             </Switch>
         </Router>
