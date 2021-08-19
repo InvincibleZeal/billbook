@@ -9,7 +9,7 @@ const ListCustomers = () => {
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title"> Customers </span>
-                    <Link to="/add-customer">
+                    <Link to="/customers/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp; New Customer
                         </button>

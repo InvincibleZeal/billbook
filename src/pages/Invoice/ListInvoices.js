@@ -11,7 +11,7 @@ const ListInvoices = () => {
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title"> Invoices </span>
-                    <Link to="/create-invoice">
+                    <Link to="/invoice/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp; New Invoice
                         </button>

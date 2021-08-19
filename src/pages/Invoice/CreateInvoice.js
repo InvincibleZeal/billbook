@@ -145,7 +145,7 @@ const CreateInvoice = () => {
                         </table>
 
                         <div className=" invoice_additem d-flex align-items-center justify-content-center ">
-                            <Link className="btn-link p-4" to="/add-item">
+                            <Link className="btn-link p-4" to="/inventory/add">
                                 <i className="fa fa-shopping-basket mr-2"> </i>
                                 Add an Item
                             </Link>

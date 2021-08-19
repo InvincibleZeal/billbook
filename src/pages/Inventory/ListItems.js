@@ -10,7 +10,7 @@ const ListItems = () => {
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper p-5 mb-5">
                     <span className="title"> Items </span>
-                    <Link to="/add-item">
+                    <Link to="/inventory/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp; Add Item
                         </button>
