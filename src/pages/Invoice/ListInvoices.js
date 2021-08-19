@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import "../../styles/add-customer.css";
 
 const ListInvoices = () => {
@@ -10,10 +11,14 @@ const ListInvoices = () => {
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
-                    <span className="title"> Invoices </span>
+                    <span className="title">
+                        {" "}
+                        <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                    </span>
                     <Link to="/invoice/add">
                         <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp; New Invoice
+                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                            <FormattedMessage id="invoice.new.button"></FormattedMessage>
                         </button>
                     </Link>
                 </div>
@@ -21,12 +26,24 @@ const ListInvoices = () => {
                     <table className="table px-5">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Customer</th>
-                                <th>Number</th>
-                                <th>Paid Status</th>
-                                <th>Amount</th>
-                                <th>Amount Due</th>
+                                <th>
+                                    <FormattedMessage id="invoice.date"></FormattedMessage>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="invoice.new.customer"></FormattedMessage>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="invoice.number"></FormattedMessage>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="invoice.paid.status"></FormattedMessage>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="invoice.amount"></FormattedMessage>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="invoice.amount.due"></FormattedMessage>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

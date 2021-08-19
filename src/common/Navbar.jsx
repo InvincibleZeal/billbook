@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const Navbar = ({ opened }) => {
     return (
@@ -14,7 +15,8 @@ const Navbar = ({ opened }) => {
                                 opened === "customers" && "sidebar-item-opened"
                             } `}
                         >
-                            <i className="fa fa-user"></i>Customers
+                            <i className="fa fa-user"></i>{" "}
+                            <FormattedMessage id="title.customer"></FormattedMessage>
                         </li>
                     </Link>
                     <Link to="/inventory">
@@ -23,7 +25,8 @@ const Navbar = ({ opened }) => {
                                 opened === "inventory" && "sidebar-item-opened"
                             }`}
                         >
-                            <i className="fa fa-star"></i>Items
+                            <i className="fa fa-star"></i>{" "}
+                            <FormattedMessage id="title.items"></FormattedMessage>
                         </li>
                     </Link>
                     <Link to="/invoice">
@@ -32,7 +35,8 @@ const Navbar = ({ opened }) => {
                                 opened === "invoice" && "sidebar-item-opened"
                             }`}
                         >
-                            <i className="fa fa-clipboard"></i>Invoices
+                            <i className="fa fa-clipboard"></i>{" "}
+                            <FormattedMessage id="title.invoice"></FormattedMessage>
                         </li>
                     </Link>
                 </ul>

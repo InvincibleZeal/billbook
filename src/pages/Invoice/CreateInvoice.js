@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import "../../styles/add-invoice.css";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
 const CreateInvoice = () => {
@@ -11,18 +12,21 @@ const CreateInvoice = () => {
             <div className="page-content p-5 bg-primary">
                 <form action="">
                     <div className="page-heading-wrapper mb-5 p-5">
-                        <span className="title"> Invoices </span>
+                        <span className="title">
+                            {" "}
+                            <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                        </span>
                         <Link to="/invoice">
                             <button className="btn" type="submit">
-                                <i className="fa fa-save"></i> &nbsp; Save
-                                Invoice
+                                <i className="fa fa-save"></i> &nbsp;{" "}
+                                <FormattedMessage id="invoice.save.button"></FormattedMessage>{" "}
                             </button>
                         </Link>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
                             <h4 className="billto text-muted m-0 mb-3">
-                                Bill to
+                                <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
                                 <div className="billing_details pr-3">
@@ -30,13 +34,19 @@ const CreateInvoice = () => {
                                     <div>81998492023</div>
                                     <div>buck@miller.com</div>
                                 </div>
-                                <div className="btn-link">Change</div>
+                                <div className="btn-link">
+                                    {" "}
+                                    <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                                </div>
                             </div>
                         </div>
                         <div className="invoice_details mx-5">
                             <div className="d-flex flex-grow mb-5">
                                 <div className="input-group px-2">
-                                    <label htmlFor="issueDate">Issued At</label>
+                                    <label htmlFor="issueDate">
+                                        {" "}
+                                        <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
+                                    </label>
                                     <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
@@ -46,7 +56,10 @@ const CreateInvoice = () => {
                                     />
                                 </div>
                                 <div className="input-group px-2">
-                                    <label htmlFor="dueDate">Due Date</label>
+                                    <label htmlFor="dueDate">
+                                        {" "}
+                                        <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
+                                    </label>
                                     <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
@@ -59,7 +72,7 @@ const CreateInvoice = () => {
                             <div className="d-flex flex-grow">
                                 <div className="input-group px-2">
                                     <label htmlFor="invoiceNumber">
-                                        Invoice Number
+                                        <FormattedMessage id="invoice.number"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -71,7 +84,7 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="referenceNumber">
-                                        Reference Number
+                                        <FormattedMessage id="invoice.reference.number"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -89,10 +102,22 @@ const CreateInvoice = () => {
                         <table className="table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Items</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Amount</th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="invoice.quantity"></FormattedMessage>{" "}
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="item.price"></FormattedMessage>{" "}
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="invoice.amount"></FormattedMessage>{" "}
+                                    </th>
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
@@ -147,7 +172,7 @@ const CreateInvoice = () => {
                         <div className=" invoice_additem d-flex align-items-center justify-content-center ">
                             <Link className="btn-link p-4" to="/inventory/add">
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                Add an Item
+                                Add an item
                             </Link>
                         </div>
                     </div>
@@ -155,7 +180,10 @@ const CreateInvoice = () => {
                     <div className="d-flex flex-grow py-5">
                         <div className="invoice_note mx-5">
                             <div className="input-group">
-                                <label htmlFor="notes">Notes</label>
+                                <label htmlFor="notes">
+                                    {" "}
+                                    <FormattedMessage id="invoice.notes"></FormattedMessage>{" "}
+                                </label>
                                 <textarea
                                     className="input-sm invoice-notes"
                                     name="notes"
