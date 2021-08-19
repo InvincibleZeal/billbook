@@ -1,18 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Navbar from "../../common/Navbar";
-
+import { Link } from "react-router-dom";
+import Wrapper from "../../common/Wrapper";
 const ListCustomers = () => {
     return (
-        <div className="wrapper">
+        <Fragment>
             <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title"> Customers </span>
-                    <a href="add-customer.html">
+                    <Link to="/add-customer">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp; New Customer
                         </button>
-                    </a>
+                    </Link>
                 </div>
                 <div className="scrollable">
                     <table className="table px-5">
@@ -53,8 +54,8 @@ const ListCustomers = () => {
                     </table>
                 </div>
             </div>
-        </div>
+        </Fragment>
     );
 };
 
-export default ListCustomers;
+export default Wrapper(ListCustomers);
