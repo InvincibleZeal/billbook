@@ -18,12 +18,20 @@ const Navbar = ({ opened }) => {
                         </li>
                     </Link>
                     <Link to="/inventory">
-                        <li className="p-5 py-3">
+                        <li
+                            className={`p-5 py-3 ${
+                                opened === "inventory" && "sidebar-item-opened"
+                            }`}
+                        >
                             <i className="fa fa-star"></i>Items
                         </li>
                     </Link>
                     <Link to="/invoice">
-                        <li className="p-5 py-3">
+                        <li
+                            className={`p-5 py-3 ${
+                                opened === "invoice" && "sidebar-item-opened"
+                            }`}
+                        >
                             <i className="fa fa-clipboard"></i>Invoices
                         </li>
                     </Link>
@@ -42,12 +50,20 @@ const Navbar = ({ opened }) => {
                         </li>
                     </Link>
                     <Link to="/inventory">
-                        <li className="p-5 py-3">
+                        <li
+                            className={`p-5 py-3 ${
+                                opened === "inventory" && "selected"
+                            }`}
+                        >
                             <i className="fa fa-star"></i>
                         </li>
                     </Link>
                     <Link to="/invoice">
-                        <li className="p-5 py-3">
+                        <li
+                            className={`p-5 py-3 ${
+                                opened === "invoice" && "selected"
+                            }`}
+                        >
                             <i className="fa fa-clipboard"></i>
                         </li>
                     </Link>
