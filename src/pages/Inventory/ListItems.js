@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 
 const ListItems = () => {

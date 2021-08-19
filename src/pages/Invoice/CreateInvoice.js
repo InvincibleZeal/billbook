@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
-import "../../styles/add-invoice.css";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
+import "styles/add-invoice.css";
 import { Link } from "react-router-dom";
 
 const CreateInvoice = () => {

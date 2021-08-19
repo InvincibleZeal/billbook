@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
-import "../../styles/add-customer.css";
+import "styles/add-customer.css";
 
 const ListInvoices = () => {
     return (
