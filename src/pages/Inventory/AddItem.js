@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Wrapper from "../../common/Wrapper";
+import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
 
@@ -56,4 +56,4 @@ const AddItem = () => {
     );
 };
 
-export default Wrapper(AddItem);
+export default withWrapper(AddItem);

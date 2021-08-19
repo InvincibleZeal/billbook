@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
-import Wrapper from "../../common/Wrapper";
+import withWrapper from "../../common/withWrapper";
 const ListCustomers = () => {
     return (
         <Fragment>
@@ -58,4 +58,4 @@ const ListCustomers = () => {
     );
 };
 
-export default Wrapper(ListCustomers);
+export default withWrapper(ListCustomers);

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Wrapper from "../../common/Wrapper";
+import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
 
@@ -72,4 +72,4 @@ const ListItems = () => {
     );
 };
 
-export default Wrapper(ListItems);
+export default withWrapper(ListItems);

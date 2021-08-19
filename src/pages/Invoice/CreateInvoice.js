@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Wrapper from "../../common/Wrapper";
+import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import "../../styles/add-invoice.css";
 import { Link } from "react-router-dom";
@@ -201,4 +201,4 @@ const CreateInvoice = () => {
     );
 };
 
-export default Wrapper(CreateInvoice);
+export default withWrapper(CreateInvoice);

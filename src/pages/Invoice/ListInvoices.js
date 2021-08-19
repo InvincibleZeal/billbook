@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Wrapper from "../../common/Wrapper";
+import withWrapper from "../../common/withWrapper";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
 import "../../styles/add-customer.css";
@@ -86,4 +86,4 @@ const ListInvoices = () => {
     );
 };
 
-export default Wrapper(ListInvoices);
+export default withWrapper(ListInvoices);
