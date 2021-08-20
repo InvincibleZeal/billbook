@@ -669,4 +669,5 @@ input:focus-visible {
     border-radius: 10px;
     bottom: 0;
     padding-right: 40px;
+    -webkit-appearance: none;
 }

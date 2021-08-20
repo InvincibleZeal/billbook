@@ -48,9 +48,9 @@ const Navbar = ({ opened }, ...props) => {
                     onChange={(e) => Context.selectLang(e)}
                 >
                     <option value="en-US" selected data-img_src={ukflag}>
-                        ENGLISH
+                        🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH
                     </option>
-                    <option value="EN-mx">FRENCH</option>
+                    <option value="EN-mx">🇫🇷 &nbsp; FRENCH</option>
                 </select>
             </nav>
             {/* Bottom Bar */}
