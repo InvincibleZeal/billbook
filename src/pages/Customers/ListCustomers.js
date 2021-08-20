@@ -49,7 +49,7 @@ const ListCustomers = () => {
                         </table>
                     </div>
                 ) : (
-                    <p style={{ textAlign: "center" }} className="my-3">
+                    <p className="my-3 mx-5">
                         {" "}
                         There are no customers data available
                     </p>

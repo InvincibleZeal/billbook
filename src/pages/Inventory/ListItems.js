@@ -55,10 +55,7 @@ const ListItems = () => {
                         </table>
                     </div>
                 ) : (
-                    <p style={{ textAlign: "center" }} className="my-3">
-                        {" "}
-                        There are no items available
-                    </p>
+                    <p className="my-3 mx-5"> There are no items available</p>
                 )}
             </div>
         </Fragment>

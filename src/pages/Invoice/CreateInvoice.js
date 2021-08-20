@@ -1,10 +1,31 @@
-import React, { Fragment } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useState, useEffect } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link } from "react-router-dom";
+import ChangeCustomerModal from "./ChangeCustomerModal";
 
 const CreateInvoice = () => {
+    // const [ItemModal, setItemModal] = useState(false);
+    const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
+    const [customersInfo, setCustomersInfo] = useState([]);
+    const [itemInfo, setItemInfo] = useState([]);
+    const [invoiceRecipentDetails, setInvoiceRecipentDetails] = useState({
+        name: "",
+        phone: "",
+        email: "",
+    });
+    useEffect(() => {
+        fetchData();
+    }, []);
+    // Function to fetch data from local storage
+    const fetchData = () => {
+        if (localStorage.getItem("customer_data"))
+            setCustomersInfo(JSON.parse(localStorage.getItem("customer_data")));
+        if (localStorage.getItem("inventory_data"))
+            setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
+    };
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -25,12 +46,37 @@ const CreateInvoice = () => {
                                 Bill to
                             </h4>
                             <div className="d-flex justify-content-between">
-                                <div className="billing_details pr-3">
-                                    <div>Buck Miller</div>
-                                    <div>81998492023</div>
-                                    <div>buck@miller.com</div>
-                                </div>
-                                <div className="btn-link">Change</div>
+                                {customersInfo.length > 0 ? (
+                                    <Fragment>
+                                        <div className="billing_details pr-3">
+                                            <div>
+                                                {invoiceRecipentDetails.name ||
+                                                    customersInfo[0].name}
+                                            </div>
+                                            <div>
+                                                {invoiceRecipentDetails.phone ||
+                                                    customersInfo[0].phone}
+                                            </div>
+                                            <div>
+                                                {invoiceRecipentDetails.email ||
+                                                    customersInfo[0].email}
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="btn-link"
+                                            onClick={() =>
+                                                setCustomersDetailsModal(true)
+                                            }
+                                        >
+                                            Change
+                                        </div>
+                                    </Fragment>
+                                ) : (
+                                    <Link to="/customers/add">
+                                        {" "}
+                                        <p>Add Customer</p>{" "}
+                                    </Link>
+                                )}
                             </div>
                         </div>
                         <div className="invoice_details mx-5">
@@ -197,6 +243,13 @@ const CreateInvoice = () => {
                     </div>
                 </form>
             </div>
+            <ChangeCustomerModal
+                modalStatus={customerDetailsModal}
+                setModalStatus={setCustomersDetailsModal}
+                customersInfo={customersInfo}
+                invoiceRecipentDetails={invoiceRecipentDetails}
+                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
+            />
         </Fragment>
     );
 };
