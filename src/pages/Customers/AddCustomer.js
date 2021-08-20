@@ -1,9 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
+import { useNotification } from "notification";
+
 const AddCustomers = () => {
+    const { triggerNotification } = useNotification();
+
+    useEffect(() => {
+        triggerNotification({
+            type: "danger",
+            title: "Some error occured",
+            time: 10000,
+        });
+    }, []);
     return (
         <Fragment>
             <Navbar opened="customers" />
