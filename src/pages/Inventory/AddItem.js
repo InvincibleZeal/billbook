@@ -1,9 +1,29 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const AddItem = () => {
+    const [data, setData] = useState({
+        name: "",
+        price: "",
+        description: "",
+        date: new Date(),
+    });
+    const history = useHistory();
+    const AddItem = (e) => {
+        e.preventDefault();
+        // Adding to local storage
+        if (localStorage.getItem("inventory_data") == null) {
+            localStorage.setItem("inventory_data", "[]");
+        }
+        const inventoryData = JSON.parse(
+            localStorage.getItem("inventory_data")
+        );
+        inventoryData.push(data);
+        localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
+        history.push("/inventory");
+    };
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -13,20 +33,37 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form action="">
+                        <form onSubmit={(e) => AddItem(e)}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">Name</label>
-                                <input type="text" name="name" required />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    required
+                                    value={data.name}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            name: e.target.value,
+                                        })
+                                    }
+                                />
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">Price</label>
                                 <input
                                     type="text"
                                     name="price"
-                                    pattern="[0-9]"
                                     required
-                                    oninvalid="this.setCustomValidity('Only numerical values allowed')"
+                                    onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
+                                    value={data.price}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            price: e.target.value,
+                                        })
+                                    }
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -35,18 +72,23 @@ const AddItem = () => {
                                     rows="4"
                                     name="description"
                                     required="true"
+                                    value={data.description}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            description: e.target.value,
+                                        })
+                                    }
                                 ></textarea>
                             </div>
                             <div
                                 className="form-group m-5"
                                 style={{ justifyContent: "center" }}
                             >
-                                <Link to="/inventory">
-                                    <button className="btn" type="submit">
-                                        <i className="fa fa-save"></i> &nbsp;
-                                        Save Item
-                                    </button>
-                                </Link>
+                                <button className="btn" type="submit">
+                                    <i className="fa fa-save"></i> &nbsp; Save
+                                    Item
+                                </button>
                             </div>
                         </form>
                     </div>
