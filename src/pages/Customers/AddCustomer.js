@@ -1,9 +1,27 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Navbar from "common/Navbar";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 const AddCustomers = () => {
+    const [data, setData] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        date: new Date(),
+    });
+    const history = useHistory();
+    const AddCustomer = (e) => {
+        e.preventDefault();
+        // Adding to local storage
+        if (localStorage.getItem("customer_data") == null) {
+            localStorage.setItem("customer_data", "[]");
+        }
+        const customerData = JSON.parse(localStorage.getItem("customer_data"));
+        customerData.push(data);
+        localStorage.setItem("customer_data", JSON.stringify(customerData));
+        history.push("/");
+    };
     return (
         <Fragment>
             <Navbar opened="customers" />
@@ -12,11 +30,22 @@ const AddCustomers = () => {
                     <span className="title"> New Customer </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form action="">
+                    <form onSubmit={(e) => AddCustomer(e)}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">Name</label>
-                                <input type="text" name="name" required />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    required
+                                    value={data.name}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            name: e.target.value,
+                                        })
+                                    }
+                                />
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">Phone</label>
@@ -25,24 +54,40 @@ const AddCustomers = () => {
                                     name="phone"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    oninvalid="this.setCustomValidity('Enter atleast 10 characters. Use only numbers')"
+                                    onInvalid="this.setCustomValidity('Enter atleast 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
+                                    value={data.phone}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            phone: e.target.value,
+                                        })
+                                    }
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">Email</label>
-                                <input type="email" name="email" required />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    value={data.email}
+                                    onChange={(e) =>
+                                        setData({
+                                            ...data,
+                                            email: e.target.value,
+                                        })
+                                    }
+                                />
                             </div>
                             <div
                                 className="form-group mx-5 my-3"
                                 style={{ justifyContent: "center" }}
                             >
-                                <Link to="/">
-                                    <button className="btn" type="submit">
-                                        <i className="fa fa-save"></i> &nbsp;
-                                        Save Customer
-                                    </button>
-                                </Link>
+                                <button className="btn" type="submit">
+                                    <i className="fa fa-save"></i> &nbsp; Save
+                                    Customer
+                                </button>
                             </div>
                         </div>
                     </form>

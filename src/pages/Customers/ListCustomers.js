@@ -1,8 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 const ListCustomers = () => {
+    const [tableData, setTableData] = useState([]);
+    useEffect(() => {
+        fetchData();
+    }, []);
+    // Function to fetch data from local storage
+    const fetchData = () => {
+        if (localStorage.getItem("customer_data"))
+            setTableData(JSON.parse(localStorage.getItem("customer_data")));
+    };
+
     return (
         <Fragment>
             <Navbar opened="customers" />
@@ -15,44 +25,35 @@ const ListCustomers = () => {
                         </button>
                     </Link>
                 </div>
-                <div className="scrollable">
-                    <table className="table px-5">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Created On</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Anissa Beier</td>
-                                <td>+9120841156265</td>
-                                <td>void@razorpay.com</td>
-                                <td>06 Aug 2020</td>
-                            </tr>
-                            <tr>
-                                <td>Mellie Buckride</td>
-                                <td>8889922222</td>
-                                <td>hello@razorpay.com</td>
-                                <td>06 Aug 2020</td>
-                            </tr>
-                            <tr>
-                                <td>Ashlee Glover</td>
-                                <td>9898761525</td>
-                                <td>contact@razorpay.com</td>
-                                <td>06 Aug 2020</td>
-                            </tr>
-                            <tr>
-                                <td>John Doe</td>
-                                <td>4819699668</td>
-                                <td>support@razorpay.com</td>
-                                <td>06 Aug 2020</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {tableData.length > 0 ? (
+                    <div className="scrollable">
+                        <table className="table px-5">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Created On</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tableData.map((data, idx) => (
+                                    <tr key={idx}>
+                                        <td>{data.name}</td>
+                                        <td>{data.phone}</td>
+                                        <td>{data.email}</td>
+                                        <td>{data.date.slice(0, 10)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <p style={{ textAlign: "center" }} className="my-3">
+                        {" "}
+                        There are no customers data available
+                    </p>
+                )}
             </div>
         </Fragment>
     );
