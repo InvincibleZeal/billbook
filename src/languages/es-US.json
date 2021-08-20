@@ -26,5 +26,9 @@
     "invoice.date": "Date",
     "invoice.cutomse.name": "Customer",
     "invoice.paid.status": "Paid Status",
-    "invoice.amount.due": "Amount Due"
+    "invoice.amount.due": "Amount Due",
+    "invoice.change": "change",
+    "invoice.add.on.item": "Add am item",
+    "invoice.total.amount": "Total Amount",
+    "invoice.model": "Model"
 }

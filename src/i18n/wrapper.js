@@ -22,7 +22,7 @@ function Wrapper(props) {
         const newlocale = e.target.value;
 
         setLocale(newlocale);
-        if (newlocale === "en-US") {
+        if (newlocale.includes("en-")) {
             setMessage(ENGLISH);
         } else setMessage(SPANISH);
     }

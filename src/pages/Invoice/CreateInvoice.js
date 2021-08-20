@@ -36,7 +36,7 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="btn-link">
                                     {" "}
-                                    <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                                    <FormattedMessage id="invoice.change"></FormattedMessage>{" "}
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,11 @@ const CreateInvoice = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Model 5</td>
+                                    <td>
+                                        {" "}
+                                        <FormattedMessage id="invoice.model"></FormattedMessage>{" "}
+                                        5
+                                    </td>
                                     <td>
                                         <input
                                             type="number"
@@ -145,7 +149,11 @@ const CreateInvoice = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Model 5</td>
+                                    <td>
+                                        {" "}
+                                        <FormattedMessage id="invoice.model"></FormattedMessage>{" "}
+                                        5
+                                    </td>
                                     <td>
                                         <input
                                             type="number"
@@ -172,7 +180,7 @@ const CreateInvoice = () => {
                         <div className=" invoice_additem d-flex align-items-center justify-content-center ">
                             <Link className="btn-link p-4" to="/inventory/add">
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                Add an item
+                                <FormattedMessage id="invoice.add.on.item"></FormattedMessage>{" "}
                             </Link>
                         </div>
                     </div>
@@ -195,7 +203,8 @@ const CreateInvoice = () => {
                                 <div className="summary_items pb-4">
                                     <div className="summary_item">
                                         <div className="summary_name">
-                                            Model 5
+                                            <FormattedMessage id="invoice.model"></FormattedMessage>{" "}
+                                            5
                                         </div>
                                         <div className="summary_quantity">
                                             x2
@@ -206,7 +215,8 @@ const CreateInvoice = () => {
                                     </div>
                                     <div className="summary_item">
                                         <div className="summary_name">
-                                            Model 3
+                                            <FormattedMessage id="invoice.model"></FormattedMessage>{" "}
+                                            3
                                         </div>
                                         <div className="summary_quantity">
                                             x1
@@ -217,7 +227,11 @@ const CreateInvoice = () => {
                                     </div>
                                 </div>
                                 <div className="summary_total d-flex mt-2">
-                                    <div>Total Amount:</div>
+                                    <div>
+                                        {" "}
+                                        <FormattedMessage id="invoice.total.amount"></FormattedMessage>{" "}
+                                        :
+                                    </div>
                                     <div className="primary">₹1500</div>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ const ListInvoices = () => {
                                     <FormattedMessage id="invoice.date"></FormattedMessage>
                                 </th>
                                 <th>
-                                    <FormattedMessage id="invoice.new.customer"></FormattedMessage>
+                                    <FormattedMessage id="title.customer"></FormattedMessage>
                                 </th>
                                 <th>
                                     <FormattedMessage id="invoice.number"></FormattedMessage>

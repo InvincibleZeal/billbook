@@ -26,5 +26,9 @@
     "invoice.date": "Fecha",
     "invoice.cutomse.name": "Clinte",
     "invoice.paid.status": "Estado pagado",
-    "invoice.amount.due": "Monto Adeudado"
+    "invoice.amount.due": "Monto Adeudado",
+    "invoice.change": "cambio",
+    "invoice.add.on.item": "Agregar un artículo",
+    "invoice.total.amount": "Cantidad total",
+    "invoice.model": "Modelo"
 }
