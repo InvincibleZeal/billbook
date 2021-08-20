@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-
-const Navbar = ({ opened }) => {
+import { context } from "../i18n/wrapper";
+import ukflag from "../assets/uk-flag.png";
+const Navbar = ({ opened }, ...props) => {
+    const Context = useContext(context);
     return (
         <Fragment>
             {/* Sidebar */}
@@ -40,6 +42,16 @@ const Navbar = ({ opened }) => {
                         </li>
                     </Link>
                 </ul>
+                <select
+                    value={Context.locale}
+                    className="select-language m-2 p-2"
+                    onChange={(e) => Context.selectLang(e)}
+                >
+                    <option value="en-US" selected data-img_src={ukflag}>
+                        ENGLISH
+                    </option>
+                    <option value="EN-mx">FRENCH</option>
+                </select>
             </nav>
             {/* Bottom Bar */}
             <nav className="bottom-bar">
