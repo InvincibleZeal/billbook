@@ -5,9 +5,10 @@ import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
+import AddItemModal from "./AddItemsModal";
 
 const CreateInvoice = () => {
-    // const [ItemModal, setItemModal] = useState(false);
+    const [itemModal, setItemModal] = useState(false);
     const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
     const [itemInfo, setItemInfo] = useState([]);
@@ -15,6 +16,12 @@ const CreateInvoice = () => {
         name: "",
         phone: "",
         email: "",
+        issueDate: "",
+        dueDate: "",
+        invoiceNumber: "",
+        referenceNumber: "",
+        items: [],
+        notes: "",
     });
     useEffect(() => {
         fetchData();
@@ -142,59 +149,68 @@ const CreateInvoice = () => {
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Model 5</td>
-                                    <td>
-                                        <input
-                                            type="number"
-                                            name="itemQuantity"
-                                            required
-                                            oninvalid="this.setCustomValidity('Only numerical values allowed')"
-                                            onInput="this.setCustomValidity('')"
-                                        />
-                                    </td>
-                                    <td>₹350</td>
-                                    <td>₹700</td>
-                                    <td className="table-action">
-                                        <a href="#" className="btn-link">
-                                            <i
-                                                className="fa fa-trash"
-                                                aria-hidden="true"
-                                            ></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Model 5</td>
-                                    <td>
-                                        <input
-                                            type="number"
-                                            name="itemQuantity"
-                                            required
-                                            oninvalid="this.setCustomValidity('Only numerical values allowed')"
-                                            onInput="this.setCustomValidity('')"
-                                        />
-                                    </td>
-                                    <td>₹350</td>
-                                    <td>₹700</td>
-                                    <td className="table-action">
-                                        <a href="#" className="btn-link">
-                                            <i
-                                                className="fa fa-trash"
-                                                aria-hidden="true"
-                                            ></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            {console.log(invoiceRecipentDetails.items)}
+                            {invoiceRecipentDetails.items.length > 0 && (
+                                //     <tr>
+                                //     <td>Model 5</td>
+                                //     <td>
+                                //         <input
+                                //             type="number"
+                                //             name="itemQuantity"
+                                //             required
+                                //             oninvalid="this.setCustomValidity('Only numerical values allowed')"
+                                //             onInput="this.setCustomValidity('')"
+                                //         />
+                                //     </td>
+                                //     <td>₹350</td>
+                                //     <td>₹700</td>
+                                //     <td className="table-action">
+                                //         <a href="#" className="btn-link">
+                                //             <i
+                                //                 className="fa fa-trash"
+                                //                 aria-hidden="true"
+                                //             ></i>
+                                //         </a>
+                                //     </td>
+                                // </tr>
+                                <tbody>
+                                    {invoiceRecipentDetails.items.map(
+                                        (item, idx) => (
+                                            <tr key={idx}>
+                                                <td> {item.name} </td>
+                                                <td>{item.amount}</td>
+                                                <td>₹{item.price}</td>
+                                                <td>
+                                                    ₹
+                                                    {item.amount *
+                                                        Number(item.price)}
+                                                </td>
+                                                <td className="table-action">
+                                                    <a
+                                                        href="#"
+                                                        className="btn-link"
+                                                    >
+                                                        <i
+                                                            className="fa fa-trash"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                            )}
                         </table>
 
                         <div className=" invoice_additem d-flex align-items-center justify-content-center ">
-                            <Link className="btn-link p-4" to="/inventory/add">
+                            <span
+                                className="btn-link p-4"
+                                onClick={() => setItemModal(true)}
+                            >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
                                 Add an Item
-                            </Link>
+                            </span>
                         </div>
                     </div>
 
@@ -211,28 +227,24 @@ const CreateInvoice = () => {
                         <div className="summary mx-5">
                             <div className="card-bordered p-3">
                                 <div className="summary_items pb-4">
-                                    <div className="summary_item">
-                                        <div className="summary_name">
-                                            Model 5
-                                        </div>
-                                        <div className="summary_quantity">
-                                            x2
-                                        </div>
-                                        <div className="summary_ammount">
-                                            ₹700
-                                        </div>
-                                    </div>
-                                    <div className="summary_item">
-                                        <div className="summary_name">
-                                            Model 3
-                                        </div>
-                                        <div className="summary_quantity">
-                                            x1
-                                        </div>
-                                        <div className="summary_ammount">
-                                            ₹800
-                                        </div>
-                                    </div>
+                                    {invoiceRecipentDetails.items.map(
+                                        (item, idx) => (
+                                            <div
+                                                className="summary_item"
+                                                key={idx}
+                                            >
+                                                <div className="summary_name">
+                                                    {item.name}
+                                                </div>
+                                                <div className="summary_quantity">
+                                                    x{item.amount}
+                                                </div>
+                                                <div className="summary_ammount">
+                                                    ₹{item.price}
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
                                 </div>
                                 <div className="summary_total d-flex mt-2">
                                     <div>Total Amount:</div>
@@ -247,6 +259,13 @@ const CreateInvoice = () => {
                 modalStatus={customerDetailsModal}
                 setModalStatus={setCustomersDetailsModal}
                 customersInfo={customersInfo}
+                invoiceRecipentDetails={invoiceRecipentDetails}
+                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
+            />
+            <AddItemModal
+                modalStatus={itemModal}
+                setModalStatus={setItemModal}
+                itemInfo={itemInfo}
                 invoiceRecipentDetails={invoiceRecipentDetails}
                 setInvoiceRecipentDetails={setInvoiceRecipentDetails}
             />

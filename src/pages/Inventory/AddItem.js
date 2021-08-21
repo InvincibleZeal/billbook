@@ -9,6 +9,7 @@ const AddItem = () => {
         price: "",
         description: "",
         date: new Date(),
+        id: Math.floor(Math.random() * 101 + 1),
     });
     const history = useHistory();
     const AddItem = (e) => {

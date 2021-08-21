@@ -1,24 +1,40 @@
+/* eslint-disable no-unused-vars */
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 Modal.setAppElement("*");
 
-const ChangeCustomerModal = ({
+const AddItemsModal = ({
     modalStatus,
     setModalStatus,
-    customersInfo,
+    itemInfo,
     invoiceRecipentDetails,
     setInvoiceRecipentDetails,
 }) => {
-    const updateCustomersDetails = (name, phone, email) => {
-        setInvoiceRecipentDetails({
-            ...invoiceRecipentDetails,
-            name,
-            phone,
-            email,
-        });
-        setModalStatus(false);
+    const addItem = (id, name, price) => {
+        const product = { id, name, price };
+        product.amount = 1;
+        if (
+            invoiceRecipentDetails.items.length === 0 ||
+            !invoiceRecipentDetails.items.find((p) => p.id === product.id)
+        ) {
+            invoiceRecipentDetails.items.push(product);
+        } else if (
+            invoiceRecipentDetails.items.find((p) => p.id === product.id)
+        ) {
+            product.amount =
+                invoiceRecipentDetails.items.find((p) => p.id === product.id)
+                    .amount + 1;
+            invoiceRecipentDetails.items.splice(
+                invoiceRecipentDetails.items.findIndex(
+                    (p) => p.id === product.id
+                ),
+                1,
+                product
+            );
+        }
+        setInvoiceRecipentDetails(invoiceRecipentDetails);
     };
     return (
         <Modal
@@ -30,7 +46,7 @@ const ChangeCustomerModal = ({
                 className="page-heading-wrapper react-modal-title-container"
                 style={{ marginBottom: "0" }}
             >
-                <span className="react-modal-title">Change Details</span>
+                <span className="react-modal-title">Select Item</span>
                 <div className="react-modal-close">
                     <i
                         className="fa fa-times"
@@ -38,24 +54,19 @@ const ChangeCustomerModal = ({
                     ></i>
                 </div>
             </div>
-            {customersInfo.length > 0 ? (
+            {itemInfo.length > 0 ? (
                 <Fragment>
-                    {customersInfo.map((info, idx) => (
+                    {itemInfo.map((info, idx) => (
                         <div
                             className="react-modal-title-container customer-card"
                             key={idx}
                             onClick={() =>
-                                updateCustomersDetails(
-                                    info.name,
-                                    info.phone,
-                                    info.email
-                                )
+                                addItem(info.id, info.name, info.price)
                             }
                         >
                             <div className="card p-3">
-                                <p>{info.name}</p>
-                                <p>{info.phone}</p>
-                                <p>{info.email}</p>
+                                <p>Item: {info.name}</p>
+                                <p>Price: ₹{info.price}</p>
                             </div>
                         </div>
                     ))}
@@ -75,12 +86,12 @@ const ChangeCustomerModal = ({
     );
 };
 
-ChangeCustomerModal.propTypes = {
+AddItemsModal.propTypes = {
     modalStatus: PropTypes.bool.isRequired,
     setModalStatus: PropTypes.func.isRequired,
-    customersInfo: PropTypes.array.isRequired,
+    itemInfo: PropTypes.array.isRequired,
     invoiceRecipentDetails: PropTypes.object.isRequired,
     setInvoiceRecipentDetails: PropTypes.func.isRequired,
 };
 
-export default ChangeCustomerModal;
+export default AddItemsModal;
