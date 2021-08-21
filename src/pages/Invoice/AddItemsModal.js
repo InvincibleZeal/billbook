@@ -35,6 +35,7 @@ const AddItemsModal = ({
             );
         }
         setInvoiceRecipentDetails(invoiceRecipentDetails);
+        setModalStatus(false);
     };
     return (
         <Modal
@@ -65,8 +66,16 @@ const AddItemsModal = ({
                             }
                         >
                             <div className="card p-3">
-                                <p>Item: {info.name}</p>
-                                <p>Price: ₹{info.price}</p>
+                                <div
+                                    className="page-heading-wrapper"
+                                    style={{ marginBottom: "0px" }}
+                                >
+                                    <div>
+                                        <p>Item: {info.name}</p>
+                                        <p>Price: ₹{info.price}</p>
+                                    </div>
+                                    <button className="btn">Select</button>
+                                </div>
                             </div>
                         </div>
                     ))}

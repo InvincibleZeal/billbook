@@ -53,9 +53,17 @@ const ChangeCustomerModal = ({
                             }
                         >
                             <div className="card p-3">
-                                <p>{info.name}</p>
-                                <p>{info.phone}</p>
-                                <p>{info.email}</p>
+                                <div
+                                    className="page-heading-wrapper"
+                                    style={{ marginBottom: "0px" }}
+                                >
+                                    <div>
+                                        <p>{info.name}</p>
+                                        <p>{info.phone}</p>
+                                        <p>{info.email}</p>
+                                    </div>
+                                    <button className="btn">Select</button>
+                                </div>
                             </div>
                         </div>
                     ))}
