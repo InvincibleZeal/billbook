@@ -248,7 +248,19 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="summary_total d-flex mt-2">
                                     <div>Total Amount:</div>
-                                    <div className="primary">₹1500</div>
+                                    <div className="primary">
+                                        ₹
+                                        {invoiceRecipentDetails.items.reduce(
+                                            (accumulator, currValue) => {
+                                                return (
+                                                    accumulator +
+                                                    currValue.amount *
+                                                        currValue.price
+                                                );
+                                            },
+                                            0
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
