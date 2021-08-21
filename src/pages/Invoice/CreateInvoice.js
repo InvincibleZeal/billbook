@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
 
@@ -23,6 +23,7 @@ const CreateInvoice = () => {
         items: [],
         notes: "",
     });
+    const history = useHistory();
     useEffect(() => {
         fetchData();
     }, []);
@@ -42,19 +43,27 @@ const CreateInvoice = () => {
             setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
         }
     };
+    const SaveInvoice = (e) => {
+        e.preventDefault();
+        // Adding to local storage
+        if (localStorage.getItem("invoice_data") == null) {
+            localStorage.setItem("invoice_data", "[]");
+        }
+        const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
+        invoiceData.push(invoiceRecipentDetails);
+        localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
+        history.push("/invoice");
+    };
     return (
         <Fragment>
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
-                <form action="">
+                <form onSubmit={(e) => SaveInvoice(e)}>
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title"> Invoices </span>
-                        <Link to="/invoice">
-                            <button className="btn" type="submit">
-                                <i className="fa fa-save"></i> &nbsp; Save
-                                Invoice
-                            </button>
-                        </Link>
+                        <button className="btn" type="submit">
+                            <i className="fa fa-save"></i> &nbsp; Save Invoice
+                        </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
@@ -64,28 +73,48 @@ const CreateInvoice = () => {
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
                                     <Fragment>
-                                        <div className="billing_details pr-3">
-                                            <div>
-                                                {invoiceRecipentDetails.name ||
-                                                    customersInfo[0].name}
+                                        {invoiceRecipentDetails.name !== "" ? (
+                                            <Fragment>
+                                                <div className="billing_details pr-3">
+                                                    <div>
+                                                        {invoiceRecipentDetails.name ||
+                                                            customersInfo[0]
+                                                                .name}
+                                                    </div>
+                                                    <div>
+                                                        {invoiceRecipentDetails.phone ||
+                                                            customersInfo[0]
+                                                                .phone}
+                                                    </div>
+                                                    <div>
+                                                        {invoiceRecipentDetails.email ||
+                                                            customersInfo[0]
+                                                                .email}
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="btn-link"
+                                                    onClick={() =>
+                                                        setCustomersDetailsModal(
+                                                            true
+                                                        )
+                                                    }
+                                                >
+                                                    Change
+                                                </div>
+                                            </Fragment>
+                                        ) : (
+                                            <div
+                                                className="btn-link"
+                                                onClick={() =>
+                                                    setCustomersDetailsModal(
+                                                        true
+                                                    )
+                                                }
+                                            >
+                                                Add Cusstomer Details
                                             </div>
-                                            <div>
-                                                {invoiceRecipentDetails.phone ||
-                                                    customersInfo[0].phone}
-                                            </div>
-                                            <div>
-                                                {invoiceRecipentDetails.email ||
-                                                    customersInfo[0].email}
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="btn-link"
-                                            onClick={() =>
-                                                setCustomersDetailsModal(true)
-                                            }
-                                        >
-                                            Change
-                                        </div>
+                                        )}
                                     </Fragment>
                                 ) : (
                                     <Link to="/customers/add">
@@ -105,6 +134,12 @@ const CreateInvoice = () => {
                                         type="date"
                                         name="issueDate"
                                         required
+                                        onChange={(e) =>
+                                            setInvoiceRecipentDetails({
+                                                ...invoiceRecipentDetails,
+                                                issueDate: e.target.value,
+                                            })
+                                        }
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -115,6 +150,12 @@ const CreateInvoice = () => {
                                         type="date"
                                         name="dueDate"
                                         required
+                                        onChange={(e) =>
+                                            setInvoiceRecipentDetails({
+                                                ...invoiceRecipentDetails,
+                                                dueDate: e.target.value,
+                                            })
+                                        }
                                     />
                                 </div>
                             </div>
@@ -126,9 +167,15 @@ const CreateInvoice = () => {
                                     <i className="fa fa-hashtag"></i>
                                     <input
                                         className="input-sm"
-                                        type="number"
+                                        type="text"
                                         name="invoiceNumber"
                                         required
+                                        onChange={(e) =>
+                                            setInvoiceRecipentDetails({
+                                                ...invoiceRecipentDetails,
+                                                invoiceNumber: e.target.value,
+                                            })
+                                        }
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -138,9 +185,15 @@ const CreateInvoice = () => {
                                     <i className="fa fa-hashtag"></i>
                                     <input
                                         className="input-sm"
-                                        type="number"
+                                        type="text"
                                         name="referenceNumber"
                                         required
+                                        onChange={(e) =>
+                                            setInvoiceRecipentDetails({
+                                                ...invoiceRecipentDetails,
+                                                referenceNumber: e.target.value,
+                                            })
+                                        }
                                     />
                                 </div>
                             </div>
@@ -211,6 +264,12 @@ const CreateInvoice = () => {
                                 <textarea
                                     className="input-sm invoice-notes"
                                     name="notes"
+                                    onChange={(e) =>
+                                        setInvoiceRecipentDetails({
+                                            ...invoiceRecipentDetails,
+                                            notes: e.target.value,
+                                        })
+                                    }
                                 ></textarea>
                             </div>
                         </div>
