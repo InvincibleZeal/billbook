@@ -151,28 +151,6 @@ const CreateInvoice = () => {
                             </thead>
                             {console.log(invoiceRecipentDetails.items)}
                             {invoiceRecipentDetails.items.length > 0 && (
-                                //     <tr>
-                                //     <td>Model 5</td>
-                                //     <td>
-                                //         <input
-                                //             type="number"
-                                //             name="itemQuantity"
-                                //             required
-                                //             oninvalid="this.setCustomValidity('Only numerical values allowed')"
-                                //             onInput="this.setCustomValidity('')"
-                                //         />
-                                //     </td>
-                                //     <td>₹350</td>
-                                //     <td>₹700</td>
-                                //     <td className="table-action">
-                                //         <a href="#" className="btn-link">
-                                //             <i
-                                //                 className="fa fa-trash"
-                                //                 aria-hidden="true"
-                                //             ></i>
-                                //         </a>
-                                //     </td>
-                                // </tr>
                                 <tbody>
                                     {invoiceRecipentDetails.items.map(
                                         (item, idx) => (
