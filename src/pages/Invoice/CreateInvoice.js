@@ -149,7 +149,6 @@ const CreateInvoice = () => {
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
-                            {console.log(invoiceRecipentDetails.items)}
                             {invoiceRecipentDetails.items.length > 0 && (
                                 <tbody>
                                     {invoiceRecipentDetails.items.map(
