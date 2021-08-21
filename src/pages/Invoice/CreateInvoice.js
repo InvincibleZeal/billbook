@@ -33,6 +33,15 @@ const CreateInvoice = () => {
         if (localStorage.getItem("inventory_data"))
             setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
     };
+    // Function to delete items
+    const removeElement = (id) => {
+        if (window.confirm("Are you sure, you eant to delete this item?")) {
+            const items = invoiceRecipentDetails.items.filter(
+                (item) => item.id !== id
+            );
+            setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
+        }
+    };
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -163,15 +172,19 @@ const CreateInvoice = () => {
                                                         Number(item.price)}
                                                 </td>
                                                 <td className="table-action">
-                                                    <a
-                                                        href="#"
+                                                    <span
+                                                        onClick={() =>
+                                                            removeElement(
+                                                                item.id
+                                                            )
+                                                        }
                                                         className="btn-link"
                                                     >
                                                         <i
                                                             className="fa fa-trash"
                                                             aria-hidden="true"
                                                         ></i>
-                                                    </a>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         )
