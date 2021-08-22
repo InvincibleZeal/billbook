@@ -67,13 +67,13 @@ const CreateInvoice = () => {
                         </span>
                         <button className="btn" type="submit">
                             <i className="fa fa-save"></i> &nbsp;{" "}
-                            <FormattedMessage id="invocie.save.button"></FormattedMessage>{" "}
+                            <FormattedMessage id="invoice.save.button"></FormattedMessage>{" "}
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
                             <h4 className="billto text-muted m-0 mb-3">
-                                <FormattedMessage id="invocie.bill.to"></FormattedMessage>{" "}
+                                <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
@@ -105,7 +105,7 @@ const CreateInvoice = () => {
                                                         )
                                                     }
                                                 >
-                                                    <FormattedMessage id="invocie.change"></FormattedMessage>{" "}
+                                                    <FormattedMessage id="invoice.change"></FormattedMessage>{" "}
                                                 </div>
                                             </Fragment>
                                         ) : (
@@ -117,7 +117,7 @@ const CreateInvoice = () => {
                                                     )
                                                 }
                                             >
-                                                <FormattedMessage id="invocie.add.customer.details"></FormattedMessage>{" "}
+                                                <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>{" "}
                                             </div>
                                         )}
                                     </Fragment>
@@ -222,7 +222,7 @@ const CreateInvoice = () => {
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.quantity"></FormattedMessage>
+                                        <FormattedMessage id="invoice.quantity"></FormattedMessage>
                                     </th>
                                     <th>
                                         {" "}

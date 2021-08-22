@@ -72,7 +72,10 @@ const ListItems = () => {
                         </table>
                     </div>
                 ) : (
-                    <p className="my-3 mx-5"> There are no items available</p>
+                    <p className="my-3 mx-5">
+                        {" "}
+                        <FormattedMessage id="no.records"></FormattedMessage>
+                    </p>
                 )}
             </div>
         </Fragment>

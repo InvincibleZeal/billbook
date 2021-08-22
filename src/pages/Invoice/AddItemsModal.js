@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+
 Modal.setAppElement("*");
 
 const AddItemsModal = ({
@@ -47,7 +49,10 @@ const AddItemsModal = ({
                 className="page-heading-wrapper react-modal-title-container"
                 style={{ marginBottom: "0" }}
             >
-                <span className="react-modal-title">Select Item</span>
+                <span className="react-modal-title">
+                    {" "}
+                    <FormattedMessage id="select.item"></FormattedMessage>{" "}
+                </span>
                 <div className="react-modal-close">
                     <i
                         className="fa fa-times"
@@ -71,10 +76,21 @@ const AddItemsModal = ({
                                     style={{ marginBottom: "0px" }}
                                 >
                                     <div>
-                                        <p>Item: {info.name}</p>
-                                        <p>Price: ₹{info.price}</p>
+                                        <p>
+                                            {" "}
+                                            <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                                            : {info.name}
+                                        </p>
+                                        <p>
+                                            {" "}
+                                            <FormattedMessage id="title.price"></FormattedMessage>{" "}
+                                            : ₹{info.price}
+                                        </p>
                                     </div>
-                                    <button className="btn">Select</button>
+                                    <button className="btn">
+                                        {" "}
+                                        <FormattedMessage id="select"></FormattedMessage>{" "}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -83,12 +99,12 @@ const AddItemsModal = ({
             ) : (
                 <p className="px-4 py-2">
                     {" "}
-                    No Customers details available. Please click{" "}
+                    <FormattedMessage id="no.customers.details"></FormattedMessage>{" "}
                     <Link to="/customers/add" style={{ color: "black" }}>
                         {" "}
-                        here
+                        <FormattedMessage id="here"></FormattedMessage>{" "}
                     </Link>{" "}
-                    to add the same.
+                    <FormattedMessage id="to.add.same"></FormattedMessage>{" "}
                 </p>
             )}
         </Modal>

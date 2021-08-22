@@ -69,7 +69,7 @@ const ListCustomers = () => {
                 ) : (
                     <p className="my-3 mx-5">
                         {" "}
-                        There are no customers data available
+                        <FormattedMessage id="no.records"></FormattedMessage>
                     </p>
                 )}
             </div>
