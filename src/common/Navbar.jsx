@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { context } from "../i18n/wrapper";
-import ukflag from "../assets/uk-flag.png";
+
 const Navbar = ({ opened }, ...props) => {
     const Context = useContext(context);
     return (
@@ -47,7 +47,7 @@ const Navbar = ({ opened }, ...props) => {
                     className="select-language m-2 p-2"
                     onChange={(e) => Context.selectLang(e)}
                 >
-                    <option value="en-US" selected data-img_src={ukflag}>
+                    <option value="en-US" selected>
                         🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH
                     </option>
                     <option value="EN-mx"> 🇪🇸 &nbsp; SPANISH</option>
