@@ -50,7 +50,7 @@ const Navbar = ({ opened }, ...props) => {
                     <option value="en-US" selected data-img_src={ukflag}>
                         🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH
                     </option>
-                    <option value="EN-mx"> 🇪🇸&nbsp; SPANISH</option>
+                    <option value="EN-mx"> 🇪🇸 &nbsp; SPANISH</option>
                 </select>
             </nav>
             {/* Bottom Bar */}
