@@ -43,14 +43,15 @@ const Navbar = ({ opened }, ...props) => {
                     </Link>
                 </ul>
                 <select
-                    value={Context.locale}
+                    defaultValue={{
+                        label: "Select Language",
+                        value: Context.locale,
+                    }}
                     className="select-language m-2 p-2"
                     onChange={(e) => Context.selectLang(e)}
                 >
-                    <option value="en-US" selected>
-                        🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH
-                    </option>
-                    <option value="EN-mx"> 🇪🇸 &nbsp; SPANISH</option>
+                    <option value="en">🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH</option>
+                    <option value="es"> 🇪🇸 &nbsp; SPANISH</option>
                 </select>
             </nav>
             {/* Bottom Bar */}

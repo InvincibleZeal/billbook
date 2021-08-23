@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IntlProvider } from "react-intl";
-import SPANISH from "../languages/EN-mx.json";
-import ENGLISH from "../languages/es-US.json";
+import SPANISH from "../languages/es.json";
+import ENGLISH from "../languages/en.json";
 import PropTypes from "prop-types";
 
 export const context = React.createContext();
@@ -10,9 +10,9 @@ const local = navigator.language;
 
 let lang;
 
-if (local === "en-GB") {
-    lang = ENGLISH;
-} else lang = SPANISH;
+if (local.startsWith("es")) {
+    lang = SPANISH;
+} else lang = ENGLISH;
 
 function Wrapper(props) {
     const [locale, setLocale] = useState(local);
@@ -22,9 +22,9 @@ function Wrapper(props) {
         const newlocale = e.target.value;
 
         setLocale(newlocale);
-        if (newlocale.includes("en-")) {
-            setMessage(ENGLISH);
-        } else setMessage(SPANISH);
+        if (newlocale.startsWith("es")) {
+            setMessage(SPANISH);
+        } else setMessage(ENGLISH);
     }
 
     return (
