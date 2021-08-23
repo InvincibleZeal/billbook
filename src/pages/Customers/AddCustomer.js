@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
-import Navbar from "common/Navbar";
+import Navbar from "../../common/Navbar";
 import { useHistory } from "react-router-dom";
-import withWrapper from "common/withWrapper";
-import "styles/add-customer.css";
+import withWrapper from "../../common/withWrapper";
+import "../../styles/add-customer.css";
+import { FormattedMessage } from "react-intl";
 const AddCustomers = () => {
     const [data, setData] = useState({
         name: "",
@@ -27,13 +28,17 @@ const AddCustomers = () => {
             <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
-                    <span className="title"> New Customer </span>
+                    <span className="title">
+                        <FormattedMessage id="title.customer"></FormattedMessage>
+                    </span>
                 </div>
                 <div className="card p-5 mx-5">
                     <form onSubmit={(e) => AddCustomer(e)}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Name</label>
+                                <label className="mb-3">
+                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                </label>
                                 <input
                                     type="text"
                                     name="name"
@@ -48,7 +53,10 @@ const AddCustomers = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Phone</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="customer.phone"></FormattedMessage>
+                                </label>
                                 <input
                                     type="text"
                                     name="phone"
@@ -66,7 +74,9 @@ const AddCustomers = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Email</label>
+                                <label className="mb-3">
+                                    <FormattedMessage id="customer.email"></FormattedMessage>
+                                </label>
                                 <input
                                     type="email"
                                     name="email"
@@ -85,8 +95,8 @@ const AddCustomers = () => {
                                 style={{ justifyContent: "center" }}
                             >
                                 <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp; Save
-                                    Customer
+                                    <i className="fa fa-save"></i> &nbsp;
+                                    <FormattedMessage id="customer.save.button"></FormattedMessage>
                                 </button>
                             </div>
                         </div>

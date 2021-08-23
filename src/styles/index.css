@@ -731,3 +731,11 @@ input:focus-visible {
     font-size: 18px;
     cursor: pointer;
 }
+
+.select-language {
+    position: fixed;
+    border-radius: 10px;
+    bottom: 0;
+    padding-right: 40px;
+    -webkit-appearance: none;
+}

@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navbar from "common/Navbar";
+import Navbar from "../../common/Navbar";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import withWrapper from "common/withWrapper";
+import withWrapper from "../../common/withWrapper";
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
@@ -18,10 +19,14 @@ const ListCustomers = () => {
             <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
-                    <span className="title"> Customers </span>
+                    <span className="title">
+                        {" "}
+                        <FormattedMessage id="title.customer"></FormattedMessage>
+                    </span>
                     <Link to="/customers/add">
                         <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp; New Customer
+                            <i className="fa fa-plus"></i> &nbsp;
+                            <FormattedMessage id="customer.new.button"></FormattedMessage>
                         </button>
                     </Link>
                 </div>
@@ -30,10 +35,22 @@ const ListCustomers = () => {
                         <table className="table px-5">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Created On</th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="customer.new.button"></FormattedMessage>
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="customer.phone"></FormattedMessage>
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="customer.email"></FormattedMessage>
+                                    </th>
+                                    <th>
+                                        {" "}
+                                        <FormattedMessage id="customer.created.on"></FormattedMessage>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

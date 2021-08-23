@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
+import withWrapper from "../../common/withWrapper";
+import Navbar from "../../common/Navbar";
 import { useHistory } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const AddItem = () => {
     const [data, setData] = useState({
@@ -30,13 +31,19 @@ const AddItem = () => {
             <Navbar opened="inventory" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
-                    <span className="title"> New Item </span>
+                    <span className="title">
+                        {" "}
+                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                    </span>
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
                         <form onSubmit={(e) => AddItem(e)}>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Name</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                </label>
                                 <input
                                     type="text"
                                     name="name"
@@ -51,7 +58,10 @@ const AddItem = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Price</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="item.price"></FormattedMessage>
+                                </label>
                                 <input
                                     type="text"
                                     name="price"
@@ -68,7 +78,10 @@ const AddItem = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Description</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="item.description"></FormattedMessage>
+                                </label>
                                 <textarea
                                     rows="4"
                                     name="description"
@@ -87,8 +100,8 @@ const AddItem = () => {
                                 style={{ justifyContent: "center" }}
                             >
                                 <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp; Save
-                                    Item
+                                    <i className="fa fa-save"></i> &nbsp;{" "}
+                                    <FormattedMessage id="item.save.button"></FormattedMessage>
                                 </button>
                             </div>
                         </form>
