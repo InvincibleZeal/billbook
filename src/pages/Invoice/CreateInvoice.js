@@ -67,13 +67,13 @@ const CreateInvoice = () => {
                         </span>
                         <button className="btn" type="submit">
                             <i className="fa fa-save"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.save.button"></FormattedMessage>
+                            <FormattedMessage id="invoice.saveButton"></FormattedMessage>
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
                             <h4 className="billto text-muted m-0 mb-3">
-                                <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
+                                <FormattedMessage id="invoice.billTo"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
@@ -117,7 +117,7 @@ const CreateInvoice = () => {
                                                     )
                                                 }
                                             >
-                                                <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                                <FormattedMessage id="invoice.addCustomerDetails"></FormattedMessage>
                                             </div>
                                         )}
                                     </Fragment>
@@ -126,7 +126,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                            <FormattedMessage id="invoice.addCustomerDetails"></FormattedMessage>
                                         </p>{" "}
                                     </Link>
                                 )}
@@ -137,7 +137,7 @@ const CreateInvoice = () => {
                                 <div className="input-group px-2">
                                     <label htmlFor="issueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.issuedAt"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-calendar-o"></i>
                                     <input
@@ -156,7 +156,7 @@ const CreateInvoice = () => {
                                 <div className="input-group px-2">
                                     <label htmlFor="dueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.dueDate"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-calendar-o"></i>
                                     <input
@@ -194,7 +194,7 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="referenceNumber">
-                                        <FormattedMessage id="invoice.reference.number"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.referenceNumber"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -278,7 +278,7 @@ const CreateInvoice = () => {
                                 onClick={() => setItemModal(true)}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                <FormattedMessage id="invoice.add.on.item"></FormattedMessage>
+                                <FormattedMessage id="invoice.addAnItem"></FormattedMessage>
                             </span>
                         </div>
                     </div>
@@ -327,7 +327,7 @@ const CreateInvoice = () => {
                                 <div className="summary_total d-flex mt-2">
                                     <div>
                                         {" "}
-                                        <FormattedMessage id="invoice.total.amount"></FormattedMessage>
+                                        <FormattedMessage id="invoice.totalAmount"></FormattedMessage>
                                         :
                                     </div>
                                     <div className="primary">

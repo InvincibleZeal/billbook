@@ -26,7 +26,7 @@ const ListItems = () => {
                     <Link to="/inventory/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="item.add.butotn"></FormattedMessage>{" "}
+                            <FormattedMessage id="item.addButton"></FormattedMessage>{" "}
                         </button>
                     </Link>
                 </div>

@@ -101,7 +101,7 @@ const AddItem = () => {
                             >
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;{" "}
-                                    <FormattedMessage id="item.save.button"></FormattedMessage>
+                                    <FormattedMessage id="item.saveButton"></FormattedMessage>
                                 </button>
                             </div>
                         </form>

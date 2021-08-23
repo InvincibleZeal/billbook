@@ -27,7 +27,7 @@ const ListInvoices = () => {
                     <Link to="/invoice/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.new.button"></FormattedMessage>
+                            <FormattedMessage id="invoice.newButton"></FormattedMessage>
                         </button>
                     </Link>
                 </div>
@@ -46,13 +46,13 @@ const ListInvoices = () => {
                                         <FormattedMessage id="invoice.number"></FormattedMessage>
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.paid.status"></FormattedMessage>
+                                        <FormattedMessage id="invoice.paidStatus"></FormattedMessage>
                                     </th>
                                     <th>
                                         <FormattedMessage id="invoice.amount"></FormattedMessage>
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amount.due"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amountDue"></FormattedMessage>
                                     </th>
                                 </tr>
                             </thead>

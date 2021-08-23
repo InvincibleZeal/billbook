@@ -26,7 +26,7 @@ const ListCustomers = () => {
                     <Link to="/customers/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;
-                            <FormattedMessage id="customer.new.button"></FormattedMessage>
+                            <FormattedMessage id="customer.newButton"></FormattedMessage>
                         </button>
                     </Link>
                 </div>
@@ -37,7 +37,7 @@ const ListCustomers = () => {
                                 <tr>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.new.button"></FormattedMessage>
+                                        <FormattedMessage id="customer.newButton"></FormattedMessage>
                                     </th>
                                     <th>
                                         {" "}
@@ -49,7 +49,7 @@ const ListCustomers = () => {
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.created.on"></FormattedMessage>
+                                        <FormattedMessage id="customer.createdOn"></FormattedMessage>
                                     </th>
                                 </tr>
                             </thead>

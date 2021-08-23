@@ -6,6 +6,7 @@ import { context } from "i18n/wrapper";
 
 const Navbar = ({ opened }, ...props) => {
     const Context = useContext(context);
+    console.log("i am rendered");
     return (
         <Fragment>
             {/* Sidebar */}
@@ -48,9 +49,14 @@ const Navbar = ({ opened }, ...props) => {
                         value: Context.locale,
                     }}
                     className="select-language m-2 p-2"
-                    onChange={(e) => Context.selectLang(e)}
+                    onChange={(e) => {
+                        Context.selectLang(e);
+                        console.log(e);
+                    }}
                 >
-                    <option value="en">🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH</option>
+                    <option value="en" selected>
+                        🏴󠁧󠁢󠁥󠁮󠁧󠁿 &nbsp; ENGLISH
+                    </option>
                     <option value="es"> 🇪🇸 &nbsp; SPANISH</option>
                 </select>
             </nav>

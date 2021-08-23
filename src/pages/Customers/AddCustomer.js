@@ -96,7 +96,7 @@ const AddCustomers = () => {
                             >
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;
-                                    <FormattedMessage id="customer.save.button"></FormattedMessage>
+                                    <FormattedMessage id="customer.saveButton"></FormattedMessage>
                                 </button>
                             </div>
                         </div>
