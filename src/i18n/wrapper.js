@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IntlProvider } from "react-intl";
-import SPANISH from "../languages/es.json";
-import ENGLISH from "../languages/en.json";
+import SPANISH from "languages/es.json";
+import ENGLISH from "languages/en.json";
 import PropTypes from "prop-types";
 
 export const context = React.createContext();

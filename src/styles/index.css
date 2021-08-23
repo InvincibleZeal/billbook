@@ -422,6 +422,7 @@ body {
     background-color: var(--card-background);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
+    color: black;
 }
 
 .card-bordered {
@@ -622,6 +623,8 @@ input:focus-visible {
     overflow-x: auto;
 }
 
+/************ Bottom bar ****************/
+
 .bottom-bar {
     display: none;
 }
@@ -664,6 +667,72 @@ input:focus-visible {
         color: var(--primary-color);
     }
 }
+
+/************ Modal Window ****************/
+
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(5px);
+}
+
+.ReactModal__Overlay--after-open {
+    z-index: 100 !important;
+}
+
+.ReactModal__Body--open {
+    overflow-y: hidden;
+}
+
+.react-modal {
+    width: 40%;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary-color);
+    box-shadow: var(--default-box-shadow);
+    border-radius: 10px;
+    position: relative;
+    color: #fff;
+    padding: var(--padding);
+    overflow: auto;
+    max-height: calc(100% - 75px);
+}
+
+/* XS screens */
+@media only screen and (max-width: 480px) {
+    .react-modal {
+        width: 80% !important;
+    }
+}
+
+/* SM screens */
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .react-modal {
+        width: 80% !important;
+    }
+}
+
+.react-modal:focus {
+    border: none;
+    outline: none;
+}
+
+.react-modal,
+    .react-modal-title-container {
+    padding: calc(var(--padding)*4);
+}
+
+.react-modal .react-modal-title {
+    font-size:18px;
+    text-transform: capitalize;
+}
+
+.react-modal .react-modal-close {
+    font-size: 18px;
+    cursor: pointer;
+}
+
 .select-language {
     position: fixed;
     border-radius: 10px;
