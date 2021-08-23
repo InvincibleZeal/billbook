@@ -30,5 +30,12 @@
     "invoice.change": "change",
     "invoice.add.on.item": "Add am item",
     "invoice.total.amount": "Total Amount",
-    "invoice.model": "Model"
+    "invoice.model": "Model",
+    "no.records": "There are no records available",
+    "invoice.add.customer.details": "Add  Customer details",
+    "select.item": "Select Item",
+    "select": "Select",
+    "no.customers.details": "No Customers are available",
+    "here": "here",
+    "to.add.same": "to add same"
 }

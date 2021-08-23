@@ -30,5 +30,12 @@
     "invoice.change": "cambio",
     "invoice.add.on.item": "Agregar un artículo",
     "invoice.total.amount": "Cantidad total",
-    "invoice.model": "Modelo"
+    "invoice.model": "Modelo",
+    "no.records": "No hay registros disponibles",
+    "invoice.add.customer.details": "Agregar detalles del cliente",
+    "select.item": "Seleccione un artículo",
+    "select": "Seleccione",
+    "no.customers.details": "No hay clientes disponibles",
+    "here": "aquí",
+    "to.add.same": "Agregar la misma"
 }
