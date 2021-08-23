@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
+import { useNotification } from "notification";
+import { FormattedMessage } from "react-intl";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
-import { useNotification } from "notification";
 
 const AddCustomers = () => {
     const { triggerNotification } = useNotification();
@@ -12,7 +13,12 @@ const AddCustomers = () => {
         triggerNotification({
             type: "danger",
             title: "Some error occured",
-            time: 10000,
+            time: 2000,
+        });
+        triggerNotification({
+            type: "warning",
+            title: "Some error occured",
+            time: 3000,
         });
     }, []);
     return (
@@ -20,17 +26,25 @@ const AddCustomers = () => {
             <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
-                    <span className="title"> New Customer </span>
+                    <span className="title">
+                        <FormattedMessage id="title.customer"></FormattedMessage>
+                    </span>
                 </div>
-                <div className="card p-5 mx-5">
+                <div className="card p-5 m  x-5">
                     <form action="">
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Name</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                </label>
                                 <input type="text" name="name" required />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Phone</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="customer.phone"></FormattedMessage>
+                                </label>
                                 <input
                                     type="text"
                                     name="phone"
@@ -41,7 +55,10 @@ const AddCustomers = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
-                                <label className="mb-3">Email</label>
+                                <label className="mb-3">
+                                    {" "}
+                                    <FormattedMessage id="customer.email"></FormattedMessage>
+                                </label>
                                 <input type="email" name="email" required />
                             </div>
                             <div
@@ -51,7 +68,7 @@ const AddCustomers = () => {
                                 <Link to="/">
                                     <button className="btn" type="submit">
                                         <i className="fa fa-save"></i> &nbsp;
-                                        Save Customer
+                                        <FormattedMessage id="customer.save.button"></FormattedMessage>
                                     </button>
                                 </Link>
                             </div>

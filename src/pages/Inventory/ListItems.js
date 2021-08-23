@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
+import withWrapper from "../../common/withWrapper";
+import Navbar from "../../common/Navbar";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
 const ListItems = () => {
@@ -9,10 +10,14 @@ const ListItems = () => {
             <Navbar opened="inventory" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper p-5 mb-5">
-                    <span className="title"> Items </span>
+                    <span className="title">
+                        {" "}
+                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                    </span>
                     <Link to="/inventory/add">
                         <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp; Add Item
+                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                            <FormattedMessage id="item.add.butotn"></FormattedMessage>{" "}
                         </button>
                     </Link>
                 </div>
@@ -26,10 +31,22 @@ const ListItems = () => {
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Added On</th>
+                                <th>
+                                    {" "}
+                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                </th>
+                                <th>
+                                    {" "}
+                                    <FormattedMessage id="item.description"></FormattedMessage>
+                                </th>
+                                <th>
+                                    {" "}
+                                    <FormattedMessage id="item.price"></FormattedMessage>
+                                </th>
+                                <th>
+                                    {" "}
+                                    <FormattedMessage id="added.on"></FormattedMessage>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

@@ -128,3 +128,11 @@
 .invoice-notes {
     height: 6rem;
 }
+
+.customer-card {
+    cursor: pointer;
+}
+
+.customer-card:hover {
+    transform: scale(1.02);
+}
