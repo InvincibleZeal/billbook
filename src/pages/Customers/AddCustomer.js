@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
-import Navbar from "../../common/Navbar";
+import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
-import withWrapper from "../../common/withWrapper";
-import "../../styles/add-customer.css";
+import withWrapper from "common/withWrapper";
+import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 const AddCustomers = () => {
     const [data, setData] = useState({

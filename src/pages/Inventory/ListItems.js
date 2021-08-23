@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 

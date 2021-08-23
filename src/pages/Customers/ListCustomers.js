@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import withWrapper from "../../common/withWrapper";
+import withWrapper from "common/withWrapper";
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {

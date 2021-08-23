@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
-import "../../styles/add-invoice.css";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
+import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";

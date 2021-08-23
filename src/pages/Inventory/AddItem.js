@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 

@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import "../../styles/add-customer.css";
+import "styles/add-customer.css";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
