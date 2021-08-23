@@ -3,6 +3,7 @@ import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
 
 const AddItem = () => {
     const [data, setData] = useState({
@@ -13,6 +14,8 @@ const AddItem = () => {
         id: Math.floor(Math.random() * 101 + 1),
     });
     const history = useHistory();
+    const { triggerNotification } = useNotification();
+
     const AddItem = (e) => {
         e.preventDefault();
         // Adding to local storage
@@ -24,6 +27,7 @@ const AddItem = () => {
         );
         inventoryData.push(data);
         localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
+        triggerNotification("Item added successfully", { type: "success" });
         history.push("/inventory");
     };
     return (

@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
+
 const AddCustomers = () => {
     const [data, setData] = useState({
         name: "",
@@ -12,6 +14,8 @@ const AddCustomers = () => {
         date: new Date(),
     });
     const history = useHistory();
+    const { triggerNotification } = useNotification();
+
     const AddCustomer = (e) => {
         e.preventDefault();
         // Adding to local storage
@@ -21,6 +25,7 @@ const AddCustomers = () => {
         const customerData = JSON.parse(localStorage.getItem("customer_data"));
         customerData.push(data);
         localStorage.setItem("customer_data", JSON.stringify(customerData));
+        triggerNotification("Customer added successfully", { type: "success" });
         history.push("/");
     };
     return (

@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
 import { FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
 
 const CreateInvoice = () => {
     const [itemModal, setItemModal] = useState(false);
@@ -25,6 +26,8 @@ const CreateInvoice = () => {
         notes: "",
     });
     const history = useHistory();
+    const { triggerNotification } = useNotification();
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -53,6 +56,9 @@ const CreateInvoice = () => {
         const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
         invoiceData.push(invoiceRecipentDetails);
         localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
+        triggerNotification("Invoice created successfully", {
+            type: "success",
+        });
         history.push("/invoice");
     };
     return (
