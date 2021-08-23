@@ -37,5 +37,6 @@
     "select": "Select",
     "no.customers.details": "No Customers are available",
     "here": "here",
-    "to.add.same": "to add same"
+    "to.add.same": "to add same",
+    "change.details": "Change Details"
 }

@@ -117,14 +117,17 @@ const CreateInvoice = () => {
                                                     )
                                                 }
                                             >
-                                                Add Cusstomer Details
+                                                <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
                                             </div>
                                         )}
                                     </Fragment>
                                 ) : (
                                     <Link to="/customers/add">
                                         {" "}
-                                        <p>Add Customer</p>{" "}
+                                        <p>
+                                            {" "}
+                                            <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                        </p>{" "}
                                     </Link>
                                 )}
                             </div>

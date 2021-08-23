@@ -99,7 +99,10 @@ const ListInvoices = () => {
                         </table>
                     </div>
                 ) : (
-                    <p className="my-3 mx-5"> There are no records available</p>
+                    <p className="my-3 mx-5">
+                        {" "}
+                        <FormattedMessage id="no.records"></FormattedMessage>
+                    </p>
                 )}
             </div>
         </Fragment>

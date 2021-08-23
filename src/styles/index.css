@@ -720,11 +720,12 @@ input:focus-visible {
 
 .react-modal,
     .react-modal-title-container {
-    padding: 15px;
+    padding: calc(var(--padding)*4);
 }
 
 .react-modal .react-modal-title {
     font-size:18px;
+    text-transform: capitalize;
 }
 
 .react-modal .react-modal-close {

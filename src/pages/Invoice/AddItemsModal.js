@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 Modal.setAppElement("*");
 
 const AddItemsModal = ({
@@ -47,7 +48,9 @@ const AddItemsModal = ({
                 className="page-heading-wrapper react-modal-title-container"
                 style={{ marginBottom: "0" }}
             >
-                <span className="react-modal-title">Select Item</span>
+                <span className="react-modal-title">
+                    <FormattedMessage id="select.item"></FormattedMessage>
+                </span>
                 <div className="react-modal-close">
                     <i
                         className="fa fa-times"
@@ -74,7 +77,9 @@ const AddItemsModal = ({
                                         <p>Item: {info.name}</p>
                                         <p>Price: ₹{info.price}</p>
                                     </div>
-                                    <button className="btn">Select</button>
+                                    <button className="btn">
+                                        <FormattedMessage id="select"></FormattedMessage>
+                                    </button>
                                 </div>
                             </div>
                         </div>
