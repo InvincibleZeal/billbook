@@ -16,7 +16,7 @@ const AddItem = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const AddItem = (e) => {
+    const saveItem = (e) => {
         e.preventDefault();
         // Adding to local storage
         if (localStorage.getItem("inventory_data") == null) {
@@ -30,6 +30,7 @@ const AddItem = () => {
         triggerNotification("Item added successfully", { type: "success" });
         history.push("/inventory");
     };
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -42,7 +43,7 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form onSubmit={(e) => AddItem(e)}>
+                        <form onSubmit={(e) => saveItem(e)}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}

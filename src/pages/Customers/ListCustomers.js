@@ -8,6 +8,7 @@ const ListCustomers = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
     // Function to fetch data from local storage
     const fetchData = () => {
         if (localStorage.getItem("customer_data"))

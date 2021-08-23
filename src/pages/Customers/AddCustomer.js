@@ -16,7 +16,7 @@ const AddCustomers = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const AddCustomer = (e) => {
+    const saveCustomer = (e) => {
         e.preventDefault();
         // Adding to local storage
         if (localStorage.getItem("customer_data") == null) {
@@ -28,6 +28,7 @@ const AddCustomers = () => {
         triggerNotification("Customer added successfully", { type: "success" });
         history.push("/");
     };
+
     return (
         <Fragment>
             <Navbar opened="customers" />
@@ -38,7 +39,7 @@ const AddCustomers = () => {
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form onSubmit={(e) => AddCustomer(e)}>
+                    <form onSubmit={(e) => saveCustomer(e)}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">

@@ -9,12 +9,12 @@ const ChangeCustomerModal = ({
     modalStatus,
     setModalStatus,
     customersInfo,
-    invoiceRecipentDetails,
-    setInvoiceRecipentDetails,
+    invoiceRecipientDetails,
+    setInvoiceRecipientDetails,
 }) => {
     const updateCustomersDetails = (name, phone, email) => {
-        setInvoiceRecipentDetails({
-            ...invoiceRecipentDetails,
+        setInvoiceRecipientDetails({
+            ...invoiceRecipientDetails,
             name,
             phone,
             email,
@@ -58,7 +58,7 @@ const ChangeCustomerModal = ({
                             <div className="card p-3">
                                 <div
                                     className="page-heading-wrapper"
-                                    style={{ marginBottom: "0px" }}
+                                    style={{ marginBottom: "0" }}
                                 >
                                     <div>
                                         <p>{info.name}</p>
@@ -92,8 +92,8 @@ ChangeCustomerModal.propTypes = {
     modalStatus: PropTypes.bool.isRequired,
     setModalStatus: PropTypes.func.isRequired,
     customersInfo: PropTypes.array.isRequired,
-    invoiceRecipentDetails: PropTypes.object.isRequired,
-    setInvoiceRecipentDetails: PropTypes.func.isRequired,
+    invoiceRecipientDetails: PropTypes.object.isRequired,
+    setInvoiceRecipientDetails: PropTypes.func.isRequired,
 };
 
 export default ChangeCustomerModal;
