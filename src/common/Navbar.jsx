@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { context } from "../i18n/wrapper";
+import { context } from "i18n/wrapper";
 
 const Navbar = ({ opened }, ...props) => {
     const Context = useContext(context);
