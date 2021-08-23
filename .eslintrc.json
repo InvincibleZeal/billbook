@@ -16,9 +16,7 @@
         "sourceType": "module"
     },
     "plugins": ["react"],
-    "rules": {
-        "indent": ["error", 4]
-    },
+    "rules": {},
     "settings": {
         "react": {
             "version": "detect"
