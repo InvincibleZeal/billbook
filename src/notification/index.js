@@ -1,7 +1,7 @@
 import {
     NotificationProvider,
     NotificationContext,
-} from "./notificationContext";
+} from "./NotifcationContext";
 
 import { useNotification } from "./useNotification";
 import Toast from "./Toast";

@@ -13,13 +13,7 @@ const Toast = (props) => {
                 {props.notifications.map((toast, i) => (
                     <div
                         key={i}
-                        className={`notification toast ${props.position}`}
-                        style={{
-                            backgroundColor: toast.backgroundColor,
-                            borderLeftColor: toast.borderColor,
-                            borderLeftStyle: "solid",
-                            borderLeftWidth: "7px",
-                        }}
+                        className={`notification toast ${props.position} toast-${toast.type}`}
                     >
                         <div className="toast-wrapper">
                             <span className="notification-title">
