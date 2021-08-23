@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { NotificationContext } from "./NotifcationContext";
+import { NotificationContext } from "./NotificationContext";
 
-export function useNotification() {
-    const { addNotification, clearNotification } =
+export default function useNotification() {
+    const { triggerNotification, clearNotification } =
         useContext(NotificationContext);
-    return { triggerNotification: addNotification, clearNotification };
+    return { triggerNotification, clearNotification };
 }

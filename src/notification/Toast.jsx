@@ -1,12 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useNotification } from "./useNotification";
-
 import "styles/toast.css";
 
 const Toast = (props) => {
-    const { clearNotification } = useNotification();
-
     return ReactDOM.createPortal(
         <>
             <div className={`notification-container ${props.position}`}>
@@ -19,7 +15,9 @@ const Toast = (props) => {
                             <span className="notification-title">
                                 {toast.title}
                             </span>
-                            <button onClick={() => clearNotification(toast)}>
+                            <button
+                                onClick={() => props.clearNotification(toast)}
+                            >
                                 <img
                                     height="25px"
                                     width="25px"

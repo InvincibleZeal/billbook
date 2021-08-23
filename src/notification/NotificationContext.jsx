@@ -17,7 +17,7 @@ export const NotificationProvider = (props) => {
     const [notifications, setNotification] = useState([]);
     const [position, setPosition] = useState("bottom-right");
 
-    const addNotification = (msg, options = {}) => {
+    const triggerNotification = (msg, options = {}) => {
         console.log(notifications.length);
         const toast = createToast(msg, options);
         const updated = [...notifications, toast];
@@ -41,13 +41,17 @@ export const NotificationProvider = (props) => {
             value={{
                 notifications,
                 setNotification,
-                addNotification,
+                triggerNotification,
                 clearNotification,
                 position,
                 setPosition,
             }}
         >
-            <Toast notifications={notifications} position={position}></Toast>
+            <Toast
+                notifications={notifications}
+                position={position}
+                clearNotification={clearNotification}
+            ></Toast>
             {props.children}
         </NotificationContext.Provider>
     );

@@ -1,9 +1,16 @@
 import {
     NotificationProvider,
     NotificationContext,
-} from "./NotifcationContext";
+} from "./NotificationContext";
 
-import { useNotification } from "./useNotification";
+import useNotification from "./useNotification";
 import Toast from "./Toast";
+import withNotification from "./withNotification";
 
-export { NotificationProvider, NotificationContext, useNotification, Toast };
+export {
+    NotificationProvider,
+    NotificationContext,
+    useNotification,
+    withNotification,
+    Toast,
+};
