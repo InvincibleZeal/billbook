@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React, { Fragment } from "react";
-import withWrapper from "../../common/withWrapper";
-import Navbar from "../../common/Navbar";
-import "../../styles/add-invoice.css";
-import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
-=======
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
@@ -16,7 +7,6 @@ import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
->>>>>>> 29db264408eaaced62ecfe85932920eb1f888fd1
 
 const CreateInvoice = () => {
     const [itemModal, setItemModal] = useState(false);
@@ -80,19 +70,10 @@ const CreateInvoice = () => {
                             {" "}
                             <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
                         </span>
-<<<<<<< HEAD
-                        <Link to="/invoice">
-                            <button className="btn" type="submit">
-                                <i className="fa fa-save"></i> &nbsp;{" "}
-                                <FormattedMessage id="invoice.save.button"></FormattedMessage>{" "}
-                            </button>
-                        </Link>
-=======
                         <button className="btn" type="submit">
                             <i className="fa fa-save"></i> &nbsp;{" "}
                             <FormattedMessage id="invoice.save.button"></FormattedMessage>
                         </button>
->>>>>>> 29db264408eaaced62ecfe85932920eb1f888fd1
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
@@ -100,17 +81,6 @@ const CreateInvoice = () => {
                                 <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
-<<<<<<< HEAD
-                                <div className="billing_details pr-3">
-                                    <div>Buck Miller</div>
-                                    <div>81998492023</div>
-                                    <div>buck@miller.com</div>
-                                </div>
-                                <div className="btn-link">
-                                    {" "}
-                                    <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
-                                </div>
-=======
                                 {customersInfo.length > 0 ? (
                                     <Fragment>
                                         {invoiceRecipentDetails.name !== "" ? (
@@ -165,7 +135,6 @@ const CreateInvoice = () => {
                                         </p>{" "}
                                     </Link>
                                 )}
->>>>>>> 29db264408eaaced62ecfe85932920eb1f888fd1
                             </div>
                         </div>
                         <div className="invoice_details mx-5">
@@ -314,13 +283,8 @@ const CreateInvoice = () => {
                                 onClick={() => setItemModal(true)}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-<<<<<<< HEAD
-                                Add an item
-                            </Link>
-=======
                                 <FormattedMessage id="invoice.add.on.item"></FormattedMessage>
                             </span>
->>>>>>> 29db264408eaaced62ecfe85932920eb1f888fd1
                         </div>
                     </div>
 
