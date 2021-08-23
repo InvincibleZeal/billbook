@@ -22,9 +22,11 @@ const AddItem = () => {
         if (localStorage.getItem("inventory_data") == null) {
             localStorage.setItem("inventory_data", "[]");
         }
-        const inventoryData = JSON.parse(
-            localStorage.getItem("inventory_data")
-        );
+
+        let inventoryData = [];
+        try {
+            inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
+        } catch (e) {}
         inventoryData.push(data);
         localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
         triggerNotification("Item added successfully", { type: "success" });

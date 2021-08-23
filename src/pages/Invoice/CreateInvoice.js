@@ -6,7 +6,7 @@ import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 
 const CreateInvoice = () => {
@@ -25,6 +25,7 @@ const CreateInvoice = () => {
         items: [],
         notes: "",
     });
+    const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
@@ -34,15 +35,43 @@ const CreateInvoice = () => {
 
     // Function to fetch data from local storage
     const fetchData = () => {
-        if (localStorage.getItem("customer_data"))
-            setCustomersInfo(JSON.parse(localStorage.getItem("customer_data")));
-        if (localStorage.getItem("inventory_data"))
-            setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
+        let customerData = [];
+        if (localStorage.getItem("customer_data")) {
+            try {
+                customerData = JSON.parse(
+                    localStorage.getItem("customer_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing customer data", {
+                    type: "error",
+                });
+                localStorage.removeItem("customer_data");
+            }
+        }
+        setCustomersInfo(customerData);
+        let inventoryData = [];
+        if (localStorage.getItem("inventory_data")) {
+            try {
+                inventoryData = JSON.parse(
+                    localStorage.getItem("inventory_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("inventory_data");
+            }
+        }
+        setItemInfo(inventoryData);
     };
 
     // Function to delete items
     const removeElement = (id) => {
-        if (window.confirm("Are you sure, you want to delete this item?")) {
+        if (
+            window.confirm(
+                intl.formatMessage({ id: "invoice.confirm.delete.item" })
+            )
+        ) {
             const items = invoiceRecipientDetails.items.filter(
                 (item) => item.id !== id
             );
@@ -126,7 +155,7 @@ const CreateInvoice = () => {
                                                     )
                                                 }
                                             >
-                                                <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                                <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                             </div>
                                         )}
                                     </Fragment>
@@ -135,7 +164,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                            <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                         </p>{" "}
                                     </Link>
                                 )}
@@ -250,11 +279,11 @@ const CreateInvoice = () => {
                                         (item, idx) => (
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
-                                                <td>{item.amount}</td>
+                                                <td>{item.quantity}</td>
                                                 <td>₹{item.price}</td>
                                                 <td>
                                                     ₹
-                                                    {item.amount *
+                                                    {item.quantity *
                                                         Number(item.price)}
                                                 </td>
                                                 <td className="table-action">
@@ -285,7 +314,7 @@ const CreateInvoice = () => {
                                 onClick={() => setItemModal(true)}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                <FormattedMessage id="invoice.add.on.item"></FormattedMessage>
+                                <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
                             </span>
                         </div>
                     </div>
@@ -311,26 +340,28 @@ const CreateInvoice = () => {
                         </div>
                         <div className="summary mx-5">
                             <div className="card-bordered p-3">
-                                <div className="summary_items pb-4">
-                                    {invoiceRecipientDetails.items.map(
-                                        (item, idx) => (
-                                            <div
-                                                className="summary_item"
-                                                key={idx}
-                                            >
-                                                <div className="summary_name">
-                                                    {item.name}
+                                {invoiceRecipientDetails.items.length ? (
+                                    <div className="summary_items pb-4">
+                                        {invoiceRecipientDetails.items.map(
+                                            (item, idx) => (
+                                                <div
+                                                    className="summary_item"
+                                                    key={idx}
+                                                >
+                                                    <div className="summary_name">
+                                                        {item.name}
+                                                    </div>
+                                                    <div className="summary_quantity">
+                                                        x{item.quantity}
+                                                    </div>
+                                                    <div className="summary_amount">
+                                                        ₹{item.price}
+                                                    </div>
                                                 </div>
-                                                <div className="summary_quantity">
-                                                    x{item.amount}
-                                                </div>
-                                                <div className="summary_amount">
-                                                    ₹{item.price}
-                                                </div>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                ) : null}
                                 <div className="summary_total d-flex mt-2">
                                     <div>
                                         {" "}
@@ -343,7 +374,7 @@ const CreateInvoice = () => {
                                             (accumulator, currValue) => {
                                                 return (
                                                     accumulator +
-                                                    currValue.amount *
+                                                    currValue.quantity *
                                                         currValue.price
                                                 );
                                             },

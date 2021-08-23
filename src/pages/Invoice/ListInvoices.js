@@ -4,16 +4,29 @@ import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
+import { useNotification } from "notification";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+
+    const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
     const fetchData = () => {
-        if (localStorage.getItem("invoice_data"))
-            setTableData(JSON.parse(localStorage.getItem("invoice_data")));
+        let invoiceData = [];
+        if (localStorage.getItem("invoice_data")) {
+            try {
+                invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("invoice_data");
+            }
+        }
+        setTableData(invoiceData);
     };
     return (
         <Fragment>

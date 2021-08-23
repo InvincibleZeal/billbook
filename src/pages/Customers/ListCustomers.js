@@ -3,16 +3,30 @@ import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
+import { useNotification } from "notification";
+
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+    const { triggerNotification } = useNotification();
 
-    // Function to fetch data from local storage
     const fetchData = () => {
-        if (localStorage.getItem("customer_data"))
-            setTableData(JSON.parse(localStorage.getItem("customer_data")));
+        let customerData = [];
+        if (localStorage.getItem("customer_data")) {
+            try {
+                customerData = JSON.parse(
+                    localStorage.getItem("customer_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing customer data", {
+                    type: "error",
+                });
+                localStorage.removeItem("customer_data");
+            }
+        }
+        setTableData(customerData);
     };
 
     return (

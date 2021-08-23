@@ -15,7 +15,7 @@ const AddItemsModal = ({
 }) => {
     const addItem = (id, name, price) => {
         const product = { id, name, price };
-        product.amount = 1;
+        product.quantity = 1;
         if (
             invoiceRecipientDetails.items.length === 0 ||
             !invoiceRecipientDetails.items.find((p) => p.id === product.id)
@@ -24,9 +24,9 @@ const AddItemsModal = ({
         } else if (
             invoiceRecipientDetails.items.find((p) => p.id === product.id)
         ) {
-            product.amount =
+            product.quantity =
                 invoiceRecipientDetails.items.find((p) => p.id === product.id)
-                    .amount + 1;
+                    .quantity + 1;
             invoiceRecipientDetails.items.splice(
                 invoiceRecipientDetails.items.findIndex(
                     (p) => p.id === product.id
