@@ -1,32 +1,33 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
-import ChangeCustomerModal from "./ChangeCustomerModal";
-import AddItemModal from "./AddItemsModal";
+import InvoiceModal from "./InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
+import { useForm } from "customHooks/useForm";
 
 const CreateInvoice = () => {
-    const [itemModal, setItemModal] = useState(false);
-    const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
+    const [modalStatus, setModalStatus] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
     const [itemInfo, setItemInfo] = useState([]);
     const [invoiceRecipientDetails, setInvoiceRecipientDetails] = useState({
         name: "",
         phone: "",
         email: "",
+        items: [],
+    });
+    const [fields, handleFieldChange] = useForm({
         issueDate: "",
         dueDate: "",
         invoiceNumber: "",
         referenceNumber: "",
-        items: [],
         notes: "",
     });
     const intl = useIntl();
     const history = useHistory();
+    const [modalType, setModalType] = useState("customer");
     const { triggerNotification } = useNotification();
 
     useEffect(() => {
@@ -35,12 +36,12 @@ const CreateInvoice = () => {
 
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        let customerData = [];
         if (localStorage.getItem("customer_data")) {
             try {
-                customerData = JSON.parse(
+                const customerData = JSON.parse(
                     localStorage.getItem("customer_data")
                 );
+                setCustomersInfo(customerData);
             } catch (e) {
                 triggerNotification("Failed parsing customer data", {
                     type: "error",
@@ -48,13 +49,12 @@ const CreateInvoice = () => {
                 localStorage.removeItem("customer_data");
             }
         }
-        setCustomersInfo(customerData);
-        let inventoryData = [];
         if (localStorage.getItem("inventory_data")) {
             try {
-                inventoryData = JSON.parse(
+                const inventoryData = JSON.parse(
                     localStorage.getItem("inventory_data")
                 );
+                setItemInfo(inventoryData);
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -62,8 +62,8 @@ const CreateInvoice = () => {
                 localStorage.removeItem("inventory_data");
             }
         }
-        setItemInfo(inventoryData);
     }, [customersInfo, itemInfo]);
+
     // Function to delete items
     const removeElement = useCallback(
         (id) => {
@@ -84,29 +84,37 @@ const CreateInvoice = () => {
         (e) => {
             e.preventDefault();
             // Adding to local storage
-            if (localStorage.getItem("invoice_data") == null) {
-                localStorage.setItem("invoice_data", "[]");
+            try {
+                if (localStorage.getItem("invoice_data") == null) {
+                    localStorage.setItem("invoice_data", "[]");
+                }
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                const finalData = { ...fields, ...invoiceRecipientDetails };
+                invoiceData.push(finalData);
+                localStorage.setItem(
+                    "invoice_data",
+                    JSON.stringify(invoiceData)
+                );
+                triggerNotification("Invoice created successfully", {
+                    type: "success",
+                });
+                history.push("/invoice");
+            } catch (e) {
+                console.error(e);
             }
-            const invoiceData = JSON.parse(
-                localStorage.getItem("invoice_data")
-            );
-            invoiceData.push(invoiceRecipientDetails);
-            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-            triggerNotification("Invoice created successfully", {
-                type: "success",
-            });
-            history.push("/invoice");
         },
         [invoiceRecipientDetails]
     );
 
-    const updateQuantity = (id, value) => {
+    const updateQuantity = useCallback((id, value) => {
         const index = invoiceRecipientDetails.items.findIndex(
             (x) => x.id === id
         );
         invoiceRecipientDetails.items[index].quantity = value;
         setInvoiceRecipientDetails({ ...invoiceRecipientDetails });
-    };
+    }, []);
 
     return (
         <Fragment>
@@ -153,9 +161,7 @@ const CreateInvoice = () => {
                                                 <div
                                                     className="btn-link"
                                                     onClick={() =>
-                                                        setCustomersDetailsModal(
-                                                            true
-                                                        )
+                                                        setModalStatus(true)
                                                     }
                                                 >
                                                     <FormattedMessage id="invoice.change"></FormattedMessage>
@@ -164,11 +170,10 @@ const CreateInvoice = () => {
                                         ) : (
                                             <div
                                                 className="btn-link"
-                                                onClick={() =>
-                                                    setCustomersDetailsModal(
-                                                        true
-                                                    )
-                                                }
+                                                onClick={() => {
+                                                    setModalStatus(true);
+                                                    setModalType("customer");
+                                                }}
                                             >
                                                 <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                             </div>
@@ -196,13 +201,9 @@ const CreateInvoice = () => {
                                         className="input-sm"
                                         type="date"
                                         name="issueDate"
+                                        value={fields.issueDate}
+                                        onChange={handleFieldChange}
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                issueDate: e.target.value,
-                                            })
-                                        }
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -215,12 +216,8 @@ const CreateInvoice = () => {
                                         type="date"
                                         name="dueDate"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                dueDate: e.target.value,
-                                            })
-                                        }
+                                        value={fields.dueDate}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -235,12 +232,8 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="invoiceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                invoiceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.invoiceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -253,12 +246,8 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="referenceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                referenceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.referenceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -338,7 +327,10 @@ const CreateInvoice = () => {
                         <div className=" invoice_add-item d-flex align-items-center justify-content-center ">
                             <span
                                 className="btn-link p-4"
-                                onClick={() => setItemModal(true)}
+                                onClick={() => {
+                                    setModalStatus(true);
+                                    setModalType("items");
+                                }}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
                                 <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
@@ -356,12 +348,8 @@ const CreateInvoice = () => {
                                 <textarea
                                     className="input-sm invoice-notes"
                                     name="notes"
-                                    onChange={(e) =>
-                                        setInvoiceRecipientDetails({
-                                            ...invoiceRecipientDetails,
-                                            notes: e.target.value,
-                                        })
-                                    }
+                                    value={fields.notes}
+                                    onChange={handleFieldChange}
                                 ></textarea>
                             </div>
                         </div>
@@ -414,19 +402,14 @@ const CreateInvoice = () => {
                     </div>
                 </form>
             </div>
-            <ChangeCustomerModal
-                modalStatus={customerDetailsModal}
-                setModalStatus={setCustomersDetailsModal}
+            <InvoiceModal
+                modalStatus={modalStatus}
+                setModalStatus={setModalStatus}
                 customersInfo={customersInfo}
-                invoiceRecipientDetails={invoiceRecipientDetails}
-                setInvoiceRecipientDetails={setInvoiceRecipientDetails}
-            />
-            <AddItemModal
-                modalStatus={itemModal}
-                setModalStatus={setItemModal}
                 itemInfo={itemInfo}
                 invoiceRecipientDetails={invoiceRecipientDetails}
                 setInvoiceRecipientDetails={setInvoiceRecipientDetails}
+                type={modalType}
             />
         </Fragment>
     );

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
@@ -6,8 +6,10 @@ import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import Button from "components/Button";
 import Input from "components/Input";
+import { useForm } from "customHooks/useForm";
+
 const AddItem = () => {
-    const [data, setData] = useState({
+    const [fields, handleFieldChange] = useForm({
         name: "",
         price: "",
         description: "",
@@ -17,8 +19,7 @@ const AddItem = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addItem = (e) => {
-        e.preventDefault();
+    const addItem = useCallback(() => {
         // Adding to local storage
         if (localStorage.getItem("inventory_data") == null) {
             localStorage.setItem("inventory_data", "[]");
@@ -27,12 +28,17 @@ const AddItem = () => {
         let inventoryData = [];
         try {
             inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
-        } catch (e) {}
-        inventoryData.push(data);
-        localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
-        triggerNotification("Item added successfully", { type: "success" });
-        history.push("/inventory");
-    };
+            inventoryData.push(fields);
+            localStorage.setItem(
+                "inventory_data",
+                JSON.stringify(inventoryData)
+            );
+            triggerNotification("Item added successfully", { type: "success" });
+            history.push("/inventory");
+        } catch (e) {
+            console.error(e);
+        }
+    }, []);
 
     return (
         <Fragment>
@@ -46,7 +52,7 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form onSubmit={(e) => addItem(e)}>
+                        <form onSubmit={addItem}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
@@ -57,13 +63,8 @@ const AddItem = () => {
                                     type="text"
                                     name="name"
                                     required
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    value={fields.name}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -77,13 +78,8 @@ const AddItem = () => {
                                     required
                                     onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
-                                    value={data.price}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            price: e.target.value,
-                                        })
-                                    }
+                                    value={fields.price}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">

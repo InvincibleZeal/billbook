@@ -15,10 +15,12 @@ const ListInvoices = () => {
     const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        let invoiceData = [];
         if (localStorage.getItem("invoice_data")) {
             try {
-                invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                setTableData(invoiceData);
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -26,14 +28,16 @@ const ListInvoices = () => {
                 localStorage.removeItem("invoice_data");
             }
         }
-        setTableData(invoiceData);
     }, [tableData]);
 
     // Function to calc total
     const calcAmount = (array) => {
-        return array.reduce((accumulator, currValue) => {
-            return accumulator + currValue.quantity * currValue.price;
-        }, 0);
+        if (array) {
+            return array.reduce((accumulator, currValue) => {
+                return accumulator + currValue.quantity * currValue.price;
+            }, 0);
+        }
+        return 0;
     };
 
     return (
@@ -80,9 +84,9 @@ const ListInvoices = () => {
                             <tbody>
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
-                                        <td>{data.issueDate}</td>
-                                        <td>{data.name}</td>
-                                        <td>{data.invoiceNumber}</td>
+                                        <td>{data.issueDate || "NA"}</td>
+                                        <td>{data.name || "NA"}</td>
+                                        <td>{data.invoiceNumber || "NA"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
                                                 PAID

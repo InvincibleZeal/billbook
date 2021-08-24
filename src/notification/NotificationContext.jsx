@@ -18,14 +18,13 @@ export const NotificationProvider = (props) => {
     const [position, setPosition] = useState("bottom-right");
 
     const triggerNotification = (msg, options = {}) => {
-        console.log(notifications.length);
         const toast = createToast(msg, options);
+        // eslint-disable-next-line no-unused-vars
         const updated = [...notifications, toast];
         setNotification((currentNotification) => [
             ...currentNotification,
             toast,
         ]);
-        console.log(updated);
         setTimeout(function () {
             setNotification((currentNotification) =>
                 currentNotification.filter((x) => x.id !== toast.id)
