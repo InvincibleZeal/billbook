@@ -124,7 +124,6 @@ const CreateInvoice = () => {
                             <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
                         </span>
                         <Button type="submit" icon="save">
-                            <i className="fa fa-save"></i> &nbsp;{" "}
                             <FormattedMessage id="invoice.save.button"></FormattedMessage>
                         </Button>
                     </div>

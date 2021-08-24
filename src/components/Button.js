@@ -13,12 +13,9 @@ function Button(props) {
 }
 
 Button.propTypes = {
-    onclick: Proptypes.func,
     children: Proptypes.any,
-    className: Proptypes.string,
     type: Proptypes.string,
     icon: Proptypes.string,
-    label: Proptypes.string,
 };
 
 export default Button;

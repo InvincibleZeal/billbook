@@ -14,7 +14,6 @@ function Input(props) {
     );
 }
 Input.propTypes = {
-    children: Proptypes.any,
     type: Proptypes.string,
     icon: Proptypes.string,
 };
