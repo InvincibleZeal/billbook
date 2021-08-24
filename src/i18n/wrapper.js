@@ -30,7 +30,6 @@ function Wrapper(props) {
     return (
         <context.Provider value={{ locale, selectLang }}>
             <IntlProvider messages={message} locale={local}>
-                {console.log("Language", local)}
                 {props.children}
             </IntlProvider>
         </context.Provider>

@@ -40,7 +40,6 @@ const AddCustomers = () => {
     return (
         <Fragment>
             <Navbar opened="customers" />
-            {console.log(fields)}
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">

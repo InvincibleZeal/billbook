@@ -8,6 +8,7 @@ import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
+import { useForm } from "customHooks/useForm";
 
 const CreateInvoice = () => {
     const [itemModal, setItemModal] = useState(false);
@@ -18,11 +19,13 @@ const CreateInvoice = () => {
         name: "",
         phone: "",
         email: "",
+        items: [],
+    });
+    const [fields, handleFieldChange] = useForm({
         issueDate: "",
         dueDate: "",
         invoiceNumber: "",
         referenceNumber: "",
-        items: [],
         notes: "",
     });
     const intl = useIntl();
@@ -196,13 +199,9 @@ const CreateInvoice = () => {
                                         className="input-sm"
                                         type="date"
                                         name="issueDate"
+                                        value={fields.issueDate}
+                                        onChange={handleFieldChange}
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                issueDate: e.target.value,
-                                            })
-                                        }
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -215,12 +214,8 @@ const CreateInvoice = () => {
                                         type="date"
                                         name="dueDate"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                dueDate: e.target.value,
-                                            })
-                                        }
+                                        value={fields.dueDate}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -235,12 +230,8 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="invoiceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                invoiceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.invoiceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                                 <div className="input-group px-2">
@@ -253,12 +244,8 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="referenceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipientDetails({
-                                                ...invoiceRecipientDetails,
-                                                referenceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.referenceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -356,12 +343,8 @@ const CreateInvoice = () => {
                                 <textarea
                                     className="input-sm invoice-notes"
                                     name="notes"
-                                    onChange={(e) =>
-                                        setInvoiceRecipientDetails({
-                                            ...invoiceRecipientDetails,
-                                            notes: e.target.value,
-                                        })
-                                    }
+                                    value={fields.notes}
+                                    onChange={handleFieldChange}
                                 ></textarea>
                             </div>
                         </div>
