@@ -47,7 +47,7 @@ const CreateInvoice = () => {
             setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
         }
     };
-    const SaveInvoice = (e) => {
+    const saveInvoice = (e) => {
         e.preventDefault();
         // Adding to local storage
         if (localStorage.getItem("invoice_data") == null) {
@@ -65,7 +65,7 @@ const CreateInvoice = () => {
         <Fragment>
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
-                <form onSubmit={(e) => SaveInvoice(e)}>
+                <form onSubmit={(e) => saveInvoice(e)}>
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
