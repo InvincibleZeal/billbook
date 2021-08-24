@@ -92,13 +92,8 @@ const AddItem = () => {
                                     rows="4"
                                     name="description"
                                     required={true}
-                                    value={data.description}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            description: e.target.value,
-                                        })
-                                    }
+                                    value={fields.description}
+                                    onChange={handleFieldChange}
                                 ></Input>
                             </div>
                             <div className="form-group m-5 justify-content-center">
