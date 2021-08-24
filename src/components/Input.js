@@ -2,17 +2,20 @@ import React from "react";
 import Proptypes from "prop-types";
 
 function Input(props) {
-    const { onChange, type, ...rest } = props;
+    const { icon, type, ...rest } = props;
+    const ele =
+        type === "textarea" ? <textarea {...rest} /> : <input {...rest} />;
 
-    return type === "textarea" ? (
-        <textarea onChange={onChange} {...rest} />
-    ) : (
-        <input onChange={onChange} {...rest} />
+    return (
+        <>
+            {icon && <i className={`fa fa-${icon}`}></i>}
+            {ele}
+        </>
     );
 }
 Input.propTypes = {
     children: Proptypes.any,
-    onChange: Proptypes.func,
     type: Proptypes.string,
+    icon: Proptypes.string,
 };
 export default Input;
