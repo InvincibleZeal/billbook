@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import { useNotification } from "notification";
+import Button from "components/Button";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
@@ -50,10 +51,9 @@ const ListInvoices = () => {
                         <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
                     </span>
                     <Link to="/invoice/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                        <Button icon="plus">
                             <FormattedMessage id="invoice.new.button"></FormattedMessage>
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (

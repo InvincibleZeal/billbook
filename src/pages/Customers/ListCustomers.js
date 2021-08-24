@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import { useNotification } from "notification";
+import Button from "components/Button";
 
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
@@ -39,10 +40,9 @@ const ListCustomers = () => {
                         <FormattedMessage id="title.customer"></FormattedMessage>
                     </span>
                     <Link to="/customers/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;
+                        <Button icon="plus">
                             <FormattedMessage id="customer.new.button"></FormattedMessage>
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (

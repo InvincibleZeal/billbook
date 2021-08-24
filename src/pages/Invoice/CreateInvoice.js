@@ -7,7 +7,8 @@ import InvoiceModal from "./InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-
+import Button from "components/Button";
+import Input from "components/Input";
 const CreateInvoice = () => {
     const [modalStatus, setModalStatus] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
@@ -126,10 +127,10 @@ const CreateInvoice = () => {
                             {" "}
                             <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
                         </span>
-                        <button className="btn" type="submit">
+                        <Button type="submit" icon="save">
                             <i className="fa fa-save"></i> &nbsp;{" "}
                             <FormattedMessage id="invoice.save.button"></FormattedMessage>
-                        </button>
+                        </Button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
@@ -197,7 +198,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
                                     </label>
-                                    <input
+                                    <Input
                                         className="input-sm"
                                         type="date"
                                         name="issueDate"
@@ -211,7 +212,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
                                     </label>
-                                    <input
+                                    <Input
                                         className="input-sm"
                                         type="date"
                                         name="dueDate"
@@ -226,8 +227,9 @@ const CreateInvoice = () => {
                                     <label htmlFor="invoiceNumber">
                                         <FormattedMessage id="invoice.number"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
-                                    <input
+
+                                    <Input
+                                        icon="hashtag"
                                         className="input-sm"
                                         type="text"
                                         name="invoiceNumber"
@@ -240,8 +242,9 @@ const CreateInvoice = () => {
                                     <label htmlFor="referenceNumber">
                                         <FormattedMessage id="invoice.reference.number"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
-                                    <input
+
+                                    <Input
+                                        icon="hashtag"
                                         className="input-sm"
                                         type="text"
                                         name="referenceNumber"
@@ -284,7 +287,7 @@ const CreateInvoice = () => {
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
                                                 <td>
-                                                    <input
+                                                    <Input
                                                         min="1"
                                                         type="number"
                                                         value={item.quantity}
@@ -345,12 +348,13 @@ const CreateInvoice = () => {
                                     {" "}
                                     <FormattedMessage id="invoice.notes"></FormattedMessage>{" "}
                                 </label>
-                                <textarea
+                                <Input
+                                    type="textarea"
                                     className="input-sm invoice-notes"
                                     name="notes"
                                     value={fields.notes}
                                     onChange={handleFieldChange}
-                                ></textarea>
+                                ></Input>
                             </div>
                         </div>
                         <div className="summary mx-5">
