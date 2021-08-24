@@ -22,12 +22,16 @@ const AddCustomers = () => {
         if (localStorage.getItem("customer_data") == null) {
             localStorage.setItem("customer_data", "[]");
         }
-        const customerData = JSON.parse(localStorage.getItem("customer_data"));
+        let customerData = [];
+        try {
+            customerData = JSON.parse(localStorage.getItem("customer_data"));
+        } catch (e) {}
         customerData.push(data);
         localStorage.setItem("customer_data", JSON.stringify(customerData));
         triggerNotification("Customer added successfully", { type: "success" });
         history.push("/");
     };
+
     return (
         <Fragment>
             <Navbar opened="customers" />

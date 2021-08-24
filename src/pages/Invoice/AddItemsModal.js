@@ -10,37 +10,37 @@ const AddItemsModal = ({
     modalStatus,
     setModalStatus,
     itemInfo,
-    invoiceRecipentDetails,
-    setInvoiceRecipentDetails,
+    invoiceRecipientDetails,
+    setInvoiceRecipientDetails,
 }) => {
     const addItem = useCallback(
         (id, name, price) => {
             const product = { id, name, price };
             product.quantity = 1;
             if (
-                invoiceRecipentDetails.items.length === 0 ||
-                !invoiceRecipentDetails.items.find((p) => p.id === product.id)
+                invoiceRecipientDetails.items.length === 0 ||
+                !invoiceRecipientDetails.items.find((p) => p.id === product.id)
             ) {
-                invoiceRecipentDetails.items.push(product);
+                invoiceRecipientDetails.items.push(product);
             } else if (
-                invoiceRecipentDetails.items.find((p) => p.id === product.id)
+                invoiceRecipientDetails.items.find((p) => p.id === product.id)
             ) {
                 product.quantity =
-                    invoiceRecipentDetails.items.find(
+                    invoiceRecipientDetails.items.find(
                         (p) => p.id === product.id
                     ).quantity + 1;
-                invoiceRecipentDetails.items.splice(
-                    invoiceRecipentDetails.items.findIndex(
+                invoiceRecipientDetails.items.splice(
+                    invoiceRecipientDetails.items.findIndex(
                         (p) => p.id === product.id
                     ),
                     1,
                     product
                 );
             }
-            setInvoiceRecipentDetails(invoiceRecipentDetails);
+            setInvoiceRecipientDetails(invoiceRecipientDetails);
             setModalStatus(false);
         },
-        [invoiceRecipentDetails]
+        [invoiceRecipientDetails]
     );
     return (
         <Modal
@@ -75,7 +75,7 @@ const AddItemsModal = ({
                             <div className="card p-3">
                                 <div
                                     className="page-heading-wrapper"
-                                    style={{ marginBottom: "0px" }}
+                                    style={{ marginBottom: "0" }}
                                 >
                                     <div>
                                         <p>Item: {info.name}</p>
@@ -92,8 +92,8 @@ const AddItemsModal = ({
             ) : (
                 <p className="px-4 py-2">
                     {" "}
-                    No Customers details available. Please click{" "}
-                    <Link to="/customers/add" style={{ color: "black" }}>
+                    No Items available. Please click{" "}
+                    <Link to="/inventory/add" style={{ color: "black" }}>
                         {" "}
                         here
                     </Link>{" "}
@@ -108,8 +108,8 @@ AddItemsModal.propTypes = {
     modalStatus: PropTypes.bool.isRequired,
     setModalStatus: PropTypes.func.isRequired,
     itemInfo: PropTypes.array.isRequired,
-    invoiceRecipentDetails: PropTypes.object.isRequired,
-    setInvoiceRecipentDetails: PropTypes.func.isRequired,
+    invoiceRecipientDetails: PropTypes.object.isRequired,
+    setInvoiceRecipientDetails: PropTypes.func.isRequired,
 };
 
 export default AddItemsModal;

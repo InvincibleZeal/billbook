@@ -4,7 +4,11 @@
         "*.jsx": "javascriptreact"
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
     "eslint.alwaysShowStatus": true,
-    "cSpell.words": ["Recipent"]
+    "cSpell.enabled": true,
+    "cSpell.words": ["atleast", "commitlint", "scrollable", "stylelint"]
 }

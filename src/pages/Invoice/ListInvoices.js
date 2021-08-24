@@ -4,24 +4,38 @@ import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
+import { useNotification } from "notification";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+
+    const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        if (localStorage.getItem("invoice_data"))
-            setTableData(JSON.parse(localStorage.getItem("invoice_data")));
+        let invoiceData = [];
+        if (localStorage.getItem("invoice_data")) {
+            try {
+                invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("invoice_data");
+            }
+        }
+        setTableData(invoiceData);
     }, [tableData]);
 
     // Function to calc total
     const calcAmount = (array) => {
-        return array((accumulator, currValue) => {
+        return array.reduce((accumulator, currValue) => {
             return accumulator + currValue.quantity * currValue.price;
         }, 0);
     };
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
