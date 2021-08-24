@@ -67,7 +67,7 @@ const AddCustomers = () => {
                                     name="phone"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    onInvalid="this.setCustomValidity('Enter atleast 10 characters. Use only numbers')"
+                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
                                     value={data.phone}
                                     onChange={(e) =>

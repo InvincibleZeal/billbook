@@ -69,6 +69,15 @@ const CreateInvoice = () => {
         },
         [invoiceRecipentDetails]
     );
+
+    const updateQuantity = (id, value) => {
+        const index = invoiceRecipentDetails.items.findIndex(
+            (x) => x.id === id
+        );
+        invoiceRecipentDetails.items[index].quantity = value;
+        setInvoiceRecipentDetails({ ...invoiceRecipentDetails });
+    };
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -257,7 +266,19 @@ const CreateInvoice = () => {
                                         (item, idx) => (
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
-                                                <td>{item.quantity}</td>
+                                                <td>
+                                                    <input
+                                                        min="1"
+                                                        type="number"
+                                                        value={item.quantity}
+                                                        onChange={(e) =>
+                                                            updateQuantity(
+                                                                item.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </td>
                                                 <td>₹{item.price}</td>
                                                 <td>
                                                     ₹
