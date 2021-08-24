@@ -99,10 +99,7 @@ const AddItem = () => {
                                     }
                                 ></textarea>
                             </div>
-                            <div
-                                className="form-group m-5"
-                                style={{ justifyContent: "center" }}
-                            >
+                            <div className="form-group m-5 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;{" "}
                                     <FormattedMessage id="item.save.button"></FormattedMessage>

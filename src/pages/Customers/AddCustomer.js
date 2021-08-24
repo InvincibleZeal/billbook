@@ -95,10 +95,7 @@ const AddCustomers = () => {
                                     }
                                 />
                             </div>
-                            <div
-                                className="form-group mx-5 my-3"
-                                style={{ justifyContent: "center" }}
-                            >
+                            <div className="form-group mx-5 my-3 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.save.button"></FormattedMessage>
