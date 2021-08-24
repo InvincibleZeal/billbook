@@ -16,20 +16,23 @@ const AddItem = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const AddItem = (e) => {
+    const addItem = (e) => {
         e.preventDefault();
         // Adding to local storage
         if (localStorage.getItem("inventory_data") == null) {
             localStorage.setItem("inventory_data", "[]");
         }
-        const inventoryData = JSON.parse(
-            localStorage.getItem("inventory_data")
-        );
+
+        let inventoryData = [];
+        try {
+            inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
+        } catch (e) {}
         inventoryData.push(data);
         localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
         triggerNotification("Item added successfully", { type: "success" });
         history.push("/inventory");
     };
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -42,7 +45,7 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form onSubmit={(e) => AddItem(e)}>
+                        <form onSubmit={(e) => addItem(e)}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
@@ -100,10 +103,7 @@ const AddItem = () => {
                                     }
                                 ></textarea>
                             </div>
-                            <div
-                                className="form-group m-5"
-                                style={{ justifyContent: "center" }}
-                            >
+                            <div className="form-group m-5 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;{" "}
                                     <FormattedMessage id="item.save.button"></FormattedMessage>

@@ -1,11 +1,12 @@
-import React, { Fragment, useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
 import ChangeCustomerModal from "./ChangeCustomerModal";
 import AddItemModal from "./AddItemsModal";
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 
 const CreateInvoice = () => {
@@ -13,7 +14,7 @@ const CreateInvoice = () => {
     const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
     const [itemInfo, setItemInfo] = useState([]);
-    const [invoiceRecipentDetails, setInvoiceRecipentDetails] = useState({
+    const [invoiceRecipientDetails, setInvoiceRecipientDetails] = useState({
         name: "",
         phone: "",
         email: "",
@@ -24,47 +25,94 @@ const CreateInvoice = () => {
         items: [],
         notes: "",
     });
+    const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
     useEffect(() => {
         fetchData();
     }, []);
+
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("customer_data"))
-            setCustomersInfo(JSON.parse(localStorage.getItem("customer_data")));
-        if (localStorage.getItem("inventory_data"))
-            setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
-    };
+    const fetchData = useCallback(() => {
+        let customerData = [];
+        if (localStorage.getItem("customer_data")) {
+            try {
+                customerData = JSON.parse(
+                    localStorage.getItem("customer_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing customer data", {
+                    type: "error",
+                });
+                localStorage.removeItem("customer_data");
+            }
+        }
+        setCustomersInfo(customerData);
+        let inventoryData = [];
+        if (localStorage.getItem("inventory_data")) {
+            try {
+                inventoryData = JSON.parse(
+                    localStorage.getItem("inventory_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("inventory_data");
+            }
+        }
+        setItemInfo(inventoryData);
+    }, [customersInfo, itemInfo]);
     // Function to delete items
-    const removeElement = (id) => {
-        if (window.confirm("Are you sure, you eant to delete this item?")) {
-            const items = invoiceRecipentDetails.items.filter(
-                (item) => item.id !== id
+    const removeElement = useCallback(
+        (id) => {
+            if (
+                window.confirm(
+                    intl.formatMessage({ id: "invoice.confirm.delete.item" })
+                )
+            ) {
+                setInvoiceRecipientDetails((invoiceDetail) => ({
+                    ...invoiceRecipientDetails,
+                    items: invoiceDetail.items.filter((item) => item.id !== id),
+                }));
+            }
+        },
+        [invoiceRecipientDetails]
+    );
+    const saveInvoice = useCallback(
+        (e) => {
+            e.preventDefault();
+            // Adding to local storage
+            if (localStorage.getItem("invoice_data") == null) {
+                localStorage.setItem("invoice_data", "[]");
+            }
+            const invoiceData = JSON.parse(
+                localStorage.getItem("invoice_data")
             );
-            setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
-        }
+            invoiceData.push(invoiceRecipientDetails);
+            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
+            triggerNotification("Invoice created successfully", {
+                type: "success",
+            });
+            history.push("/invoice");
+        },
+        [invoiceRecipientDetails]
+    );
+
+    const updateQuantity = (id, value) => {
+        const index = invoiceRecipientDetails.items.findIndex(
+            (x) => x.id === id
+        );
+        invoiceRecipientDetails.items[index].quantity = value;
+        setInvoiceRecipientDetails({ ...invoiceRecipientDetails });
     };
-    const SaveInvoice = (e) => {
-        e.preventDefault();
-        // Adding to local storage
-        if (localStorage.getItem("invoice_data") == null) {
-            localStorage.setItem("invoice_data", "[]");
-        }
-        const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
-        invoiceData.push(invoiceRecipentDetails);
-        localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-        triggerNotification("Invoice created successfully", {
-            type: "success",
-        });
-        history.push("/invoice");
-    };
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
-                <form onSubmit={(e) => SaveInvoice(e)}>
+                <form onSubmit={(e) => saveInvoice(e)}>
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
@@ -77,27 +125,27 @@ const CreateInvoice = () => {
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
-                            <h4 className="billto text-muted m-0 mb-3">
+                            <h4 className="bill-to text-muted m-0 mb-3">
                                 <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
                                     <Fragment>
-                                        {invoiceRecipentDetails.name !== "" ? (
+                                        {invoiceRecipientDetails.name !== "" ? (
                                             <Fragment>
                                                 <div className="billing_details pr-3">
                                                     <div>
-                                                        {invoiceRecipentDetails.name ||
+                                                        {invoiceRecipientDetails.name ||
                                                             customersInfo[0]
                                                                 .name}
                                                     </div>
                                                     <div>
-                                                        {invoiceRecipentDetails.phone ||
+                                                        {invoiceRecipientDetails.phone ||
                                                             customersInfo[0]
                                                                 .phone}
                                                     </div>
                                                     <div>
-                                                        {invoiceRecipentDetails.email ||
+                                                        {invoiceRecipientDetails.email ||
                                                             customersInfo[0]
                                                                 .email}
                                                     </div>
@@ -122,7 +170,7 @@ const CreateInvoice = () => {
                                                     )
                                                 }
                                             >
-                                                <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                                <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                             </div>
                                         )}
                                     </Fragment>
@@ -131,7 +179,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.add.customer.details"></FormattedMessage>
+                                            <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                         </p>{" "}
                                     </Link>
                                 )}
@@ -144,15 +192,14 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
                                         type="date"
                                         name="issueDate"
                                         required
                                         onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
+                                            setInvoiceRecipientDetails({
+                                                ...invoiceRecipientDetails,
                                                 issueDate: e.target.value,
                                             })
                                         }
@@ -163,15 +210,14 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
                                         type="date"
                                         name="dueDate"
                                         required
                                         onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
+                                            setInvoiceRecipientDetails({
+                                                ...invoiceRecipientDetails,
                                                 dueDate: e.target.value,
                                             })
                                         }
@@ -190,8 +236,8 @@ const CreateInvoice = () => {
                                         name="invoiceNumber"
                                         required
                                         onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
+                                            setInvoiceRecipientDetails({
+                                                ...invoiceRecipientDetails,
                                                 invoiceNumber: e.target.value,
                                             })
                                         }
@@ -208,8 +254,8 @@ const CreateInvoice = () => {
                                         name="referenceNumber"
                                         required
                                         onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
+                                            setInvoiceRecipientDetails({
+                                                ...invoiceRecipientDetails,
                                                 referenceNumber: e.target.value,
                                             })
                                         }
@@ -242,17 +288,29 @@ const CreateInvoice = () => {
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
-                            {invoiceRecipentDetails.items.length > 0 && (
+                            {invoiceRecipientDetails.items.length > 0 && (
                                 <tbody>
-                                    {invoiceRecipentDetails.items.map(
+                                    {invoiceRecipientDetails.items.map(
                                         (item, idx) => (
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
-                                                <td>{item.amount}</td>
+                                                <td>
+                                                    <input
+                                                        min="1"
+                                                        type="number"
+                                                        value={item.quantity}
+                                                        onChange={(e) =>
+                                                            updateQuantity(
+                                                                item.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </td>
                                                 <td>₹{item.price}</td>
                                                 <td>
                                                     ₹
-                                                    {item.amount *
+                                                    {item.quantity *
                                                         Number(item.price)}
                                                 </td>
                                                 <td className="table-action">
@@ -277,13 +335,13 @@ const CreateInvoice = () => {
                             )}
                         </table>
 
-                        <div className=" invoice_additem d-flex align-items-center justify-content-center ">
+                        <div className=" invoice_add-item d-flex align-items-center justify-content-center ">
                             <span
                                 className="btn-link p-4"
                                 onClick={() => setItemModal(true)}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                <FormattedMessage id="invoice.add.on.item"></FormattedMessage>
+                                <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
                             </span>
                         </div>
                     </div>
@@ -299,8 +357,8 @@ const CreateInvoice = () => {
                                     className="input-sm invoice-notes"
                                     name="notes"
                                     onChange={(e) =>
-                                        setInvoiceRecipentDetails({
-                                            ...invoiceRecipentDetails,
+                                        setInvoiceRecipientDetails({
+                                            ...invoiceRecipientDetails,
                                             notes: e.target.value,
                                         })
                                     }
@@ -309,26 +367,28 @@ const CreateInvoice = () => {
                         </div>
                         <div className="summary mx-5">
                             <div className="card-bordered p-3">
-                                <div className="summary_items pb-4">
-                                    {invoiceRecipentDetails.items.map(
-                                        (item, idx) => (
-                                            <div
-                                                className="summary_item"
-                                                key={idx}
-                                            >
-                                                <div className="summary_name">
-                                                    {item.name}
+                                {invoiceRecipientDetails.items.length ? (
+                                    <div className="summary_items pb-4">
+                                        {invoiceRecipientDetails.items.map(
+                                            (item, idx) => (
+                                                <div
+                                                    className="summary_item"
+                                                    key={idx}
+                                                >
+                                                    <div className="summary_name">
+                                                        {item.name}
+                                                    </div>
+                                                    <div className="summary_quantity">
+                                                        x{item.quantity}
+                                                    </div>
+                                                    <div className="summary_amount">
+                                                        ₹{item.price}
+                                                    </div>
                                                 </div>
-                                                <div className="summary_quantity">
-                                                    x{item.amount}
-                                                </div>
-                                                <div className="summary_ammount">
-                                                    ₹{item.price}
-                                                </div>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                ) : null}
                                 <div className="summary_total d-flex mt-2">
                                     <div>
                                         {" "}
@@ -337,11 +397,11 @@ const CreateInvoice = () => {
                                     </div>
                                     <div className="primary">
                                         ₹
-                                        {invoiceRecipentDetails.items.reduce(
+                                        {invoiceRecipientDetails.items.reduce(
                                             (accumulator, currValue) => {
                                                 return (
                                                     accumulator +
-                                                    currValue.amount *
+                                                    currValue.quantity *
                                                         currValue.price
                                                 );
                                             },
@@ -358,15 +418,15 @@ const CreateInvoice = () => {
                 modalStatus={customerDetailsModal}
                 setModalStatus={setCustomersDetailsModal}
                 customersInfo={customersInfo}
-                invoiceRecipentDetails={invoiceRecipentDetails}
-                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
+                invoiceRecipientDetails={invoiceRecipientDetails}
+                setInvoiceRecipientDetails={setInvoiceRecipientDetails}
             />
             <AddItemModal
                 modalStatus={itemModal}
                 setModalStatus={setItemModal}
                 itemInfo={itemInfo}
-                invoiceRecipentDetails={invoiceRecipentDetails}
-                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
+                invoiceRecipientDetails={invoiceRecipientDetails}
+                setInvoiceRecipientDetails={setInvoiceRecipientDetails}
             />
         </Fragment>
     );

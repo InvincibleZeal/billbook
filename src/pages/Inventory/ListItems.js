@@ -1,19 +1,34 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-
+import { useNotification } from "notification";
 const ListItems = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+    const { triggerNotification } = useNotification();
+
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("inventory_data"))
-            setTableData(JSON.parse(localStorage.getItem("inventory_data")));
-    };
+    const fetchData = useCallback(() => {
+        let inventoryData = [];
+        if (localStorage.getItem("inventory_data")) {
+            try {
+                inventoryData = JSON.parse(
+                    localStorage.getItem("inventory_data")
+                );
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("inventory_data");
+            }
+        }
+        setTableData(inventoryData);
+    }, [tableData]);
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
