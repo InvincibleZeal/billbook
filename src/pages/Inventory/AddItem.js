@@ -38,7 +38,7 @@ const AddItem = () => {
         } catch (e) {
             console.error(e);
         }
-    }, []);
+    }, [fields]);
 
     return (
         <Fragment>
