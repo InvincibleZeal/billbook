@@ -1,4 +1,7 @@
 {
-    "*.{css,less,scss,html,json,jsx,js}": ["prettier — write"],
+    "*.{css,less,scss,html,json,jsx,js}": [
+        "prettier — write",
+        "stylelint --fix"
+    ],
     "*.{jsx, js}": ["eslint — max-warnings 0"]
 }
