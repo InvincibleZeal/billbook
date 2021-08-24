@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { context } from "i18n/wrapper";
 
-const Navbar = ({ opened }, ...props) => {
+const Navbar = ({ opened }) => {
     const Context = useContext(context);
     return (
         <Fragment>
