@@ -1,18 +1,15 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
-import ChangeCustomerModal from "./ChangeCustomerModal";
-import AddItemModal from "./AddItemsModal";
+import InvoiceModal from "./InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 
 const CreateInvoice = () => {
-    const [itemModal, setItemModal] = useState(false);
-    const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
+    const [modalStatus, setModalStatus] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
     const [itemInfo, setItemInfo] = useState([]);
     const [invoiceRecipientDetails, setInvoiceRecipientDetails] = useState({
@@ -30,6 +27,7 @@ const CreateInvoice = () => {
     });
     const intl = useIntl();
     const history = useHistory();
+    const [modalType, setModalType] = useState("customer");
     const { triggerNotification } = useNotification();
 
     useEffect(() => {
@@ -163,9 +161,7 @@ const CreateInvoice = () => {
                                                 <div
                                                     className="btn-link"
                                                     onClick={() =>
-                                                        setCustomersDetailsModal(
-                                                            true
-                                                        )
+                                                        setModalStatus(true)
                                                     }
                                                 >
                                                     <FormattedMessage id="invoice.change"></FormattedMessage>
@@ -174,11 +170,10 @@ const CreateInvoice = () => {
                                         ) : (
                                             <div
                                                 className="btn-link"
-                                                onClick={() =>
-                                                    setCustomersDetailsModal(
-                                                        true
-                                                    )
-                                                }
+                                                onClick={() => {
+                                                    setModalStatus(true);
+                                                    setModalType("customer");
+                                                }}
                                             >
                                                 <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                             </div>
@@ -332,7 +327,10 @@ const CreateInvoice = () => {
                         <div className=" invoice_add-item d-flex align-items-center justify-content-center ">
                             <span
                                 className="btn-link p-4"
-                                onClick={() => setItemModal(true)}
+                                onClick={() => {
+                                    setModalStatus(true);
+                                    setModalType("items");
+                                }}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
                                 <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
@@ -404,19 +402,14 @@ const CreateInvoice = () => {
                     </div>
                 </form>
             </div>
-            <ChangeCustomerModal
-                modalStatus={customerDetailsModal}
-                setModalStatus={setCustomersDetailsModal}
+            <InvoiceModal
+                modalStatus={modalStatus}
+                setModalStatus={setModalStatus}
                 customersInfo={customersInfo}
-                invoiceRecipientDetails={invoiceRecipientDetails}
-                setInvoiceRecipientDetails={setInvoiceRecipientDetails}
-            />
-            <AddItemModal
-                modalStatus={itemModal}
-                setModalStatus={setItemModal}
                 itemInfo={itemInfo}
                 invoiceRecipientDetails={invoiceRecipientDetails}
                 setInvoiceRecipientDetails={setInvoiceRecipientDetails}
+                type={modalType}
             />
         </Fragment>
     );
