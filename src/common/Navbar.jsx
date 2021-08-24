@@ -19,7 +19,7 @@ const Navbar = ({ opened }) => {
                             } `}
                         >
                             <i className="fa fa-user"></i>{" "}
-                            <FormattedMessage id="title.customer"></FormattedMessage>
+                            <FormattedMessage id="title.customer" />
                         </li>
                     </Link>
                     <Link to="/inventory">
@@ -29,7 +29,7 @@ const Navbar = ({ opened }) => {
                             }`}
                         >
                             <i className="fa fa-star"></i>{" "}
-                            <FormattedMessage id="title.items"></FormattedMessage>
+                            <FormattedMessage id="title.items" />
                         </li>
                     </Link>
                     <Link to="/invoice">
@@ -39,7 +39,7 @@ const Navbar = ({ opened }) => {
                             }`}
                         >
                             <i className="fa fa-clipboard"></i>{" "}
-                            <FormattedMessage id="title.invoice"></FormattedMessage>
+                            <FormattedMessage id="title.invoice" />
                         </li>
                     </Link>
                 </ul>

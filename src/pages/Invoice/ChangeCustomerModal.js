@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import Button from "components/Button";
+
 Modal.setAppElement("*");
 
 const ChangeCustomerModal = ({
@@ -32,7 +34,7 @@ const ChangeCustomerModal = ({
                 style={{ marginBottom: "0" }}
             >
                 <span className="react-modal-title">
-                    <FormattedMessage id="change.details"></FormattedMessage>
+                    <FormattedMessage id="change.details" />
                 </span>
                 <div className="react-modal-close">
                     <i
@@ -65,9 +67,9 @@ const ChangeCustomerModal = ({
                                         <p>{info.phone}</p>
                                         <p>{info.email}</p>
                                     </div>
-                                    <button className="btn">
-                                        <FormattedMessage id="select"></FormattedMessage>
-                                    </button>
+                                    <Button>
+                                        <FormattedMessage id="select" />
+                                    </Button>
                                 </div>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import { useNotification } from "notification";
+import Button from "components/Button";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
@@ -47,13 +48,12 @@ const ListInvoices = () => {
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
                         {" "}
-                        <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                        <FormattedMessage id="title.invoice" />
                     </span>
                     <Link to="/invoice/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.new.button"></FormattedMessage>
-                        </button>
+                        <Button className="btn" icon="plus">
+                            <FormattedMessage id="invoice.newButton" />
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (
@@ -62,22 +62,22 @@ const ListInvoices = () => {
                             <thead>
                                 <tr>
                                     <th>
-                                        <FormattedMessage id="invoice.date"></FormattedMessage>
+                                        <FormattedMessage id="invoice.date" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="title.customer"></FormattedMessage>
+                                        <FormattedMessage id="title.customer" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.number"></FormattedMessage>
+                                        <FormattedMessage id="invoice.number" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.paid.status"></FormattedMessage>
+                                        <FormattedMessage id="invoice.paidStatus" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amount"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amount" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amount.due"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amountDue" />
                                     </th>
                                 </tr>
                             </thead>
@@ -104,7 +104,7 @@ const ListInvoices = () => {
                 ) : (
                     <p className="my-3 mx-5">
                         {" "}
-                        <FormattedMessage id="no.records"></FormattedMessage>
+                        <FormattedMessage id="no.records" />
                     </p>
                 )}
             </div>

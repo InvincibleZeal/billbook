@@ -37,11 +37,11 @@ const ListItems = () => {
                 <div className="page-heading-wrapper p-5 mb-5">
                     <span className="title">
                         {" "}
-                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                        <FormattedMessage id="title.items" />
                     </span>
                     <Link to="/inventory/add">
                         <Button icon="plus">
-                            <FormattedMessage id="item.add.button"></FormattedMessage>{" "}
+                            <FormattedMessage id="item.addButton" />
                         </Button>
                     </Link>
                 </div>
@@ -58,19 +58,19 @@ const ListItems = () => {
                                 <tr>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.name"></FormattedMessage>
+                                        <FormattedMessage id="customer.name" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="item.description"></FormattedMessage>
+                                        <FormattedMessage id="item.description" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="item.price"></FormattedMessage>
+                                        <FormattedMessage id="item.price" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="added.on"></FormattedMessage>
+                                        <FormattedMessage id="added.on" />
                                     </th>
                                 </tr>
                             </thead>
@@ -89,7 +89,7 @@ const ListItems = () => {
                 ) : (
                     <p className="my-3 mx-5">
                         {" "}
-                        <FormattedMessage id="no.records"></FormattedMessage>
+                        <FormattedMessage id="no.records" />
                     </p>
                 )}
             </div>

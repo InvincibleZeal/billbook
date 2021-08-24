@@ -4,7 +4,11 @@ import Proptypes from "prop-types";
 function Input(props) {
     const { icon, type, ...rest } = props;
     const ele =
-        type === "textarea" ? <textarea {...rest} /> : <input {...rest} />;
+        type === "textarea" ? (
+            <textarea {...rest} />
+        ) : (
+            <input type={type} {...rest} />
+        );
 
     return (
         <>

@@ -97,7 +97,7 @@ const ChangeCustomerModal = ({
                                                 <p>{info.email}</p>
                                             </div>
                                             <Button>
-                                                <FormattedMessage id="select"></FormattedMessage>
+                                                <FormattedMessage id="select" />
                                             </Button>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@ const ChangeCustomerModal = ({
                                                 <p>Price: ₹{info.price}</p>
                                             </div>
                                             <Button>
-                                                <FormattedMessage id="select"></FormattedMessage>
+                                                <FormattedMessage id="select" />
                                             </Button>
                                         </div>
                                     </div>
