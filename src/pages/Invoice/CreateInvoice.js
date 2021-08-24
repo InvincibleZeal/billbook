@@ -116,7 +116,7 @@ const CreateInvoice = () => {
         <Fragment>
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
-                <form onSubmit={(e) => saveInvoice(e)}>
+                <form onSubmit={saveInvoice}>
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
