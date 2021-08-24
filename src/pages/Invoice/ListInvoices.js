@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ const ListInvoices = () => {
 
     const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         let invoiceData = [];
         if (localStorage.getItem("invoice_data")) {
             try {
@@ -27,7 +27,15 @@ const ListInvoices = () => {
             }
         }
         setTableData(invoiceData);
+    }, [tableData]);
+
+    // Function to calc total
+    const calcAmount = (array) => {
+        return array.reduce((accumulator, currValue) => {
+            return accumulator + currValue.quantity * currValue.price;
+        }, 0);
     };
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -80,32 +88,8 @@ const ListInvoices = () => {
                                                 PAID
                                             </span>
                                         </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.amount *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.amount *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
+                                        <td>₹{calcAmount(data.items)}</td>
+                                        <td>₹{calcAmount(data.items)}</td>
                                     </tr>
                                 ))}
                             </tbody>

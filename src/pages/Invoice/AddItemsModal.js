@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
@@ -13,31 +13,35 @@ const AddItemsModal = ({
     invoiceRecipientDetails,
     setInvoiceRecipientDetails,
 }) => {
-    const addItem = (id, name, price) => {
-        const product = { id, name, price };
-        product.quantity = 1;
-        if (
-            invoiceRecipientDetails.items.length === 0 ||
-            !invoiceRecipientDetails.items.find((p) => p.id === product.id)
-        ) {
-            invoiceRecipientDetails.items.push(product);
-        } else if (
-            invoiceRecipientDetails.items.find((p) => p.id === product.id)
-        ) {
-            product.quantity =
+    const addItem = useCallback(
+        (id, name, price) => {
+            const product = { id, name, price };
+            product.quantity = 1;
+            if (
+                invoiceRecipientDetails.items.length === 0 ||
+                !invoiceRecipientDetails.items.find((p) => p.id === product.id)
+            ) {
+                invoiceRecipientDetails.items.push(product);
+            } else if (
                 invoiceRecipientDetails.items.find((p) => p.id === product.id)
-                    .quantity + 1;
-            invoiceRecipientDetails.items.splice(
-                invoiceRecipientDetails.items.findIndex(
-                    (p) => p.id === product.id
-                ),
-                1,
-                product
-            );
-        }
-        setInvoiceRecipientDetails(invoiceRecipientDetails);
-        setModalStatus(false);
-    };
+            ) {
+                product.quantity =
+                    invoiceRecipientDetails.items.find(
+                        (p) => p.id === product.id
+                    ).quantity + 1;
+                invoiceRecipientDetails.items.splice(
+                    invoiceRecipientDetails.items.findIndex(
+                        (p) => p.id === product.id
+                    ),
+                    1,
+                    product
+                );
+            }
+            setInvoiceRecipientDetails(invoiceRecipientDetails);
+            setModalStatus(false);
+        },
+        [invoiceRecipientDetails]
+    );
     return (
         <Modal
             isOpen={modalStatus}
@@ -88,8 +92,8 @@ const AddItemsModal = ({
             ) : (
                 <p className="px-4 py-2">
                     {" "}
-                    No Customers details available. Please click{" "}
-                    <Link to="/customers/add" style={{ color: "black" }}>
+                    No Items available. Please click{" "}
+                    <Link to="/inventory/add" style={{ color: "black" }}>
                         {" "}
                         here
                     </Link>{" "}

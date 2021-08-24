@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
@@ -12,7 +12,8 @@ const ListCustomers = () => {
     }, []);
     const { triggerNotification } = useNotification();
 
-    const fetchData = () => {
+    // Function to fetch data from local storage
+    const fetchData = useCallback(() => {
         let customerData = [];
         if (localStorage.getItem("customer_data")) {
             try {
@@ -27,7 +28,7 @@ const ListCustomers = () => {
             }
         }
         setTableData(customerData);
-    };
+    }, [tableData]);
 
     return (
         <Fragment>

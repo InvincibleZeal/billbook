@@ -16,7 +16,7 @@ const AddCustomers = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const saveCustomer = (e) => {
+    const addCustomer = (e) => {
         e.preventDefault();
         // Adding to local storage
         if (localStorage.getItem("customer_data") == null) {
@@ -42,7 +42,7 @@ const AddCustomers = () => {
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form onSubmit={(e) => saveCustomer(e)}>
+                    <form onSubmit={(e) => addCustomer(e)}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
@@ -71,7 +71,7 @@ const AddCustomers = () => {
                                     name="phone"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    onInvalid="this.setCustomValidity('Enter atleast 10 characters. Use only numbers')"
+                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
                                     value={data.phone}
                                     onChange={(e) =>
@@ -99,10 +99,7 @@ const AddCustomers = () => {
                                     }
                                 />
                             </div>
-                            <div
-                                className="form-group mx-5 my-3"
-                                style={{ justifyContent: "center" }}
-                            >
+                            <div className="form-group mx-5 my-3 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.save.button"></FormattedMessage>

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
@@ -34,7 +34,7 @@ const CreateInvoice = () => {
     }, []);
 
     // Function to fetch data from local storage
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         let customerData = [];
         if (localStorage.getItem("customer_data")) {
             try {
@@ -63,36 +63,51 @@ const CreateInvoice = () => {
             }
         }
         setItemInfo(inventoryData);
-    };
-
+    }, [customersInfo, itemInfo]);
     // Function to delete items
-    const removeElement = (id) => {
-        if (
-            window.confirm(
-                intl.formatMessage({ id: "invoice.confirm.delete.item" })
-            )
-        ) {
-            const items = invoiceRecipientDetails.items.filter(
-                (item) => item.id !== id
+    const removeElement = useCallback(
+        (id) => {
+            if (
+                window.confirm(
+                    intl.formatMessage({ id: "invoice.confirm.delete.item" })
+                )
+            ) {
+                setInvoiceRecipientDetails((invoiceDetail) => ({
+                    ...invoiceRecipientDetails,
+                    items: invoiceDetail.items.filter((item) => item.id !== id),
+                }));
+            }
+        },
+        [invoiceRecipientDetails]
+    );
+    const saveInvoice = useCallback(
+        (e) => {
+            e.preventDefault();
+            // Adding to local storage
+            if (localStorage.getItem("invoice_data") == null) {
+                localStorage.setItem("invoice_data", "[]");
+            }
+            const invoiceData = JSON.parse(
+                localStorage.getItem("invoice_data")
             );
-            setInvoiceRecipientDetails({ ...invoiceRecipientDetails, items });
-        }
+            invoiceData.push(invoiceRecipientDetails);
+            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
+            triggerNotification("Invoice created successfully", {
+                type: "success",
+            });
+            history.push("/invoice");
+        },
+        [invoiceRecipientDetails]
+    );
+
+    const updateQuantity = (id, value) => {
+        const index = invoiceRecipientDetails.items.findIndex(
+            (x) => x.id === id
+        );
+        invoiceRecipientDetails.items[index].quantity = value;
+        setInvoiceRecipientDetails({ ...invoiceRecipientDetails });
     };
 
-    const saveInvoice = (e) => {
-        e.preventDefault();
-        // Adding to local storage
-        if (localStorage.getItem("invoice_data") == null) {
-            localStorage.setItem("invoice_data", "[]");
-        }
-        const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
-        invoiceData.push(invoiceRecipientDetails);
-        localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-        triggerNotification("Invoice created successfully", {
-            type: "success",
-        });
-        history.push("/invoice");
-    };
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -279,7 +294,19 @@ const CreateInvoice = () => {
                                         (item, idx) => (
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
-                                                <td>{item.quantity}</td>
+                                                <td>
+                                                    <input
+                                                        min="1"
+                                                        type="number"
+                                                        value={item.quantity}
+                                                        onChange={(e) =>
+                                                            updateQuantity(
+                                                                item.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </td>
                                                 <td>₹{item.price}</td>
                                                 <td>
                                                     ₹

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
@@ -10,8 +10,9 @@ const ListItems = () => {
         fetchData();
     }, []);
     const { triggerNotification } = useNotification();
+
     // Function to fetch data from local storage
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         let inventoryData = [];
         if (localStorage.getItem("inventory_data")) {
             try {
@@ -26,7 +27,8 @@ const ListItems = () => {
             }
         }
         setTableData(inventoryData);
-    };
+    }, [tableData]);
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
