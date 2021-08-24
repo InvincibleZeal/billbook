@@ -15,10 +15,12 @@ const ListInvoices = () => {
     const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        let invoiceData = [];
         if (localStorage.getItem("invoice_data")) {
             try {
-                invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                setTableData(invoiceData);
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -26,7 +28,6 @@ const ListInvoices = () => {
                 localStorage.removeItem("invoice_data");
             }
         }
-        setTableData(invoiceData);
     }, [tableData]);
 
     // Function to calc total
