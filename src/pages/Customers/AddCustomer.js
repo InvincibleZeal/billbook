@@ -1,13 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
+import { useForm } from "customHooks/useForm";
 
 const AddCustomers = () => {
-    const [data, setData] = useState({
+    const [fields, handleFieldChange] = useForm({
         name: "",
         phone: "",
         email: "",
@@ -26,7 +27,7 @@ const AddCustomers = () => {
         try {
             customerData = JSON.parse(localStorage.getItem("customer_data"));
         } catch (e) {}
-        customerData.push(data);
+        customerData.push(fields);
         localStorage.setItem("customer_data", JSON.stringify(customerData));
         triggerNotification("Customer added successfully", { type: "success" });
         history.push("/");
@@ -35,6 +36,7 @@ const AddCustomers = () => {
     return (
         <Fragment>
             <Navbar opened="customers" />
+            {console.log(fields)}
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -52,13 +54,8 @@ const AddCustomers = () => {
                                     type="text"
                                     name="name"
                                     required
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    value={fields.name}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -73,13 +70,8 @@ const AddCustomers = () => {
                                     pattern="[+0-9]{10,13}"
                                     onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
-                                    value={data.phone}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            phone: e.target.value,
-                                        })
-                                    }
+                                    value={fields.phone}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -90,13 +82,8 @@ const AddCustomers = () => {
                                     type="email"
                                     name="email"
                                     required
-                                    value={data.email}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            email: e.target.value,
-                                        })
-                                    }
+                                    value={fields.email}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
