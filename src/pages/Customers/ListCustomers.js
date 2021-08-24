@@ -12,7 +12,6 @@ const ListCustomers = () => {
     const fetchData = useCallback(() => {
         if (localStorage.getItem("customer_data"))
             setTableData(JSON.parse(localStorage.getItem("customer_data")));
-        return tableData;
     }, [tableData]);
     return (
         <Fragment>

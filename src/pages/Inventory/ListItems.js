@@ -13,7 +13,6 @@ const ListItems = () => {
     const fetchData = useCallback(() => {
         if (localStorage.getItem("inventory_data"))
             setTableData(JSON.parse(localStorage.getItem("inventory_data")));
-        return tableData;
     }, [tableData]);
     return (
         <Fragment>

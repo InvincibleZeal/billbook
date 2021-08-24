@@ -14,7 +14,6 @@ const ListInvoices = () => {
     const fetchData = useCallback(() => {
         if (localStorage.getItem("invoice_data"))
             setTableData(JSON.parse(localStorage.getItem("invoice_data")));
-        return tableData;
     }, [tableData]);
     return (
         <Fragment>
@@ -74,7 +73,7 @@ const ListInvoices = () => {
                                                 (accumulator, currValue) => {
                                                     return (
                                                         accumulator +
-                                                        currValue.amount *
+                                                        currValue.quantity *
                                                             currValue.price
                                                     );
                                                 },
@@ -87,7 +86,7 @@ const ListInvoices = () => {
                                                 (accumulator, currValue) => {
                                                     return (
                                                         accumulator +
-                                                        currValue.amount *
+                                                        currValue.quantity *
                                                             currValue.price
                                                     );
                                                 },

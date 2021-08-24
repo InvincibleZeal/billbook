@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
@@ -32,32 +32,43 @@ const CreateInvoice = () => {
         fetchData();
     }, []);
     // Function to fetch data from local storage
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         if (localStorage.getItem("customer_data"))
             setCustomersInfo(JSON.parse(localStorage.getItem("customer_data")));
         if (localStorage.getItem("inventory_data"))
             setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
-    };
+    }, [customersInfo, itemInfo]);
     // Function to delete items
-    const removeElement = (id) => {
-        if (window.confirm("Are you sure, you eant to delete this item?")) {
-            setInvoiceRecipentDetails((invoiceDetail)=>({ ...invoiceRecipentDetails, items: invoiceDetail.items.filter(item=>item.id !== id) }));
-        }
-    };
-    const saveInvoice = (e) => {
-        e.preventDefault();
-        // Adding to local storage
-        if (localStorage.getItem("invoice_data") == null) {
-            localStorage.setItem("invoice_data", "[]");
-        }
-        const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
-        invoiceData.push(invoiceRecipentDetails);
-        localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-        triggerNotification("Invoice created successfully", {
-            type: "success",
-        });
-        history.push("/invoice");
-    };
+    const removeElement = useCallback(
+        (id) => {
+            if (window.confirm("Are you sure, you want to delete this item?")) {
+                setInvoiceRecipentDetails((invoiceDetail) => ({
+                    ...invoiceRecipentDetails,
+                    items: invoiceDetail.items.filter((item) => item.id !== id),
+                }));
+            }
+        },
+        [invoiceRecipentDetails]
+    );
+    const saveInvoice = useCallback(
+        (e) => {
+            e.preventDefault();
+            // Adding to local storage
+            if (localStorage.getItem("invoice_data") == null) {
+                localStorage.setItem("invoice_data", "[]");
+            }
+            const invoiceData = JSON.parse(
+                localStorage.getItem("invoice_data")
+            );
+            invoiceData.push(invoiceRecipentDetails);
+            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
+            triggerNotification("Invoice created successfully", {
+                type: "success",
+            });
+            history.push("/invoice");
+        },
+        [invoiceRecipentDetails]
+    );
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -246,11 +257,11 @@ const CreateInvoice = () => {
                                         (item, idx) => (
                                             <tr key={idx}>
                                                 <td> {item.name} </td>
-                                                <td>{item.amount}</td>
+                                                <td>{item.quantity}</td>
                                                 <td>₹{item.price}</td>
                                                 <td>
                                                     ₹
-                                                    {item.amount *
+                                                    {item.quantity *
                                                         Number(item.price)}
                                                 </td>
                                                 <td className="table-action">
@@ -318,7 +329,7 @@ const CreateInvoice = () => {
                                                     {item.name}
                                                 </div>
                                                 <div className="summary_quantity">
-                                                    x{item.amount}
+                                                    x{item.quantity}
                                                 </div>
                                                 <div className="summary_ammount">
                                                     ₹{item.price}
@@ -339,7 +350,7 @@ const CreateInvoice = () => {
                                             (accumulator, currValue) => {
                                                 return (
                                                     accumulator +
-                                                    currValue.amount *
+                                                    currValue.quantity *
                                                         currValue.price
                                                 );
                                             },

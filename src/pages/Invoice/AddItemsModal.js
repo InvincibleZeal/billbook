@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
@@ -13,31 +13,35 @@ const AddItemsModal = ({
     invoiceRecipentDetails,
     setInvoiceRecipentDetails,
 }) => {
-    const addItem = (id, name, price) => {
-        const product = { id, name, price };
-        product.amount = 1;
-        if (
-            invoiceRecipentDetails.items.length === 0 ||
-            !invoiceRecipentDetails.items.find((p) => p.id === product.id)
-        ) {
-            invoiceRecipentDetails.items.push(product);
-        } else if (
-            invoiceRecipentDetails.items.find((p) => p.id === product.id)
-        ) {
-            product.amount =
+    const addItem = useCallback(
+        (id, name, price) => {
+            const product = { id, name, price };
+            product.quantity = 1;
+            if (
+                invoiceRecipentDetails.items.length === 0 ||
+                !invoiceRecipentDetails.items.find((p) => p.id === product.id)
+            ) {
+                invoiceRecipentDetails.items.push(product);
+            } else if (
                 invoiceRecipentDetails.items.find((p) => p.id === product.id)
-                    .amount + 1;
-            invoiceRecipentDetails.items.splice(
-                invoiceRecipentDetails.items.findIndex(
-                    (p) => p.id === product.id
-                ),
-                1,
-                product
-            );
-        }
-        setInvoiceRecipentDetails(invoiceRecipentDetails);
-        setModalStatus(false);
-    };
+            ) {
+                product.quantity =
+                    invoiceRecipentDetails.items.find(
+                        (p) => p.id === product.id
+                    ).quantity + 1;
+                invoiceRecipentDetails.items.splice(
+                    invoiceRecipentDetails.items.findIndex(
+                        (p) => p.id === product.id
+                    ),
+                    1,
+                    product
+                );
+            }
+            setInvoiceRecipentDetails(invoiceRecipentDetails);
+            setModalStatus(false);
+        },
+        [invoiceRecipentDetails]
+    );
     return (
         <Modal
             isOpen={modalStatus}
