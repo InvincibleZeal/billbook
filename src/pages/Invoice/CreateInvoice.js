@@ -41,10 +41,7 @@ const CreateInvoice = () => {
     // Function to delete items
     const removeElement = (id) => {
         if (window.confirm("Are you sure, you eant to delete this item?")) {
-            const items = invoiceRecipentDetails.items.filter(
-                (item) => item.id !== id
-            );
-            setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
+            setInvoiceRecipentDetails((invoiceDetail)=>({ ...invoiceRecipentDetails, items: invoiceDetail.items.filter(item=>item.id !== id) }));
         }
     };
     const saveInvoice = (e) => {
