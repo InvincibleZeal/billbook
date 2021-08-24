@@ -97,11 +97,14 @@ const CreateInvoice = () => {
         }
     }, []);
 
-    const updateQuantity = useCallback((id, value) => {
-        const index = fields.items.findIndex((x) => x.id === id);
-        fields.items[index].quantity = Number(value);
-        setState("items", fields.items);
-    }, []);
+    const updateQuantity = useCallback(
+        (id, value) => {
+            const index = fields.items.findIndex((x) => x.id === id);
+            fields.items[index].quantity = Number(value);
+            setState("items", fields.items);
+        },
+        [fields]
+    );
 
     return (
         <Fragment>
