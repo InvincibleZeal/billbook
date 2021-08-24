@@ -81,47 +81,12 @@ Object.keys(methods).forEach((method) => {
         const formatted = formatPayload(url, method, ...args);
         let error, response;
         try {
-            response = await fetch(...formatted);
+            response = await fetch(...formatted).then((res) => res.json());
         } catch (e) {
             error = e;
         }
         return { error, response };
     };
 });
-
-axios.get = (url, params = {}, config = {}) => {
-    const formatted = formatPayload(url, methods.GET, { ...config, params });
-    return fetch(...formatted);
-};
-
-axios.post = (url, data = {}, config = {}) => {
-    const formatted = formatPayload(url, methods.POST, { ...config, data });
-    return fetch(...formatted);
-};
-
-axios.delete = (url, config = {}) => {
-    const formatted = formatPayload(url, methods.DELETE, { ...config });
-    return fetch(...formatted);
-};
-
-axios.put = (url, data = {}, config = {}) => {
-    const formatted = formatPayload(url, methods.PUT, { ...config, data });
-    return fetch(...formatted);
-};
-
-axios.patch = (url, data, config = {}) => {
-    const formatted = formatPayload(url, methods.PATCH, { ...config, data });
-    return fetch(...formatted);
-};
-
-axios.head = (url, config = {}) => {
-    const formatted = formatPayload(url, methods.HEAD, { ...config });
-    return fetch(...formatted);
-};
-
-axios.options = (url, config = {}) => {
-    const formatted = formatPayload(url, methods.OPTIONS, { ...config });
-    return fetch(...formatted);
-};
 
 export default axios;
