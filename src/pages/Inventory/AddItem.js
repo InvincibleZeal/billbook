@@ -1,12 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
+import { useForm } from "customHooks/useForm";
 
 const AddItem = () => {
-    const [data, setData] = useState({
+    const [fields, handleFieldChange] = useForm({
         name: "",
         price: "",
         description: "",
@@ -26,11 +27,16 @@ const AddItem = () => {
         let inventoryData = [];
         try {
             inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
-        } catch (e) {}
-        inventoryData.push(data);
-        localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
-        triggerNotification("Item added successfully", { type: "success" });
-        history.push("/inventory");
+            inventoryData.push(fields);
+            localStorage.setItem(
+                "inventory_data",
+                JSON.stringify(inventoryData)
+            );
+            triggerNotification("Item added successfully", { type: "success" });
+            history.push("/inventory");
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
@@ -55,13 +61,8 @@ const AddItem = () => {
                                     type="text"
                                     name="name"
                                     required
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    value={fields.name}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -75,13 +76,8 @@ const AddItem = () => {
                                     required
                                     onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
-                                    value={data.price}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            price: e.target.value,
-                                        })
-                                    }
+                                    value={fields.price}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -93,13 +89,8 @@ const AddItem = () => {
                                     rows="4"
                                     name="description"
                                     required="true"
-                                    value={data.description}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            description: e.target.value,
-                                        })
-                                    }
+                                    value={fields.description}
+                                    onChange={handleFieldChange}
                                 ></textarea>
                             </div>
                             <div className="form-group m-5 justify-content-center">

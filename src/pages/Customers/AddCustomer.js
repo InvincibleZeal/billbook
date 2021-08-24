@@ -26,11 +26,15 @@ const AddCustomers = () => {
         let customerData = [];
         try {
             customerData = JSON.parse(localStorage.getItem("customer_data"));
-        } catch (e) {}
-        customerData.push(fields);
-        localStorage.setItem("customer_data", JSON.stringify(customerData));
-        triggerNotification("Customer added successfully", { type: "success" });
-        history.push("/");
+            customerData.push(fields);
+            localStorage.setItem("customer_data", JSON.stringify(customerData));
+            triggerNotification("Customer added successfully", {
+                type: "success",
+            });
+            history.push("/");
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
