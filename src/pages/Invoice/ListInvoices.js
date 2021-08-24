@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
@@ -11,10 +11,11 @@ const ListInvoices = () => {
         fetchData();
     }, []);
     // Function to fetch data from local storage
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         if (localStorage.getItem("invoice_data"))
             setTableData(JSON.parse(localStorage.getItem("invoice_data")));
-    };
+        return tableData;
+    }, [tableData]);
     return (
         <Fragment>
             <Navbar opened="invoice" />
