@@ -4,7 +4,8 @@ import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
-
+import Button from "components/Button";
+import Input from "components/Input";
 const AddItem = () => {
     const [data, setData] = useState({
         name: "",
@@ -51,8 +52,8 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="customer.name"></FormattedMessage>
                                 </label>
-                                <input type="text" name="name" required />
-                                <input
+
+                                <Input
                                     type="text"
                                     name="name"
                                     required
@@ -70,7 +71,7 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.price"></FormattedMessage>
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="price"
                                     required
@@ -90,10 +91,11 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.description"></FormattedMessage>
                                 </label>
-                                <textarea
+                                <Input
+                                    type="textarea"
                                     rows="4"
                                     name="description"
-                                    required="true"
+                                    required={true}
                                     value={data.description}
                                     onChange={(e) =>
                                         setData({
@@ -101,13 +103,16 @@ const AddItem = () => {
                                             description: e.target.value,
                                         })
                                     }
-                                ></textarea>
+                                ></Input>
                             </div>
                             <div className="form-group m-5 justify-content-center">
-                                <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp;{" "}
+                                <Button
+                                    className="btn"
+                                    type="submit"
+                                    icon="fa fa-save"
+                                >
                                     <FormattedMessage id="item.save.button"></FormattedMessage>
-                                </button>
+                                </Button>
                             </div>
                         </form>
                     </div>
