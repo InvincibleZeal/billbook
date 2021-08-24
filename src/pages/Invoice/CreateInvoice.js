@@ -76,26 +76,32 @@ const CreateInvoice = () => {
         },
         [fields]
     );
-    const saveInvoice = useCallback((e) => {
-        e.preventDefault();
-        // Adding to local storage
-        try {
-            if (localStorage.getItem("invoice_data") == null) {
-                localStorage.setItem("invoice_data", "[]");
+    const saveInvoice = useCallback(
+        (e) => {
+            e.preventDefault();
+            // Adding to local storage
+            try {
+                if (localStorage.getItem("invoice_data") == null) {
+                    localStorage.setItem("invoice_data", "[]");
+                }
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                invoiceData.push(fields);
+                localStorage.setItem(
+                    "invoice_data",
+                    JSON.stringify(invoiceData)
+                );
+                triggerNotification("Invoice created successfully", {
+                    type: "success",
+                });
+                history.push("/invoice");
+            } catch (e) {
+                console.error(e);
             }
-            const invoiceData = JSON.parse(
-                localStorage.getItem("invoice_data")
-            );
-            invoiceData.push(fields);
-            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-            triggerNotification("Invoice created successfully", {
-                type: "success",
-            });
-            history.push("/invoice");
-        } catch (e) {
-            console.error(e);
-        }
-    }, []);
+        },
+        [fields]
+    );
 
     const updateQuantity = useCallback(
         (id, value) => {
