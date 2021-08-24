@@ -34,7 +34,7 @@ const AddCustomers = () => {
         } catch (e) {
             console.error(e);
         }
-    }, []);
+    }, [fields]);
 
     return (
         <Fragment>
