@@ -38,12 +38,12 @@ const CreateInvoice = () => {
 
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        let customerData = [];
         if (localStorage.getItem("customer_data")) {
             try {
-                customerData = JSON.parse(
+                const customerData = JSON.parse(
                     localStorage.getItem("customer_data")
                 );
+                setCustomersInfo(customerData);
             } catch (e) {
                 triggerNotification("Failed parsing customer data", {
                     type: "error",
@@ -51,13 +51,12 @@ const CreateInvoice = () => {
                 localStorage.removeItem("customer_data");
             }
         }
-        setCustomersInfo(customerData);
-        let inventoryData = [];
         if (localStorage.getItem("inventory_data")) {
             try {
-                inventoryData = JSON.parse(
+                const inventoryData = JSON.parse(
                     localStorage.getItem("inventory_data")
                 );
+                setItemInfo(inventoryData);
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -65,8 +64,8 @@ const CreateInvoice = () => {
                 localStorage.removeItem("inventory_data");
             }
         }
-        setItemInfo(inventoryData);
     }, [customersInfo, itemInfo]);
+
     // Function to delete items
     const removeElement = useCallback(
         (id) => {
@@ -87,18 +86,26 @@ const CreateInvoice = () => {
         (e) => {
             e.preventDefault();
             // Adding to local storage
-            if (localStorage.getItem("invoice_data") == null) {
-                localStorage.setItem("invoice_data", "[]");
+            try {
+                if (localStorage.getItem("invoice_data") == null) {
+                    localStorage.setItem("invoice_data", "[]");
+                }
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                const finalData = { ...fields, ...invoiceRecipientDetails };
+                invoiceData.push(finalData);
+                localStorage.setItem(
+                    "invoice_data",
+                    JSON.stringify(invoiceData)
+                );
+                triggerNotification("Invoice created successfully", {
+                    type: "success",
+                });
+                history.push("/invoice");
+            } catch (e) {
+                console.error(e);
             }
-            const invoiceData = JSON.parse(
-                localStorage.getItem("invoice_data")
-            );
-            invoiceData.push(invoiceRecipientDetails);
-            localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-            triggerNotification("Invoice created successfully", {
-                type: "success",
-            });
-            history.push("/invoice");
         },
         [invoiceRecipientDetails]
     );

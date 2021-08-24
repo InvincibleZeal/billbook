@@ -31,9 +31,12 @@ const ListInvoices = () => {
 
     // Function to calc total
     const calcAmount = (array) => {
-        return array.reduce((accumulator, currValue) => {
-            return accumulator + currValue.quantity * currValue.price;
-        }, 0);
+        if (array) {
+            return array.reduce((accumulator, currValue) => {
+                return accumulator + currValue.quantity * currValue.price;
+            }, 0);
+        }
+        return 0;
     };
 
     return (
@@ -80,9 +83,9 @@ const ListInvoices = () => {
                             <tbody>
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
-                                        <td>{data.issueDate}</td>
-                                        <td>{data.name}</td>
-                                        <td>{data.invoiceNumber}</td>
+                                        <td>{data.issueDate || "NA"}</td>
+                                        <td>{data.name || "NA"}</td>
+                                        <td>{data.invoiceNumber || "NA"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
                                                 PAID
