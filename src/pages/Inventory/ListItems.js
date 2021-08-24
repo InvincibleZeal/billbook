@@ -40,8 +40,7 @@ const ListItems = () => {
                         <FormattedMessage id="title.items"></FormattedMessage>{" "}
                     </span>
                     <Link to="/inventory/add">
-                        <Button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                        <Button icon="plus">
                             <FormattedMessage id="item.add.button"></FormattedMessage>{" "}
                         </Button>
                     </Link>

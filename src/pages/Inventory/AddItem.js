@@ -91,22 +91,13 @@ const AddItem = () => {
                                     type="textarea"
                                     rows="4"
                                     name="description"
-                                    required={true}
-                                    value={data.description}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            description: e.target.value,
-                                        })
-                                    }
+                                    required
+                                    value={fields.description}
+                                    onChange={handleFieldChange}
                                 ></Input>
                             </div>
                             <div className="form-group m-5 justify-content-center">
-                                <Button
-                                    className="btn"
-                                    type="submit"
-                                    icon="fa fa-save"
-                                >
+                                <Button type="submit" icon="save">
                                     <FormattedMessage id="item.save.button"></FormattedMessage>
                                 </Button>
                             </div>

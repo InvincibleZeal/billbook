@@ -2,11 +2,11 @@ import React from "react";
 import Proptypes from "prop-types";
 
 function Button(props) {
-    const { children, icon, ...rest } = props;
+    const { type = "default", children, icon, ...rest } = props;
 
     return (
-        <button {...rest}>
-            {icon && <i className={icon}></i>}&nbsp;
+        <button type={type} className="btn" {...rest}>
+            {icon && <i className={`fa fa-${icon}`}></i>}&nbsp;
             {children}
         </button>
     );
@@ -20,4 +20,5 @@ Button.propTypes = {
     icon: Proptypes.string,
     label: Proptypes.string,
 };
+
 export default Button;
