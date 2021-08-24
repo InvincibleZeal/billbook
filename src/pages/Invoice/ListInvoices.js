@@ -15,6 +15,13 @@ const ListInvoices = () => {
         if (localStorage.getItem("invoice_data"))
             setTableData(JSON.parse(localStorage.getItem("invoice_data")));
     }, [tableData]);
+
+    // Function to calc total
+    const calcAmount = (array) => {
+        return array((accumulator, currValue) => {
+            return accumulator + currValue.quantity * currValue.price;
+        }, 0);
+    };
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -67,32 +74,8 @@ const ListInvoices = () => {
                                                 PAID
                                             </span>
                                         </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.quantity *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.quantity *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
+                                        <td>₹{calcAmount(data.items)}</td>
+                                        <td>₹{calcAmount(data.items)}</td>
                                     </tr>
                                 ))}
                             </tbody>
