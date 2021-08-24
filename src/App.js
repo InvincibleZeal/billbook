@@ -5,13 +5,15 @@ import {
     Switch,
     Redirect,
 } from "react-router-dom";
+
 import { ListCustomers, AddCustomer } from "pages/Customers";
 import { ListItems, AddItem } from "pages/Inventory";
 import { ListInvoices, CreateInvoice } from "pages/Invoice";
+import { NotificationProvider } from "notification";
 
 function App() {
     return (
-        <>
+        <NotificationProvider>
             <Router>
                 <Switch>
                     {/* Customer Module */}
@@ -41,7 +43,7 @@ function App() {
                     <Route component={ListCustomers} />
                 </Switch>
             </Router>
-        </>
+        </NotificationProvider>
     );
 }
 

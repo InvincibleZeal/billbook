@@ -1,11 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
+import Button from "components/Button";
+import Input from "components/Input";
+import { useForm } from "customHooks/useForm";
 
 const AddItem = () => {
-    const [data, setData] = useState({
+    const [fields, handleFieldChange] = useForm({
         name: "",
         price: "",
         description: "",
@@ -13,19 +17,29 @@ const AddItem = () => {
         id: Math.floor(Math.random() * 101 + 1),
     });
     const history = useHistory();
-    const AddItem = (e) => {
-        e.preventDefault();
+    const { triggerNotification } = useNotification();
+
+    const addItem = useCallback(() => {
         // Adding to local storage
         if (localStorage.getItem("inventory_data") == null) {
             localStorage.setItem("inventory_data", "[]");
         }
-        const inventoryData = JSON.parse(
-            localStorage.getItem("inventory_data")
-        );
-        inventoryData.push(data);
-        localStorage.setItem("inventory_data", JSON.stringify(inventoryData));
-        history.push("/inventory");
-    };
+
+        let inventoryData = [];
+        try {
+            inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
+            inventoryData.push(fields);
+            localStorage.setItem(
+                "inventory_data",
+                JSON.stringify(inventoryData)
+            );
+            triggerNotification("Item added successfully", { type: "success" });
+            history.push("/inventory");
+        } catch (e) {
+            console.error(e);
+        }
+    }, [fields]);
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -38,23 +52,19 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form onSubmit={(e) => AddItem(e)}>
+                        <form onSubmit={addItem}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
                                     <FormattedMessage id="customer.name"></FormattedMessage>
                                 </label>
-                                <input
+
+                                <Input
                                     type="text"
                                     name="name"
                                     required
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    value={fields.name}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -62,19 +72,14 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.price"></FormattedMessage>
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="price"
                                     required
                                     onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
-                                    value={data.price}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            price: e.target.value,
-                                        })
-                                    }
+                                    value={fields.price}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -82,27 +87,19 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.description"></FormattedMessage>
                                 </label>
-                                <textarea
+                                <Input
+                                    type="textarea"
                                     rows="4"
                                     name="description"
-                                    required="true"
-                                    value={data.description}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            description: e.target.value,
-                                        })
-                                    }
-                                ></textarea>
+                                    required
+                                    value={fields.description}
+                                    onChange={handleFieldChange}
+                                ></Input>
                             </div>
-                            <div
-                                className="form-group m-5"
-                                style={{ justifyContent: "center" }}
-                            >
-                                <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp;{" "}
-                                    <FormattedMessage id="item.saveButton"></FormattedMessage>
-                                </button>
+                            <div className="form-group m-5 justify-content-center">
+                                <Button type="submit" icon="save">
+                                    <FormattedMessage id="item.save.button"></FormattedMessage>
+                                </Button>
                             </div>
                         </form>
                     </div>

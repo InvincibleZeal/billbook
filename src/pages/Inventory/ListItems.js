@@ -1,19 +1,35 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
+import { useNotification } from "notification";
+import Button from "components/Button";
 
 const ListItems = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+    const { triggerNotification } = useNotification();
+
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("inventory_data"))
-            setTableData(JSON.parse(localStorage.getItem("inventory_data")));
-    };
+    const fetchData = useCallback(() => {
+        if (localStorage.getItem("inventory_data")) {
+            try {
+                const inventoryData = JSON.parse(
+                    localStorage.getItem("inventory_data")
+                );
+                setTableData(inventoryData);
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("inventory_data");
+            }
+        }
+    }, []);
+
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -24,10 +40,9 @@ const ListItems = () => {
                         <FormattedMessage id="title.items"></FormattedMessage>{" "}
                     </span>
                     <Link to="/inventory/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="item.addButton"></FormattedMessage>{" "}
-                        </button>
+                        <Button icon="plus">
+                            <FormattedMessage id="item.add.button"></FormattedMessage>{" "}
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (

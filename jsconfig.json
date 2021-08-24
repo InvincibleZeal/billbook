@@ -1,6 +1,15 @@
 {
+<<<<<<< HEAD
     "compilerOptions": {
       "baseUrl": "src"
     },
     "include": ["src"]
   }
+=======
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    "include": ["src"]
+}
+>>>>>>> feat/components

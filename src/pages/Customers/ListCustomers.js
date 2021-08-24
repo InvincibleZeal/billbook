@@ -1,18 +1,34 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
+import { useNotification } from "notification";
+import Button from "components/Button";
+
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+    const { triggerNotification } = useNotification();
+
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("customer_data"))
-            setTableData(JSON.parse(localStorage.getItem("customer_data")));
-    };
+    const fetchData = useCallback(() => {
+        if (localStorage.getItem("customer_data")) {
+            try {
+                const customerData = JSON.parse(
+                    localStorage.getItem("customer_data")
+                );
+                setTableData(customerData);
+            } catch (e) {
+                triggerNotification("Failed parsing customer data", {
+                    type: "error",
+                });
+                localStorage.removeItem("customer_data");
+            }
+        }
+    }, []);
 
     return (
         <Fragment>
@@ -24,10 +40,9 @@ const ListCustomers = () => {
                         <FormattedMessage id="title.customer"></FormattedMessage>
                     </span>
                     <Link to="/customers/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;
-                            <FormattedMessage id="customer.newButton"></FormattedMessage>
-                        </button>
+                        <Button icon="plus">
+                            <FormattedMessage id="customer.new.button"></FormattedMessage>
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (
@@ -37,7 +52,7 @@ const ListCustomers = () => {
                                 <tr>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.newButton"></FormattedMessage>
+                                        <FormattedMessage id="customer.new.button"></FormattedMessage>
                                     </th>
                                     <th>
                                         {" "}
@@ -49,7 +64,7 @@ const ListCustomers = () => {
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.createdOn"></FormattedMessage>
+                                        <FormattedMessage id="customer.created.on"></FormattedMessage>
                                     </th>
                                 </tr>
                             </thead>

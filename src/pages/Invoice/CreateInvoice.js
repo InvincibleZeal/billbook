@@ -1,65 +1,122 @@
-/* eslint-disable no-unused-vars */
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
-import ChangeCustomerModal from "./ChangeCustomerModal";
-import AddItemModal from "./AddItemsModal";
-import { FormattedMessage } from "react-intl";
+import InvoiceModal from "./InvoiceModal";
+import { useIntl, FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
+import { useForm } from "customHooks/useForm";
 
 const CreateInvoice = () => {
-    const [itemModal, setItemModal] = useState(false);
-    const [customerDetailsModal, setCustomersDetailsModal] = useState(false);
+    const [modalStatus, setModalStatus] = useState(false);
     const [customersInfo, setCustomersInfo] = useState([]);
     const [itemInfo, setItemInfo] = useState([]);
-    const [invoiceRecipentDetails, setInvoiceRecipentDetails] = useState({
-        name: "",
-        phone: "",
-        email: "",
+    const [fields, handleFieldChange, setState] = useForm({
         issueDate: "",
         dueDate: "",
         invoiceNumber: "",
         referenceNumber: "",
-        items: [],
         notes: "",
+        customers: [],
+        items: [],
     });
+    const intl = useIntl();
     const history = useHistory();
+    const [modalType, setModalType] = useState("customer");
+    const { triggerNotification } = useNotification();
+
     useEffect(() => {
         fetchData();
     }, []);
+
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("customer_data"))
-            setCustomersInfo(JSON.parse(localStorage.getItem("customer_data")));
-        if (localStorage.getItem("inventory_data"))
-            setItemInfo(JSON.parse(localStorage.getItem("inventory_data")));
-    };
+    const fetchData = useCallback(() => {
+        if (localStorage.getItem("customer_data")) {
+            try {
+                const customerData = JSON.parse(
+                    localStorage.getItem("customer_data")
+                );
+                setCustomersInfo(customerData);
+            } catch (e) {
+                triggerNotification("Failed parsing customer data", {
+                    type: "error",
+                });
+                localStorage.removeItem("customer_data");
+            }
+        }
+        if (localStorage.getItem("inventory_data")) {
+            try {
+                const inventoryData = JSON.parse(
+                    localStorage.getItem("inventory_data")
+                );
+                setItemInfo(inventoryData);
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("inventory_data");
+            }
+        }
+    }, [customersInfo, itemInfo]);
+
     // Function to delete items
-    const removeElement = (id) => {
-        if (window.confirm("Are you sure, you eant to delete this item?")) {
-            const items = invoiceRecipentDetails.items.filter(
-                (item) => item.id !== id
-            );
-            setInvoiceRecipentDetails({ ...invoiceRecipentDetails, items });
-        }
-    };
-    const SaveInvoice = (e) => {
-        e.preventDefault();
-        // Adding to local storage
-        if (localStorage.getItem("invoice_data") == null) {
-            localStorage.setItem("invoice_data", "[]");
-        }
-        const invoiceData = JSON.parse(localStorage.getItem("invoice_data"));
-        invoiceData.push(invoiceRecipentDetails);
-        localStorage.setItem("invoice_data", JSON.stringify(invoiceData));
-        history.push("/invoice");
-    };
+    const removeElement = useCallback(
+        (id) => {
+            if (
+                window.confirm(
+                    intl.formatMessage({ id: "invoice.confirm.delete.item" })
+                )
+            ) {
+                setState(
+                    "items",
+                    fields.items.filter((item) => item.id !== id)
+                );
+            }
+        },
+        [fields]
+    );
+    const saveInvoice = useCallback(
+        (e) => {
+            e.preventDefault();
+            // Adding to local storage
+            try {
+                if (localStorage.getItem("invoice_data") == null) {
+                    localStorage.setItem("invoice_data", "[]");
+                }
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                invoiceData.push(fields);
+                localStorage.setItem(
+                    "invoice_data",
+                    JSON.stringify(invoiceData)
+                );
+                triggerNotification("Invoice created successfully", {
+                    type: "success",
+                });
+                history.push("/invoice");
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        [fields]
+    );
+
+    const updateQuantity = useCallback(
+        (id, value) => {
+            const index = fields.items.findIndex((x) => x.id === id);
+            fields.items[index].quantity = Number(value);
+            setState("items", fields.items);
+        },
+        [fields]
+    );
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
-                <form onSubmit={(e) => SaveInvoice(e)}>
+                <form onSubmit={saveInvoice}>
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
@@ -67,42 +124,43 @@ const CreateInvoice = () => {
                         </span>
                         <button className="btn" type="submit">
                             <i className="fa fa-save"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.saveButton"></FormattedMessage>
+                            <FormattedMessage id="invoice.save.button"></FormattedMessage>
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
-                            <h4 className="billto text-muted m-0 mb-3">
-                                <FormattedMessage id="invoice.billTo"></FormattedMessage>{" "}
+                            <h4 className="bill-to text-muted m-0 mb-3">
+                                <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
                             </h4>
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
                                     <Fragment>
-                                        {invoiceRecipentDetails.name !== "" ? (
+                                        {fields.customers.length > 0 ? (
                                             <Fragment>
                                                 <div className="billing_details pr-3">
                                                     <div>
-                                                        {invoiceRecipentDetails.name ||
-                                                            customersInfo[0]
-                                                                .name}
+                                                        {
+                                                            fields.customers[0]
+                                                                .name
+                                                        }
                                                     </div>
                                                     <div>
-                                                        {invoiceRecipentDetails.phone ||
-                                                            customersInfo[0]
-                                                                .phone}
+                                                        {
+                                                            fields.customers[0]
+                                                                .phone
+                                                        }
                                                     </div>
                                                     <div>
-                                                        {invoiceRecipentDetails.email ||
-                                                            customersInfo[0]
-                                                                .email}
+                                                        {
+                                                            fields.customers[0]
+                                                                .email
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div
                                                     className="btn-link"
                                                     onClick={() =>
-                                                        setCustomersDetailsModal(
-                                                            true
-                                                        )
+                                                        setModalStatus(true)
                                                     }
                                                 >
                                                     <FormattedMessage id="invoice.change"></FormattedMessage>
@@ -111,13 +169,12 @@ const CreateInvoice = () => {
                                         ) : (
                                             <div
                                                 className="btn-link"
-                                                onClick={() =>
-                                                    setCustomersDetailsModal(
-                                                        true
-                                                    )
-                                                }
+                                                onClick={() => {
+                                                    setModalStatus(true);
+                                                    setModalType("customer");
+                                                }}
                                             >
-                                                <FormattedMessage id="invoice.addCustomerDetails"></FormattedMessage>
+                                                <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                             </div>
                                         )}
                                     </Fragment>
@@ -126,7 +183,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.addCustomerDetails"></FormattedMessage>
+                                            <FormattedMessage id="invoice.select.customer"></FormattedMessage>
                                         </p>{" "}
                                     </Link>
                                 )}
@@ -137,39 +194,29 @@ const CreateInvoice = () => {
                                 <div className="input-group px-2">
                                     <label htmlFor="issueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.issuedAt"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
                                         type="date"
                                         name="issueDate"
+                                        value={fields.issueDate}
+                                        onChange={handleFieldChange}
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
-                                                issueDate: e.target.value,
-                                            })
-                                        }
                                     />
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="dueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.dueDate"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
                                     </label>
-                                    <i className="fa fa-calendar-o"></i>
                                     <input
                                         className="input-sm"
                                         type="date"
                                         name="dueDate"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
-                                                dueDate: e.target.value,
-                                            })
-                                        }
+                                        value={fields.dueDate}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -184,17 +231,13 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="invoiceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
-                                                invoiceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.invoiceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="referenceNumber">
-                                        <FormattedMessage id="invoice.referenceNumber"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.reference.number"></FormattedMessage>{" "}
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -202,12 +245,8 @@ const CreateInvoice = () => {
                                         type="text"
                                         name="referenceNumber"
                                         required
-                                        onChange={(e) =>
-                                            setInvoiceRecipentDetails({
-                                                ...invoiceRecipentDetails,
-                                                referenceNumber: e.target.value,
-                                            })
-                                        }
+                                        value={fields.referenceNumber}
+                                        onChange={handleFieldChange}
                                     />
                                 </div>
                             </div>
@@ -237,48 +276,59 @@ const CreateInvoice = () => {
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
-                            {invoiceRecipentDetails.items.length > 0 && (
+                            {fields.items.length > 0 && (
                                 <tbody>
-                                    {invoiceRecipentDetails.items.map(
-                                        (item, idx) => (
-                                            <tr key={idx}>
-                                                <td> {item.name} </td>
-                                                <td>{item.amount}</td>
-                                                <td>₹{item.price}</td>
-                                                <td>
-                                                    ₹
-                                                    {item.amount *
-                                                        Number(item.price)}
-                                                </td>
-                                                <td className="table-action">
-                                                    <span
-                                                        onClick={() =>
-                                                            removeElement(
-                                                                item.id
-                                                            )
-                                                        }
-                                                        className="btn-link"
-                                                    >
-                                                        <i
-                                                            className="fa fa-trash"
-                                                            aria-hidden="true"
-                                                        ></i>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
+                                    {fields.items.map((item, idx) => (
+                                        <tr key={idx}>
+                                            <td> {item.name} </td>
+                                            <td>
+                                                <input
+                                                    min="1"
+                                                    type="number"
+                                                    value={item.quantity}
+                                                    onChange={(e) =>
+                                                        updateQuantity(
+                                                            item.id,
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </td>
+                                            <td>₹{item.price}</td>
+                                            <td>
+                                                ₹
+                                                {item.quantity *
+                                                    Number(item.price)}
+                                            </td>
+                                            <td className="table-action">
+                                                <span
+                                                    onClick={() =>
+                                                        removeElement(item.id)
+                                                    }
+                                                    className="btn-link"
+                                                >
+                                                    <i
+                                                        className="fa fa-trash"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             )}
                         </table>
 
-                        <div className=" invoice_additem d-flex align-items-center justify-content-center ">
+                        <div className=" invoice_add-item d-flex align-items-center justify-content-center ">
                             <span
                                 className="btn-link p-4"
-                                onClick={() => setItemModal(true)}
+                                onClick={() => {
+                                    setModalStatus(true);
+                                    setModalType("items");
+                                }}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                <FormattedMessage id="invoice.addAnItem"></FormattedMessage>
+                                <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
                             </span>
                         </div>
                     </div>
@@ -293,20 +343,16 @@ const CreateInvoice = () => {
                                 <textarea
                                     className="input-sm invoice-notes"
                                     name="notes"
-                                    onChange={(e) =>
-                                        setInvoiceRecipentDetails({
-                                            ...invoiceRecipentDetails,
-                                            notes: e.target.value,
-                                        })
-                                    }
+                                    value={fields.notes}
+                                    onChange={handleFieldChange}
                                 ></textarea>
                             </div>
                         </div>
                         <div className="summary mx-5">
                             <div className="card-bordered p-3">
-                                <div className="summary_items pb-4">
-                                    {invoiceRecipentDetails.items.map(
-                                        (item, idx) => (
+                                {fields.items.length ? (
+                                    <div className="summary_items pb-4">
+                                        {fields.items.map((item, idx) => (
                                             <div
                                                 className="summary_item"
                                                 key={idx}
@@ -315,28 +361,28 @@ const CreateInvoice = () => {
                                                     {item.name}
                                                 </div>
                                                 <div className="summary_quantity">
-                                                    x{item.amount}
+                                                    x{item.quantity}
                                                 </div>
-                                                <div className="summary_ammount">
+                                                <div className="summary_amount">
                                                     ₹{item.price}
                                                 </div>
                                             </div>
-                                        )
-                                    )}
-                                </div>
+                                        ))}
+                                    </div>
+                                ) : null}
                                 <div className="summary_total d-flex mt-2">
                                     <div>
                                         {" "}
-                                        <FormattedMessage id="invoice.totalAmount"></FormattedMessage>
+                                        <FormattedMessage id="invoice.total.amount"></FormattedMessage>
                                         :
                                     </div>
                                     <div className="primary">
                                         ₹
-                                        {invoiceRecipentDetails.items.reduce(
+                                        {fields.items.reduce(
                                             (accumulator, currValue) => {
                                                 return (
                                                     accumulator +
-                                                    currValue.amount *
+                                                    currValue.quantity *
                                                         currValue.price
                                                 );
                                             },
@@ -349,19 +395,14 @@ const CreateInvoice = () => {
                     </div>
                 </form>
             </div>
-            <ChangeCustomerModal
-                modalStatus={customerDetailsModal}
-                setModalStatus={setCustomersDetailsModal}
+            <InvoiceModal
+                modalStatus={modalStatus}
+                setModalStatus={setModalStatus}
                 customersInfo={customersInfo}
-                invoiceRecipentDetails={invoiceRecipentDetails}
-                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
-            />
-            <AddItemModal
-                modalStatus={itemModal}
-                setModalStatus={setItemModal}
                 itemInfo={itemInfo}
-                invoiceRecipentDetails={invoiceRecipentDetails}
-                setInvoiceRecipentDetails={setInvoiceRecipentDetails}
+                type={modalType}
+                setState={setState}
+                fields={fields}
             />
         </Fragment>
     );

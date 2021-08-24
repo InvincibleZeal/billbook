@@ -1,20 +1,45 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
+import { useNotification } from "notification";
 
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         fetchData();
     }, []);
+
+    const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
-    const fetchData = () => {
-        if (localStorage.getItem("invoice_data"))
-            setTableData(JSON.parse(localStorage.getItem("invoice_data")));
+    const fetchData = useCallback(() => {
+        if (localStorage.getItem("invoice_data")) {
+            try {
+                const invoiceData = JSON.parse(
+                    localStorage.getItem("invoice_data")
+                );
+                setTableData(invoiceData);
+            } catch (e) {
+                triggerNotification("Failed parsing inventory data", {
+                    type: "error",
+                });
+                localStorage.removeItem("invoice_data");
+            }
+        }
+    }, [tableData]);
+
+    // Function to calc total
+    const calcAmount = (array) => {
+        if (array) {
+            return array.reduce((accumulator, currValue) => {
+                return accumulator + currValue.quantity * currValue.price;
+            }, 0);
+        }
+        return 0;
     };
+
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -27,7 +52,7 @@ const ListInvoices = () => {
                     <Link to="/invoice/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.newButton"></FormattedMessage>
+                            <FormattedMessage id="invoice.new.button"></FormattedMessage>
                         </button>
                     </Link>
                 </div>
@@ -46,53 +71,31 @@ const ListInvoices = () => {
                                         <FormattedMessage id="invoice.number"></FormattedMessage>
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.paidStatus"></FormattedMessage>
+                                        <FormattedMessage id="invoice.paid.status"></FormattedMessage>
                                     </th>
                                     <th>
                                         <FormattedMessage id="invoice.amount"></FormattedMessage>
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amountDue"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amount.due"></FormattedMessage>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
-                                        <td>{data.issueDate}</td>
-                                        <td>{data.name}</td>
-                                        <td>{data.invoiceNumber}</td>
+                                        <td>{data.issueDate || "NA"}</td>
+                                        <td>
+                                            {data.customers[0].name || "NA"}
+                                        </td>
+                                        <td>{data.invoiceNumber || "NA"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
                                                 PAID
                                             </span>
                                         </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.amount *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
-                                        <td>
-                                            ₹
-                                            {data.items.reduce(
-                                                (accumulator, currValue) => {
-                                                    return (
-                                                        accumulator +
-                                                        currValue.amount *
-                                                            currValue.price
-                                                    );
-                                                },
-                                                0
-                                            )}
-                                        </td>
+                                        <td>₹{calcAmount(data.items)}</td>
+                                        <td>₹{calcAmount(data.items)}</td>
                                     </tr>
                                 ))}
                             </tbody>

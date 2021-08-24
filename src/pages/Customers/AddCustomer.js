@@ -1,28 +1,43 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback } from "react";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
+import { useNotification } from "notification";
+import Button from "components/Button";
+import Input from "components/Input";
+import { useForm } from "customHooks/useForm";
+
 const AddCustomers = () => {
-    const [data, setData] = useState({
+    const [fields, handleFieldChange] = useForm({
         name: "",
         phone: "",
         email: "",
         date: new Date(),
     });
     const history = useHistory();
-    const AddCustomer = (e) => {
-        e.preventDefault();
+    const { triggerNotification } = useNotification();
+
+    const addCustomer = useCallback(() => {
         // Adding to local storage
         if (localStorage.getItem("customer_data") == null) {
             localStorage.setItem("customer_data", "[]");
         }
-        const customerData = JSON.parse(localStorage.getItem("customer_data"));
-        customerData.push(data);
-        localStorage.setItem("customer_data", JSON.stringify(customerData));
-        history.push("/");
-    };
+        let customerData = [];
+        try {
+            customerData = JSON.parse(localStorage.getItem("customer_data"));
+            customerData.push(fields);
+            localStorage.setItem("customer_data", JSON.stringify(customerData));
+            triggerNotification("Customer added successfully", {
+                type: "success",
+            });
+            history.push("/");
+        } catch (e) {
+            console.error(e);
+        }
+    }, [fields]);
+
     return (
         <Fragment>
             <Navbar opened="customers" />
@@ -33,23 +48,18 @@ const AddCustomers = () => {
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form onSubmit={(e) => AddCustomer(e)}>
+                    <form onSubmit={addCustomer}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.name"></FormattedMessage>
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="name"
                                     required
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    value={fields.name}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
@@ -57,47 +67,33 @@ const AddCustomers = () => {
                                     {" "}
                                     <FormattedMessage id="customer.phone"></FormattedMessage>
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="phone"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    onInvalid="this.setCustomValidity('Enter atleast 10 characters. Use only numbers')"
+                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
-                                    value={data.phone}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            phone: e.target.value,
-                                        })
-                                    }
+                                    value={fields.phone}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.email"></FormattedMessage>
                                 </label>
-                                <input
+                                <Input
                                     type="email"
                                     name="email"
                                     required
-                                    value={data.email}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            email: e.target.value,
-                                        })
-                                    }
+                                    value={fields.email}
+                                    onChange={handleFieldChange}
                                 />
                             </div>
-                            <div
-                                className="form-group mx-5 my-3"
-                                style={{ justifyContent: "center" }}
-                            >
-                                <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp;
-                                    <FormattedMessage id="customer.saveButton"></FormattedMessage>
-                                </button>
+                            <div className="form-group mx-5 my-3 justify-content-center">
+                                <Button type="submit" icon="save">
+                                    <FormattedMessage id="customer.save.button"></FormattedMessage>
+                                </Button>
                             </div>
                         </div>
                     </form>
