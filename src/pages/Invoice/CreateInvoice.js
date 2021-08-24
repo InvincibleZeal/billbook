@@ -110,13 +110,13 @@ const CreateInvoice = () => {
         [invoiceRecipientDetails]
     );
 
-    const updateQuantity = (id, value) => {
+    const updateQuantity = useCallback((id, value) => {
         const index = invoiceRecipientDetails.items.findIndex(
             (x) => x.id === id
         );
         invoiceRecipientDetails.items[index].quantity = value;
         setInvoiceRecipientDetails({ ...invoiceRecipientDetails });
-    };
+    }, []);
 
     return (
         <Fragment>
