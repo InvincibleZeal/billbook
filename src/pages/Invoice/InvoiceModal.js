@@ -9,18 +9,13 @@ const ChangeCustomerModal = ({
     modalStatus,
     setModalStatus,
     customersInfo,
-    invoiceRecipientDetails,
-    setInvoiceRecipientDetails,
     itemInfo,
     type,
+    setState,
+    fields,
 }) => {
     const updateCustomersDetails = useCallback((name, phone, email) => {
-        setInvoiceRecipientDetails({
-            ...invoiceRecipientDetails,
-            name,
-            phone,
-            email,
-        });
+        setState("customers", [{ name, phone, email }]);
         setModalStatus(false);
     }, []);
 
@@ -29,29 +24,23 @@ const ChangeCustomerModal = ({
             const product = { id, name, price };
             product.quantity = 1;
             if (
-                invoiceRecipientDetails.items.length === 0 ||
-                !invoiceRecipientDetails.items.find((p) => p.id === product.id)
+                fields.items.length === 0 ||
+                !fields.items.find((p) => p.id === product.id)
             ) {
-                invoiceRecipientDetails.items.push(product);
-            } else if (
-                invoiceRecipientDetails.items.find((p) => p.id === product.id)
-            ) {
+                fields.items.push(product);
+            } else if (fields.items.find((p) => p.id === product.id)) {
                 product.quantity =
-                    invoiceRecipientDetails.items.find(
-                        (p) => p.id === product.id
-                    ).quantity + 1;
-                invoiceRecipientDetails.items.splice(
-                    invoiceRecipientDetails.items.findIndex(
-                        (p) => p.id === product.id
-                    ),
+                    fields.items.find((p) => p.id === product.id).quantity + 1;
+                fields.items.splice(
+                    fields.items.findIndex((p) => p.id === product.id),
                     1,
                     product
                 );
             }
-            setInvoiceRecipientDetails(invoiceRecipientDetails);
+            setState("items", [...fields.items]);
             setModalStatus(false);
         },
-        [invoiceRecipientDetails]
+        [fields]
     );
     return (
         <Modal
@@ -179,10 +168,10 @@ ChangeCustomerModal.propTypes = {
     modalStatus: PropTypes.bool.isRequired,
     setModalStatus: PropTypes.func.isRequired,
     customersInfo: PropTypes.array.isRequired,
-    invoiceRecipientDetails: PropTypes.object.isRequired,
-    setInvoiceRecipientDetails: PropTypes.func.isRequired,
     itemInfo: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
+    setState: PropTypes.func.isRequired,
+    fields: PropTypes.object.isRequired,
 };
 
 export default ChangeCustomerModal;

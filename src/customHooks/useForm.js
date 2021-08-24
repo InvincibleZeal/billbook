@@ -6,10 +6,16 @@ export function useForm(initialState) {
     return [
         fields,
         function (event) {
-            setValues({
-                ...fields,
+            setValues((prev) => ({
+                ...prev,
                 [event.target.name]: event.target.value,
-            });
+            }));
+        },
+        function (key, value) {
+            setValues((prev) => ({
+                ...prev,
+                [key]: value,
+            }));
         },
     ];
 }
