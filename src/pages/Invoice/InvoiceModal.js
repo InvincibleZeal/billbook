@@ -14,10 +14,13 @@ const ChangeCustomerModal = ({
     setState,
     fields,
 }) => {
-    const updateCustomersDetails = useCallback((name, phone, email) => {
-        setState("customers", [{ name, phone, email }]);
-        setModalStatus(false);
-    }, []);
+    const updateCustomersDetails = useCallback(
+        (name, phone, email) => {
+            setState("customers", [{ name, phone, email }]);
+            setModalStatus(false);
+        },
+        [fields]
+    );
 
     const addItem = useCallback(
         (id, name, price) => {
