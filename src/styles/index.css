@@ -719,12 +719,12 @@ input:focus-visible {
 }
 
 .react-modal,
-    .react-modal-title-container {
-    padding: calc(var(--padding)*4);
+.react-modal-title-container {
+    padding: calc(var(--padding) * 4);
 }
 
 .react-modal .react-modal-title {
-    font-size:18px;
+    font-size: 18px;
     text-transform: capitalize;
 }
 
@@ -739,4 +739,9 @@ input:focus-visible {
     bottom: 0;
     padding-right: 40px;
     -webkit-appearance: none;
+}
+/*   card components */
+.card-default {
+    padding: 1rem;
+    background-color: white;
 }

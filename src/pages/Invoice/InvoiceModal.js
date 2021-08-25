@@ -4,7 +4,6 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Button from "components/Button";
-
 Modal.setAppElement("*");
 
 const ChangeCustomerModal = ({
@@ -142,7 +141,7 @@ const ChangeCustomerModal = ({
                                                 <p>Price: ₹{info.price}</p>
                                             </div>
                                             <Button>
-                                                <FormattedMessage id="select"></FormattedMessage>
+                                                <FormattedMessage id="select" />
                                             </Button>
                                         </div>
                                     </div>
