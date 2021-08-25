@@ -96,7 +96,7 @@ const ChangeCustomerModal = ({
                                                 <p>{info.email}</p>
                                             </div>
                                             <button className="btn">
-                                                <FormattedMessage id="select"></FormattedMessage>
+                                                <FormattedMessage id="select" />
                                             </button>
                                         </div>
                                     </div>
