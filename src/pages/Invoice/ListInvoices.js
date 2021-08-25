@@ -85,9 +85,7 @@ const ListInvoices = () => {
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
                                         <td>{data.issueDate || "NA"}</td>
-                                        <td>
-                                            {data.customers[0].name || "NA"}
-                                        </td>
+                                        <td>{data.customers.name || "NA"}</td>
                                         <td>{data.invoiceNumber || "NA"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">

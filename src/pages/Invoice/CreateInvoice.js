@@ -18,7 +18,7 @@ const CreateInvoice = () => {
         invoiceNumber: "",
         referenceNumber: "",
         notes: "",
-        customers: [],
+        customers: {},
         items: [],
     });
     const intl = useIntl();
@@ -135,26 +135,17 @@ const CreateInvoice = () => {
                             <div className="d-flex justify-content-between">
                                 {customersInfo.length > 0 ? (
                                     <Fragment>
-                                        {fields.customers.length > 0 ? (
+                                        {fields.customers.name ? (
                                             <Fragment>
                                                 <div className="billing_details pr-3">
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .name
-                                                        }
+                                                        {fields.customers.name}
                                                     </div>
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .phone
-                                                        }
+                                                        {fields.customers.phone}
                                                     </div>
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .email
-                                                        }
+                                                        {fields.customers.email}
                                                     </div>
                                                 </div>
                                                 <div
