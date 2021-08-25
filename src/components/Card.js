@@ -1,9 +1,7 @@
 import React from "react";
 import Proptypes from "prop-types";
 import "./card.css";
-function Card(props) {
-    const { children, className, ...rest } = props;
-
+function Card({ children, className, ...rest }) {
     return (
         <div className={` card-default ${className}`} {...rest}>
             {children}
