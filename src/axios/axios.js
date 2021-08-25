@@ -9,6 +9,7 @@ const methods = {
 };
 
 const axios = function (config) {
+    config = config || {};
     const { url, method, data, params } = config;
     switch (method) {
         case methods.POST:
@@ -39,16 +40,16 @@ const formatPayload = (url, method, ...args) => {
         case methods.POST:
         case methods.PATCH:
         case methods.PUT:
-            [data, config] = args;
+            [data, config = {}] = args;
             config.body = JSON.stringify(data);
             break;
         case methods.DELETE:
         case methods.HEAD:
         case methods.OPTIONS:
-            [config] = args;
+            [config = {}] = args;
             break;
         case methods.GET:
-            [params, config] = args;
+            [params = {}, config = {}] = args;
             config = { ...config, params };
             break;
     }
@@ -59,9 +60,10 @@ const formatPayload = (url, method, ...args) => {
         url.searchParams.append(key, config.params[key])
     );
     config.method = method;
-    config.headers["Content-Type"] =
-        config.headers["Content-Type"] || "application/json";
-
+    config.headers = {
+        "Content-Type": "application/json",
+        ...(config.headers || {}),
+    };
     return { url, config };
 };
 
@@ -70,7 +72,16 @@ Object.keys(methods).forEach((method) => {
         const formatted = formatPayload(url, method, ...args);
         let error, response;
         try {
-            response = await fetch(...formatted).then((res) => res.json());
+            response = await fetch(formatted.url, formatted.config)
+                .then(async (res) => {
+                    return { res, text: await res.text() };
+                })
+                .then(({ res, text }) => {
+                    return text ? JSON.parse(text) : res;
+                })
+                .catch((err) => {
+                    error = err;
+                });
         } catch (e) {
             error = e;
         }
