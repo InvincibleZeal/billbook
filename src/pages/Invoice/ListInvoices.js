@@ -47,12 +47,12 @@ const ListInvoices = () => {
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
                         {" "}
-                        <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                        <FormattedMessage id="title.invoice" />
                     </span>
                     <Link to="/invoice/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.new.button"></FormattedMessage>
+                            <FormattedMessage id="invoice.newButton" />
                         </button>
                     </Link>
                 </div>
@@ -62,22 +62,22 @@ const ListInvoices = () => {
                             <thead>
                                 <tr>
                                     <th>
-                                        <FormattedMessage id="invoice.date"></FormattedMessage>
+                                        <FormattedMessage id="invoice.date" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="title.customer"></FormattedMessage>
+                                        <FormattedMessage id="title.customer" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.number"></FormattedMessage>
+                                        <FormattedMessage id="invoice.number" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.paid.status"></FormattedMessage>
+                                        <FormattedMessage id="invoice.paidStatus" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amount"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amount" />
                                     </th>
                                     <th>
-                                        <FormattedMessage id="invoice.amount.due"></FormattedMessage>
+                                        <FormattedMessage id="invoice.amountDue" />
                                     </th>
                                 </tr>
                             </thead>
@@ -85,9 +85,7 @@ const ListInvoices = () => {
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
                                         <td>{data.issueDate || "NA"}</td>
-                                        <td>
-                                            {data.customers[0].name || "NA"}
-                                        </td>
+                                        <td>{data.customers.name || "NA"}</td>
                                         <td>{data.invoiceNumber || "NA"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
@@ -104,7 +102,7 @@ const ListInvoices = () => {
                 ) : (
                     <p className="my-3 mx-5">
                         {" "}
-                        <FormattedMessage id="no.records"></FormattedMessage>
+                        <FormattedMessage id="no.records" />
                     </p>
                 )}
             </div>

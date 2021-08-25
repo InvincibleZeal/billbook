@@ -45,7 +45,7 @@ const AddItem = () => {
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
                         {" "}
-                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                        <FormattedMessage id="title.items" />
                     </span>
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
@@ -54,7 +54,7 @@ const AddItem = () => {
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
-                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                    <FormattedMessage id="customer.name" />
                                 </label>
                                 <input
                                     type="text"
@@ -67,7 +67,7 @@ const AddItem = () => {
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
-                                    <FormattedMessage id="item.price"></FormattedMessage>
+                                    <FormattedMessage id="item.price" />
                                 </label>
                                 <input
                                     type="text"
@@ -82,7 +82,7 @@ const AddItem = () => {
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
-                                    <FormattedMessage id="item.description"></FormattedMessage>
+                                    <FormattedMessage id="item.description" />
                                 </label>
                                 <textarea
                                     rows="4"
@@ -95,7 +95,7 @@ const AddItem = () => {
                             <div className="form-group m-5 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;{" "}
-                                    <FormattedMessage id="item.save.button"></FormattedMessage>
+                                    <FormattedMessage id="item.saveButton" />
                                 </button>
                             </div>
                         </form>
