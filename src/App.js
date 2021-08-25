@@ -9,6 +9,8 @@ import { ListCustomers, AddCustomer } from "pages/Customers";
 import { ListItems, AddItem } from "pages/Inventory";
 import { ListInvoices, CreateInvoice } from "pages/Invoice";
 import { NotificationProvider } from "notification";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 import ErrorBoundary from "common/ErrorBoundary";
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
         <ErrorBoundary>
             <NotificationProvider>
                 <Router>
+                    <Navbar />
                     <Switch>
                         {/* Customer Module */}
                         <Route path="/" exact>
@@ -49,4 +52,4 @@ function App() {
     );
 }
 
-export default App;
+export default withWrapper(App);
