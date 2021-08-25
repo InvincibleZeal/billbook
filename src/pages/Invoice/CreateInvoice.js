@@ -189,6 +189,7 @@ const CreateInvoice = () => {
                                         <FormattedMessage id="invoice.issuedAt" />
                                     </label>
                                     <Input
+                                        size="sm"
                                         type="date"
                                         name="issueDate"
                                         value={fields.issueDate}
