@@ -37,23 +37,13 @@ const formatPayload = (url, method, ...args) => {
     let config, params, data;
     switch (method) {
         case methods.POST:
-            [data, config] = args;
-            config = { ...config, data };
-            break;
-        case methods.DELETE:
-            [config] = args;
-            break;
+        case methods.PATCH:
         case methods.PUT:
             [data, config] = args;
-            config = { ...config, data };
+            config.body = JSON.stringify(data);
             break;
-        case methods.PATCH:
-            [data, config] = args;
-            config = { ...config, data };
-            break;
+        case methods.DELETE:
         case methods.HEAD:
-            [config] = args;
-            break;
         case methods.OPTIONS:
             [config] = args;
             break;
@@ -63,12 +53,11 @@ const formatPayload = (url, method, ...args) => {
             break;
     }
     url = new URL(url);
+
+    config.params = config.params || {};
     Object.keys(config.params).forEach((key) =>
         url.searchParams.append(key, config.params[key])
     );
-
-    config.body = JSON.stringify(config.data);
-    delete config.data;
     config.method = method;
     config.headers["Content-Type"] =
         config.headers["Content-Type"] || "application/json";
@@ -77,7 +66,7 @@ const formatPayload = (url, method, ...args) => {
 };
 
 Object.keys(methods).forEach((method) => {
-    axios[method.toLowerCase] = async (url, ...args) => {
+    axios[method.toLowerCase()] = async (url, ...args) => {
         const formatted = formatPayload(url, method, ...args);
         let error, response;
         try {
