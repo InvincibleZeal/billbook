@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
@@ -42,7 +40,6 @@ const ListInvoices = () => {
 
     return (
         <Fragment>
-            <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -112,4 +109,4 @@ const ListInvoices = () => {
     );
 };
 
-export default withWrapper(ListInvoices);
+export default ListInvoices;

@@ -1,6 +1,4 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
 import InvoiceModal from "./InvoiceModal";
@@ -114,7 +112,6 @@ const CreateInvoice = () => {
 
     return (
         <Fragment>
-            <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
                 <form onSubmit={saveInvoice}>
                     <div className="page-heading-wrapper mb-5 p-5">
@@ -408,4 +405,4 @@ const CreateInvoice = () => {
     );
 };
 
-export default withWrapper(CreateInvoice);
+export default CreateInvoice;

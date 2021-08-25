@@ -9,11 +9,14 @@ import { ListCustomers, AddCustomer } from "pages/Customers";
 import { ListItems, AddItem } from "pages/Inventory";
 import { ListInvoices, CreateInvoice } from "pages/Invoice";
 import { NotificationProvider } from "notification";
+import withWrapper from "common/withWrapper";
+import Navbar from "common/Navbar";
 
 function App() {
     return (
         <NotificationProvider>
             <Router>
+                <Navbar />
                 <Switch>
                     {/* Customer Module */}
                     <Route path="/" exact>
@@ -46,4 +49,4 @@ function App() {
     );
 }
 
-export default App;
+export default withWrapper(App);

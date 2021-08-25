@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
@@ -30,7 +28,6 @@ const ListItems = () => {
 
     return (
         <Fragment>
-            <Navbar opened="inventory" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper p-5 mb-5">
                     <span className="title">
@@ -96,4 +93,4 @@ const ListItems = () => {
     );
 };
 
-export default withWrapper(ListItems);
+export default ListItems;

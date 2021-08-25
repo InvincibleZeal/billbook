@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import withWrapper from "common/withWrapper";
 import { useNotification } from "notification";
 
 const ListCustomers = () => {
@@ -31,7 +29,6 @@ const ListCustomers = () => {
 
     return (
         <Fragment>
-            <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -91,4 +88,4 @@ const ListCustomers = () => {
     );
 };
 
-export default withWrapper(ListCustomers);
+export default ListCustomers;
