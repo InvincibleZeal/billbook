@@ -275,7 +275,7 @@ const CreateInvoice = () => {
                                         <tr key={idx}>
                                             <td> {item.name} </td>
                                             <td>
-                                                <input
+                                                <Input
                                                     min="1"
                                                     type="number"
                                                     value={item.quantity}

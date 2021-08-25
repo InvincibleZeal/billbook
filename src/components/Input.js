@@ -1,7 +1,7 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-function Input({ size, icon, type, ...rest }) {
+function Input({ size = "md", icon, type, ...rest }) {
     const Inputelement =
         type === "textarea" ? (
             <textarea
