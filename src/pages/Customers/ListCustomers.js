@@ -12,12 +12,12 @@ const ListCustomers = () => {
 
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
+        let customerData = [];
         if (localStorage.getItem("customer_data")) {
             try {
-                const customerData = JSON.parse(
+                customerData = JSON.parse(
                     localStorage.getItem("customer_data")
                 );
-                setTableData(customerData);
             } catch (e) {
                 triggerNotification("Failed parsing customer data", {
                     type: "error",
@@ -25,7 +25,8 @@ const ListCustomers = () => {
                 localStorage.removeItem("customer_data");
             }
         }
-    }, []);
+        setTableData(customerData);
+    }, [tableData]);
 
     return (
         <Fragment>
@@ -33,12 +34,12 @@ const ListCustomers = () => {
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
                         {" "}
-                        <FormattedMessage id="title.customer"></FormattedMessage>
+                        <FormattedMessage id="title.customer" />
                     </span>
                     <Link to="/customers/add">
                         <button className="btn">
                             <i className="fa fa-plus"></i> &nbsp;
-                            <FormattedMessage id="customer.new.button"></FormattedMessage>
+                            <FormattedMessage id="customer.newButton" />
                         </button>
                     </Link>
                 </div>
@@ -49,19 +50,19 @@ const ListCustomers = () => {
                                 <tr>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.new.button"></FormattedMessage>
+                                        <FormattedMessage id="customer.newButton" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.phone"></FormattedMessage>
+                                        <FormattedMessage id="customer.phone" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.email"></FormattedMessage>
+                                        <FormattedMessage id="customer.email" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="customer.created.on"></FormattedMessage>
+                                        <FormattedMessage id="customer.createdOn" />
                                     </th>
                                 </tr>
                             </thead>
@@ -80,7 +81,7 @@ const ListCustomers = () => {
                 ) : (
                     <p className="my-3 mx-5">
                         {" "}
-                        <FormattedMessage id="no.records"></FormattedMessage>
+                        <FormattedMessage id="no.records" />
                     </p>
                 )}
             </div>

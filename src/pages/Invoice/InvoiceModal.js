@@ -6,18 +6,18 @@ import { FormattedMessage } from "react-intl";
 Modal.setAppElement("*");
 
 const ChangeCustomerModal = ({
-    modalStatus,
-    setModalStatus,
-    customersInfo,
-    itemInfo,
+    status,
+    setModalState,
+    customers,
+    items,
     type,
-    setState,
+    setFormState,
     fields,
 }) => {
     const updateCustomersDetails = useCallback(
         (name, phone, email) => {
-            setState("customers", [{ name, phone, email }]);
-            setModalStatus(false);
+            setFormState("customers", { name, phone, email });
+            setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
     );
@@ -26,29 +26,33 @@ const ChangeCustomerModal = ({
         (id, name, price) => {
             const product = { id, name, price };
             product.quantity = 1;
+            const updateItems = [...fields.items];
             if (
-                fields.items.length === 0 ||
-                !fields.items.find((p) => p.id === product.id)
+                updateItems.length === 0 ||
+                !updateItems.find((p) => p.id === product.id)
             ) {
-                fields.items.push(product);
-            } else if (fields.items.find((p) => p.id === product.id)) {
+                updateItems.push(product);
+            } else if (updateItems.find((p) => p.id === product.id)) {
+                debugger; // eslint-disable-line no-debugger
                 product.quantity =
-                    fields.items.find((p) => p.id === product.id).quantity + 1;
-                fields.items.splice(
-                    fields.items.findIndex((p) => p.id === product.id),
+                    updateItems.find((p) => p.id === product.id).quantity + 1;
+                updateItems.splice(
+                    updateItems.findIndex((p) => p.id === product.id),
                     1,
                     product
                 );
             }
-            setState("items", [...fields.items]);
-            setModalStatus(false);
+            setFormState("items", [...updateItems]);
+            setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
     );
     return (
         <Modal
-            isOpen={modalStatus}
-            onRequestClose={() => setModalStatus(false)}
+            isOpen={status}
+            onRequestClose={() =>
+                setModalState((state) => ({ ...state, status: false }))
+            }
             className="react-modal"
         >
             <div
@@ -65,15 +69,20 @@ const ChangeCustomerModal = ({
                 <div className="react-modal-close">
                     <i
                         className="fa fa-times"
-                        onClick={() => setModalStatus(false)}
+                        onClick={() =>
+                            setModalState((state) => ({
+                                ...state,
+                                status: false,
+                            }))
+                        }
                     ></i>
                 </div>
             </div>
             {type === "customer" ? (
                 <Fragment>
-                    {customersInfo.length > 0 ? (
+                    {customers.length > 0 ? (
                         <Fragment>
-                            {customersInfo.map((info, idx) => (
+                            {customers.map((info, idx) => (
                                 <div
                                     className="react-modal-title-container customer-card"
                                     key={idx}
@@ -96,7 +105,7 @@ const ChangeCustomerModal = ({
                                                 <p>{info.email}</p>
                                             </div>
                                             <button className="btn">
-                                                <FormattedMessage id="select"></FormattedMessage>
+                                                <FormattedMessage id="select" />
                                             </button>
                                         </div>
                                     </div>
@@ -120,9 +129,9 @@ const ChangeCustomerModal = ({
                 </Fragment>
             ) : (
                 <Fragment>
-                    {itemInfo.length > 0 ? (
+                    {items.length > 0 ? (
                         <Fragment>
-                            {itemInfo.map((info, idx) => (
+                            {items.map((info, idx) => (
                                 <div
                                     className="react-modal-title-container customer-card"
                                     key={idx}
@@ -168,12 +177,12 @@ const ChangeCustomerModal = ({
 };
 
 ChangeCustomerModal.propTypes = {
-    modalStatus: PropTypes.bool.isRequired,
-    setModalStatus: PropTypes.func.isRequired,
-    customersInfo: PropTypes.array.isRequired,
-    itemInfo: PropTypes.array.isRequired,
+    status: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    setState: PropTypes.func.isRequired,
+    setModalState: PropTypes.func.isRequired,
+    customers: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
+    setFormState: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
 };
 

@@ -7,21 +7,24 @@ import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 
 const CreateInvoice = () => {
-    const [modalStatus, setModalStatus] = useState(false);
-    const [customersInfo, setCustomersInfo] = useState([]);
-    const [itemInfo, setItemInfo] = useState([]);
-    const [fields, handleFieldChange, setState] = useForm({
+    const [modalState, setModalState] = useState({
+        status: false,
+        items: [],
+        customers: [],
+        type: "customer",
+    });
+
+    const [fields, handleFieldChange, setFormState] = useForm({
         issueDate: "",
         dueDate: "",
         invoiceNumber: "",
         referenceNumber: "",
         notes: "",
-        customers: [],
+        customers: {},
         items: [],
     });
     const intl = useIntl();
     const history = useHistory();
-    const [modalType, setModalType] = useState("customer");
     const { triggerNotification } = useNotification();
 
     useEffect(() => {
@@ -35,7 +38,10 @@ const CreateInvoice = () => {
                 const customerData = JSON.parse(
                     localStorage.getItem("customer_data")
                 );
-                setCustomersInfo(customerData);
+                setModalState((state) => ({
+                    ...state,
+                    customers: customerData,
+                }));
             } catch (e) {
                 triggerNotification("Failed parsing customer data", {
                     type: "error",
@@ -48,7 +54,7 @@ const CreateInvoice = () => {
                 const inventoryData = JSON.parse(
                     localStorage.getItem("inventory_data")
                 );
-                setItemInfo(inventoryData);
+                setModalState((state) => ({ ...state, items: inventoryData }));
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -56,7 +62,7 @@ const CreateInvoice = () => {
                 localStorage.removeItem("inventory_data");
             }
         }
-    }, [customersInfo, itemInfo]);
+    }, [modalState.customers, modalState.items]);
 
     // Function to delete items
     const removeElement = useCallback(
@@ -66,7 +72,7 @@ const CreateInvoice = () => {
                     intl.formatMessage({ id: "invoice.confirm.delete.item" })
                 )
             ) {
-                setState(
+                setFormState(
                     "items",
                     fields.items.filter((item) => item.id !== id)
                 );
@@ -105,7 +111,7 @@ const CreateInvoice = () => {
         (id, value) => {
             const index = fields.items.findIndex((x) => x.id === id);
             fields.items[index].quantity = Number(value);
-            setState("items", fields.items);
+            setFormState("items", fields.items);
         },
         [fields]
     );
@@ -117,61 +123,61 @@ const CreateInvoice = () => {
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
-                            <FormattedMessage id="title.invoice"></FormattedMessage>{" "}
+                            <FormattedMessage id="title.invoice" />
                         </span>
                         <button className="btn" type="submit">
                             <i className="fa fa-save"></i> &nbsp;{" "}
-                            <FormattedMessage id="invoice.save.button"></FormattedMessage>
+                            <FormattedMessage id="invoice.saveButton" />
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div className="card-bordered p-3 mx-5">
                             <h4 className="bill-to text-muted m-0 mb-3">
-                                <FormattedMessage id="invoice.bill.to"></FormattedMessage>{" "}
+                                <FormattedMessage id="invoice.billTo" />
                             </h4>
                             <div className="d-flex justify-content-between">
-                                {customersInfo.length > 0 ? (
+                                {modalState.customers.length > 0 ? (
                                     <Fragment>
-                                        {fields.customers.length > 0 ? (
+                                        {fields.customers.name ? (
                                             <Fragment>
                                                 <div className="billing_details pr-3">
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .name
-                                                        }
+                                                        {fields.customers.name}
                                                     </div>
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .phone
-                                                        }
+                                                        {fields.customers.phone}
                                                     </div>
                                                     <div>
-                                                        {
-                                                            fields.customers[0]
-                                                                .email
-                                                        }
+                                                        {fields.customers.email}
                                                     </div>
                                                 </div>
                                                 <div
                                                     className="btn-link"
                                                     onClick={() =>
-                                                        setModalStatus(true)
+                                                        setModalState(
+                                                            (state) => ({
+                                                                ...state,
+                                                                status: true,
+                                                                type: "customer",
+                                                            })
+                                                        )
                                                     }
                                                 >
-                                                    <FormattedMessage id="invoice.change"></FormattedMessage>
+                                                    <FormattedMessage id="invoice.change" />
                                                 </div>
                                             </Fragment>
                                         ) : (
                                             <div
                                                 className="btn-link"
                                                 onClick={() => {
-                                                    setModalStatus(true);
-                                                    setModalType("customer");
+                                                    setModalState((state) => ({
+                                                        ...state,
+                                                        status: true,
+                                                        type: "customer",
+                                                    }));
                                                 }}
                                             >
-                                                <FormattedMessage id="invoice.select.customer"></FormattedMessage>
+                                                <FormattedMessage id="invoice.selectCustomer" />
                                             </div>
                                         )}
                                     </Fragment>
@@ -180,7 +186,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.select.customer"></FormattedMessage>
+                                            <FormattedMessage id="invoice.selectCustomer" />
                                         </p>{" "}
                                     </Link>
                                 )}
@@ -191,7 +197,7 @@ const CreateInvoice = () => {
                                 <div className="input-group px-2">
                                     <label htmlFor="issueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.issued.at"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.issuedAt" />
                                     </label>
                                     <input
                                         className="input-sm"
@@ -205,7 +211,7 @@ const CreateInvoice = () => {
                                 <div className="input-group px-2">
                                     <label htmlFor="dueDate">
                                         {" "}
-                                        <FormattedMessage id="invoice.due.date"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.dueDate" />
                                     </label>
                                     <input
                                         className="input-sm"
@@ -220,7 +226,7 @@ const CreateInvoice = () => {
                             <div className="d-flex flex-grow">
                                 <div className="input-group px-2">
                                     <label htmlFor="invoiceNumber">
-                                        <FormattedMessage id="invoice.number"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.number" />
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -234,7 +240,7 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="referenceNumber">
-                                        <FormattedMessage id="invoice.reference.number"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.referenceNumber" />
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
@@ -256,19 +262,19 @@ const CreateInvoice = () => {
                                 <tr>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="title.items"></FormattedMessage>{" "}
+                                        <FormattedMessage id="title.items" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="invoice.quantity"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.quantity" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="item.price"></FormattedMessage>{" "}
+                                        <FormattedMessage id="item.price" />
                                     </th>
                                     <th>
                                         {" "}
-                                        <FormattedMessage id="invoice.amount"></FormattedMessage>{" "}
+                                        <FormattedMessage id="invoice.amount" />
                                     </th>
                                     <th className="table-action"></th>
                                 </tr>
@@ -320,12 +326,15 @@ const CreateInvoice = () => {
                             <span
                                 className="btn-link p-4"
                                 onClick={() => {
-                                    setModalStatus(true);
-                                    setModalType("items");
+                                    setModalState((state) => ({
+                                        ...state,
+                                        status: true,
+                                        type: "items",
+                                    }));
                                 }}
                             >
                                 <i className="fa fa-shopping-basket mr-2"> </i>
-                                <FormattedMessage id="invoice.add.an.item"></FormattedMessage>
+                                <FormattedMessage id="invoice.addAnItem" />
                             </span>
                         </div>
                     </div>
@@ -335,7 +344,7 @@ const CreateInvoice = () => {
                             <div className="input-group">
                                 <label htmlFor="notes">
                                     {" "}
-                                    <FormattedMessage id="invoice.notes"></FormattedMessage>{" "}
+                                    <FormattedMessage id="invoice.notes" />
                                 </label>
                                 <textarea
                                     className="input-sm invoice-notes"
@@ -370,7 +379,7 @@ const CreateInvoice = () => {
                                 <div className="summary_total d-flex mt-2">
                                     <div>
                                         {" "}
-                                        <FormattedMessage id="invoice.total.amount"></FormattedMessage>
+                                        <FormattedMessage id="invoice.totalAmount" />
                                         :
                                     </div>
                                     <div className="primary">
@@ -393,12 +402,12 @@ const CreateInvoice = () => {
                 </form>
             </div>
             <InvoiceModal
-                modalStatus={modalStatus}
-                setModalStatus={setModalStatus}
-                customersInfo={customersInfo}
-                itemInfo={itemInfo}
-                type={modalType}
-                setState={setState}
+                status={modalState.status}
+                setModalState={setModalState}
+                customers={modalState.customers}
+                items={modalState.items}
+                type={modalState.type}
+                setFormState={setFormState}
                 fields={fields}
             />
         </Fragment>

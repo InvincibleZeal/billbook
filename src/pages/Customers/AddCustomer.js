@@ -39,7 +39,7 @@ const AddCustomers = () => {
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
-                        <FormattedMessage id="title.customer"></FormattedMessage>
+                        <FormattedMessage id="title.customer" />
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
@@ -47,7 +47,7 @@ const AddCustomers = () => {
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
-                                    <FormattedMessage id="customer.name"></FormattedMessage>
+                                    <FormattedMessage id="customer.name" />
                                 </label>
                                 <input
                                     type="text"
@@ -60,7 +60,7 @@ const AddCustomers = () => {
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
-                                    <FormattedMessage id="customer.phone"></FormattedMessage>
+                                    <FormattedMessage id="customer.phone" />
                                 </label>
                                 <input
                                     type="text"
@@ -75,7 +75,7 @@ const AddCustomers = () => {
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
-                                    <FormattedMessage id="customer.email"></FormattedMessage>
+                                    <FormattedMessage id="customer.email" />
                                 </label>
                                 <input
                                     type="email"
@@ -88,7 +88,7 @@ const AddCustomers = () => {
                             <div className="form-group mx-5 my-3 justify-content-center">
                                 <button className="btn" type="submit">
                                     <i className="fa fa-save"></i> &nbsp;
-                                    <FormattedMessage id="customer.save.button"></FormattedMessage>
+                                    <FormattedMessage id="customer.saveButton" />
                                 </button>
                             </div>
                         </div>
