@@ -28,7 +28,6 @@ const ListCustomers = () => {
             }
         }
         setTableData(customerData);
-        throw new Error("Test Error");
     }, [tableData]);
 
     return (
