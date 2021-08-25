@@ -16,7 +16,7 @@ const ChangeCustomerModal = ({
 }) => {
     const updateCustomersDetails = useCallback(
         (name, phone, email) => {
-            setState("customers", [{ name, phone, email }]);
+            setState("customers", { name, phone, email });
             setModalStatus(false);
         },
         [fields]
