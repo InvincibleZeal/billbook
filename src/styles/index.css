@@ -47,6 +47,10 @@ body {
     border-radius: 0.25rem;
 }
 
+.center-content {
+    text-align: center;
+}
+
 /************ Colors ****************/
 .primary {
     color: var(--primary-color);
@@ -396,15 +400,6 @@ body {
 .my-5 {
     margin-top: calc(5 * var(--padding));
     margin-bottom: calc(5 * var(--padding));
-}
-
-/************ Project Helpers ****************/
-
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 /************ Project Helpers ****************/
