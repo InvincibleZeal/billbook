@@ -189,7 +189,6 @@ const CreateInvoice = () => {
                                         <FormattedMessage id="invoice.issuedAt" />
                                     </label>
                                     <Input
-                                        className="input-sm"
                                         type="date"
                                         name="issueDate"
                                         value={fields.issueDate}
@@ -203,7 +202,7 @@ const CreateInvoice = () => {
                                         <FormattedMessage id="invoice.dueDate" />
                                     </label>
                                     <Input
-                                        className="input-sm"
+                                        size="sm"
                                         type="date"
                                         name="dueDate"
                                         required
@@ -219,8 +218,8 @@ const CreateInvoice = () => {
                                     </label>
 
                                     <Input
+                                        size="sm"
                                         icon="hashtag"
-                                        className="input-sm"
                                         type="text"
                                         name="invoiceNumber"
                                         required
@@ -234,8 +233,8 @@ const CreateInvoice = () => {
                                     </label>
 
                                     <Input
+                                        size="sm"
                                         icon="hashtag"
-                                        className="input-sm"
                                         type="text"
                                         name="referenceNumber"
                                         required
