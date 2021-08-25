@@ -136,10 +136,10 @@
     height: 6rem;
 }
 
-.customer-card{
+.customer-card {
     cursor: pointer;
 }
 
-.customer-card:hover{
+.customer-card:hover {
     transform: scale(1.02);
 }

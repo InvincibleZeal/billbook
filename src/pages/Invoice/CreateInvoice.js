@@ -226,8 +226,9 @@ const CreateInvoice = () => {
                                     <label htmlFor="invoiceNumber">
                                         <FormattedMessage id="invoice.number" />
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
+
                                     <Input
+                                        icon="hashtag"
                                         className="input-sm"
                                         type="text"
                                         name="invoiceNumber"
@@ -240,8 +241,9 @@ const CreateInvoice = () => {
                                     <label htmlFor="referenceNumber">
                                         <FormattedMessage id="invoice.referenceNumber" />
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
+
                                     <Input
+                                        icon="hashtag"
                                         className="input-sm"
                                         type="text"
                                         name="referenceNumber"
