@@ -4,6 +4,8 @@ import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
+import Button from "components/Button";
+
 const ListItems = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
@@ -38,10 +40,9 @@ const ListItems = () => {
                         <FormattedMessage id="title.items" />
                     </span>
                     <Link to="/inventory/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                        <Button icon="plus">
                             <FormattedMessage id="item.addButton" />
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {tableData.length > 0 ? (

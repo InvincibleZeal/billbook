@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-
+import Button from "components/Button";
+import Input from "components/Input";
 const AddItem = () => {
     const [fields, handleFieldChange] = useForm({
         name: "",
@@ -56,7 +57,7 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="customer.name" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="name"
                                     required
@@ -69,7 +70,7 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.price" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="price"
                                     required
@@ -84,19 +85,19 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.description" />
                                 </label>
-                                <textarea
+                                <Input
                                     rows="4"
+                                    type="textarea"
                                     name="description"
                                     required="true"
                                     value={fields.description}
                                     onChange={handleFieldChange}
-                                ></textarea>
+                                />
                             </div>
                             <div className="form-group m-5 justify-content-center">
-                                <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp;{" "}
+                                <Button icon="save" type="submit">
                                     <FormattedMessage id="item.saveButton" />
-                                </button>
+                                </Button>
                             </div>
                         </form>
                     </div>
