@@ -26,21 +26,23 @@ const ChangeCustomerModal = ({
         (id, name, price) => {
             const product = { id, name, price };
             product.quantity = 1;
+            const updateItems = [...fields.items];
             if (
-                fields.items.length === 0 ||
-                !fields.items.find((p) => p.id === product.id)
+                updateItems.length === 0 ||
+                !updateItems.find((p) => p.id === product.id)
             ) {
-                fields.items.push(product);
-            } else if (fields.items.find((p) => p.id === product.id)) {
+                updateItems.push(product);
+            } else if (updateItems.find((p) => p.id === product.id)) {
+                debugger; // eslint-disable-line no-debugger
                 product.quantity =
-                    fields.items.find((p) => p.id === product.id).quantity + 1;
-                fields.items.splice(
-                    fields.items.findIndex((p) => p.id === product.id),
+                    updateItems.find((p) => p.id === product.id).quantity + 1;
+                updateItems.splice(
+                    updateItems.findIndex((p) => p.id === product.id),
                     1,
                     product
                 );
             }
-            setState("items", [...fields.items]);
+            setState("items", [...updateItems]);
             setModalStatus(false);
         },
         [fields]
