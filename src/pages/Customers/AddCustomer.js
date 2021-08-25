@@ -1,60 +1,55 @@
-import React, { Fragment } from "react";
-import withWrapper from "common/withWrapper";
+import React, { Fragment, useCallback } from "react";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
+import withWrapper from "common/withWrapper";
+import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 
-const AddItem = () => {
+const AddCustomers = () => {
     const [fields, handleFieldChange] = useForm({
         name: "",
-        price: "",
-        description: "",
+        phone: "",
+        email: "",
         date: new Date(),
-        id: Math.floor(Math.random() * 101 + 1),
     });
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addItem = (e) => {
-        e.preventDefault();
+    const addCustomer = useCallback(() => {
         // Adding to local storage
-        if (localStorage.getItem("inventory_data") == null) {
-            localStorage.setItem("inventory_data", "[]");
+        if (localStorage.getItem("customer_data") == null) {
+            localStorage.setItem("customer_data", "[]");
         }
-
-        let inventoryData = [];
+        let customerData = [];
         try {
-            inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
-            inventoryData.push(fields);
-            localStorage.setItem(
-                "inventory_data",
-                JSON.stringify(inventoryData)
-            );
-            triggerNotification("Item added successfully", { type: "success" });
-            history.push("/inventory");
+            customerData = JSON.parse(localStorage.getItem("customer_data"));
+            customerData.push(fields);
+            localStorage.setItem("customer_data", JSON.stringify(customerData));
+            triggerNotification("Customer added successfully", {
+                type: "success",
+            });
+            history.push("/");
         } catch (e) {
             console.error(e);
         }
-    };
+    }, [fields]);
 
     return (
         <Fragment>
-            <Navbar opened="inventory" />
+            <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
-                        {" "}
-                        <FormattedMessage id="title.items" />
+                        <FormattedMessage id="title.customer" />
                     </span>
                 </div>
-                <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
-                    <div className="py-5">
-                        <form onSubmit={(e) => addItem(e)}>
+                <div className="card p-5 mx-5">
+                    <form onSubmit={addCustomer}>
+                        <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
-                                    {" "}
                                     <FormattedMessage id="customer.name" />
                                 </label>
                                 <input
@@ -68,43 +63,43 @@ const AddItem = () => {
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     {" "}
-                                    <FormattedMessage id="item.price" />
+                                    <FormattedMessage id="customer.phone" />
                                 </label>
                                 <input
                                     type="text"
-                                    name="price"
+                                    name="phone"
                                     required
-                                    onInvalid="this.setCustomValidity('Only numerical values allowed')"
+                                    pattern="[+0-9]{10,13}"
+                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
-                                    value={fields.price}
+                                    value={fields.phone}
                                     onChange={handleFieldChange}
                                 />
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
-                                    {" "}
-                                    <FormattedMessage id="item.description" />
+                                    <FormattedMessage id="customer.email" />
                                 </label>
-                                <textarea
-                                    rows="4"
-                                    name="description"
-                                    required="true"
-                                    value={fields.description}
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    value={fields.email}
                                     onChange={handleFieldChange}
-                                ></textarea>
+                                />
                             </div>
-                            <div className="form-group m-5 justify-content-center">
+                            <div className="form-group mx-5 my-3 justify-content-center">
                                 <button className="btn" type="submit">
-                                    <i className="fa fa-save"></i> &nbsp;{" "}
-                                    <FormattedMessage id="item.saveButton" />
+                                    <i className="fa fa-save"></i> &nbsp;
+                                    <FormattedMessage id="customer.saveButton" />
                                 </button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </Fragment>
     );
 };
 
-export default withWrapper(AddItem);
+export default withWrapper(AddCustomers);
