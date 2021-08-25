@@ -13,12 +13,12 @@ const ListItems = () => {
 
     // Function to fetch data from local storage
     const fetchData = useCallback(() => {
-        let inventoryData = [];
         if (localStorage.getItem("inventory_data")) {
             try {
-                inventoryData = JSON.parse(
+                const inventoryData = JSON.parse(
                     localStorage.getItem("inventory_data")
                 );
+                setTableData(inventoryData);
             } catch (e) {
                 triggerNotification("Failed parsing inventory data", {
                     type: "error",
@@ -26,8 +26,7 @@ const ListItems = () => {
                 localStorage.removeItem("inventory_data");
             }
         }
-        setTableData(inventoryData);
-    }, [tableData]);
+    }, []);
 
     return (
         <Fragment>

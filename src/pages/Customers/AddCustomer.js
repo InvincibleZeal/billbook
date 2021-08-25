@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback } from "react";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
@@ -17,8 +17,7 @@ const AddCustomers = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addCustomer = (e) => {
-        e.preventDefault();
+    const addCustomer = useCallback(() => {
         // Adding to local storage
         if (localStorage.getItem("customer_data") == null) {
             localStorage.setItem("customer_data", "[]");
@@ -35,7 +34,7 @@ const AddCustomers = () => {
         } catch (e) {
             console.error(e);
         }
-    };
+    }, [fields]);
 
     return (
         <Fragment>
@@ -47,7 +46,7 @@ const AddCustomers = () => {
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form onSubmit={(e) => addCustomer(e)}>
+                    <form onSubmit={addCustomer}>
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
