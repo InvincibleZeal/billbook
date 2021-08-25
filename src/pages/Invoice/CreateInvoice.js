@@ -189,7 +189,7 @@ const CreateInvoice = () => {
                                         {" "}
                                         <p>
                                             {" "}
-                                            <FormattedMessage id="invoice.selectSustomer" />
+                                            <FormattedMessage id="invoice.selectCustomer" />
                                         </p>{" "}
                                     </Link>
                                 )}
