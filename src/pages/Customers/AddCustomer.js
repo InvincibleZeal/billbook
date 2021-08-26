@@ -1,4 +1,5 @@
-import React, { Fragment, useCallback } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useCallback, useState } from "react";
 import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import withWrapper from "common/withWrapper";
@@ -6,6 +7,7 @@ import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import Nope from "nope-validator";
 
 const AddCustomers = () => {
     const [fields, handleFieldChange] = useForm({
@@ -14,27 +16,47 @@ const AddCustomers = () => {
         email: "",
         date: new Date(),
     });
+    const [errors, setErrors] = useState();
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addCustomer = useCallback(() => {
-        // Adding to local storage
-        if (localStorage.getItem("customer_data") == null) {
-            localStorage.setItem("customer_data", "[]");
-        }
-        let customerData = [];
-        try {
-            customerData = JSON.parse(localStorage.getItem("customer_data"));
-            customerData.push(fields);
-            localStorage.setItem("customer_data", JSON.stringify(customerData));
-            triggerNotification("Customer added successfully", {
-                type: "success",
-            });
-            history.push("/");
-        } catch (e) {
-            console.error(e);
-        }
-    }, [fields]);
+    const CustomersDetailsSchema = Nope.object().shape({
+        name: Nope.string()
+            .atLeast(5, "Please provide a longer name")
+            .atMost(255, "Name is too long!"),
+        email: Nope.string().email().required(),
+        phone: Nope.number().required(),
+    });
+    const addCustomer = useCallback(
+        (event) => {
+            event.preventDefault();
+            setErrors(CustomersDetailsSchema.validate(fields));
+            if (CustomersDetailsSchema.validate(fields) === undefined) {
+                // Adding to local storage
+                if (localStorage.getItem("customer_data") == null) {
+                    localStorage.setItem("customer_data", "[]");
+                }
+                let customerData = [];
+                try {
+                    customerData = JSON.parse(
+                        localStorage.getItem("customer_data")
+                    );
+                    customerData.push(fields);
+                    localStorage.setItem(
+                        "customer_data",
+                        JSON.stringify(customerData)
+                    );
+                    triggerNotification("Customer added successfully", {
+                        type: "success",
+                    });
+                    history.push("/");
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        },
+        [fields]
+    );
 
     return (
         <Fragment>
@@ -59,6 +81,11 @@ const AddCustomers = () => {
                                     value={fields.name}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.name && (
+                                    <span className="text-error mt-2">
+                                        {errors.name || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
@@ -70,11 +97,14 @@ const AddCustomers = () => {
                                     name="phone"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
-                                    onInput="this.setCustomValidity('')"
                                     value={fields.phone}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.phone && (
+                                    <span className="text-error mt-2">
+                                        {errors.phone || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
@@ -87,6 +117,11 @@ const AddCustomers = () => {
                                     value={fields.email}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.email && (
+                                    <span className="text-error mt-2">
+                                        {errors.email || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
                                 <button className="btn" type="submit">
