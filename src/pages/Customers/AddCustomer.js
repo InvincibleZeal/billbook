@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useCallback, useState } from "react";
-import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
-import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
@@ -60,7 +57,6 @@ const AddCustomers = () => {
 
     return (
         <Fragment>
-            <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -137,4 +133,4 @@ const AddCustomers = () => {
     );
 };
 
-export default withWrapper(AddCustomers);
+export default AddCustomers;

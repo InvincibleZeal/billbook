@@ -23,7 +23,8 @@
         "eject": "react-scripts eject",
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "postinstall": "husky install"
     },
     "eslintConfig": {
         "extends": [

@@ -1,11 +1,12 @@
 import React, { Fragment, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { context } from "i18n/wrapper";
 
-const Navbar = ({ opened }) => {
+const Navbar = () => {
     const Context = useContext(context);
+    const location = useLocation();
+    const opened = location.pathname;
     return (
         <Fragment>
             {/* Sidebar */}
@@ -14,7 +15,8 @@ const Navbar = ({ opened }) => {
                     <Link to="/">
                         <li
                             className={`p-5 py-3  ${
-                                opened === "customers" && "sidebar-item-opened"
+                                opened.includes("customers") &&
+                                "sidebar-item-opened"
                             } `}
                         >
                             <i className="fa fa-user"></i>{" "}
@@ -24,7 +26,8 @@ const Navbar = ({ opened }) => {
                     <Link to="/inventory">
                         <li
                             className={`p-5 py-3 ${
-                                opened === "inventory" && "sidebar-item-opened"
+                                opened.includes("inventory") &&
+                                "sidebar-item-opened"
                             }`}
                         >
                             <i className="fa fa-star"></i>{" "}
@@ -34,7 +37,8 @@ const Navbar = ({ opened }) => {
                     <Link to="/invoice">
                         <li
                             className={`p-5 py-3 ${
-                                opened === "invoice" && "sidebar-item-opened"
+                                opened.includes("invoice") &&
+                                "sidebar-item-opened"
                             }`}
                         >
                             <i className="fa fa-clipboard"></i>{" "}
@@ -60,7 +64,7 @@ const Navbar = ({ opened }) => {
                     <Link to="/">
                         <li
                             className={`p-5 py-3 ${
-                                opened === "customers" && "selected"
+                                opened.includes("customers") && "selected"
                             }`}
                         >
                             <i className="fa fa-user"></i>
@@ -69,7 +73,7 @@ const Navbar = ({ opened }) => {
                     <Link to="/inventory">
                         <li
                             className={`p-5 py-3 ${
-                                opened === "inventory" && "selected"
+                                opened.includes("inventory") && "selected"
                             }`}
                         >
                             <i className="fa fa-star"></i>
@@ -78,7 +82,7 @@ const Navbar = ({ opened }) => {
                     <Link to="/invoice">
                         <li
                             className={`p-5 py-3 ${
-                                opened === "invoice" && "selected"
+                                opened.includes("invoice") && "selected"
                             }`}
                         >
                             <i className="fa fa-clipboard"></i>
@@ -88,10 +92,6 @@ const Navbar = ({ opened }) => {
             </nav>
         </Fragment>
     );
-};
-
-Navbar.propTypes = {
-    opened: PropTypes.string.isRequired,
 };
 
 export default Navbar;
