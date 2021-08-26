@@ -2,20 +2,13 @@ import React from "react";
 import Proptypes from "prop-types";
 
 function Input({ size = "md", className, icon, type, ...rest }) {
+    const inputClass = `${size} === "ßmd" ? "input-md" : "input-sm" ${className}`;
+
     const Inputelement =
         type === "textarea" ? (
-            <textarea
-                className={`${size} === "ßmd" ? "input-md" : "input-sm" ${className}`}
-                {...rest}
-            />
+            <textarea className={inputClass} {...rest} />
         ) : (
-            <input
-                className={`${
-                    size === "md" ? "input-md" : "input-sm"
-                } ${className}`}
-                type={type}
-                {...rest}
-            />
+            <input className={inputClass} type={type} {...rest} />
         );
 
     return (
