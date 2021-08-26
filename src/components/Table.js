@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-key */
 import React from "react";
 import PropTypes from "prop-types";
-function Table({ TableData, formatter }) {
+function Table({ tableData, formatter }) {
     // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
 
     const TableBody = function () {
-        const body = TableData.map((rowData) => {
+        const body = tableData.map((rowData) => {
             const trData = formatter.map((columnData) => {
-                let cellData, currentValue;
+                let cellData = "";
                 const columnDataId = columnData.id;
                 const columnDataFormatter = columnData.formatter;
                 const columnDataFormatterValidator =
@@ -15,20 +15,15 @@ function Table({ TableData, formatter }) {
                     typeof columnDataFormatter === "function";
 
                 if (columnDataId) {
-                    currentValue = rowData[columnDataId];
                     cellData = rowData[columnDataId];
-                } else {
-                    currentValue = undefined;
-                    if (columnDataFormatterValidator) {
-                        cellData = columnDataFormatter(
-                            currentValue,
-                            rowData,
-                            TableData
-                        );
-                        return <td>{cellData}</td>;
-                    } else {
-                        return <td></td>;
-                    }
+                }
+                if (columnDataFormatterValidator) {
+                    cellData = columnDataId ? cellData : undefined;
+                    cellData = columnDataFormatter(
+                        cellData, // currentValue
+                        rowData,
+                        tableData
+                    );
                 }
                 return <td>{cellData}</td>;
             });
@@ -45,7 +40,7 @@ function Table({ TableData, formatter }) {
 }
 
 Table.propTypes = {
-    TableData: PropTypes.array,
+    tableData: PropTypes.array,
     formatter: PropTypes.array,
 };
 export default Table;

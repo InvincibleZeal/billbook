@@ -33,7 +33,7 @@ const ListItems = () => {
 
     const formatter = [
         { label: "Name", id: "name" },
-        { label: "Dsecription", id: "description" },
+        { label: "Description", id: "description" },
         { label: "Price", id: "price" },
         { label: "Date", id: "date" },
     ];
@@ -83,7 +83,7 @@ const ListItems = () => {
                             </thead>
                             <Table
                                 formatter={formatter}
-                                TableData={tableData}
+                                tableData={tableData}
                             />
                         </table>
                     </div>

@@ -78,7 +78,7 @@ const ListCustomers = () => {
                             </thead>
                             <Table
                                 formatter={formatter}
-                                TableData={tableData}
+                                tableData={tableData}
                             />
                         </table>
                     </div>
