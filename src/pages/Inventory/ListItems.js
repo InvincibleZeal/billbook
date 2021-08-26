@@ -19,7 +19,7 @@ const ListItems = () => {
         const { error, response } = await razorpay.fetchItems();
 
         if (error) {
-            triggerNotification("Internal Server Error", {
+            triggerNotification(error.message || "Something went wrong", {
                 type: "danger",
             });
         } else {

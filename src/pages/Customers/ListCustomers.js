@@ -18,7 +18,7 @@ const ListCustomers = () => {
     const fetchData = useCallback(async () => {
         const { error, response } = await razorpay.fetchCustomers();
         if (error) {
-            triggerNotification("Internal Server Error", {
+            triggerNotification(error.message || "Something went wrong", {
                 type: "danger",
             });
         } else {

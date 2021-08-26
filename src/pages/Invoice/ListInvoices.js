@@ -20,12 +20,11 @@ const ListInvoices = () => {
         const { error, response } = await razorpay.fetchInvoices();
 
         if (error) {
-            triggerNotification("Internal Server Error", {
+            triggerNotification(error.message || "Something went wrong", {
                 type: "danger",
             });
         } else {
             setTableData(response.items);
-            console.log(response);
         }
         setLoading(false);
     }, [tableData]);
