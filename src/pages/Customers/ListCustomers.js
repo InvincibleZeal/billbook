@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import withWrapper from "common/withWrapper";
 import { useNotification } from "notification";
 import Button from "components/Button";
+import Table from "components/Table";
 
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
@@ -31,6 +32,12 @@ const ListCustomers = () => {
         setTableData(customerData);
     }, [tableData]);
 
+    const formatter = [
+        { label: "Name", id: "name" },
+        { label: "Phone", id: "phone" },
+        { label: "Email", id: "email" },
+        { label: "Date", id: "date" },
+    ];
     return (
         <Fragment>
             <Navbar opened="customers" />
@@ -69,16 +76,10 @@ const ListCustomers = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.phone}</td>
-                                        <td>{data.email}</td>
-                                        <td>{data.date.slice(0, 10)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                TableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (
