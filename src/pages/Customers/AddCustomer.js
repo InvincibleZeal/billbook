@@ -16,7 +16,7 @@ const AddCustomers = () => {
     const [errors, setErrors] = useState();
     const history = useHistory();
     const { triggerNotification } = useNotification();
-
+    // Schema For Customer Details
     const CustomersDetailsSchema = Nope.object().shape({
         name: Nope.string()
             .atLeast(5, "Please provide a longer name")
