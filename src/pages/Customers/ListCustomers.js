@@ -22,7 +22,6 @@ const ListCustomers = () => {
                 type: "danger",
             });
         } else {
-            console.log(response);
             setTableData(response.items);
         }
         setLoading(false);

@@ -2,28 +2,30 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
+import { razorpay } from "api";
+import Spinner from "components/Spinner";
+
 const ListItems = () => {
+    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
     const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetchData();
     }, []);
     const { triggerNotification } = useNotification();
 
     // Function to fetch data from local storage
-    const fetchData = useCallback(() => {
-        if (localStorage.getItem("inventory_data")) {
-            try {
-                const inventoryData = JSON.parse(
-                    localStorage.getItem("inventory_data")
-                );
-                setTableData(inventoryData);
-            } catch (e) {
-                triggerNotification("Failed parsing inventory data", {
-                    type: "error",
-                });
-                localStorage.removeItem("inventory_data");
-            }
+    const fetchData = useCallback(async () => {
+        const { error, response } = await razorpay.fetchItems();
+
+        if (error) {
+            triggerNotification("Internal Server Error", {
+                type: "danger",
+            });
+        } else {
+            setTableData(response.items);
         }
+        setLoading(false);
     }, []);
 
     return (
@@ -41,7 +43,9 @@ const ListItems = () => {
                         </button>
                     </Link>
                 </div>
-                {tableData.length > 0 ? (
+                {loading ? (
+                    <Spinner loading={loading}></Spinner>
+                ) : tableData.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <colgroup>
@@ -75,8 +79,12 @@ const ListItems = () => {
                                     <tr key={idx}>
                                         <td>{data.name}</td>
                                         <td>{data.description}</td>
-                                        <td>₹{data.price}</td>
-                                        <td>{data.date.slice(0, 10)}</td>
+                                        <td>₹{data.amount}</td>
+                                        <td>
+                                            {new Date(
+                                                data.created_at * 1000
+                                            ).toLocaleString("en", dateOptions)}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
