@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
 import Button from "components/Button";
+import Table from "components/Table";
 
 const ListItems = () => {
     const [tableData, setTableData] = useState([]);
@@ -29,7 +30,12 @@ const ListItems = () => {
             }
         }
     }, []);
-
+    const formatter = [
+        { label: "Name", id: "name" },
+        { label: "Dsecription", id: "description" },
+        { label: "Price", id: "price" },
+        { label: "Date", id: "date" },
+    ];
     return (
         <Fragment>
             <Navbar opened="inventory" />
@@ -74,16 +80,10 @@ const ListItems = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.description}</td>
-                                        <td>₹{data.price}</td>
-                                        <td>{data.date.slice(0, 10)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                TableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

@@ -2,7 +2,7 @@ import React from "react";
 import Proptypes from "prop-types";
 
 function Input({ size = "md", className, icon, type, ...rest }) {
-    const inputClass = `${size} === "ßmd" ? "input-md" : "input-sm" ${className}`;
+    const inputClass = `${size} === "md" ? "input-md" : "input-sm" ${className}`;
 
     const Inputelement =
         type === "textarea" ? (
