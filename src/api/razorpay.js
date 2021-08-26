@@ -12,11 +12,20 @@ const api = {
     fetchCustomers: () => {
         return instance.get(URL.Customers);
     },
+    createCustomer: (data) => {
+        return instance.post(URL.Customers, data);
+    },
     fetchItems: () => {
         return instance.get(URL.Items);
     },
+    createItem: (data) => {
+        return instance.post(URL.Items, data);
+    },
     fetchInvoices: () => {
         return instance.get(URL.Invoices);
+    },
+    createInvoice: (data) => {
+        return instance.post(URL.Invoices, data);
     },
 };
 

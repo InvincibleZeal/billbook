@@ -19,7 +19,7 @@ const ListCustomers = () => {
         const { error, response } = await razorpay.fetchCustomers();
         if (error) {
             triggerNotification(error.message || "Something went wrong", {
-                type: "danger",
+                type: "error",
             });
         } else {
             setTableData(response.items);
