@@ -25,10 +25,10 @@ function Table({ tableData, formatter }) {
                         tableData
                     );
                 }
-                return <td>{cellData}</td>;
+                return <td key={cellData}>{cellData}</td>;
             });
 
-            return <tr>{trData}</tr>;
+            return <tr key={Object.keys(rowData)[0]}>{trData}</tr>;
         });
         return body;
     };
@@ -44,21 +44,3 @@ Table.propTypes = {
     formatter: PropTypes.array,
 };
 export default Table;
-
-// const columnDataFormatterValidator =
-//     columnData.formatter &&
-//     typeof columnData.formatter === "function"; // this is optional if we are sure that if formatter exist then it will be a function
-// if (!columnDataId) {
-//     if (columnDataFormatterValidator) {
-//         cellData = columnData.formatter(TableData, rowData);
-//         return <td>{cellData}</td>;
-//     } else {
-//         return <td></td>;
-//     }
-// }
-// if (columnDataId)
-// cellData = rowData[columnDataId];
-// if (columnDataFormatterValidator) {
-//     cellData = columnData.formatter(columnData, rowData);
-//     return <td>{cellData}</td>;
-// }

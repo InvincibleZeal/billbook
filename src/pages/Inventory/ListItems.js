@@ -61,7 +61,7 @@ const ListItems = () => {
                                 <col span="1" style={{ width: "15%" }} />
                                 <col span="1" style={{ width: "15%" }} />
                             </colgroup>
-                            <thead>
+                            <thead key="thead">
                                 <tr>
                                     <th>
                                         {" "}
