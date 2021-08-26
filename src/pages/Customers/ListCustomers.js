@@ -76,7 +76,7 @@ const ListCustomers = () => {
                                         <td>{data.email}</td>
                                         <td>
                                             {new Date(
-                                                data.created_at
+                                                data.created_at * 1000
                                             ).toLocaleString("en", dateOptions)}
                                         </td>
                                     </tr>
