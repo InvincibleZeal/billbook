@@ -35,12 +35,13 @@ axios.request = function (...args) {
 };
 
 const formatPayload = (url, method, ...args) => {
+    args = args.reverse();
     let config, params, data;
     switch (method) {
         case methods.POST:
         case methods.PATCH:
         case methods.PUT:
-            [data, config = {}] = args;
+            [config = {}, data] = args;
             config.body = JSON.stringify(data);
             break;
         case methods.DELETE:
@@ -49,7 +50,7 @@ const formatPayload = (url, method, ...args) => {
             [config = {}] = args;
             break;
         case methods.GET:
-            [params = {}, config = {}] = args;
+            [config = {}, params = {}] = args;
             config = { ...config, params };
             break;
     }
