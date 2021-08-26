@@ -35,23 +35,19 @@ axios.request = function (...args) {
 };
 
 const formatPayload = (url, method, ...args) => {
-    args = args.reverse();
-    let config, params, data;
+    let config, data;
     switch (method) {
         case methods.POST:
         case methods.PATCH:
         case methods.PUT:
-            [config = {}, data] = args;
+            [data, config = {}] = args;
             config.body = JSON.stringify(data);
             break;
         case methods.DELETE:
         case methods.HEAD:
         case methods.OPTIONS:
-            [config = {}] = args;
-            break;
         case methods.GET:
-            [config = {}, params = {}] = args;
-            config = { ...config, params };
+            [config = {}] = args;
             break;
     }
     url = new URL(url);
@@ -68,26 +64,81 @@ const formatPayload = (url, method, ...args) => {
     return { url, config };
 };
 
+const construct = async (url, method, ...args) => {
+    const formatted = formatPayload(url, method, ...args);
+    let error, response;
+    try {
+        response = await fetch(formatted.url, formatted.config)
+            .then(async (res) => {
+                return { res, text: await res.text() };
+            })
+            .then(({ res, text }) => {
+                return text ? JSON.parse(text) : res;
+            })
+            .catch((err) => {
+                error = err;
+            });
+    } catch (e) {
+        error = e;
+    }
+    return { error, response };
+};
+
 Object.keys(methods).forEach((method) => {
     axios[method.toLowerCase()] = async (url, ...args) => {
-        const formatted = formatPayload(url, method, ...args);
-        let error, response;
-        try {
-            response = await fetch(formatted.url, formatted.config)
-                .then(async (res) => {
-                    return { res, text: await res.text() };
-                })
-                .then(({ res, text }) => {
-                    return text ? JSON.parse(text) : res;
-                })
-                .catch((err) => {
-                    error = err;
-                });
-        } catch (e) {
-            error = e;
-        }
-        return { error, response };
+        return construct(url, method, ...args);
     };
 });
+
+axios.config = ({ baseUrl, headers }) => {
+    return new Axios({ baseUrl, headers });
+};
+
+class Axios {
+    constructor({ baseUrl, headers }) {
+        this.baseUrl = baseUrl;
+        this.headers = headers;
+
+        Object.keys(methods).forEach((method) => {
+            this[method.toLowerCase()] = async (url, ...args) => {
+                try {
+                    url = new URL(url);
+                } catch (e) {
+                    if (!this.baseUrl.endsWith("/")) {
+                        baseUrl = this.baseUrl + "/";
+                    }
+                    if (url.startsWith("/")) {
+                        url = url.slice(1);
+                    }
+                    url = baseUrl + url;
+                }
+                let config, data;
+                switch (method) {
+                    case methods.POST:
+                    case methods.PATCH:
+                    case methods.PUT:
+                        [data, config = {}] = args;
+                        config.body = JSON.stringify(data);
+                        break;
+                    case methods.DELETE:
+                    case methods.HEAD:
+                    case methods.OPTIONS:
+                    case methods.GET:
+                        [config = {}] = args;
+                        break;
+                }
+                if (Object.keys(this.headers).length) {
+                    config.headers = {
+                        ...this.headers,
+                        ...config.headers,
+                    };
+                }
+                args.pop();
+                args.push(config);
+                return construct(url, method, ...args);
+            };
+        });
+    }
+}
 
 export default axios;

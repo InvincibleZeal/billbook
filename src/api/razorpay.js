@@ -1,37 +1,21 @@
 import axios from "axios";
 import config from "./config";
 
+const instance = axios.config({ ...config.razorpay });
+const Url = {
+    Customers: "customers",
+    Items: "items",
+    Invoices: "invoices",
+};
 const api = {
     fetchCustomers: () => {
-        return axios.get(`${config.razorpay.url}/customers`, {
-            headers: { ...config.razorpay.headers },
-        });
+        return instance.get(Url.Customers);
     },
-    fetchCustomer: (id) => {
-        return axios.get(`${config.razorpay.url}/customers/${id}`, {
-            headers: { ...config.razorpay.headers },
-        });
-    },
-
     fetchItems: () => {
-        return axios.get(`${config.razorpay.url}/items`, {
-            headers: { ...config.razorpay.headers },
-        });
-    },
-    fetchItem: (id) => {
-        return axios.get(`${config.razorpay.url}/items/${id}`, {
-            headers: { ...config.razorpay.headers },
-        });
+        return instance.get(Url.Items);
     },
     fetchInvoices: () => {
-        return axios.get(`${config.razorpay.url}/invoices`, {
-            headers: { ...config.razorpay.headers },
-        });
-    },
-    fetchInvoice: (id) => {
-        return axios.get(`${config.razorpay.url}/invoices/${id}`, {
-            headers: { ...config.razorpay.headers },
-        });
+        return instance.get(Url.Invoices);
     },
 };
 
