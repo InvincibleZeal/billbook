@@ -30,6 +30,7 @@ const ListItems = () => {
             }
         }
     }, []);
+
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Dsecription", id: "description" },
