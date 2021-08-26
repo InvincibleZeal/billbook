@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "./config";
 
 const instance = axios.config({ ...config.razorpay });
+console.log(instance);
 const Url = {
     Customers: "customers",
     Items: "items",

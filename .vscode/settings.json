@@ -15,7 +15,9 @@
         "billbook",
         "browserslist",
         "commitlint",
+        "ltrim",
         "razorpay",
+        "rtrim",
         "scrollable",
         "stylelint"
     ]
