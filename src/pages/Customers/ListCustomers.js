@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useNotification } from "notification";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
+import { formatDate } from "utils/helper";
 
 const ListCustomers = () => {
-    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -74,9 +74,9 @@ const ListCustomers = () => {
                                         <td>{data.contact}</td>
                                         <td>{data.email}</td>
                                         <td>
-                                            {new Date(
-                                                data.created_at * 1000
-                                            ).toLocaleString("en", dateOptions)}
+                                            {data.created_at
+                                                ? formatDate(data.created_at)
+                                                : "-"}
                                         </td>
                                     </tr>
                                 ))}

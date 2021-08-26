@@ -5,9 +5,9 @@ import "styles/add-customer.css";
 import { useNotification } from "notification";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
+import { formatDate } from "utils/helper";
 
 const ListInvoices = () => {
-    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -86,22 +86,17 @@ const ListInvoices = () => {
                                     <tr key={idx}>
                                         <td>
                                             {data.created_at
-                                                ? new Date(
-                                                      data.created_at * 1000
-                                                  ).toLocaleString(
-                                                      "en",
-                                                      dateOptions
-                                                  )
-                                                : "NA"}
+                                                ? formatDate(data.created_at)
+                                                : "-"}
                                         </td>
                                         <td>
                                             {data.customer_details &&
                                             data.customer_details.customer_name
                                                 ? data.customer_details
                                                       .customer_name
-                                                : "NA"}
+                                                : "-"}
                                         </td>
-                                        <td>{data.invoice_number || "NA"}</td>
+                                        <td>{data.invoice_number || "-"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
                                                 PAID
