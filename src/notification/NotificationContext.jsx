@@ -4,10 +4,10 @@ import Toast from "./Toast";
 export const NotificationContext = React.createContext();
 
 const ToastType = {
-    Simple: "simple",
-    Success: "success",
-    Error: "error",
-    Warning: "warning",
+    SIMPLE: "simple",
+    SUCCESS: "success",
+    ERROR: "error",
+    WARNING: "warning",
 };
 
 const createToast = (msg, options) => {
@@ -17,7 +17,7 @@ const createToast = (msg, options) => {
     toast.title = msg;
     toast.type = Object.values(ToastType).includes(options.type)
         ? options.type
-        : ToastType.Simple;
+        : ToastType.SIMPLE;
     toast.time = options.time || 3000;
     return toast;
 };
