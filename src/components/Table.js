@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React from "react";
 import PropTypes from "prop-types";
 function Table({ tableData, formatter }) {
@@ -6,24 +5,25 @@ function Table({ tableData, formatter }) {
 
     const TableBody = function () {
         const body = tableData.map((rowData, rowIndex) => {
-            const trData = formatter.map((columnData) => {
+            const trData = formatter.map((columnData, columnId) => {
                 let cellData = "";
                 const columnDataId = columnData.id;
                 const columnDataFormatter = columnData.formatter;
-                const columnDataFormatterValidator =
-                    columnDataFormatter &&
-                    typeof columnDataFormatter === "function";
 
                 if (columnDataId) {
                     cellData = rowData[columnDataId];
                 }
-                if (columnDataFormatterValidator) {
-                    cellData = columnDataId ? cellData : undefined;
-                    cellData = columnDataFormatter(
-                        cellData, // currentValue
-                        rowData,
-                        tableData
-                    );
+                if (columnDataFormatter) {
+                    if (typeof columnDataFormatter === "function") {
+                        cellData = cellData || undefined;
+                        console.log(cellData);
+                        cellData = columnDataFormatter(
+                            cellData, // currentValue
+                            rowData,
+                            tableData
+                        );
+                    } else
+                        return <td key={columnId}> {columnDataFormatter}</td>;
                 }
                 return <td key={cellData}>{cellData}</td>;
             });

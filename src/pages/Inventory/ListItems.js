@@ -33,8 +33,8 @@ const ListItems = () => {
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Description", id: "description" },
-        { label: "Price", id: "price" },
-        { label: "Date", id: "date" },
+        { label: "Price", id: "amount" },
+        { label: "Date", id: "created_at", formatter: formatDate },
     ];
     return (
         <Fragment>
@@ -63,7 +63,7 @@ const ListItems = () => {
                                 <col span="1" style={{ width: "15%" }} />
                                 <col span="1" style={{ width: "15%" }} />
                             </colgroup>
-                            <thead key="thead">
+                            <thead>
                                 <tr>
                                     <th>
                                         {" "}
@@ -87,20 +87,10 @@ const ListItems = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.description}</td>
-                                        <td>₹{data.amount}</td>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

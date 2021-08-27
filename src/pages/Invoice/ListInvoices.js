@@ -33,34 +33,33 @@ const ListInvoices = () => {
 
     // Function to calc total
 
-    const calcAmount = (array) => {
-        if (array) {
-            return array.reduce((accumulator, currValue) => {
-                return accumulator + currValue.net_amount;
-            }, 0);
-        }
-        return 0;
-    };
-    console.log(tableData);
+    // const calcAmount = (array) => {
+    //     if (array) {
+    //         return array.reduce((accumulator, currValue) => {
+    //             return accumulator + currValue.net_amount;
+    //         }, 0);
+    //     }
+    //     return 0;
+    // };
+
     const formatter = [
-        { label: "IssueDate", id: "issueDate" },
-        { label: "Customers", id: "customers.name" },
-        { label: "InvoiceNumber", id: "invoiceNumber" },
+        { label: "CreatedAt", id: "created_at", formatter: formatDate },
+        { label: "Customers", id: "customers_details " }, // this is not showing yet
+
+        { label: "InvoiceNumber", id: "invoice_number" },
         {
             label: "PaidStatus",
-            formatter: () => {
-                <span className="bg-info info px-3 py-1 rounded">PAID</span>;
-            },
+            formatter: (
+                <span className="bg-info info px-3 py-1 rounded">PAID</span>
+            ),
         },
         {
             label: "Amount",
             id: "amount",
-            formatter: calcAmount,
         },
         {
             label: "AmountDue",
-            id: "amountDue",
-            formatter: calcAmount,
+            id: "amount_due",
         },
     ];
     return (
@@ -110,32 +109,6 @@ const ListInvoices = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
-                            {/* <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                        <td>
-                                            {data.customer_details &&
-                                            data.customer_details.customer_name
-                                                ? data.customer_details
-                                                      .customer_name
-                                                : "-"}
-                                        </td>
-                                        <td>{data.invoice_number || "-"}</td>
-                                        <td>
-                                            <span className="bg-info info px-3 py-1 rounded">
-                                                PAID
-                                            </span>
-                                        </td>
-                                        <td>₹{calcAmount(data.line_items)}</td>
-                                        <td>₹{calcAmount(data.line_items)}</td>
-                                    </tr>
-                                ))}
-                            </tbody> */}
                         </table>
                     </div>
                 ) : (

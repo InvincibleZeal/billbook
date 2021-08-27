@@ -31,9 +31,9 @@ const ListCustomers = () => {
 
     const formatter = [
         { label: "Name", id: "name" },
-        { label: "Phone", id: "phone" },
+        { label: "Phone", id: "contact" },
         { label: "Email", id: "email" },
-        { label: "Date", id: "date" },
+        { label: "Date", id: "created_at", formatter: formatDate },
     ];
     return (
         <Fragment>
@@ -80,20 +80,10 @@ const ListCustomers = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.contact}</td>
-                                        <td>{data.email}</td>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

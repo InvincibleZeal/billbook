@@ -125,6 +125,12 @@ const CreateInvoice = () => {
                         </span>
                         <Button icon="save" type="submit">
                             <FormattedMessage id="invoice.saveButton" />
+                            <Spinner
+                                loading={saving}
+                                size={12}
+                                className="px-1"
+                                width="30px"
+                            ></Spinner>
                         </Button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
