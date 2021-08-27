@@ -87,10 +87,6 @@ const ListItems = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
                         </table>
                     </div>
                 ) : (
