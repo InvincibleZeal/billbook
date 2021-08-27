@@ -484,6 +484,11 @@ input:focus-visible {
     flex-grow: 1;
 }
 
+.text-error {
+    color: var(--danger-color);
+    font-size: 12px;
+}
+
 /************ Buttons ****************/
 .btn-link {
     color: var(--primary-color);

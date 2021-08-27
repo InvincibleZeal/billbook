@@ -1,18 +1,20 @@
 import { useState } from "react";
 
-export function useForm(initialState) {
+export function useForm(initialState, validationSchema) {
+    // State Variables
     const [fields, setValues] = useState(initialState);
+    const [errors, setErrors] = useState({});
 
-    // Function to handle form values
-    const handleFormState = (event) => {
+    // For Handling  form related changes
+    const handleFieldChange = (event) => {
         setValues((prev) => ({
             ...prev,
             [event.target.name]: event.target.value,
         }));
     };
 
-    // Function to handle object, array in fields
-    const setFormState = (key, value) => {
+    // For Handling other changes wrt to arrays and objects
+    const setState = (key, value) => {
         if (typeof value === "function") {
             const newValue = value(fields[key]);
             console.log(newValue);
@@ -28,5 +30,18 @@ export function useForm(initialState) {
         }
     };
 
-    return [fields, handleFormState, setFormState];
+    // Function to Validate fields
+    const validate = () => {
+        const results = validationSchema.validate(fields);
+        setErrors(results);
+        return !results;
+    };
+
+    return {
+        fields,
+        handleFieldChange,
+        setState,
+        validate,
+        errors,
+    };
 }
