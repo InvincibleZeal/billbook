@@ -131,57 +131,66 @@ const CreateInvoice = () => {
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
-                        <div className="card-bordered p-3 mx-5">
-                            <h4 className="bill-to text-muted m-0 mb-3">
-                                <FormattedMessage id="invoice.billTo" />
-                            </h4>
-                            <div className="d-flex justify-content-between">
-                                {!loading && !modalState.customers.length ? (
-                                    <Link to="/customers/add">
-                                        {" "}
-                                        <p>
+                        <div>
+                            <div className="card-bordered p-3 mx-5 mb-1">
+                                <h4 className="bill-to text-muted m-0 mb-3">
+                                    <FormattedMessage id="invoice.billTo" />
+                                </h4>
+                                <div className="d-flex justify-content-between">
+                                    {!loading &&
+                                    !modalState.customers.length ? (
+                                        <Link to="/customers/add">
                                             {" "}
-                                            <FormattedMessage id="invoice.selectCustomer" />
-                                        </p>{" "}
-                                    </Link>
-                                ) : null}
-                                {!loading && fields.customer.name ? (
-                                    <Fragment>
-                                        <div className="billing_details pr-3">
-                                            <div>{fields.customer.name}</div>
-                                            <div>{fields.customer.contact}</div>
-                                            <div>{fields.customer.email}</div>
-                                        </div>
-                                        <div
-                                            className="btn-link"
-                                            onClick={() =>
-                                                setModalState((state) => ({
-                                                    ...state,
-                                                    status: true,
-                                                    type: "customer",
-                                                }))
-                                            }
-                                        >
-                                            <FormattedMessage id="invoice.change" />
-                                        </div>
-                                    </Fragment>
-                                ) : null}
-                                {!fields.customer.name ? (
-                                    <Fragment>
-                                        <div
-                                            className="btn-link"
-                                            onClick={() => {
-                                                setModalState((state) => ({
-                                                    ...state,
-                                                    status: true,
-                                                    type: "customer",
-                                                }));
-                                            }}
-                                        >
-                                            <FormattedMessage id="invoice.selectCustomer" />
-                                        </div>
-                                    </Fragment>
-                                ) : null}
+                                            <p>
+                                                {" "}
+                                                <FormattedMessage id="invoice.selectCustomer" />
+                                            </p>{" "}
+                                        </Link>
+                                    ) : null}
+                                    {!loading && fields.customer.name ? (
+                                        <Fragment>
+                                            <div className="billing_details pr-3">
+                                                <div>
+                                                    {fields.customer.name}
+                                                </div>
+                                                <div>
+                                                    {fields.customer.contact}
+                                                </div>
+                                                <div>
+                                                    {fields.customer.email}
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="btn-link"
+                                                onClick={() =>
+                                                    setModalState((state) => ({
+                                                        ...state,
+                                                        status: true,
+                                                        type: "customer",
+                                                    }))
+                                                }
+                                            >
+                                                <FormattedMessage id="invoice.change" />
+                                            </div>
+                                        </Fragment>
+                                    ) : null}
+                                    {!fields.customer.name ? (
+                                        <Fragment>
+                                            <div
+                                                className="btn-link"
+                                                onClick={() => {
+                                                    setModalState((state) => ({
+                                                        ...state,
+                                                        status: true,
+                                                        type: "customer",
+                                                    }));
+                                                }}
+                                            >
+                                                <FormattedMessage id="invoice.selectCustomer" />
+                                            </div>
+                                        </Fragment>
+                                    ) : null}
+                                </div>
                             </div>
                             {errors?.customer && (
                                 <span className="text-error mx-1 px-5">
@@ -245,9 +254,9 @@ const CreateInvoice = () => {
                                         value={fields.invoice_number}
                                         onChange={handleFieldChange}
                                     />
-                                    {errors?.invoiceNumber && (
+                                    {errors?.invoice_number && (
                                         <span className="text-error mt-2">
-                                            {errors.invoiceNumber || ""}
+                                            {errors.invoice_number || ""}
                                         </span>
                                     )}
                                 </div>
@@ -264,9 +273,9 @@ const CreateInvoice = () => {
                                         value={fields.reference_number}
                                         onChange={handleFieldChange}
                                     />
-                                    {errors?.referenceNumber && (
+                                    {errors?.reference_number && (
                                         <span className="text-error mt-2">
-                                            {errors.referenceNumber || ""}
+                                            {errors.reference_number || ""}
                                         </span>
                                     )}
                                 </div>
@@ -355,9 +364,9 @@ const CreateInvoice = () => {
                                 <FormattedMessage id="invoice.addAnItem" />
                             </span>
                         </div>
-                        {errors?.items && (
+                        {errors?.line_items && (
                             <span className="text-error mt-2">
-                                {errors.items || ""}
+                                {errors.line_items || ""}
                             </span>
                         )}
                     </div>

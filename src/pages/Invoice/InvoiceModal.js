@@ -25,29 +25,33 @@ const ChangeCustomerModal = ({
         [fields]
     );
 
-    const addItem = useCallback((id, name, price) => {
-        const product = { id: id, name, price };
-        product.quantity = 1;
-        setState("line_items", (items) => {
-            const updateItems = [...fields.line_items];
-            if (
-                updateItems.length === 0 ||
-                !updateItems.find((p) => p.id === product.id)
-            ) {
-                updateItems.push(product);
-            } else if (updateItems.find((p) => p.id === product.id)) {
-                product.quantity =
-                    updateItems.find((p) => p.id === product.id).quantity + 1;
-                updateItems.splice(
-                    updateItems.findIndex((p) => p.id === product.id),
-                    1,
-                    product
-                );
-            }
-            return updateItems;
-        });
-        setModalState((state) => ({ ...state, status: false }));
-    }, []);
+    const addItem = useCallback(
+        (id, name, price) => {
+            const product = { id: id, name, price };
+            product.quantity = 1;
+            setState("line_items", (items) => {
+                const updateItems = [...items];
+                if (
+                    updateItems.length === 0 ||
+                    !updateItems.find((p) => p.id === product.id)
+                ) {
+                    updateItems.push(product);
+                } else if (updateItems.find((p) => p.id === product.id)) {
+                    product.quantity =
+                        updateItems.find((p) => p.id === product.id).quantity +
+                        1;
+                    updateItems.splice(
+                        updateItems.findIndex((p) => p.id === product.id),
+                        1,
+                        product
+                    );
+                }
+                return updateItems;
+            });
+            setModalState((state) => ({ ...state, status: false }));
+        },
+        [fields]
+    );
     return (
         <Modal
             isOpen={status}

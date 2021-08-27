@@ -2,10 +2,10 @@ import Nope from "nope-validator";
 
 // Fields for the Invoice
 export const invoiceDetails = {
+    customer: {},
     issueDate: "",
     dueDate: "",
     notes: "",
-    customer: {},
     invoice_number: "",
     reference_number: "",
     customer_id: "",
@@ -19,8 +19,9 @@ export const InvoiceDetailsSchema = Nope.object().shape({
         name: Nope.string().required(),
     }),
     issueDate: Nope.string().required(),
-    invoiceNumber: Nope.string().required(),
-    referenceNumber: Nope.string().required(),
-    items: Nope.array().minLength(0, "This is a required field"),
+    dueDate: Nope.string().required(),
     notes: Nope.string(),
+    invoice_number: Nope.string().required(),
+    reference_number: Nope.string().required(),
+    line_items: Nope.array().minLength(0, "This is a required field"),
 });

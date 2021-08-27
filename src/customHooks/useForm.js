@@ -15,19 +15,14 @@ export function useForm(initialState, validationSchema) {
 
     // For Handling other changes wrt to arrays and objects
     const setState = (key, value) => {
+        let newValue = value;
         if (typeof value === "function") {
-            const newValue = value(fields[key]);
-            console.log(newValue);
-            setValues((prev) => ({
-                ...prev,
-                [key]: newValue,
-            }));
-        } else {
-            setValues((prev) => ({
-                ...prev,
-                [key]: value,
-            }));
+            newValue = value(fields[key]);
         }
+        setValues((prev) => ({
+            ...prev,
+            [key]: newValue,
+        }));
     };
 
     // Function to Validate fields
