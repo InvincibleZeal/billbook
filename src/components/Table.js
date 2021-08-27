@@ -23,9 +23,14 @@ function Table({ tableData, formatter }) {
                             tableData
                         );
                     } else
-                        return <td key={}> {columnDataFormatter}</td>;
+                        return (
+                            <td key={columnDataId || columnIndex}>
+                                {" "}
+                                {columnDataFormatter}
+                            </td>
+                        );
                 }
-                return <td key={columnDataId ? columnDataId : columnIndex}>{cellData}</td>;
+                return <td key={columnDataId || columnIndex}>{cellData}</td>;
             });
 
             return <tr key={rowIndex}>{trData}</tr>;
