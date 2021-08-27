@@ -7,13 +7,13 @@ export const invoiceDetails = {
     invoiceNumber: "",
     referenceNumber: "",
     notes: "",
-    customers: {},
+    customer: {},
     items: [],
 };
 
 // Schema For Customer Details
 export const InvoiceDetailsSchema = Nope.object().shape({
-    customers: Nope.object().shape({
+    customer: Nope.object().shape({
         name: Nope.string().required(),
     }),
     issueDate: Nope.string().required(),

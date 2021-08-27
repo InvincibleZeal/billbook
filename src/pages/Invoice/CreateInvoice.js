@@ -136,24 +136,24 @@ const CreateInvoice = () => {
                                 <div className="d-flex justify-content-between">
                                     {modalState.customers.length > 0 ? (
                                         <Fragment>
-                                            {fields.customers.name ? (
+                                            {fields.customer.name ? (
                                                 <Fragment>
                                                     <div className="billing_details pr-3">
                                                         <div>
                                                             {
-                                                                fields.customers
+                                                                fields.customer
                                                                     .name
                                                             }
                                                         </div>
                                                         <div>
                                                             {
-                                                                fields.customers
+                                                                fields.customer
                                                                     .phone
                                                             }
                                                         </div>
                                                         <div>
                                                             {
-                                                                fields.customers
+                                                                fields.customer
                                                                     .email
                                                             }
                                                         </div>
@@ -201,9 +201,9 @@ const CreateInvoice = () => {
                                     )}
                                 </div>
                             </div>
-                            {errors?.customers && (
+                            {errors?.customer && (
                                 <span className="text-error mx-1 px-5">
-                                    {errors.customers.name || ""}
+                                    {errors.customer.name || ""}
                                 </span>
                             )}
                         </div>
