@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
@@ -6,7 +5,7 @@ import InvoiceModal from "./InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import Nope from "nope-validator";
+import { invoiceDetails, InvoiceDetailsSchema } from "./FormDetails";
 
 const CreateInvoice = () => {
     const [modalState, setModalState] = useState({
@@ -15,27 +14,13 @@ const CreateInvoice = () => {
         customers: [],
         type: "customer",
     });
-    const [fields, handleFieldChange, setFormState] = useForm({
-        issueDate: "",
-        dueDate: "",
-        invoiceNumber: "",
-        referenceNumber: "",
-        notes: "",
-        customers: {},
-        items: [],
-    });
-    const [errors, setErrors] = useState();
-    // Schema For Customer Details
-    const InvoiceDetailsSchema = Nope.object().shape({
-        customers: Nope.object().shape({
-            name: Nope.string().required(),
-        }),
-        issueDate: Nope.string().required(),
-        invoiceNumber: Nope.string().required(),
-        referenceNumber: Nope.string().required(),
-        items: Nope.array().minLength(0, "This is a required field"),
-        notes: Nope.string(),
-    });
+    const {
+        fields,
+        handleFieldChange,
+        validation,
+        errors,
+        handleOtherChanges,
+    } = useForm(invoiceDetails, InvoiceDetailsSchema);
     const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
@@ -85,7 +70,7 @@ const CreateInvoice = () => {
                     intl.formatMessage({ id: "invoice.confirm.delete.item" })
                 )
             ) {
-                setFormState(
+                handleOtherChanges(
                     "items",
                     fields.items.filter((item) => item.id !== id)
                 );
@@ -96,8 +81,7 @@ const CreateInvoice = () => {
     const saveInvoice = useCallback(
         (event) => {
             event.preventDefault();
-            setErrors(InvoiceDetailsSchema.validate(fields));
-            if (InvoiceDetailsSchema.validate(fields) === undefined) {
+            if (validation()) {
                 // Adding to local storage
                 try {
                     if (localStorage.getItem("invoice_data") == null) {
@@ -127,7 +111,7 @@ const CreateInvoice = () => {
         (id, value) => {
             const index = fields.items.findIndex((x) => x.id === id);
             fields.items[index].quantity = Number(value);
-            setFormState("items", fields.items);
+            handleOtherChanges("items", fields.items);
         },
         [fields]
     );
@@ -472,7 +456,7 @@ const CreateInvoice = () => {
                 customers={modalState.customers}
                 items={modalState.items}
                 type={modalState.type}
-                setFormState={setFormState}
+                handleOtherChanges={handleOtherChanges}
                 fields={fields}
             />
         </Fragment>

@@ -11,12 +11,12 @@ const ChangeCustomerModal = ({
     customers,
     items,
     type,
-    setFormState,
+    handleOtherChanges,
     fields,
 }) => {
     const updateCustomersDetails = useCallback(
         (name, phone, email) => {
-            setFormState("customers", { name, phone, email });
+            handleOtherChanges("customers", { name, phone, email });
             setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
@@ -42,7 +42,7 @@ const ChangeCustomerModal = ({
                     product
                 );
             }
-            setFormState("items", [...updateItems]);
+            handleOtherChanges("items", [...updateItems]);
             setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
@@ -182,7 +182,7 @@ ChangeCustomerModal.propTypes = {
     setModalState: PropTypes.func.isRequired,
     customers: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    setFormState: PropTypes.func.isRequired,
+    handleOtherChanges: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
 };
 
