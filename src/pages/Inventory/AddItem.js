@@ -1,9 +1,10 @@
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 import { razorpay } from "api";
+import Spinner from "components/Spinner";
 
 const AddItem = () => {
     const [fields, handleFieldChange] = useForm({
@@ -12,6 +13,7 @@ const AddItem = () => {
         description: "",
         currency: "INR",
     });
+    const [saving, setSaving] = useState(false);
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
@@ -19,6 +21,7 @@ const AddItem = () => {
         async (e) => {
             // Adding to local storage
             e.preventDefault();
+            setSaving(true);
             const { error, response } = await razorpay.createItem(fields);
 
             if (error || response.error) {
@@ -33,6 +36,7 @@ const AddItem = () => {
                 });
                 history.push("/inventory");
             }
+            setSaving(false);
         },
         [fields]
     );
@@ -91,9 +95,19 @@ const AddItem = () => {
                                 ></textarea>
                             </div>
                             <div className="form-group m-5 justify-content-center">
-                                <button className="btn" type="submit">
+                                <button
+                                    className="btn"
+                                    type="submit"
+                                    disabled={saving}
+                                >
                                     <i className="fa fa-save"></i> &nbsp;{" "}
                                     <FormattedMessage id="item.saveButton" />
+                                    <Spinner
+                                        loading={saving}
+                                        size={12}
+                                        className="px-1"
+                                        width="30px"
+                                    ></Spinner>
                                 </button>
                             </div>
                         </form>

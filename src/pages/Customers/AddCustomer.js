@@ -1,10 +1,11 @@
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 import { razorpay } from "api";
+import Spinner from "components/Spinner";
 
 const AddCustomers = () => {
     const [fields, handleFieldChange] = useForm({
@@ -12,12 +13,14 @@ const AddCustomers = () => {
         contact: "",
         email: "",
     });
+    const [saving, setSaving] = useState(false);
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
     const addCustomer = useCallback(
         async (e) => {
             e.preventDefault();
+            setSaving(true);
             const { error, response } = await razorpay.createCustomer(fields);
 
             if (error || response.error) {
@@ -31,6 +34,7 @@ const AddCustomers = () => {
                 });
                 history.push("/customers");
             }
+            setSaving(false);
         },
         [fields]
     );
@@ -87,9 +91,19 @@ const AddCustomers = () => {
                                 />
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
-                                <button className="btn" type="submit">
+                                <button
+                                    className="btn"
+                                    type="submit"
+                                    disabled={saving}
+                                >
                                     <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.saveButton" />
+                                    <Spinner
+                                        loading={saving}
+                                        size={12}
+                                        className="px-1"
+                                        width="30px"
+                                    ></Spinner>
                                 </button>
                             </div>
                         </div>
