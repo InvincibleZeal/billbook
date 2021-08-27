@@ -3,7 +3,7 @@ import { useState } from "react";
 export function useForm(initialState, validationSchema) {
     // State Variables
     const [fields, setValues] = useState(initialState);
-    const [errors, setErrors] = useState();
+    const [errors, setErrors] = useState({});
 
     // For Handling  form related changes
     const handleFieldChange = (event) => {
