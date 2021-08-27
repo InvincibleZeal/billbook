@@ -4,11 +4,13 @@ import Nope from "nope-validator";
 export const invoiceDetails = {
     issueDate: "",
     dueDate: "",
-    invoiceNumber: "",
-    referenceNumber: "",
     notes: "",
     customer: {},
-    items: [],
+    invoice_number: "",
+    reference_number: "",
+    customer_id: "",
+    line_items: [],
+    type: "invoice",
 };
 
 // Schema For Customer Details

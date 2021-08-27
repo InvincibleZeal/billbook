@@ -11,15 +11,21 @@ import {
 } from "pages/Customers/FormDetails";
 
 const AddCustomers = () => {
+    // State Variables
     const { fields, handleFieldChange, validate, errors } = useForm(
         customersDetails,
         CustomersDetailsSchema
     );
+
+    // Imports for link and notification
     const history = useHistory();
     const { triggerNotification } = useNotification();
+
+    // API called here to add customers to db
     const addCustomer = useCallback(
         async (event) => {
             event.preventDefault();
+            // Form Validations
             if (validate()) {
                 const { error, response } = await razorpay.createCustomer(
                     fields
@@ -81,9 +87,9 @@ const AddCustomers = () => {
                                     value={fields.contact}
                                     onChange={handleFieldChange}
                                 />
-                                {errors?.phone && (
+                                {errors?.contact && (
                                     <span className="text-error mt-2">
-                                        {errors.phone || ""}
+                                        {errors.contact || ""}
                                     </span>
                                 )}
                             </div>
