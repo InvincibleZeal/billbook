@@ -1,35 +1,21 @@
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import Nope from "nope-validator";
+import { itemDetails, ItemDetailsSchema } from "./FormDetails";
 
 const AddItem = () => {
-    const [fields, handleFieldChange] = useForm({
-        name: "",
-        price: "",
-        description: "",
-        date: new Date(),
-        id: Math.floor(Math.random() * 101 + 1),
-    });
+    const { fields, handleFieldChange, validation, errors } = useForm(
+        itemDetails,
+        ItemDetailsSchema
+    );
     const history = useHistory();
-    const [errors, setErrors] = useState();
     const { triggerNotification } = useNotification();
-    // Schema For Item Details
-    const ItemDetailsSchema = Nope.object().shape({
-        name: Nope.string().required(),
-        description: Nope.string().required(),
-        price: Nope.number()
-            .atLeast(0, "Please provide a longer name")
-            .required(),
-    });
-
     const addItem = useCallback(
         (event) => {
             event.preventDefault();
-            setErrors(ItemDetailsSchema.validate(fields));
-            if (ItemDetailsSchema.validate(fields) === undefined) {
+            if (validation()) {
                 // Adding to local storage
                 if (localStorage.getItem("inventory_data") == null) {
                     localStorage.setItem("inventory_data", "[]");
@@ -55,7 +41,6 @@ const AddItem = () => {
         },
         [fields]
     );
-
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
