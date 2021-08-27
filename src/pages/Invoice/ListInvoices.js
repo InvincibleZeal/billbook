@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import { useNotification } from "notification";
 import Button from "components/Button";
-
+import Table from "components/Table";
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
@@ -32,6 +32,7 @@ const ListInvoices = () => {
     }, [tableData]);
 
     // Function to calc total
+
     const calcAmount = (array) => {
         if (array) {
             return array.reduce((accumulator, currValue) => {
@@ -40,7 +41,28 @@ const ListInvoices = () => {
         }
         return 0;
     };
-
+    console.log(tableData);
+    const formatter = [
+        { label: "IssueDate", id: "issueDate" },
+        { label: "Customers", id: "customers.name" },
+        { label: "InvoiceNumber", id: "invoiceNumber" },
+        {
+            label: "PaidStatus",
+            formatter: () => {
+                <span className="bg-info info px-3 py-1 rounded">PAID</span>;
+            },
+        },
+        {
+            label: "Amount",
+            id: "amount",
+            formatter: calcAmount,
+        },
+        {
+            label: "AmountDue",
+            id: "amountDue",
+            formatter: calcAmount,
+        },
+    ];
     return (
         <Fragment>
             <Navbar opened="invoice" />
@@ -81,7 +103,11 @@ const ListInvoices = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
+                            {/* <tbody>
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
                                         <td>{data.issueDate || "NA"}</td>
@@ -96,7 +122,7 @@ const ListInvoices = () => {
                                         <td>₹{calcAmount(data.items)}</td>
                                     </tr>
                                 ))}
-                            </tbody>
+                            </tbody> */}
                         </table>
                     </div>
                 ) : (
