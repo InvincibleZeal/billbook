@@ -14,7 +14,7 @@ const CreateInvoice = () => {
         customers: [],
         type: "customer",
     });
-    const { fields, handleFieldChange, validation, errors, setState } = useForm(
+    const { fields, handleFieldChange, validate, errors, setState } = useForm(
         invoiceDetails,
         InvoiceDetailsSchema
     );
@@ -78,7 +78,7 @@ const CreateInvoice = () => {
     const saveInvoice = useCallback(
         (event) => {
             event.preventDefault();
-            if (validation()) {
+            if (validate()) {
                 // Adding to local storage
                 try {
                     if (localStorage.getItem("invoice_data") == null) {

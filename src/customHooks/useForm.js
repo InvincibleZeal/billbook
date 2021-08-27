@@ -22,7 +22,7 @@ export function useForm(initialState, validationSchema) {
     };
 
     // Function to Validate fields
-    const validation = () => {
+    const validate = () => {
         const results = validationSchema.validate(fields);
         setErrors(results);
         return !results;
@@ -32,7 +32,7 @@ export function useForm(initialState, validationSchema) {
         fields,
         handleFieldChange,
         setState,
-        validation,
+        validate,
         errors,
     };
 }

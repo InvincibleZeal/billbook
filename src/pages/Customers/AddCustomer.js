@@ -7,7 +7,7 @@ import { useForm } from "customHooks/useForm";
 import { customersDetails, CustomersDetailsSchema } from "./FormDetails";
 
 const AddCustomers = () => {
-    const { fields, handleFieldChange, validation, errors } = useForm(
+    const { fields, handleFieldChange, validate, errors } = useForm(
         customersDetails,
         CustomersDetailsSchema
     );
@@ -16,7 +16,7 @@ const AddCustomers = () => {
     const addCustomer = useCallback(
         (event) => {
             event.preventDefault();
-            if (validation()) {
+            if (validate()) {
                 // Adding to local storage
                 if (localStorage.getItem("customer_data") == null) {
                     localStorage.setItem("customer_data", "[]");
