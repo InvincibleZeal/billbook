@@ -5,7 +5,7 @@ function Table({ tableData, formatter }) {
     // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
 
     const TableBody = function () {
-        const body = tableData.map((rowData) => {
+        const body = tableData.map((rowData, rowIndex) => {
             const trData = formatter.map((columnData) => {
                 let cellData = "";
                 const columnDataId = columnData.id;
@@ -28,7 +28,7 @@ function Table({ tableData, formatter }) {
                 return <td key={cellData}>{cellData}</td>;
             });
 
-            return <tr key={Object.keys(rowData)[0]}>{trData}</tr>;
+            return <tr key={rowIndex}>{trData}</tr>;
         });
         return body;
     };
