@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import { razorpay } from "api";
 import { itemDetails, ItemDetailsSchema } from "pages/Inventory/FormDetails";
 
 const AddItem = () => {
@@ -13,29 +14,22 @@ const AddItem = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
     const addItem = useCallback(
-        (event) => {
+        async (event) => {
             event.preventDefault();
             if (validate()) {
-                // Adding to local storage
-                if (localStorage.getItem("inventory_data") == null) {
-                    localStorage.setItem("inventory_data", "[]");
-                }
-                let inventoryData = [];
-                try {
-                    inventoryData = JSON.parse(
-                        localStorage.getItem("inventory_data")
+                const { error, response } = await razorpay.createItem(fields);
+
+                if (error || response.error) {
+                    triggerNotification(
+                        error ? error.message : "Something went wrong",
+                        { type: "error" }
                     );
-                    inventoryData.push(fields);
-                    localStorage.setItem(
-                        "inventory_data",
-                        JSON.stringify(inventoryData)
-                    );
+                } else {
+                    console.log(response);
                     triggerNotification("Item added successfully", {
                         type: "success",
                     });
                     history.push("/inventory");
-                } catch (e) {
-                    console.error(e);
                 }
             }
         },
@@ -78,11 +72,11 @@ const AddItem = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="price"
+                                    name="amount"
                                     required
                                     onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
-                                    value={fields.price}
+                                    value={fields.amount}
                                     onChange={handleFieldChange}
                                 />
                                 {errors?.price && (
@@ -99,7 +93,7 @@ const AddItem = () => {
                                 <textarea
                                     rows="4"
                                     name="description"
-                                    required="true"
+                                    required={true}
                                     value={fields.description}
                                     onChange={handleFieldChange}
                                 ></textarea>

@@ -4,6 +4,7 @@ import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import { razorpay } from "api";
 import {
     customersDetails,
     CustomersDetailsSchema,
@@ -17,29 +18,22 @@ const AddCustomers = () => {
     const history = useHistory();
     const { triggerNotification } = useNotification();
     const addCustomer = useCallback(
-        (event) => {
+        async (event) => {
             event.preventDefault();
             if (validate()) {
-                // Adding to local storage
-                if (localStorage.getItem("customer_data") == null) {
-                    localStorage.setItem("customer_data", "[]");
-                }
-                let customerData = [];
-                try {
-                    customerData = JSON.parse(
-                        localStorage.getItem("customer_data")
+                const { error, response } = await razorpay.createCustomer(
+                    fields
+                );
+                if (error || response.error) {
+                    triggerNotification(
+                        error ? error.message : "Something went wrong",
+                        { type: "error" }
                     );
-                    customerData.push(fields);
-                    localStorage.setItem(
-                        "customer_data",
-                        JSON.stringify(customerData)
-                    );
-                    triggerNotification("Customer added successfully", {
+                } else {
+                    triggerNotification("Customer saved successfully", {
                         type: "success",
                     });
-                    history.push("/");
-                } catch (e) {
-                    console.error(e);
+                    history.push("/customers");
                 }
             }
         },
@@ -81,10 +75,10 @@ const AddCustomers = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="phone"
+                                    name="contact"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    value={fields.phone}
+                                    value={fields.contact}
                                     onChange={handleFieldChange}
                                 />
                                 {errors?.phone && (
