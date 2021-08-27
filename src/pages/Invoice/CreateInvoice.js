@@ -1,11 +1,14 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
-import InvoiceModal from "./InvoiceModal";
+import InvoiceModal from "pages/Invoice/InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import { invoiceDetails, InvoiceDetailsSchema } from "./FormDetails";
+import {
+    invoiceDetails,
+    InvoiceDetailsSchema,
+} from "pages/Invoice/FormDetails";
 
 const CreateInvoice = () => {
     const [modalState, setModalState] = useState({

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import { itemDetails, ItemDetailsSchema } from "./FormDetails";
+import { itemDetails, ItemDetailsSchema } from "pages/Inventory/FormDetails";
 
 const AddItem = () => {
     const { fields, handleFieldChange, validate, errors } = useForm(

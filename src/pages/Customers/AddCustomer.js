@@ -4,7 +4,10 @@ import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import { customersDetails, CustomersDetailsSchema } from "./FormDetails";
+import {
+    customersDetails,
+    CustomersDetailsSchema,
+} from "pages/Customers/FormDetails";
 
 const AddCustomers = () => {
     const { fields, handleFieldChange, validate, errors } = useForm(
