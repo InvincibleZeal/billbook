@@ -44,7 +44,11 @@ const ListInvoices = () => {
 
     const formatter = [
         { label: "CreatedAt", id: "created_at", formatter: formatDate },
-        { label: "Customers", id: "customers_details " }, // this is not showing yet
+        {
+            label: "Customers",
+            id: "customer_details",
+            formatter: (customerDetails) => customerDetails.name,
+        }, // this is not showing yet
 
         { label: "InvoiceNumber", id: "invoice_number" },
         {

@@ -13,10 +13,10 @@ function Table({ tableData, formatter }) {
                 if (columnDataId) {
                     cellData = rowData[columnDataId];
                 }
+
                 if (columnDataFormatter) {
                     if (typeof columnDataFormatter === "function") {
                         cellData = cellData || undefined;
-                        console.log(cellData);
                         cellData = columnDataFormatter(
                             cellData, // currentValue
                             rowData,
