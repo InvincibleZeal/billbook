@@ -1,28 +1,25 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 export function useForm(initialState) {
     const [fields, setValues] = useState(initialState);
 
     // Function to handle form values
-    const handleFormState = useCallback(
-        (event) => {
-            setValues((prev) => ({
-                ...prev,
-                [event.target.name]: event.target.value,
-            }));
-        },
-        [fields]
-    );
+    const handleFormState = (event) => {
+        setValues((prev) => ({
+            ...prev,
+            [event.target.name]: event.target.value,
+        }));
+    };
 
     // Function to handle object, array in fields
-    const handleState = useCallback(
-        (key, value) => {
+    const handleState = (key, callback) => {
+        ((value) => {
             setValues((prev) => ({
                 ...prev,
                 [key]: value,
             }));
-        },
-        [fields]
-    );
+        })();
+    };
+
     return [fields, handleFormState, handleState];
 }
