@@ -234,7 +234,7 @@ const CreateInvoice = () => {
                                 </div>
                                 <div className="input-group px-2">
                                     <label htmlFor="reference_number">
-                                        <FormattedMessage id="invoice.reference_number" />
+                                        <FormattedMessage id="invoice.referenceNumber" />
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
