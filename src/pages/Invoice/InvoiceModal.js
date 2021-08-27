@@ -22,18 +22,17 @@ const ChangeCustomerModal = ({
         [fields]
     );
 
-    const addItem = useCallback(
-        (id, name, price) => {
-            const product = { id, name, price };
-            product.quantity = 1;
-            const updateItems = [...fields.items];
+    const addItem = useCallback((id, name, price) => {
+        const product = { id, name, price };
+        product.quantity = 1;
+        setState("items", (items) => {
+            const updateItems = [...items];
             if (
                 updateItems.length === 0 ||
                 !updateItems.find((p) => p.id === product.id)
             ) {
                 updateItems.push(product);
             } else if (updateItems.find((p) => p.id === product.id)) {
-                debugger; // eslint-disable-line no-debugger
                 product.quantity =
                     updateItems.find((p) => p.id === product.id).quantity + 1;
                 updateItems.splice(
@@ -42,11 +41,10 @@ const ChangeCustomerModal = ({
                     product
                 );
             }
-            setState("items", [...updateItems]);
-            setModalState((state) => ({ ...state, status: false }));
-        },
-        [fields]
-    );
+            return updateItems;
+        });
+        setModalState((state) => ({ ...state, status: false }));
+    }, []);
     return (
         <Modal
             isOpen={status}
