@@ -26,7 +26,6 @@ const AddCustomers = () => {
                     { type: "error" }
                 );
             } else {
-                console.log(response);
                 triggerNotification("Customer saved successfully", {
                     type: "success",
                 });

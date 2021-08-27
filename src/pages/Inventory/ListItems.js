@@ -44,7 +44,9 @@ const ListItems = () => {
                     </Link>
                 </div>
                 {loading ? (
-                    <Spinner loading={loading}></Spinner>
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} type="double"></Spinner>
+                    </div>
                 ) : tableData.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">

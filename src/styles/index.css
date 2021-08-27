@@ -735,11 +735,3 @@ input:focus-visible {
     padding-right: 40px;
     -webkit-appearance: none;
 }
-
-/************ Spinner ****************/
-
-.spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

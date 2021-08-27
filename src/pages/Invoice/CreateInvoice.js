@@ -5,6 +5,8 @@ import InvoiceModal from "./InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import { razorpay } from "api";
+import Spinner from "components/Spinner";
 
 const CreateInvoice = () => {
     const [modalState, setModalState] = useState({
@@ -13,15 +15,19 @@ const CreateInvoice = () => {
         customers: [],
         type: "customer",
     });
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
 
     const [fields, handleFieldChange, setFormState] = useForm({
         issueDate: "",
         dueDate: "",
-        invoiceNumber: "",
-        referenceNumber: "",
+        invoice_number: "",
+        reference_number: "",
         notes: "",
-        customers: {},
-        items: [],
+        customer: {},
+        customer_id: "",
+        line_items: [],
+        type: "invoice",
     });
     const intl = useIntl();
     const history = useHistory();
@@ -32,36 +38,17 @@ const CreateInvoice = () => {
     }, []);
 
     // Function to fetch data from local storage
-    const fetchData = useCallback(() => {
-        if (localStorage.getItem("customer_data")) {
-            try {
-                const customerData = JSON.parse(
-                    localStorage.getItem("customer_data")
-                );
-                setModalState((state) => ({
-                    ...state,
-                    customers: customerData,
-                }));
-            } catch (e) {
-                triggerNotification("Failed parsing customer data", {
-                    type: "error",
-                });
-                localStorage.removeItem("customer_data");
-            }
-        }
-        if (localStorage.getItem("inventory_data")) {
-            try {
-                const inventoryData = JSON.parse(
-                    localStorage.getItem("inventory_data")
-                );
-                setModalState((state) => ({ ...state, items: inventoryData }));
-            } catch (e) {
-                triggerNotification("Failed parsing inventory data", {
-                    type: "error",
-                });
-                localStorage.removeItem("inventory_data");
-            }
-        }
+    const fetchData = useCallback(async () => {
+        const promises = [razorpay.fetchCustomers(), razorpay.fetchItems()];
+        const [customers, items] = await Promise.allSettled(promises);
+        setModalState((state) => ({
+            ...state,
+            customers: customers.value.response.items,
+            items: items.value.response.items.filter(
+                (x) => x.type === "invoice"
+            ),
+        }));
+        setLoading(false);
     }, [modalState.customers, modalState.items]);
 
     // Function to delete items
@@ -73,45 +60,54 @@ const CreateInvoice = () => {
                 )
             ) {
                 setFormState(
-                    "items",
-                    fields.items.filter((item) => item.id !== id)
+                    "line_items",
+                    fields.line_items.filter((item) => item.id !== id)
                 );
             }
         },
         [fields]
     );
     const saveInvoice = useCallback(
-        (e) => {
+        async (e) => {
             e.preventDefault();
+            setSaving(true);
             // Adding to local storage
-            try {
-                if (localStorage.getItem("invoice_data") == null) {
-                    localStorage.setItem("invoice_data", "[]");
-                }
-                const invoiceData = JSON.parse(
-                    localStorage.getItem("invoice_data")
+            const data = {
+                ...fields,
+                notes: { remarks: fields.notes },
+                line_items: fields.line_items.map((x) => ({
+                    item_id: x.id,
+                    quantity: x.quantity,
+                })),
+            };
+            delete data.customer;
+            delete data.dueDate;
+            delete data.issueDate;
+            delete data.reference_number;
+
+            const { error, response } = await razorpay.createInvoice(data);
+
+            if (error || response.error) {
+                triggerNotification(
+                    error ? error.message : "Something went wrong",
+                    { type: "error" }
                 );
-                invoiceData.push(fields);
-                localStorage.setItem(
-                    "invoice_data",
-                    JSON.stringify(invoiceData)
-                );
+            } else {
                 triggerNotification("Invoice created successfully", {
                     type: "success",
                 });
                 history.push("/invoice");
-            } catch (e) {
-                console.error(e);
             }
+            setSaving(false);
         },
         [fields]
     );
 
     const updateQuantity = useCallback(
         (id, value) => {
-            const index = fields.items.findIndex((x) => x.id === id);
-            fields.items[index].quantity = Number(value);
-            setFormState("items", fields.items);
+            const index = fields.line_items.findIndex((x) => x.id === id);
+            fields.line_items[index].quantity = Number(value);
+            setFormState("line_items", fields.line_items);
         },
         [fields]
     );
@@ -125,9 +121,15 @@ const CreateInvoice = () => {
                             {" "}
                             <FormattedMessage id="title.invoice" />
                         </span>
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={saving}>
                             <i className="fa fa-save"></i> &nbsp;{" "}
                             <FormattedMessage id="invoice.saveButton" />
+                            <Spinner
+                                loading={saving}
+                                size={12}
+                                className="px-1"
+                                width="30px"
+                            ></Spinner>
                         </button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
@@ -136,52 +138,7 @@ const CreateInvoice = () => {
                                 <FormattedMessage id="invoice.billTo" />
                             </h4>
                             <div className="d-flex justify-content-between">
-                                {modalState.customers.length > 0 ? (
-                                    <Fragment>
-                                        {fields.customers.name ? (
-                                            <Fragment>
-                                                <div className="billing_details pr-3">
-                                                    <div>
-                                                        {fields.customers.name}
-                                                    </div>
-                                                    <div>
-                                                        {fields.customers.phone}
-                                                    </div>
-                                                    <div>
-                                                        {fields.customers.email}
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    className="btn-link"
-                                                    onClick={() =>
-                                                        setModalState(
-                                                            (state) => ({
-                                                                ...state,
-                                                                status: true,
-                                                                type: "customer",
-                                                            })
-                                                        )
-                                                    }
-                                                >
-                                                    <FormattedMessage id="invoice.change" />
-                                                </div>
-                                            </Fragment>
-                                        ) : (
-                                            <div
-                                                className="btn-link"
-                                                onClick={() => {
-                                                    setModalState((state) => ({
-                                                        ...state,
-                                                        status: true,
-                                                        type: "customer",
-                                                    }));
-                                                }}
-                                            >
-                                                <FormattedMessage id="invoice.selectCustomer" />
-                                            </div>
-                                        )}
-                                    </Fragment>
-                                ) : (
+                                {!loading && !modalState.customers.length ? (
                                     <Link to="/customers/add">
                                         {" "}
                                         <p>
@@ -189,7 +146,44 @@ const CreateInvoice = () => {
                                             <FormattedMessage id="invoice.selectCustomer" />
                                         </p>{" "}
                                     </Link>
-                                )}
+                                ) : null}
+                                {!loading && fields.customer.name ? (
+                                    <Fragment>
+                                        <div className="billing_details pr-3">
+                                            <div>{fields.customer.name}</div>
+                                            <div>{fields.customer.contact}</div>
+                                            <div>{fields.customer.email}</div>
+                                        </div>
+                                        <div
+                                            className="btn-link"
+                                            onClick={() =>
+                                                setModalState((state) => ({
+                                                    ...state,
+                                                    status: true,
+                                                    type: "customer",
+                                                }))
+                                            }
+                                        >
+                                            <FormattedMessage id="invoice.change" />
+                                        </div>
+                                    </Fragment>
+                                ) : null}
+                                {!fields.customer.name ? (
+                                    <Fragment>
+                                        <div
+                                            className="btn-link"
+                                            onClick={() => {
+                                                setModalState((state) => ({
+                                                    ...state,
+                                                    status: true,
+                                                    type: "customer",
+                                                }));
+                                            }}
+                                        >
+                                            <FormattedMessage id="invoice.selectCustomer" />
+                                        </div>
+                                    </Fragment>
+                                ) : null}
                             </div>
                         </div>
                         <div className="invoice_details mx-5">
@@ -225,30 +219,30 @@ const CreateInvoice = () => {
                             </div>
                             <div className="d-flex flex-grow">
                                 <div className="input-group px-2">
-                                    <label htmlFor="invoiceNumber">
+                                    <label htmlFor="invoice_number">
                                         <FormattedMessage id="invoice.number" />
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
                                         className="input-sm"
                                         type="text"
-                                        name="invoiceNumber"
+                                        name="invoice_number"
                                         required
-                                        value={fields.invoiceNumber}
+                                        value={fields.invoice_number}
                                         onChange={handleFieldChange}
                                     />
                                 </div>
                                 <div className="input-group px-2">
-                                    <label htmlFor="referenceNumber">
-                                        <FormattedMessage id="invoice.referenceNumber" />
+                                    <label htmlFor="reference_number">
+                                        <FormattedMessage id="invoice.reference_number" />
                                     </label>
                                     <i className="fa fa-hashtag"></i>
                                     <input
                                         className="input-sm"
                                         type="text"
-                                        name="referenceNumber"
+                                        name="reference_number"
                                         required
-                                        value={fields.referenceNumber}
+                                        value={fields.reference_number}
                                         onChange={handleFieldChange}
                                     />
                                 </div>
@@ -279,9 +273,9 @@ const CreateInvoice = () => {
                                     <th className="table-action"></th>
                                 </tr>
                             </thead>
-                            {fields.items.length > 0 && (
+                            {fields.line_items.length > 0 && (
                                 <tbody>
-                                    {fields.items.map((item, idx) => (
+                                    {fields.line_items.map((item, idx) => (
                                         <tr key={idx}>
                                             <td> {item.name} </td>
                                             <td>
@@ -356,9 +350,9 @@ const CreateInvoice = () => {
                         </div>
                         <div className="summary mx-5">
                             <div className="card-bordered p-3">
-                                {fields.items.length ? (
+                                {fields.line_items.length ? (
                                     <div className="summary_items pb-4">
-                                        {fields.items.map((item, idx) => (
+                                        {fields.line_items.map((item, idx) => (
                                             <div
                                                 className="summary_item"
                                                 key={idx}
@@ -384,7 +378,7 @@ const CreateInvoice = () => {
                                     </div>
                                     <div className="primary">
                                         ₹
-                                        {fields.items.reduce(
+                                        {fields.line_items.reduce(
                                             (accumulator, currValue) => {
                                                 return (
                                                     accumulator +
@@ -409,6 +403,7 @@ const CreateInvoice = () => {
                 type={modalState.type}
                 setFormState={setFormState}
                 fields={fields}
+                loading={loading}
             />
         </Fragment>
     );
