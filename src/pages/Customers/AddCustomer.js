@@ -1,35 +1,49 @@
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 import { razorpay } from "api";
+import {
+    customersDetails,
+    CustomersDetailsSchema,
+} from "pages/Customers/FormDetails";
 
 const AddCustomers = () => {
-    const [fields, handleFieldChange] = useForm({
-        name: "",
-        contact: "",
-        email: "",
-    });
+    // State Variables
+    const { fields, handleFieldChange, validate, errors } = useForm(
+        customersDetails,
+        CustomersDetailsSchema
+    );
+    const [loading, setLoading] = useState(false);
+
+    // Imports for link and notification
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
+    // API called here to add customers to db
     const addCustomer = useCallback(
-        async (e) => {
-            e.preventDefault();
-            const { error, response } = await razorpay.createCustomer(fields);
-
-            if (error || response.error) {
-                triggerNotification(
-                    error ? error.message : "Something went wrong",
-                    { type: "error" }
+        async (event) => {
+            event.preventDefault();
+            // Form Validations
+            if (validate()) {
+                setLoading(true);
+                const { error, response } = await razorpay.createCustomer(
+                    fields
                 );
-            } else {
-                triggerNotification("Customer saved successfully", {
-                    type: "success",
-                });
-                history.push("/customers");
+                if (error || response.error) {
+                    triggerNotification(
+                        error ? error.message : "Something went wrong",
+                        { type: "error" }
+                    );
+                } else {
+                    triggerNotification("Customer saved successfully", {
+                        type: "success",
+                    });
+                    history.push("/customers");
+                }
+                setLoading(false);
             }
         },
         [fields]
@@ -57,6 +71,11 @@ const AddCustomers = () => {
                                     value={fields.name}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.name && (
+                                    <span className="text-error mt-2">
+                                        {errors.name || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
@@ -68,11 +87,14 @@ const AddCustomers = () => {
                                     name="contact"
                                     required
                                     pattern="[+0-9]{10,13}"
-                                    onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
-                                    onInput="this.setCustomValidity('')"
                                     value={fields.contact}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.contact && (
+                                    <span className="text-error mt-2">
+                                        {errors.contact || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
@@ -85,9 +107,18 @@ const AddCustomers = () => {
                                     value={fields.email}
                                     onChange={handleFieldChange}
                                 />
+                                {errors?.email && (
+                                    <span className="text-error mt-2">
+                                        {errors.email || ""}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
-                                <button className="btn" type="submit">
+                                <button
+                                    className="btn"
+                                    type="submit"
+                                    disabled={loading}
+                                >
                                     <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.saveButton" />
                                 </button>
