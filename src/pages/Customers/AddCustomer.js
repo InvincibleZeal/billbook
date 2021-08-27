@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
@@ -16,6 +16,7 @@ const AddCustomers = () => {
         customersDetails,
         CustomersDetailsSchema
     );
+    const [loading, setLoading] = useState(false);
 
     // Imports for link and notification
     const history = useHistory();
@@ -27,6 +28,7 @@ const AddCustomers = () => {
             event.preventDefault();
             // Form Validations
             if (validate()) {
+                setLoading(true);
                 const { error, response } = await razorpay.createCustomer(
                     fields
                 );
@@ -41,6 +43,7 @@ const AddCustomers = () => {
                     });
                     history.push("/customers");
                 }
+                setLoading(false);
             }
         },
         [fields]
@@ -111,7 +114,11 @@ const AddCustomers = () => {
                                 )}
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
-                                <button className="btn" type="submit">
+                                <button
+                                    className="btn"
+                                    type="submit"
+                                    disabled={loading}
+                                >
                                     <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.saveButton" />
                                 </button>
