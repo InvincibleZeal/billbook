@@ -10,5 +10,15 @@
     },
     "eslint.alwaysShowStatus": true,
     "cSpell.enabled": true,
-    "cSpell.words": ["atleast", "commitlint", "scrollable", "stylelint"]
+    "cSpell.words": [
+        "atleast",
+        "billbook",
+        "browserslist",
+        "commitlint",
+        "ltrim",
+        "razorpay",
+        "rtrim",
+        "scrollable",
+        "stylelint"
+    ]
 }

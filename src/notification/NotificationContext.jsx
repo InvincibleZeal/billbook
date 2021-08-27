@@ -3,12 +3,21 @@ import PropTypes from "prop-types";
 import Toast from "./Toast";
 export const NotificationContext = React.createContext();
 
+const ToastType = {
+    SIMPLE: "simple",
+    SUCCESS: "success",
+    ERROR: "error",
+    WARNING: "warning",
+};
+
 const createToast = (msg, options) => {
     const id = Math.floor(Math.random() * 101 + 1);
     const toast = {};
     toast.id = id;
     toast.title = msg;
-    toast.type = options.type || "simple";
+    toast.type = Object.values(ToastType).includes(options.type)
+        ? options.type
+        : ToastType.SIMPLE;
     toast.time = options.time || 3000;
     return toast;
 };

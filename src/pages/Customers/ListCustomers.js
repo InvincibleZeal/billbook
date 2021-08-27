@@ -1,35 +1,32 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import withWrapper from "common/withWrapper";
 import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
+import { razorpay } from "api";
+import Spinner from "components/Spinner";
+import { formatDate } from "utils/helper";
 
 const ListCustomers = () => {
     const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetchData();
     }, []);
     const { triggerNotification } = useNotification();
 
     // Function to fetch data from local storage
-    const fetchData = useCallback(() => {
-        let customerData = [];
-        if (localStorage.getItem("customer_data")) {
-            try {
-                customerData = JSON.parse(
-                    localStorage.getItem("customer_data")
-                );
-            } catch (e) {
-                triggerNotification("Failed parsing customer data", {
-                    type: "error",
-                });
-                localStorage.removeItem("customer_data");
-            }
+    const fetchData = useCallback(async () => {
+        const { error, response } = await razorpay.fetchCustomers();
+        if (error) {
+            triggerNotification(error.message || "Something went wrong", {
+                type: "error",
+            });
+        } else {
+            setTableData(response.items);
         }
-        setTableData(customerData);
+        setLoading(false);
     }, [tableData]);
 
     const formatter = [
@@ -40,7 +37,6 @@ const ListCustomers = () => {
     ];
     return (
         <Fragment>
-            <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -53,7 +49,11 @@ const ListCustomers = () => {
                         </Button>
                     </Link>
                 </div>
-                {tableData.length > 0 ? (
+                {loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} type="double"></Spinner>
+                    </div>
+                ) : tableData.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <thead>
@@ -80,6 +80,20 @@ const ListCustomers = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
+                            <tbody>
+                                {tableData.map((data, idx) => (
+                                    <tr key={idx}>
+                                        <td>{data.name}</td>
+                                        <td>{data.contact}</td>
+                                        <td>{data.email}</td>
+                                        <td>
+                                            {data.created_at
+                                                ? formatDate(data.created_at)
+                                                : "-"}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     </div>
                 ) : (
@@ -93,4 +107,4 @@ const ListCustomers = () => {
     );
 };
 
-export default withWrapper(ListCustomers);
+export default ListCustomers;

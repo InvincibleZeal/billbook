@@ -1,47 +1,46 @@
 import React, { Fragment, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 import Button from "components/Button";
 import Input from "components/Input";
+import { razorpay } from "api";
+
 const AddItem = () => {
     const [fields, handleFieldChange] = useForm({
         name: "",
-        price: "",
+        amount: "",
         description: "",
-        date: new Date(),
-        id: Math.floor(Math.random() * 101 + 1),
+        currency: "INR",
     });
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addItem = useCallback(() => {
-        // Adding to local storage
-        if (localStorage.getItem("inventory_data") == null) {
-            localStorage.setItem("inventory_data", "[]");
-        }
+    const addItem = useCallback(
+        async (e) => {
+            // Adding to local storage
+            e.preventDefault();
+            const { error, response } = await razorpay.createItem(fields);
 
-        let inventoryData = [];
-        try {
-            inventoryData = JSON.parse(localStorage.getItem("inventory_data"));
-            inventoryData.push(fields);
-            localStorage.setItem(
-                "inventory_data",
-                JSON.stringify(inventoryData)
-            );
-            triggerNotification("Item added successfully", { type: "success" });
-            history.push("/inventory");
-        } catch (e) {
-            console.error(e);
-        }
-    }, [fields]);
+            if (error || response.error) {
+                triggerNotification(
+                    error ? error.message : "Something went wrong",
+                    { type: "error" }
+                );
+            } else {
+                console.log(response);
+                triggerNotification("Item added successfully", {
+                    type: "success",
+                });
+                history.push("/inventory");
+            }
+        },
+        [fields]
+    );
 
     return (
         <Fragment>
-            <Navbar opened="inventory" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -72,11 +71,11 @@ const AddItem = () => {
                                 </label>
                                 <Input
                                     type="text"
-                                    name="price"
+                                    name="amount"
                                     required
                                     onInvalid="this.setCustomValidity('Only numerical values allowed')"
                                     onInput="this.setCustomValidity('')"
-                                    value={fields.price}
+                                    value={fields.amount}
                                     onChange={handleFieldChange}
                                 />
                             </div>
@@ -89,7 +88,7 @@ const AddItem = () => {
                                     rows="4"
                                     type="textarea"
                                     name="description"
-                                    required="true"
+                                    required={true}
                                     value={fields.description}
                                     onChange={handleFieldChange}
                                 />
@@ -107,4 +106,4 @@ const AddItem = () => {
     );
 };
 
-export default withWrapper(AddItem);
+export default AddItem;

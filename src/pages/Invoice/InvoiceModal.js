@@ -4,52 +4,58 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Button from "components/Button";
+import Spinner from "components/Spinner";
 Modal.setAppElement("*");
 
 const ChangeCustomerModal = ({
-    modalStatus,
-    setModalStatus,
-    customersInfo,
-    itemInfo,
+    status,
+    setModalState,
+    customers,
+    items,
     type,
-    setState,
+    setFormState,
     fields,
+    loading,
 }) => {
     const updateCustomersDetails = useCallback(
-        (name, phone, email) => {
-            setState("customers", { name, phone, email });
-            setModalStatus(false);
+        (id, name, contact, email) => {
+            setFormState("customer", { name, contact, email });
+            setFormState("customer_id", id);
+            setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
     );
 
     const addItem = useCallback(
         (id, name, price) => {
-            const product = { id, name, price };
+            const product = { id: id, name, price };
             product.quantity = 1;
+            const updateItems = [...fields.line_items];
             if (
-                fields.items.length === 0 ||
-                !fields.items.find((p) => p.id === product.id)
+                updateItems.length === 0 ||
+                !updateItems.find((p) => p.id === product.id)
             ) {
-                fields.items.push(product);
-            } else if (fields.items.find((p) => p.id === product.id)) {
+                updateItems.push(product);
+            } else if (updateItems.find((p) => p.id === product.id)) {
                 product.quantity =
-                    fields.items.find((p) => p.id === product.id).quantity + 1;
-                fields.items.splice(
-                    fields.items.findIndex((p) => p.id === product.id),
+                    updateItems.find((p) => p.id === product.id).quantity + 1;
+                updateItems.splice(
+                    updateItems.findIndex((p) => p.id === product.id),
                     1,
                     product
                 );
             }
-            setState("items", [...fields.items]);
-            setModalStatus(false);
+            setFormState("line_items", [...updateItems]);
+            setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
     );
     return (
         <Modal
-            isOpen={modalStatus}
-            onRequestClose={() => setModalStatus(false)}
+            isOpen={status}
+            onRequestClose={() =>
+                setModalState((state) => ({ ...state, status: false }))
+            }
             className="react-modal"
         >
             <div
@@ -66,22 +72,31 @@ const ChangeCustomerModal = ({
                 <div className="react-modal-close">
                     <i
                         className="fa fa-times"
-                        onClick={() => setModalStatus(false)}
+                        onClick={() =>
+                            setModalState((state) => ({
+                                ...state,
+                                status: false,
+                            }))
+                        }
                     ></i>
                 </div>
             </div>
             {type === "customer" ? (
                 <Fragment>
-                    {customersInfo.length > 0 ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} size={50}></Spinner>
+                    </div>
+                    {!loading && customers.length > 0 ? (
                         <Fragment>
-                            {customersInfo.map((info, idx) => (
+                            {customers.map((info, idx) => (
                                 <div
                                     className="react-modal-title-container customer-card"
                                     key={idx}
                                     onClick={() =>
                                         updateCustomersDetails(
+                                            info.id,
                                             info.name,
-                                            info.phone,
+                                            info.contact,
                                             info.email
                                         )
                                     }
@@ -93,7 +108,7 @@ const ChangeCustomerModal = ({
                                         >
                                             <div>
                                                 <p>{info.name}</p>
-                                                <p>{info.phone}</p>
+                                                <p>{info.contact}</p>
                                                 <p>{info.email}</p>
                                             </div>
                                             <Button>
@@ -104,7 +119,9 @@ const ChangeCustomerModal = ({
                                 </div>
                             ))}
                         </Fragment>
-                    ) : (
+                    ) : null}
+
+                    {!loading && customers.length === 0 ? (
                         <p className="px-4 py-2">
                             {" "}
                             No Customers details available. Please click{" "}
@@ -117,18 +134,21 @@ const ChangeCustomerModal = ({
                             </Link>{" "}
                             to add the same.
                         </p>
-                    )}
+                    ) : null}
                 </Fragment>
             ) : (
                 <Fragment>
-                    {itemInfo.length > 0 ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} size={50}></Spinner>
+                    </div>
+                    {!loading && items.length > 0 ? (
                         <Fragment>
-                            {itemInfo.map((info, idx) => (
+                            {items.map((info, idx) => (
                                 <div
                                     className="react-modal-title-container customer-card"
                                     key={idx}
                                     onClick={() =>
-                                        addItem(info.id, info.name, info.price)
+                                        addItem(info.id, info.name, info.amount)
                                     }
                                 >
                                     <div className="card p-3">
@@ -138,7 +158,7 @@ const ChangeCustomerModal = ({
                                         >
                                             <div>
                                                 <p>Item: {info.name}</p>
-                                                <p>Price: ₹{info.price}</p>
+                                                <p>Price: ₹{info.amount}</p>
                                             </div>
                                             <Button>
                                                 <FormattedMessage id="select" />
@@ -148,7 +168,8 @@ const ChangeCustomerModal = ({
                                 </div>
                             ))}
                         </Fragment>
-                    ) : (
+                    ) : null}
+                    {!loading && items.length === 0 ? (
                         <p className="px-4 py-2">
                             {" "}
                             No Items available. Please click{" "}
@@ -161,7 +182,7 @@ const ChangeCustomerModal = ({
                             </Link>{" "}
                             to add the same.
                         </p>
-                    )}
+                    ) : null}
                 </Fragment>
             )}
         </Modal>
@@ -169,13 +190,14 @@ const ChangeCustomerModal = ({
 };
 
 ChangeCustomerModal.propTypes = {
-    modalStatus: PropTypes.bool.isRequired,
-    setModalStatus: PropTypes.func.isRequired,
-    customersInfo: PropTypes.array.isRequired,
-    itemInfo: PropTypes.array.isRequired,
+    status: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    setState: PropTypes.func.isRequired,
+    setModalState: PropTypes.func.isRequired,
+    customers: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
+    setFormState: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 export default ChangeCustomerModal;

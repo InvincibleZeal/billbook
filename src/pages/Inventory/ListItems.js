@@ -1,34 +1,33 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
+import { razorpay } from "api";
+import Spinner from "components/Spinner";
+import { formatDate } from "utils/helper";
 
 const ListItems = () => {
     const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetchData();
     }, []);
     const { triggerNotification } = useNotification();
 
     // Function to fetch data from local storage
-    const fetchData = useCallback(() => {
-        if (localStorage.getItem("inventory_data")) {
-            try {
-                const inventoryData = JSON.parse(
-                    localStorage.getItem("inventory_data")
-                );
-                setTableData(inventoryData);
-            } catch (e) {
-                triggerNotification("Failed parsing inventory data", {
-                    type: "error",
-                });
-                localStorage.removeItem("inventory_data");
-            }
+    const fetchData = useCallback(async () => {
+        const { error, response } = await razorpay.fetchItems();
+
+        if (error) {
+            triggerNotification(error.message || "Something went wrong", {
+                type: "error",
+            });
+        } else {
+            setTableData(response.items);
         }
+        setLoading(false);
     }, []);
 
     const formatter = [
@@ -39,7 +38,6 @@ const ListItems = () => {
     ];
     return (
         <Fragment>
-            <Navbar opened="inventory" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper p-5 mb-5">
                     <span className="title">
@@ -52,7 +50,11 @@ const ListItems = () => {
                         </Button>
                     </Link>
                 </div>
-                {tableData.length > 0 ? (
+                {loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} type="double"></Spinner>
+                    </div>
+                ) : tableData.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <colgroup>
@@ -85,6 +87,20 @@ const ListItems = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
+                            <tbody>
+                                {tableData.map((data, idx) => (
+                                    <tr key={idx}>
+                                        <td>{data.name}</td>
+                                        <td>{data.description}</td>
+                                        <td>₹{data.amount}</td>
+                                        <td>
+                                            {data.created_at
+                                                ? formatDate(data.created_at)
+                                                : "-"}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     </div>
                 ) : (
@@ -98,4 +114,4 @@ const ListItems = () => {
     );
 };
 
-export default withWrapper(ListItems);
+export default ListItems;

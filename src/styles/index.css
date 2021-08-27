@@ -47,6 +47,10 @@ body {
     border-radius: 0.25rem;
 }
 
+.center-content {
+    text-align: center;
+}
+
 /************ Colors ****************/
 .primary {
     color: var(--primary-color);
@@ -90,7 +94,7 @@ body {
 
 /************ Paddings ****************/
 .p-0 {
-    padding: 0px;
+    padding: 0;
 }
 
 .p-1 {
@@ -245,7 +249,7 @@ body {
 
 /************ Margins ****************/
 .m-0 {
-    margin: 0px;
+    margin: 0;
 }
 
 .m-1 {
@@ -407,20 +411,11 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/************ Project Helpers ****************/
-
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 /************ Card ****************/
 
 .card {
     background-color: var(--card-background);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
     color: black;
 }
@@ -529,7 +524,7 @@ input:focus-visible {
     width: 250px;
     min-width: 250px;
     padding-top: 1.5rem;
-    box-shadow: 2px 0px 7px 0px rgb(0 0 0 / 10%);
+    box-shadow: 2px 0 7px 0 rgb(0 0 0 / 10%);
 }
 
 .sidebar ul {

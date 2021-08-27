@@ -1,34 +1,34 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
-import withWrapper from "common/withWrapper";
-import Navbar from "common/Navbar";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
+import { razorpay } from "api";
+import Spinner from "components/Spinner";
+import { formatDate } from "utils/helper";
+
 const ListInvoices = () => {
     const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetchData();
     }, []);
 
     const { triggerNotification } = useNotification();
     // Function to fetch data from local storage
-    const fetchData = useCallback(() => {
-        if (localStorage.getItem("invoice_data")) {
-            try {
-                const invoiceData = JSON.parse(
-                    localStorage.getItem("invoice_data")
-                );
-                setTableData(invoiceData);
-            } catch (e) {
-                triggerNotification("Failed parsing inventory data", {
-                    type: "error",
-                });
-                localStorage.removeItem("invoice_data");
-            }
+    const fetchData = useCallback(async () => {
+        const { error, response } = await razorpay.fetchInvoices();
+
+        if (error) {
+            triggerNotification(error.message || "Something went wrong", {
+                type: "error",
+            });
+        } else {
+            setTableData(response.items);
         }
+        setLoading(false);
     }, [tableData]);
 
     // Function to calc total
@@ -36,7 +36,7 @@ const ListInvoices = () => {
     const calcAmount = (array) => {
         if (array) {
             return array.reduce((accumulator, currValue) => {
-                return accumulator + currValue.quantity * currValue.price;
+                return accumulator + currValue.net_amount;
             }, 0);
         }
         return 0;
@@ -65,7 +65,6 @@ const ListInvoices = () => {
     ];
     return (
         <Fragment>
-            <Navbar opened="invoice" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -78,7 +77,11 @@ const ListInvoices = () => {
                         </Button>
                     </Link>
                 </div>
-                {tableData.length > 0 ? (
+                {loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Spinner loading={loading} type="double"></Spinner>
+                    </div>
+                ) : tableData.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <thead>
@@ -110,16 +113,26 @@ const ListInvoices = () => {
                             {/* <tbody>
                                 {tableData.map((data, idx) => (
                                     <tr key={idx}>
-                                        <td>{data.issueDate || "NA"}</td>
-                                        <td>{data.customers.name || "NA"}</td>
-                                        <td>{data.invoiceNumber || "NA"}</td>
+                                        <td>
+                                            {data.created_at
+                                                ? formatDate(data.created_at)
+                                                : "-"}
+                                        </td>
+                                        <td>
+                                            {data.customer_details &&
+                                            data.customer_details.customer_name
+                                                ? data.customer_details
+                                                      .customer_name
+                                                : "-"}
+                                        </td>
+                                        <td>{data.invoice_number || "-"}</td>
                                         <td>
                                             <span className="bg-info info px-3 py-1 rounded">
                                                 PAID
                                             </span>
                                         </td>
-                                        <td>₹{calcAmount(data.items)}</td>
-                                        <td>₹{calcAmount(data.items)}</td>
+                                        <td>₹{calcAmount(data.line_items)}</td>
+                                        <td>₹{calcAmount(data.line_items)}</td>
                                     </tr>
                                 ))}
                             </tbody> */}
@@ -136,4 +149,4 @@ const ListInvoices = () => {
     );
 };
 
-export default withWrapper(ListInvoices);
+export default ListInvoices;

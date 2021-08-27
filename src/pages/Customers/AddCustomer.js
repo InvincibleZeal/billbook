@@ -1,46 +1,44 @@
 import React, { Fragment, useCallback } from "react";
-import Navbar from "common/Navbar";
 import { useHistory } from "react-router-dom";
-import withWrapper from "common/withWrapper";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
 import Button from "components/Button";
 import Input from "components/Input";
+import { razorpay } from "api";
 
 const AddCustomers = () => {
     const [fields, handleFieldChange] = useForm({
         name: "",
-        phone: "",
+        contact: "",
         email: "",
-        date: new Date(),
     });
     const history = useHistory();
     const { triggerNotification } = useNotification();
 
-    const addCustomer = useCallback(() => {
-        // Adding to local storage
-        if (localStorage.getItem("customer_data") == null) {
-            localStorage.setItem("customer_data", "[]");
-        }
-        let customerData = [];
-        try {
-            customerData = JSON.parse(localStorage.getItem("customer_data"));
-            customerData.push(fields);
-            localStorage.setItem("customer_data", JSON.stringify(customerData));
-            triggerNotification("Customer added successfully", {
-                type: "success",
-            });
-            history.push("/");
-        } catch (e) {
-            console.error(e);
-        }
-    }, [fields]);
+    const addCustomer = useCallback(
+        async (e) => {
+            e.preventDefault();
+            const { error, response } = await razorpay.createCustomer(fields);
+
+            if (error || response.error) {
+                triggerNotification(
+                    error ? error.message : "Something went wrong",
+                    { type: "error" }
+                );
+            } else {
+                triggerNotification("Customer saved successfully", {
+                    type: "success",
+                });
+                history.push("/customers");
+            }
+        },
+        [fields]
+    );
 
     return (
         <Fragment>
-            <Navbar opened="customers" />
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
@@ -69,12 +67,12 @@ const AddCustomers = () => {
                                 </label>
                                 <Input
                                     type="text"
-                                    name="phone"
+                                    name="contact"
                                     required
                                     pattern="[+0-9]{10,13}"
                                     onInvalid="this.setCustomValidity('Enter at least 10 characters. Use only numbers')"
                                     onInput="this.setCustomValidity('')"
-                                    value={fields.phone}
+                                    value={fields.contact}
                                     onChange={handleFieldChange}
                                 />
                             </div>
@@ -103,4 +101,4 @@ const AddCustomers = () => {
     );
 };
 
-export default withWrapper(AddCustomers);
+export default AddCustomers;
