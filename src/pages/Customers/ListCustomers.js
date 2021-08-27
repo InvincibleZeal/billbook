@@ -80,10 +80,6 @@ const ListCustomers = () => {
                                 formatter={formatter}
                                 tableData={tableData}
                             />
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
                         </table>
                     </div>
                 ) : (
