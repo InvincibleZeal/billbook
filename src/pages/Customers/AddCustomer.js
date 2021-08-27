@@ -1,34 +1,22 @@
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
-import Nope from "nope-validator";
+import { customersDetails, CustomersDetailsSchema } from "./FormDetails";
 
 const AddCustomers = () => {
-    const [fields, handleFieldChange] = useForm({
-        name: "",
-        phone: "",
-        email: "",
-        date: new Date(),
-    });
-    const [errors, setErrors] = useState();
+    const { fields, handleFieldChange, validation, errors } = useForm(
+        customersDetails,
+        CustomersDetailsSchema
+    );
     const history = useHistory();
     const { triggerNotification } = useNotification();
-    // Schema For Customer Details
-    const CustomersDetailsSchema = Nope.object().shape({
-        name: Nope.string()
-            .atLeast(5, "Please provide a longer name")
-            .atMost(255, "Name is too long!"),
-        email: Nope.string().email().required(),
-        phone: Nope.number().required(),
-    });
     const addCustomer = useCallback(
         (event) => {
             event.preventDefault();
-            setErrors(CustomersDetailsSchema.validate(fields));
-            if (CustomersDetailsSchema.validate(fields) === undefined) {
+            if (validation()) {
                 // Adding to local storage
                 if (localStorage.getItem("customer_data") == null) {
                     localStorage.setItem("customer_data", "[]");
