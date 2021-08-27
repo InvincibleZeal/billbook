@@ -12,14 +12,21 @@ export function useForm(initialState) {
     };
 
     // Function to handle object, array in fields
-    const handleState = (key, callback) => {
-        ((value) => {
+    const setFormState = (key, value) => {
+        if (typeof value === "function") {
+            const newValue = value(fields[key]);
+            console.log(newValue);
+            setValues((prev) => ({
+                ...prev,
+                [key]: newValue,
+            }));
+        } else {
             setValues((prev) => ({
                 ...prev,
                 [key]: value,
             }));
-        })();
+        }
     };
 
-    return [fields, handleFormState, handleState];
+    return [fields, handleFormState, setFormState];
 }
