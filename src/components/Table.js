@@ -5,7 +5,7 @@ function Table({ tableData, formatter }) {
 
     const TableBody = function () {
         const body = tableData.map((rowData, rowIndex) => {
-            const trData = formatter.map((columnData, columnId) => {
+            const trData = formatter.map((columnData, columnIndex) => {
                 let cellData = "";
                 const columnDataId = columnData.id;
                 const columnDataFormatter = columnData.formatter;
@@ -23,9 +23,9 @@ function Table({ tableData, formatter }) {
                             tableData
                         );
                     } else
-                        return <td key={columnId}> {columnDataFormatter}</td>;
+                        return <td key={}> {columnDataFormatter}</td>;
                 }
-                return <td key={cellData}>{cellData}</td>;
+                return <td key={columnDataId ? columnDataId : columnIndex}>{cellData}</td>;
             });
 
             return <tr key={rowIndex}>{trData}</tr>;

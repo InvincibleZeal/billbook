@@ -30,18 +30,6 @@ const ListInvoices = () => {
         }
         setLoading(false);
     }, [tableData]);
-
-    // Function to calc total
-
-    // const calcAmount = (array) => {
-    //     if (array) {
-    //         return array.reduce((accumulator, currValue) => {
-    //             return accumulator + currValue.net_amount;
-    //         }, 0);
-    //     }
-    //     return 0;
-    // };
-
     const formatter = [
         { label: "CreatedAt", id: "created_at", formatter: formatDate },
         {
