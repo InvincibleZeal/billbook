@@ -735,3 +735,19 @@ input:focus-visible {
     padding-right: 40px;
     -webkit-appearance: none;
 }
+
+.w-100 {
+    width: 100%;
+}
+
+.fw-medium {
+    font-weight: var(--font-medium);
+}
+
+.fw-semi-bold {
+    font-weight: var(--font-semi-bold);
+}
+
+.fw-bold {
+    font-weight: var(--font-bold);
+}

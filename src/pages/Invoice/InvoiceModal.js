@@ -63,7 +63,7 @@ const ChangeCustomerModal = ({
             >
                 <span className="react-modal-title">
                     {type === "customer" ? (
-                        <FormattedMessage id="change.details" />
+                        <FormattedMessage id="invoice.selectCustomer" />
                     ) : (
                         <FormattedMessage id="select.item" />
                     )}
@@ -106,9 +106,19 @@ const ChangeCustomerModal = ({
                                             style={{ marginBottom: "0" }}
                                         >
                                             <div>
-                                                <p>{info.name}</p>
-                                                <p>{info.contact}</p>
-                                                <p>{info.email}</p>
+                                                <h3
+                                                    style={{ fontSize: "1rem" }}
+                                                >
+                                                    {info.name}
+                                                </h3>
+                                                <div className="text-muted">
+                                                    <p className="pt-2">
+                                                        {info.contact}
+                                                    </p>
+                                                    <p className="pt-2">
+                                                        {info.email}
+                                                    </p>
+                                                </div>
                                             </div>
                                             <button className="btn">
                                                 <FormattedMessage id="select" />
@@ -155,9 +165,13 @@ const ChangeCustomerModal = ({
                                             className="page-heading-wrapper"
                                             style={{ marginBottom: "0" }}
                                         >
-                                            <div>
-                                                <p>Item: {info.name}</p>
-                                                <p>Price: ₹{info.amount}</p>
+                                            <div className="d-flex justify-content-between">
+                                                <p className="fw-bold">
+                                                    Item: {info.name}
+                                                </p>
+                                                <p className="text-muted px-3">
+                                                    Price: ₹{info.amount}
+                                                </p>
                                             </div>
                                             <button className="btn">
                                                 <FormattedMessage id="select"></FormattedMessage>

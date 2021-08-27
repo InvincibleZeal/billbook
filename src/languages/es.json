@@ -24,7 +24,7 @@
     "invoice.amount": "Monto",
     "invoice.notes": "Notas",
     "invoice.date": "Fecha",
-    "invoice.cutomseName": "Clinte",
+    "invoice.customerName": "Clinte",
     "invoice.paidStatus": "Estado pagado",
     "invoice.amountDue": "Monto Adeudado",
     "invoice.change": "cambio",
