@@ -14,7 +14,7 @@ export function useForm(initialState, validationSchema) {
     };
 
     // For Handling other changes wrt to arrays and objects
-    const handleOtherChanges = (key, value) => {
+    const setState = (key, value) => {
         setValues((prev) => ({
             ...prev,
             [key]: value,
@@ -25,16 +25,13 @@ export function useForm(initialState, validationSchema) {
     const validation = () => {
         const results = validationSchema.validate(fields);
         setErrors(results);
-        if (results === undefined) {
-            return true;
-        }
-        return false;
+        return !results;
     };
 
     return {
         fields,
         handleFieldChange,
-        handleOtherChanges,
+        setState,
         validation,
         errors,
     };

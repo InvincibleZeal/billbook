@@ -14,13 +14,10 @@ const CreateInvoice = () => {
         customers: [],
         type: "customer",
     });
-    const {
-        fields,
-        handleFieldChange,
-        validation,
-        errors,
-        handleOtherChanges,
-    } = useForm(invoiceDetails, InvoiceDetailsSchema);
+    const { fields, handleFieldChange, validation, errors, setState } = useForm(
+        invoiceDetails,
+        InvoiceDetailsSchema
+    );
     const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
@@ -70,7 +67,7 @@ const CreateInvoice = () => {
                     intl.formatMessage({ id: "invoice.confirm.delete.item" })
                 )
             ) {
-                handleOtherChanges(
+                setState(
                     "items",
                     fields.items.filter((item) => item.id !== id)
                 );
@@ -111,7 +108,7 @@ const CreateInvoice = () => {
         (id, value) => {
             const index = fields.items.findIndex((x) => x.id === id);
             fields.items[index].quantity = Number(value);
-            handleOtherChanges("items", fields.items);
+            setState("items", fields.items);
         },
         [fields]
     );
@@ -456,7 +453,7 @@ const CreateInvoice = () => {
                 customers={modalState.customers}
                 items={modalState.items}
                 type={modalState.type}
-                handleOtherChanges={handleOtherChanges}
+                setState={setState}
                 fields={fields}
             />
         </Fragment>
