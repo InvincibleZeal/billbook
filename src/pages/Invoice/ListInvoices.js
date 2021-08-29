@@ -8,8 +8,11 @@ import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch } from "react-redux";
 
 const ListInvoices = () => {
+    const dispatch = useDispatch();
+
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -29,6 +32,7 @@ const ListInvoices = () => {
             setTableData(response.items);
         }
         setLoading(false);
+        dispatch({ type: "add_items", payload: response.items });
     }, [tableData]);
     const formatter = [
         { label: "CreatedAt", id: "created_at", formatter: formatDate },

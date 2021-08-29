@@ -1,11 +1,9 @@
 const initialData = {
     data: [],
 };
-const customerReducer = (state = initialData, action) => {
+const invoiceReducer = (state = initialData, action) => {
     switch (action.type) {
-        case "add_single_customer":
-        case "add_customers":
-            console.log(action.payload);
+        case "add_invoice":
             return {
                 ...state,
                 data: action.payload,
@@ -14,4 +12,4 @@ const customerReducer = (state = initialData, action) => {
             return { state };
     }
 };
-export default customerReducer;
+export default invoiceReducer;

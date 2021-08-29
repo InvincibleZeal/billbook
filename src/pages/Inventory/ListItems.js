@@ -7,8 +7,11 @@ import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch } from "react-redux";
 
 const ListItems = () => {
+    const dispatch = useDispatch();
+
     // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,6 +36,8 @@ const ListItems = () => {
             setTableData(response.items);
         }
         setLoading(false);
+        // dispatching the type and payload to items reducer to take action according to it.
+        dispatch({ type: "add_items", payload: response.items });
     }, []);
 
     const formatter = [

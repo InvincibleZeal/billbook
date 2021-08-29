@@ -32,7 +32,7 @@ const ListCustomers = () => {
             });
         } else {
             setTableData(response.items);
-            dispatch({ type: "add_single_customer", payload: response.items });
+            dispatch({ type: "add_customers", payload: response.items });
         }
         setLoading(false);
     }, []);
