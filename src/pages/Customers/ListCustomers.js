@@ -7,8 +7,10 @@ import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch } from "react-redux";
 
 const ListCustomers = () => {
+    const dispatch = useDispatch();
     // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,6 +32,7 @@ const ListCustomers = () => {
             });
         } else {
             setTableData(response.items);
+            dispatch({ type: "add_single_customer", payload: response.items });
         }
         setLoading(false);
     }, []);
