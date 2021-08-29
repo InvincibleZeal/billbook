@@ -9,14 +9,19 @@ import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
 
 const ListCustomers = () => {
+    // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // Fetching the Initial Data once the page loads
     useEffect(() => {
         fetchData();
     }, []);
+
+    // Imports for notification
     const { triggerNotification } = useNotification();
 
-    // Function to fetch data from local storage
+    // API called here to fetch the customers details from db
     const fetchData = useCallback(async () => {
         const { error, response } = await razorpay.fetchCustomers();
         if (error) {
@@ -27,7 +32,7 @@ const ListCustomers = () => {
             setTableData(response.items);
         }
         setLoading(false);
-    }, [tableData]);
+    }, []);
 
     const formatter = [
         { label: "Name", id: "name" },
@@ -40,7 +45,6 @@ const ListCustomers = () => {
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
-                        {" "}
                         <FormattedMessage id="title.customer" />
                     </span>
                     <Link to="/customers/add">
