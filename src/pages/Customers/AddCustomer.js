@@ -4,6 +4,8 @@ import "styles/add-customer.css";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import Button from "components/Button";
+import Input from "components/Input";
 import { razorpay } from "api";
 import {
     customersDetails,
@@ -64,7 +66,7 @@ const AddCustomers = () => {
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.name" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="name"
                                     required
@@ -82,7 +84,7 @@ const AddCustomers = () => {
                                     {" "}
                                     <FormattedMessage id="customer.phone" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="contact"
                                     required
@@ -100,7 +102,7 @@ const AddCustomers = () => {
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.email" />
                                 </label>
-                                <input
+                                <Input
                                     type="email"
                                     name="email"
                                     required
@@ -114,14 +116,13 @@ const AddCustomers = () => {
                                 )}
                             </div>
                             <div className="form-group mx-5 my-3 justify-content-center">
-                                <button
-                                    className="btn"
+                                <Button
                                     type="submit"
                                     disabled={loading}
+                                    icon="save"
                                 >
-                                    <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="customer.saveButton" />
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </form>

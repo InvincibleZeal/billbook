@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import Button from "components/Button";
 import Spinner from "components/Spinner";
 Modal.setAppElement("*");
 
@@ -113,9 +114,9 @@ const ChangeCustomerModal = ({
                                                 <p>{info.contact}</p>
                                                 <p>{info.email}</p>
                                             </div>
-                                            <button className="btn">
+                                            <Button>
                                                 <FormattedMessage id="select" />
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>
@@ -162,9 +163,9 @@ const ChangeCustomerModal = ({
                                                 <p>Item: {info.name}</p>
                                                 <p>Price: ₹{info.amount}</p>
                                             </div>
-                                            <button className="btn">
-                                                <FormattedMessage id="select"></FormattedMessage>
-                                            </button>
+                                            <Button>
+                                                <FormattedMessage id="select" />
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>

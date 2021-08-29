@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import { useNotification } from "notification";
+import Button from "components/Button";
+import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
@@ -28,17 +30,30 @@ const ListInvoices = () => {
         }
         setLoading(false);
     }, [tableData]);
+    const formatter = [
+        { label: "CreatedAt", id: "created_at", formatter: formatDate },
+        {
+            label: "Customers",
+            id: "customer_details",
+            formatter: (customerDetails) => customerDetails.name,
+        }, // this is not showing yet
 
-    // Function to calc total
-    const calcAmount = (array) => {
-        if (array) {
-            return array.reduce((accumulator, currValue) => {
-                return accumulator + currValue.net_amount;
-            }, 0);
-        }
-        return 0;
-    };
-
+        { label: "InvoiceNumber", id: "invoice_number" },
+        {
+            label: "PaidStatus",
+            formatter: (
+                <span className="bg-info info px-3 py-1 rounded">PAID</span>
+            ),
+        },
+        {
+            label: "Amount",
+            id: "amount",
+        },
+        {
+            label: "AmountDue",
+            id: "amount_due",
+        },
+    ];
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -48,10 +63,9 @@ const ListInvoices = () => {
                         <FormattedMessage id="title.invoice" />
                     </span>
                     <Link to="/invoice/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                        <Button icon="plus">
                             <FormattedMessage id="invoice.newButton" />
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {loading ? (
@@ -83,32 +97,10 @@ const ListInvoices = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                        <td>
-                                            {data.customer_details &&
-                                            data.customer_details.customer_name
-                                                ? data.customer_details
-                                                      .customer_name
-                                                : "-"}
-                                        </td>
-                                        <td>{data.invoice_number || "-"}</td>
-                                        <td>
-                                            <span className="bg-info info px-3 py-1 rounded">
-                                                PAID
-                                            </span>
-                                        </td>
-                                        <td>₹{calcAmount(data.line_items)}</td>
-                                        <td>₹{calcAmount(data.line_items)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

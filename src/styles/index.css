@@ -740,3 +740,8 @@ input:focus-visible {
     padding-right: 40px;
     -webkit-appearance: none;
 }
+/*   card components */
+.card-default {
+    padding: 1rem;
+    background-color: white;
+}

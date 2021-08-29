@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import Button from "components/Button";
+import Input from "components/Input";
 import { razorpay } from "api";
 import { itemDetails, ItemDetailsSchema } from "pages/Inventory/FormDetails";
 
@@ -59,7 +61,7 @@ const AddItem = () => {
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.name" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="name"
                                     required
@@ -77,7 +79,7 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.price" />
                                 </label>
-                                <input
+                                <Input
                                     type="text"
                                     name="amount"
                                     required
@@ -95,13 +97,14 @@ const AddItem = () => {
                                     {" "}
                                     <FormattedMessage id="item.description" />
                                 </label>
-                                <textarea
+                                <Input
                                     rows="4"
+                                    type="textarea"
                                     name="description"
                                     required={true}
                                     value={fields.description}
                                     onChange={handleFieldChange}
-                                ></textarea>
+                                />
                                 {errors?.description && (
                                     <span className="text-error mt-2">
                                         {errors.name || ""}
@@ -109,14 +112,13 @@ const AddItem = () => {
                                 )}
                             </div>
                             <div className="form-group m-5 justify-content-center">
-                                <button
-                                    className="btn"
+                                <Button
+                                    icon="save"
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    <i className="fa fa-save"></i> &nbsp;
                                     <FormattedMessage id="item.saveButton" />
-                                </button>
+                                </Button>
                             </div>
                         </form>
                     </div>

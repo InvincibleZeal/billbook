@@ -5,6 +5,8 @@ import InvoiceModal from "pages/Invoice/InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
 import { useForm } from "customHooks/useForm";
+import Button from "components/Button";
+import Input from "components/Input";
 import {
     invoiceDetails,
     InvoiceDetailsSchema,
@@ -119,8 +121,7 @@ const CreateInvoice = () => {
                             {" "}
                             <FormattedMessage id="title.invoice" />
                         </span>
-                        <button className="btn" type="submit" disabled={saving}>
-                            <i className="fa fa-save"></i> &nbsp;{" "}
+                        <Button icon="save" type="submit">
                             <FormattedMessage id="invoice.saveButton" />
                             <Spinner
                                 loading={saving}
@@ -128,7 +129,7 @@ const CreateInvoice = () => {
                                 className="px-1"
                                 width="30px"
                             ></Spinner>
-                        </button>
+                        </Button>
                     </div>
                     <div className="d-flex py-5 flex-grow align-items-start">
                         <div>
@@ -206,8 +207,8 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.issuedAt" />
                                     </label>
-                                    <input
-                                        className="input-sm"
+                                    <Input
+                                        size="sm"
                                         type="date"
                                         name="issueDate"
                                         value={fields.issueDate}
@@ -225,8 +226,8 @@ const CreateInvoice = () => {
                                         {" "}
                                         <FormattedMessage id="invoice.dueDate" />
                                     </label>
-                                    <input
-                                        className="input-sm"
+                                    <Input
+                                        size="sm"
                                         type="date"
                                         name="dueDate"
                                         required
@@ -245,9 +246,10 @@ const CreateInvoice = () => {
                                     <label htmlFor="invoice_number">
                                         <FormattedMessage id="invoice.number" />
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
-                                    <input
-                                        className="input-sm"
+
+                                    <Input
+                                        size="sm"
+                                        icon="hashtag"
                                         type="text"
                                         name="invoice_number"
                                         required
@@ -264,9 +266,10 @@ const CreateInvoice = () => {
                                     <label htmlFor="reference_number">
                                         <FormattedMessage id="invoice.reference_number" />
                                     </label>
-                                    <i className="fa fa-hashtag"></i>
-                                    <input
-                                        className="input-sm"
+
+                                    <Input
+                                        size="sm"
+                                        icon="hashtag"
                                         type="text"
                                         name="reference_number"
                                         required
@@ -312,7 +315,7 @@ const CreateInvoice = () => {
                                         <tr key={idx}>
                                             <td> {item.name} </td>
                                             <td>
-                                                <input
+                                                <Input
                                                     min="1"
                                                     type="number"
                                                     value={item.quantity}
@@ -378,12 +381,13 @@ const CreateInvoice = () => {
                                     {" "}
                                     <FormattedMessage id="invoice.notes" />
                                 </label>
-                                <textarea
+                                <Input
+                                    type="textarea"
                                     className="input-sm invoice-notes"
                                     name="notes"
                                     value={fields.notes}
                                     onChange={handleFieldChange}
-                                ></textarea>
+                                />
                                 {errors?.notes && (
                                     <span className="text-error mt-2">
                                         {errors.notes || ""}
