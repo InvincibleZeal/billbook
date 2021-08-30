@@ -7,11 +7,14 @@ import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch } from "react-redux";
+import { setCustomerList } from "redux/actions/index";
 
 const ListCustomers = () => {
     // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
 
     // Fetching the Initial Data once the page loads
     useEffect(() => {
@@ -30,6 +33,7 @@ const ListCustomers = () => {
             });
         } else {
             setTableData(response.items);
+            dispatch(setCustomerList(response.items));
         }
         setLoading(false);
     }, []);
