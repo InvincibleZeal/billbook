@@ -32,7 +32,7 @@ const ListInvoices = () => {
             setTableData(response.items);
         }
         setLoading(false);
-        dispatch({ type: "add_items", payload: response.items });
+        dispatch({ type: "add_invoices", payload: response.items });
     }, [tableData]);
     const formatter = [
         { label: "CreatedAt", id: "created_at", formatter: formatDate },

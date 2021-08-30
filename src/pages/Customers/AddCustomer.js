@@ -11,10 +11,10 @@ import {
     customersDetails,
     CustomersDetailsSchema,
 } from "pages/Customers/FormDetails";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 const AddCustomers = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // State Variables
     const { fields, handleFieldChange, validate, errors } = useForm(
         customersDetails,
@@ -45,10 +45,10 @@ const AddCustomers = () => {
                     triggerNotification("Customer saved successfully", {
                         type: "success",
                     });
-                    dispatch({
-                        type: "add_single_customer",
-                        payload: response.data,
-                    });
+                    // dispatch({
+                    //     type: "add_single_customer",
+                    //     payload: response.data,
+                    // });
                     history.push("/customers");
                 }
                 setLoading(false);

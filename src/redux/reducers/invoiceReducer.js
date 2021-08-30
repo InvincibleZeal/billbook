@@ -3,7 +3,8 @@ const initialData = {
 };
 const invoiceReducer = (state = initialData, action) => {
     switch (action.type) {
-        case "add_invoice":
+        case "add_invoices":
+            console.log(action.payload);
             return {
                 ...state,
                 data: action.payload,
