@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
-import React, { Fragment, useState, useEffect, useCallback } from "react";
+import React, { Fragment, useState, useCallback } from "react";
 import "styles/add-invoice.css";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import InvoiceModal from "pages/Invoice/InvoiceModal";
 import { useIntl, FormattedMessage } from "react-intl";
 import { useNotification } from "notification";
@@ -16,6 +15,7 @@ import { razorpay } from "api";
 import Spinner from "components/Spinner";
 
 const CreateInvoice = () => {
+    // State Variables
     const [modalState, setModalState] = useState({
         status: false,
         type: "customer",
@@ -24,8 +24,9 @@ const CreateInvoice = () => {
         invoiceDetails,
         InvoiceDetailsSchema
     );
-    const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+
+    // Imports for history, internationalization and notification
     const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
@@ -46,12 +47,13 @@ const CreateInvoice = () => {
         },
         [fields]
     );
+
+    // Saving Invoice Details
     const saveInvoice = useCallback(
         async (event) => {
             event.preventDefault();
             if (validate()) {
                 setSaving(true);
-                // Adding to local storage
                 const data = {
                     ...fields,
                     notes: { remarks: fields.notes },
@@ -84,6 +86,7 @@ const CreateInvoice = () => {
         [fields]
     );
 
+    // Updating Count in Items Table
     const updateQuantity = useCallback(
         (id, value) => {
             const index = fields.line_items.findIndex((x) => x.id === id);
@@ -416,12 +419,9 @@ const CreateInvoice = () => {
             <InvoiceModal
                 status={modalState.status}
                 setModalState={setModalState}
-                customers={modalState.customers}
-                items={modalState.items}
                 type={modalState.type}
                 setState={setState}
                 fields={fields}
-                loading={loading}
             />
         </Fragment>
     );
