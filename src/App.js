@@ -13,7 +13,7 @@ import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import ErrorBoundary from "common/ErrorBoundary";
 import { useDispatch } from "react-redux";
-import { fetchCustomersList } from "redux/actions/index";
+import { fetchCustomersList, fetchItemsList } from "redux/actions/index";
 
 function App() {
     // State Variables
@@ -27,6 +27,7 @@ function App() {
     // Function to Fetch Data
     const fetchData = useCallback(async () => {
         dispatch(fetchCustomersList());
+        dispatch(fetchItemsList());
     }, []);
 
     return (
