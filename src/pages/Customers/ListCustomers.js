@@ -1,18 +1,17 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
-import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
-import { useDispatch } from "react-redux";
-import { setCustomerList } from "redux/actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCustomersList } from "redux/actions/index";
 
 const ListCustomers = () => {
+    const data = useSelector((state) => state.allCustomers);
+    console.log(data);
     // State Variables
-    const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
@@ -21,20 +20,9 @@ const ListCustomers = () => {
         fetchData();
     }, []);
 
-    // Imports for notification
-    const { triggerNotification } = useNotification();
-
     // API called here to fetch the customers details from db
     const fetchData = useCallback(async () => {
-        const { error, response } = await razorpay.fetchCustomers();
-        if (error) {
-            triggerNotification(error.message || "Something went wrong", {
-                type: "error",
-            });
-        } else {
-            setTableData(response.items);
-            dispatch(setCustomerList(response.items));
-        }
+        dispatch(fetchCustomersList());
         setLoading(false);
     }, []);
 
@@ -61,7 +49,7 @@ const ListCustomers = () => {
                     <div className="d-flex justify-content-center align-items-center">
                         <Spinner loading={loading} type="double"></Spinner>
                     </div>
-                ) : tableData.length > 0 ? (
+                ) : data.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <thead>
@@ -84,10 +72,7 @@ const ListCustomers = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
+                            <Table formatter={formatter} tableData={data} />
                         </table>
                     </div>
                 ) : (
