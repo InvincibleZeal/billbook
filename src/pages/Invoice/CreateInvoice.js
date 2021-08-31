@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import "styles/add-invoice.css";
 import { Link, useHistory } from "react-router-dom";
@@ -17,8 +18,6 @@ import Spinner from "components/Spinner";
 const CreateInvoice = () => {
     const [modalState, setModalState] = useState({
         status: false,
-        items: [],
-        customers: [],
         type: "customer",
     });
     const { fields, handleFieldChange, validate, errors, setState } = useForm(
@@ -30,24 +29,6 @@ const CreateInvoice = () => {
     const intl = useIntl();
     const history = useHistory();
     const { triggerNotification } = useNotification();
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    // Function to fetch data from local storage
-    const fetchData = useCallback(async () => {
-        const promises = [razorpay.fetchCustomers(), razorpay.fetchItems()];
-        const [customers, items] = await Promise.allSettled(promises);
-        setModalState((state) => ({
-            ...state,
-            customers: customers.value.response.items,
-            items: items.value.response.items.filter(
-                (x) => x.type === "invoice"
-            ),
-        }));
-        setLoading(false);
-    }, [modalState.customers, modalState.items]);
 
     // Function to delete items
     const removeElement = useCallback(
@@ -138,17 +119,7 @@ const CreateInvoice = () => {
                                     <FormattedMessage id="invoice.billTo" />
                                 </h4>
                                 <div className="d-flex justify-content-between">
-                                    {!loading &&
-                                    !modalState.customers.length ? (
-                                        <Link to="/customers/add">
-                                            {" "}
-                                            <p>
-                                                {" "}
-                                                <FormattedMessage id="invoice.selectCustomer" />
-                                            </p>{" "}
-                                        </Link>
-                                    ) : null}
-                                    {!loading && fields.customer.name ? (
+                                    {fields.customer.name ? (
                                         <Fragment>
                                             <div className="billing_details pr-3">
                                                 <div>
