@@ -72,7 +72,7 @@ const ChangeCustomerModal = ({
             >
                 <span className="react-modal-title">
                     {type === "customer" ? (
-                        <FormattedMessage id="change.details" />
+                        <FormattedMessage id="invoice.selectCustomer" />
                     ) : (
                         <FormattedMessage id="select.item" />
                     )}

@@ -426,7 +426,7 @@ body {
     border: 1px solid var(--light-grey);
 }
 
-/************ Forms Componets ****************/
+/************ Forms Components ****************/
 
 label {
     font-size: var(--default-font-size);
@@ -740,6 +740,23 @@ input:focus-visible {
     padding-right: 40px;
     -webkit-appearance: none;
 }
+
+.w-100 {
+    width: 100%;
+}
+
+.fw-medium {
+    font-weight: var(--font-medium);
+}
+
+.fw-semi-bold {
+    font-weight: var(--font-semi-bold);
+}
+
+.fw-bold {
+    font-weight: var(--font-bold);
+}
+
 /*   card components */
 .card-default {
     padding: 1rem;

@@ -7,6 +7,7 @@ import Button from "components/Button";
 import Input from "components/Input";
 import { razorpay } from "api";
 import { itemDetails, ItemDetailsSchema } from "pages/Inventory/FormDetails";
+import Spinner from "components/Spinner";
 
 const AddItem = () => {
     // State Variables
@@ -118,6 +119,12 @@ const AddItem = () => {
                                     disabled={loading}
                                 >
                                     <FormattedMessage id="item.saveButton" />
+                                    <Spinner
+                                        loading={loading}
+                                        size={12}
+                                        className="px-1"
+                                        width="30px"
+                                    ></Spinner>
                                 </Button>
                             </div>
                         </form>
