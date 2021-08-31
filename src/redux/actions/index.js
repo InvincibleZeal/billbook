@@ -21,9 +21,12 @@ export const fetchItemsList = () => async (dispatch) => {
         });
 };
 
-export const setItemsList = (items) => {
-    return {
-        type: ActionTypes.SET_ITEMS_LIST,
-        payload: items,
-    };
+export const fetchInvoiceList = () => async (dispatch) => {
+    const { response } = await razorpay.fetchInvoices();
+    if (response.error) console.error(response.error);
+    else
+        dispatch({
+            type: ActionTypes.FETCH_INVOICE_LIST,
+            payload: response.items,
+        });
 };
