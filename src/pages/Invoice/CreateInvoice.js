@@ -54,7 +54,7 @@ const CreateInvoice = () => {
         (id) => {
             if (
                 window.confirm(
-                    intl.formatMessage({ id: "invoice.confirm.delete.item" })
+                    intl.formatMessage({ id: "invoice.confirmDeleteItem" })
                 )
             ) {
                 setState(
