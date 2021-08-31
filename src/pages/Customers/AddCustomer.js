@@ -7,6 +7,8 @@ import { useForm } from "customHooks/useForm";
 import Button from "components/Button";
 import Input from "components/Input";
 import { razorpay } from "api";
+import Spinner from "components/Spinner";
+
 import {
     customersDetails,
     CustomersDetailsSchema,
@@ -122,6 +124,12 @@ const AddCustomers = () => {
                                     icon="save"
                                 >
                                     <FormattedMessage id="customer.saveButton" />
+                                    <Spinner
+                                        loading={loading}
+                                        size={12}
+                                        className="px-1"
+                                        width="30px"
+                                    ></Spinner>
                                 </Button>
                             </div>
                         </div>
