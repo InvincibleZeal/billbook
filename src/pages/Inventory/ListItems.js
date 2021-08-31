@@ -1,19 +1,17 @@
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
-import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
-import { useDispatch } from "react-redux";
-import { setItemsList } from "redux/actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemsList } from "redux/actions/index";
 
 const ListItems = () => {
-    // State Variables
-    const [tableData, setTableData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // Redux Variables
+    const data = useSelector((state) => state.allItems);
     const dispatch = useDispatch();
 
     // Fetching the Initial Data once the page loads
@@ -21,22 +19,9 @@ const ListItems = () => {
         fetchData();
     }, []);
 
-    // Imports for notification
-    const { triggerNotification } = useNotification();
-
     // API called here to fetch the items details from db
     const fetchData = useCallback(async () => {
-        const { error, response } = await razorpay.fetchItems();
-
-        if (error) {
-            triggerNotification(error.message || "Something went wrong", {
-                type: "error",
-            });
-        } else {
-            setTableData(response.items);
-            dispatch(setItemsList(response.items));
-        }
-        setLoading(false);
+        dispatch(fetchItemsList());
     }, []);
 
     const formatter = [
@@ -59,11 +44,11 @@ const ListItems = () => {
                         </Button>
                     </Link>
                 </div>
-                {loading ? (
+                {data === null ? (
                     <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} type="double"></Spinner>
+                        <Spinner loading={true} type="double"></Spinner>
                     </div>
-                ) : tableData.length > 0 ? (
+                ) : data.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <colgroup>
@@ -92,10 +77,7 @@ const ListItems = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
+                            <Table formatter={formatter} tableData={data} />
                         </table>
                     </div>
                 ) : (

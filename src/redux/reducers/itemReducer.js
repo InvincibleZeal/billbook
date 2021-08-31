@@ -1,9 +1,9 @@
 import { ActionTypes } from "../constants/actions-types";
 
-export const itemsList = (state = [], { type, payload }) => {
+export const itemsList = (state = null, { type, payload }) => {
     switch (type) {
-        case ActionTypes.SET_ITEMS_LIST:
-            return [...state, ...payload];
+        case ActionTypes.FETCH_ITEMS_LIST:
+            return [...payload];
         default:
             return state;
     }
