@@ -15,8 +15,11 @@ const ChangeCustomerModal = ({
     setState,
     fields,
 }) => {
+    // Redux Variables
     const customers = useSelector((state) => state.allCustomers);
     const items = useSelector((state) => state.allItems);
+
+    // Function to update customers details to fields
     const updateCustomersDetails = useCallback(
         (id, name, contact, email) => {
             setState("customer", { name, contact, email });
@@ -26,6 +29,7 @@ const ChangeCustomerModal = ({
         [fields]
     );
 
+    // Function to add item to fields
     const addItem = useCallback(
         (id, name, price) => {
             const product = { id: id, name, price };
@@ -53,6 +57,7 @@ const ChangeCustomerModal = ({
         },
         [fields]
     );
+
     return (
         <Modal
             isOpen={status}
