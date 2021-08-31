@@ -13,6 +13,8 @@ const ListInvoices = () => {
     // Redux Variables
     const data = useSelector((state) => state.allInvoices);
     const dispatch = useDispatch();
+
+    // useEffect Hook
     useEffect(() => {
         fetchData();
     }, []);
@@ -21,6 +23,8 @@ const ListInvoices = () => {
     const fetchData = useCallback(async () => {
         dispatch(fetchInvoiceList());
     });
+
+    // Table Fields
     const formatter = [
         { label: "CreatedAt", id: "created_at", formatter: formatDate },
         {
@@ -45,6 +49,7 @@ const ListInvoices = () => {
             id: "amount_due",
         },
     ];
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">

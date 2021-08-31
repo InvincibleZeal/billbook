@@ -24,12 +24,14 @@ const ListItems = () => {
         dispatch(fetchItemsList());
     }, []);
 
+    // Table Fields
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Description", id: "description" },
         { label: "Price", id: "amount" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
