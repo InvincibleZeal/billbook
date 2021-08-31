@@ -26,21 +26,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
+ 
     - name: Install dependencies
-    - run: npm install
+      run: npm install
     
     - name: Run test
-    - run: npm test
+      run: npm test
     
     - name: Build
-    - run: npm run build --if-present
+      run: npm run build --if-present
 
     - name: Push coverage to Codecov
-    - uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v2
 
     - name: Push coverage to Series CI
-    - run: |
+      run: |
         npm test -- --coverage --silent --watchAll=false | grep "All files" | awk '{sub("$", "%", $4)}; {print $4}' | xargs -I {} curl \
         --header "Authorization: Token ${{ secrets.SERIESCI_TOKEN }}" \
         --data-urlencode value="{}" \
