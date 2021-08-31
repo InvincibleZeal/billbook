@@ -11,6 +11,8 @@ import {
     customersDetails,
     CustomersDetailsSchema,
 } from "pages/Customers/FormDetails";
+import { useDispatch } from "react-redux";
+import { fetchCustomersList } from "redux/actions/index";
 
 const AddCustomers = () => {
     // State Variables
@@ -20,9 +22,10 @@ const AddCustomers = () => {
     );
     const [loading, setLoading] = useState(false);
 
-    // Imports for link and notification
+    // Imports for link, dispatch and notification
     const history = useHistory();
     const { triggerNotification } = useNotification();
+    const dispatch = useDispatch();
 
     // API called here to add customers to db
     const addCustomer = useCallback(
@@ -35,11 +38,15 @@ const AddCustomers = () => {
                     fields
                 );
                 if (error || response.error) {
+                    console.log(response.error.description);
                     triggerNotification(
-                        error ? error.message : "Something went wrong",
+                        response.error
+                            ? response.error.description
+                            : "Something went wrong",
                         { type: "error" }
                     );
                 } else {
+                    dispatch(fetchCustomersList());
                     triggerNotification("Customer saved successfully", {
                         type: "success",
                     });
