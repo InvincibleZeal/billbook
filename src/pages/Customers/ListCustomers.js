@@ -1,15 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Table from "components/Table";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCustomersList } from "redux/actions/index";
 
 const ListCustomers = () => {
-    // State Variables
+    // Redux Variables
     const data = useSelector((state) => state.allCustomers);
+    const dispatch = useDispatch();
 
     // Table Fields
     const formatter = [
@@ -18,6 +20,16 @@ const ListCustomers = () => {
         { label: "Email", id: "email" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
+    // useEffect Hook
+    useEffect(() => {
+        fetchData();
+    });
+
+    // Function to Fetch Data
+    const fetchData = useCallback(async () => {
+        dispatch(fetchCustomersList());
+    }, []);
 
     return (
         <Fragment>
