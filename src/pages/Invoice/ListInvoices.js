@@ -40,7 +40,7 @@ const ListInvoices = () => {
             label: "Customers",
             id: "customer_details",
             formatter: (customerDetails) => customerDetails.name,
-        }, // this is not showing yet
+        },
 
         { label: "InvoiceNumber", id: "invoice_number" },
         {
