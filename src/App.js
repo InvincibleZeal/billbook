@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -12,8 +12,23 @@ import { NotificationProvider } from "notification";
 import withWrapper from "common/withWrapper";
 import Navbar from "common/Navbar";
 import ErrorBoundary from "common/ErrorBoundary";
+import { useDispatch } from "react-redux";
+import { fetchCustomersList } from "redux/actions/index";
 
 function App() {
+    // State Variables
+    const dispatch = useDispatch();
+
+    // useEffect Hook
+    useEffect(() => {
+        fetchData();
+    });
+
+    // Function to Fetch Data
+    const fetchData = useCallback(async () => {
+        dispatch(fetchCustomersList());
+    }, []);
+
     return (
         <ErrorBoundary>
             <NotificationProvider>

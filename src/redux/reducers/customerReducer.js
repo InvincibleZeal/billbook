@@ -1,9 +1,9 @@
 import { ActionTypes } from "../constants/actions-types";
 
-export const customersList = (state = [], { type, payload }) => {
+export const customersList = (state = null, { type, payload }) => {
     switch (type) {
         case ActionTypes.FETCH_CUSTOMERS_LIST:
-            return [...state, ...payload];
+            return [...payload];
         default:
             return state;
     }

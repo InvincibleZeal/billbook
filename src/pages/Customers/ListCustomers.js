@@ -1,37 +1,24 @@
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+import React, { Fragment } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Table from "components/Table";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCustomersList } from "redux/actions/index";
+import { useSelector } from "react-redux";
 
 const ListCustomers = () => {
-    const data = useSelector((state) => state.allCustomers);
-    console.log(data);
     // State Variables
-    const [loading, setLoading] = useState(true);
-    const dispatch = useDispatch();
+    const data = useSelector((state) => state.allCustomers);
 
-    // Fetching the Initial Data once the page loads
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    // API called here to fetch the customers details from db
-    const fetchData = useCallback(async () => {
-        dispatch(fetchCustomersList());
-        setLoading(false);
-    }, []);
-
+    // Table Fields
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Phone", id: "contact" },
         { label: "Email", id: "email" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -45,9 +32,9 @@ const ListCustomers = () => {
                         </Button>
                     </Link>
                 </div>
-                {loading ? (
+                {data === null ? (
                     <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} type="double"></Spinner>
+                        <Spinner loading={true} type="double"></Spinner>
                     </div>
                 ) : data.length > 0 ? (
                     <div className="scrollable">
