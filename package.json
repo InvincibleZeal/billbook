@@ -4,7 +4,6 @@
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^11.2.7",
         "@testing-library/user-event": "^12.8.3",
         "nope-validator": "^1.0.2",
         "react": "^17.0.2",
@@ -24,7 +23,8 @@
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
-        "postinstall": "husky install"
+        "postinstall": "husky install",
+        "coverage": "npm test -- --coverage --watchAll=false | grep \"All files\" | awk '{sub(\"$\", \"%\", $4)}; {print $4}'"
     },
     "eslintConfig": {
         "extends": [
@@ -47,6 +47,7 @@
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
+        "@testing-library/react": "^12.0.0",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
