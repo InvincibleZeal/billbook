@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import Button from "components/Button";
 import Spinner from "components/Spinner";
 Modal.setAppElement("*");
 
@@ -12,14 +13,14 @@ const ChangeCustomerModal = ({
     customers,
     items,
     type,
-    setFormState,
+    setState,
     fields,
     loading,
 }) => {
     const updateCustomersDetails = useCallback(
         (id, name, contact, email) => {
-            setFormState("customer", { name, contact, email });
-            setFormState("customer_id", id);
+            setState("customer", { name, contact, email });
+            setState("customer_id", id);
             setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
@@ -29,22 +30,25 @@ const ChangeCustomerModal = ({
         (id, name, price) => {
             const product = { id: id, name, price };
             product.quantity = 1;
-            const updateItems = [...fields.line_items];
-            if (
-                updateItems.length === 0 ||
-                !updateItems.find((p) => p.id === product.id)
-            ) {
-                updateItems.push(product);
-            } else if (updateItems.find((p) => p.id === product.id)) {
-                product.quantity =
-                    updateItems.find((p) => p.id === product.id).quantity + 1;
-                updateItems.splice(
-                    updateItems.findIndex((p) => p.id === product.id),
-                    1,
-                    product
-                );
-            }
-            setFormState("line_items", [...updateItems]);
+            setState("line_items", (items) => {
+                const updateItems = [...items];
+                if (
+                    updateItems.length === 0 ||
+                    !updateItems.find((p) => p.id === product.id)
+                ) {
+                    updateItems.push(product);
+                } else if (updateItems.find((p) => p.id === product.id)) {
+                    product.quantity =
+                        updateItems.find((p) => p.id === product.id).quantity +
+                        1;
+                    updateItems.splice(
+                        updateItems.findIndex((p) => p.id === product.id),
+                        1,
+                        product
+                    );
+                }
+                return updateItems;
+            });
             setModalState((state) => ({ ...state, status: false }));
         },
         [fields]
@@ -120,9 +124,9 @@ const ChangeCustomerModal = ({
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button className="btn">
+                                            <Button>
                                                 <FormattedMessage id="select" />
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>
@@ -173,9 +177,9 @@ const ChangeCustomerModal = ({
                                                     Price: ₹{info.amount}
                                                 </p>
                                             </div>
-                                            <button className="btn">
-                                                <FormattedMessage id="select"></FormattedMessage>
-                                            </button>
+                                            <Button>
+                                                <FormattedMessage id="select" />
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +212,7 @@ ChangeCustomerModal.propTypes = {
     setModalState: PropTypes.func.isRequired,
     customers: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    setFormState: PropTypes.func.isRequired,
+    setState: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
 };

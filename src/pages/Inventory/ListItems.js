@@ -2,19 +2,26 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
+import Button from "components/Button";
+import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
 
 const ListItems = () => {
+    // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // Fetching the Initial Data once the page loads
     useEffect(() => {
         fetchData();
     }, []);
+
+    // Imports for notification
     const { triggerNotification } = useNotification();
 
-    // Function to fetch data from local storage
+    // API called here to fetch the items details from db
     const fetchData = useCallback(async () => {
         const { error, response } = await razorpay.fetchItems();
 
@@ -28,6 +35,12 @@ const ListItems = () => {
         setLoading(false);
     }, []);
 
+    const formatter = [
+        { label: "Name", id: "name" },
+        { label: "Description", id: "description" },
+        { label: "Price", id: "amount" },
+        { label: "Date", id: "created_at", formatter: formatDate },
+    ];
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -37,10 +50,9 @@ const ListItems = () => {
                         <FormattedMessage id="title.items" />
                     </span>
                     <Link to="/inventory/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;{" "}
+                        <Button icon="plus">
                             <FormattedMessage id="item.addButton" />
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {loading ? (
@@ -76,20 +88,10 @@ const ListItems = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.description}</td>
-                                        <td>₹{data.amount}</td>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

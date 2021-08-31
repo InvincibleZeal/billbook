@@ -2,19 +2,26 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { useNotification } from "notification";
+import Button from "components/Button";
+import Table from "components/Table";
 import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
 
 const ListCustomers = () => {
+    // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // Fetching the Initial Data once the page loads
     useEffect(() => {
         fetchData();
     }, []);
+
+    // Imports for notification
     const { triggerNotification } = useNotification();
 
-    // Function to fetch data from local storage
+    // API called here to fetch the customers details from db
     const fetchData = useCallback(async () => {
         const { error, response } = await razorpay.fetchCustomers();
         if (error) {
@@ -25,21 +32,25 @@ const ListCustomers = () => {
             setTableData(response.items);
         }
         setLoading(false);
-    }, [tableData]);
+    }, []);
 
+    const formatter = [
+        { label: "Name", id: "name" },
+        { label: "Phone", id: "contact" },
+        { label: "Email", id: "email" },
+        { label: "Date", id: "created_at", formatter: formatDate },
+    ];
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
                 <div className="page-heading-wrapper mb-5 p-5">
                     <span className="title">
-                        {" "}
                         <FormattedMessage id="title.customer" />
                     </span>
                     <Link to="/customers/add">
-                        <button className="btn">
-                            <i className="fa fa-plus"></i> &nbsp;
+                        <Button icon="plus">
                             <FormattedMessage id="customer.newButton" />
-                        </button>
+                        </Button>
                     </Link>
                 </div>
                 {loading ? (
@@ -69,20 +80,10 @@ const ListCustomers = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tableData.map((data, idx) => (
-                                    <tr key={idx}>
-                                        <td>{data.name}</td>
-                                        <td>{data.contact}</td>
-                                        <td>{data.email}</td>
-                                        <td>
-                                            {data.created_at
-                                                ? formatDate(data.created_at)
-                                                : "-"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <Table
+                                formatter={formatter}
+                                tableData={tableData}
+                            />
                         </table>
                     </div>
                 ) : (

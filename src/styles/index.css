@@ -426,7 +426,7 @@ body {
     border: 1px solid var(--light-grey);
 }
 
-/************ Forms Componets ****************/
+/************ Forms Components ****************/
 
 label {
     font-size: var(--default-font-size);
@@ -482,6 +482,11 @@ input:focus-visible {
 
 .flex-grow > * {
     flex-grow: 1;
+}
+
+.text-error {
+    color: var(--danger-color);
+    font-size: 12px;
 }
 
 /************ Buttons ****************/
@@ -750,4 +755,10 @@ input:focus-visible {
 
 .fw-bold {
     font-weight: var(--font-bold);
+}
+
+/*   card components */
+.card-default {
+    padding: 1rem;
+    background-color: white;
 }
