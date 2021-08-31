@@ -35,3 +35,6 @@ jobs:
     
     - name: Build
     - run: npm run build --if-present
+
+    - name: Push coverage to Codecov
+    - uses: codecov/codecov-action@v2
