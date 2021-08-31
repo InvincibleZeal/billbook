@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Button from "components/Button";
 import Spinner from "components/Spinner";
+import { useSelector } from "react-redux";
 Modal.setAppElement("*");
 
 const ChangeCustomerModal = ({
     status,
     setModalState,
-    customers,
-    items,
     type,
     setState,
     fields,
-    loading,
 }) => {
+    const customers = useSelector((state) => state.allCustomers);
+    const items = useSelector((state) => state.allItems);
     const updateCustomersDetails = useCallback(
         (id, name, contact, email) => {
             setState("customer", { name, contact, email });
@@ -86,106 +86,124 @@ const ChangeCustomerModal = ({
             </div>
             {type === "customer" ? (
                 <Fragment>
-                    <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} size={50}></Spinner>
-                    </div>
-                    {!loading && customers.length > 0 ? (
+                    {customers === null ? (
+                        <div className="d-flex justify-content-center align-items-center">
+                            <Spinner loading={true} size={50}></Spinner>
+                        </div>
+                    ) : (
                         <Fragment>
-                            {customers.map((info, idx) => (
-                                <div
-                                    className="react-modal-title-container customer-card"
-                                    key={idx}
-                                    onClick={() =>
-                                        updateCustomersDetails(
-                                            info.id,
-                                            info.name,
-                                            info.contact,
-                                            info.email
-                                        )
-                                    }
-                                >
-                                    <div className="card p-3">
+                            {customers.length > 0 ? (
+                                <Fragment>
+                                    {customers.map((info, idx) => (
                                         <div
-                                            className="page-heading-wrapper"
-                                            style={{ marginBottom: "0" }}
+                                            className="react-modal-title-container customer-card"
+                                            key={idx}
+                                            onClick={() =>
+                                                updateCustomersDetails(
+                                                    info.id,
+                                                    info.name,
+                                                    info.contact,
+                                                    info.email
+                                                )
+                                            }
                                         >
-                                            <div>
-                                                <p>{info.name}</p>
-                                                <p>{info.contact}</p>
-                                                <p>{info.email}</p>
+                                            <div className="card p-3">
+                                                <div
+                                                    className="page-heading-wrapper"
+                                                    style={{
+                                                        marginBottom: "0",
+                                                    }}
+                                                >
+                                                    <div>
+                                                        <p>{info.name}</p>
+                                                        <p>{info.contact}</p>
+                                                        <p>{info.email}</p>
+                                                    </div>
+                                                    <Button>
+                                                        <FormattedMessage id="select" />
+                                                    </Button>
+                                                </div>
                                             </div>
-                                            <Button>
-                                                <FormattedMessage id="select" />
-                                            </Button>
                                         </div>
-                                    </div>
-                                </div>
-                            ))}
+                                    ))}
+                                </Fragment>
+                            ) : (
+                                <p className="px-4 py-2">
+                                    {" "}
+                                    No Customers details available. Please click{" "}
+                                    <Link
+                                        to="/customers/add"
+                                        style={{ color: "black" }}
+                                    >
+                                        {" "}
+                                        here
+                                    </Link>{" "}
+                                    to add the same.
+                                </p>
+                            )}
                         </Fragment>
-                    ) : null}
-
-                    {!loading && customers.length === 0 ? (
-                        <p className="px-4 py-2">
-                            {" "}
-                            No Customers details available. Please click{" "}
-                            <Link
-                                to="/customers/add"
-                                style={{ color: "black" }}
-                            >
-                                {" "}
-                                here
-                            </Link>{" "}
-                            to add the same.
-                        </p>
-                    ) : null}
+                    )}
                 </Fragment>
             ) : (
                 <Fragment>
-                    <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} size={50}></Spinner>
-                    </div>
-                    {!loading && items.length > 0 ? (
+                    {items === null ? (
+                        <div className="d-flex justify-content-center align-items-center">
+                            <Spinner loading={true} size={50}></Spinner>
+                        </div>
+                    ) : (
                         <Fragment>
-                            {items.map((info, idx) => (
-                                <div
-                                    className="react-modal-title-container customer-card"
-                                    key={idx}
-                                    onClick={() =>
-                                        addItem(info.id, info.name, info.amount)
-                                    }
-                                >
-                                    <div className="card p-3">
+                            {items.length > 0 ? (
+                                <Fragment>
+                                    {items.map((info, idx) => (
                                         <div
-                                            className="page-heading-wrapper"
-                                            style={{ marginBottom: "0" }}
+                                            className="react-modal-title-container customer-card"
+                                            key={idx}
+                                            onClick={() =>
+                                                addItem(
+                                                    info.id,
+                                                    info.name,
+                                                    info.amount
+                                                )
+                                            }
                                         >
-                                            <div>
-                                                <p>Item: {info.name}</p>
-                                                <p>Price: ₹{info.amount}</p>
+                                            <div className="card p-3">
+                                                <div
+                                                    className="page-heading-wrapper"
+                                                    style={{
+                                                        marginBottom: "0",
+                                                    }}
+                                                >
+                                                    <div>
+                                                        <p>Item: {info.name}</p>
+                                                        <p>
+                                                            Price: ₹
+                                                            {info.amount}
+                                                        </p>
+                                                    </div>
+                                                    <Button>
+                                                        <FormattedMessage id="select" />
+                                                    </Button>
+                                                </div>
                                             </div>
-                                            <Button>
-                                                <FormattedMessage id="select" />
-                                            </Button>
                                         </div>
-                                    </div>
-                                </div>
-                            ))}
+                                    ))}
+                                </Fragment>
+                            ) : (
+                                <p className="px-4 py-2">
+                                    {" "}
+                                    No Items available. Please click{" "}
+                                    <Link
+                                        to="/inventory/add"
+                                        style={{ color: "black" }}
+                                    >
+                                        {" "}
+                                        here
+                                    </Link>{" "}
+                                    to add the same.
+                                </p>
+                            )}
                         </Fragment>
-                    ) : null}
-                    {!loading && items.length === 0 ? (
-                        <p className="px-4 py-2">
-                            {" "}
-                            No Items available. Please click{" "}
-                            <Link
-                                to="/inventory/add"
-                                style={{ color: "black" }}
-                            >
-                                {" "}
-                                here
-                            </Link>{" "}
-                            to add the same.
-                        </p>
-                    ) : null}
+                    )}
                 </Fragment>
             )}
         </Modal>
@@ -196,11 +214,8 @@ ChangeCustomerModal.propTypes = {
     status: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     setModalState: PropTypes.func.isRequired,
-    customers: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
     setState: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
 };
 
 export default ChangeCustomerModal;
