@@ -1,12 +1,9 @@
+import React from "react";
 import "@testing-library/jest-dom";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Button from "components/Button";
 
 describe("Button", () => {
-    it("should render without errors", () => {
-        render(<Button></Button>);
-    });
-
     it("should not be an empty DOM element", () => {
         const { container } = render(<Button></Button>);
         expect(container).not.toBeNull();
@@ -24,7 +21,7 @@ describe("Button", () => {
         expect(screen.getByRole("button")).toHaveTextContent(text);
     });
 
-    it.skip("should contain 'btn' class", () => {
+    it("should contain 'btn' class", () => {
         render(<Button></Button>);
         expect(screen.getByRole("button")).not.toHaveClass("undefined");
         expect(screen.getByRole("button")).toHaveClass("btn");
