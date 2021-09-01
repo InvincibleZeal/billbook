@@ -9,7 +9,7 @@ function Input({ size = "md", className, icon, type, ...rest }) {
             <textarea data-testid="textarea" className={inputClass} {...rest} />
         ) : (
             <input
-                data-testid="input-box"
+                data-testid="textbox"
                 className={inputClass}
                 type={type}
                 {...rest}
@@ -33,6 +33,6 @@ Input.propTypes = {
     type: Proptypes.string,
     icon: Proptypes.string,
     size: Proptypes.string,
-    className: Proptypes.string.isRequired,
+    className: Proptypes.string,
 };
 export default Input;
