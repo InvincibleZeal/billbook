@@ -1,45 +1,36 @@
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+import React, { Fragment, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
-import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCustomersList } from "redux/actions/index";
 
 const ListCustomers = () => {
-    // State Variables
-    const [tableData, setTableData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // Redux Variables
+    const data = useSelector((state) => state.allCustomers);
+    const dispatch = useDispatch();
 
-    // Fetching the Initial Data once the page loads
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    // Imports for notification
-    const { triggerNotification } = useNotification();
-
-    // API called here to fetch the customers details from db
-    const fetchData = useCallback(async () => {
-        const { error, response } = await razorpay.fetchCustomers();
-        if (error) {
-            triggerNotification(error.message || "Something went wrong", {
-                type: "error",
-            });
-        } else {
-            setTableData(response.items);
-        }
-        setLoading(false);
-    }, []);
-
+    // Table Fields
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Phone", id: "contact" },
         { label: "Email", id: "email" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
+    // useEffect Hook
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    // Function to Fetch Data
+    const fetchData = useCallback(() => {
+        dispatch(fetchCustomersList());
+    }, []);
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -53,11 +44,11 @@ const ListCustomers = () => {
                         </Button>
                     </Link>
                 </div>
-                {loading ? (
+                {data === null ? (
                     <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} type="double"></Spinner>
+                        <Spinner loading={true} type="double"></Spinner>
                     </div>
-                ) : tableData.length > 0 ? (
+                ) : data.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <thead>
@@ -80,10 +71,7 @@ const ListCustomers = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
+                            <Table formatter={formatter} tableData={data} />
                         </table>
                     </div>
                 ) : (

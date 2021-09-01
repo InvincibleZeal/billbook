@@ -35,7 +35,6 @@ const AddItem = () => {
                         { type: "error" }
                     );
                 } else {
-                    console.log(response);
                     triggerNotification("Item added successfully", {
                         type: "success",
                     });

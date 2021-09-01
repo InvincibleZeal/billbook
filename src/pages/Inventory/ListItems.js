@@ -1,46 +1,37 @@
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import { useNotification } from "notification";
 import Button from "components/Button";
 import Table from "components/Table";
-import { razorpay } from "api";
 import Spinner from "components/Spinner";
 import { formatDate } from "utils/helper";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemsList } from "redux/actions/index";
 
 const ListItems = () => {
-    // State Variables
-    const [tableData, setTableData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // Redux Variables
+    const data = useSelector((state) => state.allItems);
+    const dispatch = useDispatch();
 
     // Fetching the Initial Data once the page loads
     useEffect(() => {
         fetchData();
     }, []);
 
-    // Imports for notification
-    const { triggerNotification } = useNotification();
-
     // API called here to fetch the items details from db
-    const fetchData = useCallback(async () => {
-        const { error, response } = await razorpay.fetchItems();
-
-        if (error) {
-            triggerNotification(error.message || "Something went wrong", {
-                type: "error",
-            });
-        } else {
-            setTableData(response.items);
-        }
-        setLoading(false);
+    const fetchData = useCallback(() => {
+        dispatch(fetchItemsList());
     }, []);
 
+    // Table Fields
     const formatter = [
         { label: "Name", id: "name" },
         { label: "Description", id: "description" },
         { label: "Price", id: "amount" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -55,11 +46,11 @@ const ListItems = () => {
                         </Button>
                     </Link>
                 </div>
-                {loading ? (
+                {data === null ? (
                     <div className="d-flex justify-content-center align-items-center">
-                        <Spinner loading={loading} type="double"></Spinner>
+                        <Spinner loading={true} type="double"></Spinner>
                     </div>
-                ) : tableData.length > 0 ? (
+                ) : data.length > 0 ? (
                     <div className="scrollable">
                         <table className="table px-5">
                             <colgroup>
@@ -88,10 +79,7 @@ const ListItems = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
+                            <Table formatter={formatter} tableData={data} />
                         </table>
                     </div>
                 ) : (
