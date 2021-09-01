@@ -21,6 +21,7 @@
         "rtrim",
         "scrollable",
         "stylelint",
-        "testid"
+        "testid",
+        "textbox"
     ]
 }
