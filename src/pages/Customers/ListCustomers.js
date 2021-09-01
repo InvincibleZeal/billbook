@@ -24,7 +24,7 @@ const ListCustomers = () => {
     // useEffect Hook
     useEffect(() => {
         fetchData();
-    });
+    }, []);
 
     // Function to Fetch Data
     const fetchData = useCallback(() => {
