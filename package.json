@@ -17,14 +17,14 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test --passWithNoTests",
+        "test": "jest",
         "stylelint": "stylelint '**/*.scss'; exit 0",
         "eject": "react-scripts eject",
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
         "postinstall": "husky install",
-        "test:coverage": "npm test -- --coverage --watchAll=false"
+        "test:coverage": "jest --coverage"
     },
     "eslintConfig": {
         "extends": [
@@ -69,5 +69,18 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
+    },
+    "jest": {
+        "verbose": true,
+        "roots": [
+            "<rootDir>"
+        ],
+        "modulePaths": [
+            "<rootDir>"
+        ],
+        "moduleDirectories": [
+            "node_modules",
+            "src"
+        ]
     }
 }
