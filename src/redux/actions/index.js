@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/actions-types";
+import { ActionTypes } from "redux/constants/actions-types";
 import { razorpay } from "api";
 
 export const fetchCustomersList = () => async (dispatch) => {

@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/actions-types";
+import { ActionTypes } from "redux/constants/actions-types";
 
 export const customersList = (state = null, { type, payload }) => {
     switch (type) {
