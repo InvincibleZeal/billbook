@@ -37,7 +37,6 @@ const AddCustomers = () => {
                     fields
                 );
                 if (error || response.error) {
-                    console.log(response.error.description);
                     triggerNotification(
                         response.error
                             ? response.error.description
