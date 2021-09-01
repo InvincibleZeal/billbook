@@ -12,7 +12,7 @@
     "item.price": "Price",
     "item.description": "Description",
     "item.saveButton": "Save Item",
-    "item.addButton": " Item Added",
+    "item.addButton": "Add Item",
     "invoice.saveButton": "Save Invoice",
     "invoice.newButton": "New Invoice",
     "invoice.billTo": "Bill to",
