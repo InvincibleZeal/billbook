@@ -3,9 +3,16 @@
 </h1>
 
 <p align="center">
-    <a href="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status"> <img src="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status" /></a>
+    <a href="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status">
+        <img src="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status" />
+    </a>
+</p>
+<p align="center">
     <a href="https://codecov.io/gh/InvincibleZeal/billbook">
-    <img src="https://codecov.io/gh/InvincibleZeal/billbook/branch/main/graph/badge.svg?token=TFUN93F51A"/>
+        <img src="https://codecov.io/gh/InvincibleZeal/billbook/branch/main/graph/badge.svg?token=TFUN93F51A"/>
+    </a>
+    <a href="https://seriesci.com/InvincibleZeal/billbook/series/main/coverage.svg">
+        <img src="https://seriesci.com/InvincibleZeal/billbook/series/main/coverage.svg" />
     </a>
 </p>
 

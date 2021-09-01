@@ -24,7 +24,7 @@
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
         "postinstall": "husky install",
-        "test:coverage": "npm test -- --coverage --watchAll=false | grep \"All files\" | awk '{sub(\"$\", \"%\", $4)}; {print $4}'"
+        "test:coverage": "npm test -- --coverage --watchAll=false"
     },
     "eslintConfig": {
         "extends": [
