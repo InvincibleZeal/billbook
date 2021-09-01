@@ -20,7 +20,7 @@ const ListItems = () => {
     }, []);
 
     // API called here to fetch the items details from db
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(() => {
         dispatch(fetchItemsList());
     }, []);
 

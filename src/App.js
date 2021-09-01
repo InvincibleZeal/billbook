@@ -25,7 +25,7 @@ function App() {
     });
 
     // Function to Fetch Data
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(() => {
         dispatch(fetchCustomersList());
         dispatch(fetchItemsList());
     }, []);

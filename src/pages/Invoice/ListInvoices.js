@@ -20,7 +20,7 @@ const ListInvoices = () => {
     }, []);
 
     // Function to Fetch Data
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(() => {
         dispatch(fetchInvoiceList());
     });
 
