@@ -6,14 +6,24 @@ function Input({ size = "md", className, icon, type, ...rest }) {
 
     const Inputelement =
         type === "textarea" ? (
-            <textarea className={inputClass} {...rest} />
+            <textarea data-testid="textarea" className={inputClass} {...rest} />
         ) : (
-            <input className={inputClass} type={type} {...rest} />
+            <input
+                data-testid="input-box"
+                className={inputClass}
+                type={type}
+                {...rest}
+            />
         );
 
     return (
         <>
-            {icon && <i className={`fa fa-${icon}`}></i>}
+            {icon && (
+                <i
+                    data-testid="input-text-icon"
+                    className={`fa fa-${icon}`}
+                ></i>
+            )}
             {Inputelement}
         </>
     );
@@ -23,6 +33,6 @@ Input.propTypes = {
     type: Proptypes.string,
     icon: Proptypes.string,
     size: Proptypes.string,
-    className: Proptypes.string,
+    className: Proptypes.string.isRequired,
 };
 export default Input;

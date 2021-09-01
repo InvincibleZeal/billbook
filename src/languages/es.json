@@ -29,6 +29,7 @@
     "invoice.amountDue": "Monto Adeudado",
     "invoice.change": "cambio",
     "invoice.addAnItem": "Agregar un artículo",
+    "invoice.confirmDeleteItem": "Confirmar, ¿quieres eliminar?",
     "invoice.totalAmount": "Cantidad total",
     "invoice.model": "Modelo",
     "no.records": "No hay registros disponibles",

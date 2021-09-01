@@ -1,15 +1,18 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-function Button({ type = "button", className, children, icon, ...rest }) {
+function Button({ type = "button", className = "", children, icon, ...rest }) {
     return (
         <button
-            data-testID="button"
+            data-testid="button"
             type={type}
             className={`btn ${className}`}
             {...rest}
         >
-            {icon && <i className={`fa fa-${icon}`}></i>}&nbsp;
+            {icon && (
+                <i data-testid="font-icon" className={`fa fa-${icon}`}></i>
+            )}
+            &nbsp;
             {children}
         </button>
     );

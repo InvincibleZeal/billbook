@@ -14,7 +14,6 @@ const ListCustomers = () => {
     // State Variables
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
-
     // Fetching the Initial Data once the page loads
     useEffect(() => {
         fetchData();
