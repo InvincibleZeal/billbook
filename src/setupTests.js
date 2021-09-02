@@ -1,14 +1,17 @@
 import React from "react";
 import { NotificationProvider } from "notification";
 import Wrapper from "i18n/wrapper";
-
+import { Provider } from "react-redux";
+import store from "redux/store";
 export const mockContext = (children) => {
     return (
         <NotificationProvider>
-            <Wrapper>
-                <div id="notification-root"></div>
-                {children}
-            </Wrapper>
+            <Provider store={store}>
+                <Wrapper>
+                    <div id="notification-root"></div>
+                    {children}
+                </Wrapper>
+            </Provider>
         </NotificationProvider>
     );
 };

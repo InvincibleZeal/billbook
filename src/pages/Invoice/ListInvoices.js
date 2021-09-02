@@ -66,7 +66,7 @@ const ListInvoices = () => {
                         {" "}
                         <FormattedMessage id="title.invoice" />
                     </span>
-                    <Link to="/invoice/add">
+                    <Link data-testid="link" to="/invoice/add">
                         <Button icon="plus">
                             <FormattedMessage id="invoice.newButton" />
                         </Button>

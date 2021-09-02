@@ -12,6 +12,7 @@ describe("Button", () => {
     it("should not be an empty DOM element", () => {
         const { container } = render(<Spinner loading={true}></Spinner>);
         expect(container).not.toBeNull();
+        expect(screen.queryByRole("img")).toBeInTheDocument();
     });
 
     it("should contain a img element", () => {
