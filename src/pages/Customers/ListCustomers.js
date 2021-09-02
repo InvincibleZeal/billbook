@@ -40,6 +40,7 @@ const ListCustomers = () => {
         { label: "Email", id: "email" },
         { label: "Date", id: "created_at", formatter: formatDate },
     ];
+
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
@@ -59,7 +60,11 @@ const ListCustomers = () => {
                     </div>
                 ) : tableData.length > 0 ? (
                     <div className="scrollable">
-                        <table className="table px-5">
+                        <Table
+                            formatter={formatter}
+                            tableData={tableData}
+                            className="table px-5"
+                        >
                             <thead>
                                 <tr>
                                     <th>
@@ -80,11 +85,7 @@ const ListCustomers = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
-                        </table>
+                        </Table>
                     </div>
                 ) : (
                     <p className="my-3 mx-5">
