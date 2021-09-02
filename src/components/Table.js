@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-function Table({ tableData, formatter }) {
-    // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
-
+function Table({ tableData = [], formatter = [], children, ...rest }) {
     const TableBody = function () {
         const body = tableData.map((rowData, rowIndex) => {
             const trData = formatter.map((columnData, columnIndex) => {
@@ -24,28 +22,46 @@ function Table({ tableData, formatter }) {
                         );
                     } else
                         return (
-                            <td key={columnDataId || columnIndex}>
+                            <td
+                                key={columnDataId || columnIndex}
+                                data-testid="table-cell"
+                            >
                                 {" "}
                                 {columnDataFormatter}
                             </td>
                         );
                 }
-                return <td key={columnDataId || columnIndex}>{cellData}</td>;
+                return (
+                    <td
+                        key={columnDataId || columnIndex}
+                        data-testid="table-cell"
+                    >
+                        {cellData}
+                    </td>
+                );
             });
 
-            return <tr key={rowIndex}>{trData}</tr>;
+            return (
+                <tr key={rowIndex} data-testid="table-row">
+                    {trData}
+                </tr>
+            );
         });
         return body;
     };
     return (
-        <tbody>
-            <TableBody />
-        </tbody>
+        <table data-testid="table" {...rest}>
+            {children}
+            <tbody data-testid="table-tbody">
+                <TableBody />
+            </tbody>
+        </table>
     );
 }
 
 Table.propTypes = {
     tableData: PropTypes.array,
     formatter: PropTypes.array,
+    children: PropTypes.element,
 };
 export default Table;

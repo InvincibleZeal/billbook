@@ -74,7 +74,11 @@ const ListInvoices = () => {
                     </div>
                 ) : tableData.length > 0 ? (
                     <div className="scrollable">
-                        <table className="table px-5">
+                        <Table
+                            formatter={formatter}
+                            tableData={tableData}
+                            className="table px-5"
+                        >
                             <thead>
                                 <tr>
                                     <th>
@@ -97,11 +101,7 @@ const ListInvoices = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
-                        </table>
+                        </Table>
                     </div>
                 ) : (
                     <p className="my-3 mx-5">

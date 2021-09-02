@@ -61,7 +61,11 @@ const ListItems = () => {
                     </div>
                 ) : tableData.length > 0 ? (
                     <div className="scrollable">
-                        <table className="table px-5">
+                        <Table
+                            formatter={formatter}
+                            tableData={tableData}
+                            className="table px-5"
+                        >
                             <colgroup>
                                 <col span="1" style={{ width: "20%" }} />
                                 <col span="1" style={{ width: "50%" }} />
@@ -88,11 +92,7 @@ const ListItems = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <Table
-                                formatter={formatter}
-                                tableData={tableData}
-                            />
-                        </table>
+                        </Table>
                     </div>
                 ) : (
                     <p className="my-3 mx-5">
