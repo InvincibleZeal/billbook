@@ -9,7 +9,10 @@ const Toast = (props) => {
 
     return ReactDOM.createPortal(
         <>
-            <div className={`notification-container ${props.position}`}>
+            <div
+                data-testid="notify-toast"
+                className={`notification-container ${props.position}`}
+            >
                 {props.notifications.map((toast, i) => (
                     <div
                         key={i}
