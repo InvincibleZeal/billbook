@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import "styles/add-customer.css";
 import Button from "components/Button";
 import Table from "components/Table";
@@ -23,29 +23,38 @@ const ListInvoices = () => {
     const fetchData = useCallback(() => {
         dispatch(fetchInvoiceList());
     });
+    // useIntl format message
 
+    const intl = useIntl();
     // Table Fields
     const formatter = [
-        { label: "CreatedAt", id: "created_at", formatter: formatDate },
         {
-            label: "Customers",
+            label: intl.formatMessage({ id: "invoice.issuedAt" }),
+            id: "created_at",
+            formatter: formatDate,
+        },
+        {
+            label: intl.formatMessage({ id: "title.customer" }),
             id: "customer_details",
             formatter: (customerDetails) => customerDetails.name,
-        }, // this is not showing yet
+        },
 
-        { label: "InvoiceNumber", id: "invoice_number" },
         {
-            label: "PaidStatus",
+            label: intl.formatMessage({ id: "invoice.number" }),
+            id: "invoice_number",
+        },
+        {
+            label: intl.formatMessage({ id: "invoice.paidStatus" }),
             formatter: (
                 <span className="bg-info info px-3 py-1 rounded">PAID</span>
             ),
         },
         {
-            label: "Amount",
+            label: intl.formatMessage({ id: "invoice.amount" }),
             id: "amount",
         },
         {
-            label: "AmountDue",
+            label: intl.formatMessage({ id: "invoice.amountDue" }),
             id: "amount_due",
         },
     ];
@@ -70,31 +79,11 @@ const ListInvoices = () => {
                     </div>
                 ) : data.length > 0 ? (
                     <div className="scrollable">
-                        <table className="table px-5">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <FormattedMessage id="invoice.date" />
-                                    </th>
-                                    <th>
-                                        <FormattedMessage id="title.customer" />
-                                    </th>
-                                    <th>
-                                        <FormattedMessage id="invoice.number" />
-                                    </th>
-                                    <th>
-                                        <FormattedMessage id="invoice.paidStatus" />
-                                    </th>
-                                    <th>
-                                        <FormattedMessage id="invoice.amount" />
-                                    </th>
-                                    <th>
-                                        <FormattedMessage id="invoice.amountDue" />
-                                    </th>
-                                </tr>
-                            </thead>
-                            <Table formatter={formatter} tableData={data} />
-                        </table>
+                        <Table
+                            formatter={formatter}
+                            tableData={data}
+                            className="table px-5"
+                        />
                     </div>
                 ) : (
                     <p className="my-3 mx-5">

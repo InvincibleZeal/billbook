@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useCallback } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Table from "components/Table";
@@ -14,11 +14,19 @@ const ListCustomers = () => {
     const dispatch = useDispatch();
 
     // Table Fields
+    const intl = useIntl();
     const formatter = [
-        { label: "Name", id: "name" },
-        { label: "Phone", id: "contact" },
-        { label: "Email", id: "email" },
-        { label: "Date", id: "created_at", formatter: formatDate },
+        { label: intl.formatMessage({ id: "customer.name" }), id: "name" },
+        {
+            label: intl.formatMessage({ id: "customer.phone" }),
+            id: "contact",
+        },
+        { label: intl.formatMessage({ id: "customer.email" }), id: "email" },
+        {
+            label: intl.formatMessage({ id: "invoice.date" }),
+            id: "created_at",
+            formatter: formatDate,
+        },
     ];
 
     // useEffect Hook
@@ -50,29 +58,11 @@ const ListCustomers = () => {
                     </div>
                 ) : data.length > 0 ? (
                     <div className="scrollable">
-                        <table className="table px-5">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="customer.newButton" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="customer.phone" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="customer.email" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="customer.createdOn" />
-                                    </th>
-                                </tr>
-                            </thead>
-                            <Table formatter={formatter} tableData={data} />
-                        </table>
+                        <Table
+                            formatter={formatter}
+                            tableData={data}
+                            className="table px-5"
+                        ></Table>
                     </div>
                 ) : (
                     <p className="my-3 mx-5">
