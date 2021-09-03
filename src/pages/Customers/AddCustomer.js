@@ -38,7 +38,9 @@ const AddCustomers = () => {
                 );
                 if (error || response.error) {
                     triggerNotification(
-                        error ? error.message : "Something went wrong",
+                        response.error
+                            ? response.error.description
+                            : "Something went wrong",
                         { type: "error" }
                     );
                 } else {
