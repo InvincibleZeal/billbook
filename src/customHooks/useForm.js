@@ -12,7 +12,6 @@ export function useForm(initialState, validationSchema) {
             ...prev,
             [name]: value,
         }));
-        console.log(fields, errors);
     };
 
     // For Handling other changes wrt to arrays and objects

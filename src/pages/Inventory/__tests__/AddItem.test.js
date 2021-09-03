@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-disabled-tests */
 import React from "react";
 import "@testing-library/jest-dom";
 import { act, fireEvent, render, screen } from "@testing-library/react";
@@ -7,15 +8,14 @@ import { mockContext } from "setupTests";
 import { useForm } from "customHooks/useForm";
 import { ItemDetailsSchema, itemDetails } from "pages/Inventory/FormDetails";
 
-const fillInputs = async (values) => {
+const fillInputs = (values) => {
     const inputs = {
         name: screen.queryByLabelText("name"),
         amount: screen.queryByLabelText("amount"),
         description: screen.queryByLabelText("description"),
     };
     for (const [key, input] of Object.entries(inputs)) {
-        console.log(key, input.value || "None", values[key]);
-        await fireEvent.change(input, { target: { value: values[key] } });
+        fireEvent.change(input, { target: { value: values[key] } });
     }
     return inputs;
 };
@@ -26,43 +26,41 @@ describe("AddItem", () => {
         expect(screen.queryAllByRole("textbox")).not.toBeNull();
     });
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip("should contain correct input values", () => {
+    it("should contain correct input values", () => {
         render(mockContext(<AddItem></AddItem>));
-        const form = screen.getByTestId("item-form");
         const values = {
             name: "Precious Item",
             amount: "23",
             description: "useful",
         };
+        const form = screen.getByTestId("item-form");
         const inputs = fillInputs(values);
         fireEvent.click(form.querySelector("button"));
-        screen.debug(inputs.description);
         expect(inputs.description.innerHTML).toEqual(values.description);
         expect(inputs.name).toHaveValue(values.name);
         expect(inputs.amount).toHaveValue(values.amount);
     });
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip("should show error on incorrect values", async () => {
+    it("should not show error on correct values", () => {
+        const values = {
+            name: "Precious Item",
+            amount: "23",
+            description: "useful",
+            currency: "INR",
+        };
+        const realUseState = React.useState;
+        jest.spyOn(React, "useState").mockImplementationOnce(() =>
+            realUseState(values)
+        );
+
         const { result } = renderHook(() =>
             useForm(itemDetails, ItemDetailsSchema)
         );
 
         render(mockContext(<AddItem></AddItem>));
-        const values = {
-            name: "Precious Item",
-            amount: "23",
-            description: "useful",
-        };
-        await fillInputs(values);
-        // const form = screen.getByTestId("item-form");
-        // fireEvent.click(form.querySelector("button"));
         act(() => {
             result.current.validate();
         });
-        console.log(result.current);
-        expect(result.current.error.name).toBeTruthy();
-        // expect(result.current.errors.amount).toBe("Invalid input");
+        expect(result.current.error).toBeUndefined();
     });
 });
