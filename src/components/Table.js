@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-function Table({ tableData, formatter, children }) {
+function Table({ tableData, formatter, children, ...rest }) {
     // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
     const TableHead = function () {
         return formatter.map((columnHead, index) => (
@@ -43,7 +43,7 @@ function Table({ tableData, formatter, children }) {
     };
     return (
         <>
-            <table className="table px-5">
+            <table {...rest}>
                 {children}
                 <thead>
                     <tr>

@@ -60,7 +60,11 @@ const ListItems = () => {
                     </div>
                 ) : data.length > 0 ? (
                     <div className="scrollable">
-                        <Table formatter={formatter} tableData={data}>
+                        <Table
+                            formatter={formatter}
+                            tableData={data}
+                            className="table px-5"
+                        >
                             <colgroup>
                                 <col span="1" style={{ width: "20%" }} />
                                 <col span="1" style={{ width: "50%" }} />
