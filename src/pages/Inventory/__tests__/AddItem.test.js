@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-disabled-tests */
 import React from "react";
 import "@testing-library/jest-dom";
 import { act, fireEvent, render, screen } from "@testing-library/react";
@@ -61,6 +60,6 @@ describe("AddItem", () => {
         act(() => {
             result.current.validate();
         });
-        expect(result.current.error).toBeUndefined();
+        expect(result.current.errors).toBeUndefined();
     });
 });
