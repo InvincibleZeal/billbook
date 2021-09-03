@@ -42,19 +42,17 @@ function Table({ tableData, formatter, children, ...rest }) {
         return body;
     };
     return (
-        <>
-            <table {...rest}>
-                {children}
-                <thead>
-                    <tr>
-                        <TableHead />
-                    </tr>
-                </thead>
-                <tbody>
-                    <TableBody />
-                </tbody>
-            </table>
-        </>
+        <table {...rest}>
+            {children}
+            <thead>
+                <tr>
+                    <TableHead />
+                </tr>
+            </thead>
+            <tbody>
+                <TableBody />
+            </tbody>
+        </table>
     );
 }
 
