@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 function Table({ tableData, formatter }) {
     // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
-
+    const TableHead = function () {
+        return formatter.map((columnHead, index) => (
+            <th key={index}>{columnHead.label}</th>
+        ));
+    };
     const TableBody = function () {
         const body = tableData.map((rowData, rowIndex) => {
             const trData = formatter.map((columnData, columnIndex) => {
@@ -38,9 +42,26 @@ function Table({ tableData, formatter }) {
         return body;
     };
     return (
-        <tbody>
-            <TableBody />
-        </tbody>
+        <>
+            <table className="table px-5">
+                {formatter[1].id === "description" && (
+                    <colgroup>
+                        <col span="1" style={{ width: "20%" }} />
+                        <col span="1" style={{ width: "50%" }} />
+                        <col span="1" style={{ width: "15%" }} />
+                        <col span="1" style={{ width: "15%" }} />
+                    </colgroup>
+                )}
+                <thead>
+                    <tr>
+                        <TableHead />
+                    </tr>
+                </thead>
+                <tbody>
+                    <TableBody />
+                </tbody>
+            </table>
+        </>
     );
 }
 
