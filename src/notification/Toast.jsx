@@ -3,9 +3,16 @@ import ReactDOM from "react-dom";
 import "styles/toast.css";
 
 const Toast = (props) => {
+    const ROOT_ID = "notification-root";
+    const root = document.createElement("div");
+    root.setAttribute("id", ROOT_ID);
+
     return ReactDOM.createPortal(
         <>
-            <div className={`notification-container ${props.position}`}>
+            <div
+                data-testid="notify-toast"
+                className={`notification-container ${props.position}`}
+            >
                 {props.notifications.map((toast, i) => (
                     <div
                         key={i}
@@ -32,7 +39,7 @@ const Toast = (props) => {
                 ))}
             </div>
         </>,
-        document.getElementById("notification-root")
+        document.getElementById(ROOT_ID) || root
     );
 };
 
