@@ -66,32 +66,34 @@ const ListItems = () => {
                             tableData={tableData}
                             className="table px-5"
                         >
-                            <colgroup>
-                                <col span="1" style={{ width: "20%" }} />
-                                <col span="1" style={{ width: "50%" }} />
-                                <col span="1" style={{ width: "15%" }} />
-                                <col span="1" style={{ width: "15%" }} />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="customer.name" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="item.description" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="item.price" />
-                                    </th>
-                                    <th>
-                                        {" "}
-                                        <FormattedMessage id="added.on" />
-                                    </th>
-                                </tr>
-                            </thead>
+                            <Fragment>
+                                <colgroup>
+                                    <col span="1" style={{ width: "20%" }} />
+                                    <col span="1" style={{ width: "50%" }} />
+                                    <col span="1" style={{ width: "15%" }} />
+                                    <col span="1" style={{ width: "15%" }} />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            {" "}
+                                            <FormattedMessage id="customer.name" />
+                                        </th>
+                                        <th>
+                                            {" "}
+                                            <FormattedMessage id="item.description" />
+                                        </th>
+                                        <th>
+                                            {" "}
+                                            <FormattedMessage id="item.price" />
+                                        </th>
+                                        <th>
+                                            {" "}
+                                            <FormattedMessage id="added.on" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </Fragment>
                         </Table>
                     </div>
                 ) : (

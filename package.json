@@ -48,6 +48,7 @@
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
         "@testing-library/react": "^12.0.0",
+        "@testing-library/react-hooks": "^7.0.2",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
@@ -61,6 +62,7 @@
         "eslint-plugin-react": "^7.24.0",
         "husky": "^7.0.0",
         "lint-staged": "^11.1.2",
+        "msw": "^0.35.0",
         "prettier": "^2.3.2",
         "stylelint": "^13.13.1",
         "stylelint-config-standard": "^22.0.0"
