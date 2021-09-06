@@ -36,10 +36,10 @@ function App() {
 
     return (
         <ErrorBoundary>
-            <Suspense fallback={<h1>Loading Web App...</h1>}>
-                <NotificationProvider>
-                    <Router>
-                        <Navbar />
+            <NotificationProvider>
+                <Router>
+                    <Navbar />
+                    <Suspense fallback={<h1>Loading components</h1>}>
                         <Switch>
                             {/* Customer Module */}
                             <Route path="/" exact>
@@ -67,9 +67,9 @@ function App() {
                             </Route>
                             <Route component={ListCustomers} />
                         </Switch>
-                    </Router>
-                </NotificationProvider>
-            </Suspense>
+                    </Suspense>
+                </Router>
+            </NotificationProvider>
         </ErrorBoundary>
     );
 }
