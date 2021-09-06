@@ -56,12 +56,13 @@ const AddItem = () => {
                 </div>
                 <div className="card px-5 mx-5" style={{ maxWidth: "400px" }}>
                     <div className="py-5">
-                        <form onSubmit={addItem}>
+                        <form onSubmit={addItem} data-testid="item-form">
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.name" />
                                 </label>
                                 <Input
+                                    aria-label="name"
                                     type="text"
                                     name="name"
                                     required
@@ -80,6 +81,7 @@ const AddItem = () => {
                                     <FormattedMessage id="item.price" />
                                 </label>
                                 <Input
+                                    aria-label="amount"
                                     type="text"
                                     name="amount"
                                     required
@@ -98,6 +100,7 @@ const AddItem = () => {
                                     <FormattedMessage id="item.description" />
                                 </label>
                                 <Input
+                                    aria-label="description"
                                     rows="4"
                                     type="textarea"
                                     name="description"

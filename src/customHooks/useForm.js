@@ -7,9 +7,10 @@ export function useForm(initialState, validationSchema) {
 
     // For Handling  form related changes
     const handleFieldChange = (event) => {
+        const { name, value } = event.target;
         setValues((prev) => ({
             ...prev,
-            [event.target.name]: event.target.value,
+            [name]: value,
         }));
     };
 

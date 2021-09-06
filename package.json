@@ -4,7 +4,6 @@
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^11.2.7",
         "@testing-library/user-event": "^12.8.3",
         "nope-validator": "^1.0.2",
         "react": "^17.0.2",
@@ -29,7 +28,8 @@
         "prepare": "husky install",
         "postinstall": "husky install",
         "lhci": "lhci autorun",
-        "server": "http-server ./build -p 4000 -g"
+        "server": "http-server ./build -p 4000 -g",
+        "test:coverage": "npm test -- --coverage --watchAll=false"
     },
     "eslintConfig": {
         "extends": [
@@ -53,12 +53,15 @@
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
         "@lhci/cli": "^0.8.1",
+        "@testing-library/react": "^12.0.0",
+        "@testing-library/react-hooks": "^7.0.2",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-config-standard": "^16.0.3",
         "eslint-plugin-import": "^2.24.0",
+        "eslint-plugin-jest": "^24.4.0",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-promise": "^5.1.0",
@@ -66,6 +69,7 @@
         "http-server": "^13.0.1",
         "husky": "^7.0.0",
         "lint-staged": "^11.1.2",
+        "msw": "^0.35.0",
         "prettier": "^2.3.2",
         "stylelint": "^13.13.1",
         "stylelint-config-standard": "^22.0.0"

@@ -19,10 +19,13 @@
         "lhci",
         "ltrim",
         "preconnect",
+        "proptypes",
         "razorpay",
         "rtrim",
         "scrollable",
         "stylelint",
-        "stylesheet"
+        "stylesheet",
+        "testid",
+        "textbox"
     ]
 }
