@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "styles/toast.css";
 
 const Toast = (props) => {
+    const ROOT_ID = "notification-root";
+    const root = document.createElement("div");
+    root.setAttribute("id", ROOT_ID);
+
     return ReactDOM.createPortal(
         <>
             <div className={`notification-container ${props.position}`}>
@@ -32,7 +36,7 @@ const Toast = (props) => {
                 ))}
             </div>
         </>,
-        document.getElementById("notification-root")
+        document.getElementById(ROOT_ID) || root
     );
 };
 

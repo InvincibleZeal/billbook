@@ -1,10 +1,24 @@
-# Billbook
+<h1 align="center">
+    <a href="https://billbook-razorpay.netlify.app" style="color: black;">Billbook</a>
+</h1>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status)](https://app.netlify.com/sites/billbook-razorpay/deploys)
+<p align="center">
+    <a href="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status">
+        <img src="https://api.netlify.com/api/v1/badges/953f4838-bb01-4e0c-aaaf-22774ba5c3f0/deploy-status" />
+    </a>
+</p>
+<p align="center">
+    <a href="https://codecov.io/gh/InvincibleZeal/billbook">
+        <img src="https://codecov.io/gh/InvincibleZeal/billbook/branch/main/graph/badge.svg?token=TFUN93F51A"/>
+    </a>
+    <a href="https://seriesci.com/InvincibleZeal/billbook/series/main/coverage.svg">
+        <img src="https://seriesci.com/InvincibleZeal/billbook/series/main/coverage.svg" />
+    </a>
+</p>
 
 <p>This is an invoicing system. It works especially well for SMEs and likes to be called <em>BillBook!</em>.</p>
 
-### Check this out live at : https://billbook-razorpay.netlify.app/
+Check out the live app [here](https://billbook-razorpay.netlify.app/)
 
 ## Features
 
@@ -31,7 +45,3 @@
 <img width="1440" alt="invoice list" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A13%3A04.542Z">
 
 <img width="1438" alt="invoice add" src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-08-17T09%3A13%3A31.351Z">
-
-## Other Features
-
-<p>This website is built using pure HTML and CSS and is compatible with other screen sizes down to a mobile screen.</p>

@@ -16,9 +16,12 @@
         "browserslist",
         "commitlint",
         "ltrim",
+        "proptypes",
         "razorpay",
         "rtrim",
         "scrollable",
-        "stylelint"
+        "stylelint",
+        "testid",
+        "textbox"
     ]
 }

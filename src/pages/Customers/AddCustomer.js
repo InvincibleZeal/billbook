@@ -64,13 +64,14 @@ const AddCustomers = () => {
                     </span>
                 </div>
                 <div className="card p-5 mx-5">
-                    <form onSubmit={addCustomer}>
+                    <form onSubmit={addCustomer} data-testid="customer-form">
                         <div className="row py-5" style={{ maxWidth: "800px" }}>
                             <div className="form-group mx-5 my-3">
                                 <label className="mb-3">
                                     <FormattedMessage id="customer.name" />
                                 </label>
                                 <Input
+                                    aria-label="name"
                                     type="text"
                                     name="name"
                                     required
@@ -89,6 +90,7 @@ const AddCustomers = () => {
                                     <FormattedMessage id="customer.phone" />
                                 </label>
                                 <Input
+                                    aria-label="contact"
                                     type="text"
                                     name="contact"
                                     required
@@ -107,6 +109,7 @@ const AddCustomers = () => {
                                     <FormattedMessage id="customer.email" />
                                 </label>
                                 <Input
+                                    aria-label="email"
                                     type="email"
                                     name="email"
                                     required
