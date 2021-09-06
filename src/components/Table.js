@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-function Table({ tableData, formatter, children, ...rest }) {
-    // const Theads = formatter.map((theadValue) => <th> {theadValue.label}</th>);
+function Table({ tableData = [], formatter = [], children, ...rest }) {
     const TableHead = function () {
         return formatter.map((columnHead, index) => (
             <th key={index}>{columnHead.label}</th>
@@ -28,28 +27,42 @@ function Table({ tableData, formatter, children, ...rest }) {
                         );
                     } else
                         return (
-                            <td key={columnDataId || columnIndex}>
+                            <td
+                                key={columnDataId || columnIndex}
+                                data-testid="table-cell"
+                            >
                                 {" "}
                                 {columnDataFormatter}
                             </td>
                         );
                 }
-                return <td key={columnDataId || columnIndex}>{cellData}</td>;
+                return (
+                    <td
+                        key={columnDataId || columnIndex}
+                        data-testid="table-cell"
+                    >
+                        {cellData}
+                    </td>
+                );
             });
 
-            return <tr key={rowIndex}>{trData}</tr>;
+            return (
+                <tr key={rowIndex} data-testid="table-row">
+                    {trData}
+                </tr>
+            );
         });
         return body;
     };
     return (
-        <table {...rest}>
+        <table {...rest} data-testid="table">
             {children}
             <thead>
                 <tr>
                     <TableHead />
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-testid="table-tbody">
                 <TableBody />
             </tbody>
         </table>
@@ -59,6 +72,6 @@ function Table({ tableData, formatter, children, ...rest }) {
 Table.propTypes = {
     tableData: PropTypes.array,
     formatter: PropTypes.array,
-    children: PropTypes.array,
+    children: PropTypes.any,
 };
 export default Table;
