@@ -27,7 +27,8 @@
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
-        "postinstall": "husky install"
+        "postinstall": "husky install",
+        "lhci": "lhci autorun"
     },
     "eslintConfig": {
         "extends": [

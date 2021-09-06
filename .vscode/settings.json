@@ -12,9 +12,11 @@
     "cSpell.enabled": true,
     "cSpell.words": [
         "atleast",
+        "autorun",
         "billbook",
         "browserslist",
         "commitlint",
+        "lhci",
         "ltrim",
         "razorpay",
         "rtrim",
