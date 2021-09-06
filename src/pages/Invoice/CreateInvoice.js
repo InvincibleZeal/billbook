@@ -99,7 +99,7 @@ const CreateInvoice = () => {
     return (
         <Fragment>
             <div className="page-content p-5 bg-primary">
-                <form onSubmit={saveInvoice}>
+                <form onSubmit={saveInvoice} data-testid="invoice-form">
                     <div className="page-heading-wrapper mb-5 p-5">
                         <span className="title">
                             {" "}
@@ -182,6 +182,7 @@ const CreateInvoice = () => {
                                         <FormattedMessage id="invoice.issuedAt" />
                                     </label>
                                     <Input
+                                        aria-label="issueDate"
                                         size="sm"
                                         type="date"
                                         name="issueDate"
@@ -201,6 +202,7 @@ const CreateInvoice = () => {
                                         <FormattedMessage id="invoice.dueDate" />
                                     </label>
                                     <Input
+                                        aria-label="dueDate"
                                         size="sm"
                                         type="date"
                                         name="dueDate"
@@ -222,6 +224,7 @@ const CreateInvoice = () => {
                                     </label>
 
                                     <Input
+                                        aria-label="invoice_number"
                                         size="sm"
                                         icon="hashtag"
                                         type="text"
@@ -242,6 +245,7 @@ const CreateInvoice = () => {
                                     </label>
 
                                     <Input
+                                        aria-label="reference_number"
                                         size="sm"
                                         icon="hashtag"
                                         type="text"
@@ -356,6 +360,7 @@ const CreateInvoice = () => {
                                     <FormattedMessage id="invoice.notes" />
                                 </label>
                                 <Input
+                                    aria-label="notes"
                                     type="textarea"
                                     className="input-sm invoice-notes"
                                     name="notes"
