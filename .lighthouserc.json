@@ -2,7 +2,7 @@
     "ci": {
         "collect": {
             "url": ["http://127.0.0.1:4000"],
-            "startServerCommand": "http-server ./build -p 4000 -g",
+            "startServerCommand": "npm run server",
             "startServerReadyPattern": "Available on",
             "numberOfRuns": 1
         },
@@ -10,7 +10,17 @@
             "target": "temporary-public-storage"
         },
         "assert": {
-            "preset": "lighthouse:recommended"
+            "preset": "lighthouse:no-pwa",
+            "assertions": {
+                "categories:performance": [
+                    "warn",
+                    { "aggregationMethod": "optimistic", "minScore": 0.7 }
+                ],
+                "categories:accessibility": [
+                    "warn",
+                    { "aggregationMethod": "optimistic", "minScore": 0.9 }
+                ]
+            }
         }
     }
 }

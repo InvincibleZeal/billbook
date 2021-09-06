@@ -18,9 +18,11 @@
         "commitlint",
         "lhci",
         "ltrim",
+        "preconnect",
         "razorpay",
         "rtrim",
         "scrollable",
-        "stylelint"
+        "stylelint",
+        "stylesheet"
     ]
 }

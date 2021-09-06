@@ -28,7 +28,8 @@
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
         "postinstall": "husky install",
-        "lhci": "lhci autorun"
+        "lhci": "lhci autorun",
+        "server": "http-server ./build -p 4000 -g"
     },
     "eslintConfig": {
         "extends": [
@@ -51,6 +52,7 @@
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
+        "@lhci/cli": "^0.8.1",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
@@ -61,6 +63,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-promise": "^5.1.0",
         "eslint-plugin-react": "^7.24.0",
+        "http-server": "^13.0.1",
         "husky": "^7.0.0",
         "lint-staged": "^11.1.2",
         "prettier": "^2.3.2",
