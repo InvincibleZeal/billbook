@@ -1,25 +1,25 @@
 name: LighthouseCI
-  on:
+on:
     pull_request:
 
-  jobs:
+jobs:
     lighthouse:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
 
-        - name: Setup node
-          uses: actions/setup-node@v1
-          with:
-            node-version: "14.x"
+            - name: Setup node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "14.x"
 
-        - name: Install dependencies
-          run: npm ci && npm i -g http-server @lhci/cli
+            - name: Install dependencies
+              run: npm ci && npm i -g http-server @lhci/cli
 
-        - name: Build
-          run: npm run build
+            - name: Build
+              run: npm run build
 
-        - name: LighthouseCI
-          run: lhci autorun
-          env:
-            LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+            - name: LighthouseCI
+              run: lhci autorun
+              env:
+                  LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
