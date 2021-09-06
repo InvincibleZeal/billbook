@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 function Table({ tableData = [], formatter = [], children, ...rest }) {
+    const TableHead = function () {
+        return formatter.map((columnHead, index) => (
+            <th key={index}>{columnHead.label}</th>
+        ));
+    };
     const TableBody = function () {
         const body = tableData.map((rowData, rowIndex) => {
             const trData = formatter.map((columnData, columnIndex) => {
@@ -50,8 +55,13 @@ function Table({ tableData = [], formatter = [], children, ...rest }) {
         return body;
     };
     return (
-        <table data-testid="table" {...rest}>
+        <table {...rest} data-testid="table">
             {children}
+            <thead>
+                <tr>
+                    <TableHead />
+                </tr>
+            </thead>
             <tbody data-testid="table-tbody">
                 <TableBody />
             </tbody>
@@ -62,6 +72,6 @@ function Table({ tableData = [], formatter = [], children, ...rest }) {
 Table.propTypes = {
     tableData: PropTypes.array,
     formatter: PropTypes.array,
-    children: PropTypes.element,
+    children: PropTypes.any,
 };
 export default Table;

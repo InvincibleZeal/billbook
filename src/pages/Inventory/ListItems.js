@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useCallback } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Table from "components/Table";
@@ -25,11 +25,19 @@ const ListItems = () => {
     }, []);
 
     // Table Fields
+    const intl = useIntl();
     const formatter = [
-        { label: "Name", id: "name" },
-        { label: "Description", id: "description" },
-        { label: "Price", id: "amount" },
-        { label: "Date", id: "created_at", formatter: formatDate },
+        { label: intl.formatMessage({ id: "customer.name" }), id: "name" },
+        {
+            label: intl.formatMessage({ id: "item.description" }),
+            id: "description",
+        },
+        { label: intl.formatMessage({ id: "item.price" }), id: "amount" },
+        {
+            label: intl.formatMessage({ id: "invoice.date" }),
+            id: "created_at",
+            formatter: formatDate,
+        },
     ];
 
     return (
@@ -57,34 +65,12 @@ const ListItems = () => {
                             tableData={data}
                             className="table px-5"
                         >
-                            <Fragment>
-                                <colgroup>
-                                    <col span="1" style={{ width: "20%" }} />
-                                    <col span="1" style={{ width: "50%" }} />
-                                    <col span="1" style={{ width: "15%" }} />
-                                    <col span="1" style={{ width: "15%" }} />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            {" "}
-                                            <FormattedMessage id="customer.name" />
-                                        </th>
-                                        <th>
-                                            {" "}
-                                            <FormattedMessage id="item.description" />
-                                        </th>
-                                        <th>
-                                            {" "}
-                                            <FormattedMessage id="item.price" />
-                                        </th>
-                                        <th>
-                                            {" "}
-                                            <FormattedMessage id="added.on" />
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </Fragment>
+                            <colgroup>
+                                <col span="1" style={{ width: "20%" }} />
+                                <col span="1" style={{ width: "50%" }} />
+                                <col span="1" style={{ width: "15%" }} />
+                                <col span="1" style={{ width: "15%" }} />
+                            </colgroup>
                         </Table>
                     </div>
                 ) : (
