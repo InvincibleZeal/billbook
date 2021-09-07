@@ -640,6 +640,7 @@ input:focus-visible {
         bottom: 0;
         width: 100%;
         background-color: var(--white);
+        z-index: 500;
     }
 
     .bottom-bar ul {
