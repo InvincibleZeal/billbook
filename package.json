@@ -20,16 +20,18 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "build:stats": "npm run build -- --stats",
         "test": "react-scripts test --passWithNoTests",
+        "test:coverage": "npm test -- --coverage --watchAll=false",
         "stylelint": "stylelint '**/*.scss'; exit 0",
         "eject": "react-scripts eject",
         "lint": "eslint ./ --ignore-path .gitignore",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
         "postinstall": "husky install",
+        "analyze": "node scripts/analyze.js",
         "lhci": "lhci autorun",
-        "server": "http-server ./build -p 4000 -g",
-        "test:coverage": "npm test -- --coverage --watchAll=false"
+        "server": "http-server ./build -p 4000 -g"
     },
     "eslintConfig": {
         "extends": [
@@ -71,8 +73,10 @@
         "lint-staged": "^11.1.2",
         "msw": "^0.35.0",
         "prettier": "^2.3.2",
+        "progress-bar-webpack-plugin": "^2.1.0",
         "stylelint": "^13.13.1",
-        "stylelint-config-standard": "^22.0.0"
+        "stylelint-config-standard": "^22.0.0",
+        "webpack-bundle-analyzer": "^4.4.2"
     },
     "config": {
         "commitizen": {
