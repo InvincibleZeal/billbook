@@ -1,0 +1,25 @@
+{
+    "ci": {
+        "collect": {
+            "url": ["http://127.0.0.1:4000"],
+            "startServerCommand": "npm run server",
+            "startServerReadyPattern": "Available on",
+            "numberOfRuns": 1
+        },
+        "upload": {
+            "target": "temporary-public-storage"
+        },
+        "assert": {
+            "assertions": {
+                "categories:performance": [
+                    "warn",
+                    { "aggregationMethod": "optimistic", "minScore": 0.3 }
+                ],
+                "categories:accessibility": [
+                    "warn",
+                    { "aggregationMethod": "optimistic", "minScore": 0.7 }
+                ]
+            }
+        }
+    }
+}
