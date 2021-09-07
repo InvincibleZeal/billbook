@@ -12,15 +12,19 @@
     "cSpell.enabled": true,
     "cSpell.words": [
         "atleast",
+        "autorun",
         "billbook",
         "browserslist",
         "commitlint",
+        "lhci",
         "ltrim",
+        "preconnect",
         "proptypes",
         "razorpay",
         "rtrim",
         "scrollable",
         "stylelint",
+        "stylesheet",
         "testid",
         "textbox"
     ]
